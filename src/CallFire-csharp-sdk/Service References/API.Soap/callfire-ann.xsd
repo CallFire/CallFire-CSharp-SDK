@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns:tns="http://api.callfire.com/annotations" elementFormDefault="qualified" targetNamespace="http://api.callfire.com/annotations" xmlns="http://www.w3.org/2001/XMLSchema">
+  <attribute name="sinceVersion" type="decimal" />
+  <attribute name="deprecatedVersion" type="decimal" />
+  <attribute name="restParam" type="token" />
+  <attribute name="restParamType" type="token" />
+  <attribute name="requiredIn">
+    <simpleType>
+      <list itemType="tns:restMethod" />
+    </simpleType>
+  </attribute>
+  <attribute name="excludeFromOperations" type="token" />
+  <attribute default="false" name="restIndexedArray" type="boolean" />
+  <simpleType name="restMethod">
+    <restriction base="token">
+      <enumeration value="GET" />
+      <enumeration value="POST" />
+      <enumeration value="PUT" />
+      <enumeration value="DELETE" />
+    </restriction>
+  </simpleType>
+  <element name="restOperation">
+    <complexType>
+      <attribute name="path" type="string" />
+      <attribute name="method" type="tns:restMethod" />
+    </complexType>
+  </element>
+  <element name="condition">
+    <complexType>
+      <attribute name="field" use="required" />
+      <attribute name="value" use="required" />
+    </complexType>
+  </element>
+  <element name="summary" type="string" />
+  <element name="description">
+    <complexType>
+      <sequence>
+        <any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/1999/xhtml" />
+      </sequence>
+    </complexType>
+  </element>
+  <element name="link" type="string" />
+  <element name="demoValue" type="string" />
+  <element name="docGeneration">
+    <complexType>
+      <attribute default="false" name="hideDoc" type="boolean" />
+    </complexType>
+  </element>
+  <element name="version" />
+  <element name="baseUrl" />
+</schema>

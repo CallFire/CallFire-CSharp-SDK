@@ -1,0 +1,1613 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:x="http://www.w3.org/1999/xhtml" xmlns:ann="http://api.callfire.com/annotations" xmlns:tns="http://api.callfire.com/service/xsd" xmlns:data="http://api.callfire.com/data" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" elementFormDefault="qualified" targetNamespace="http://api.callfire.com/service/xsd" jaxb:version="2.0" jaxb:extensionBindingPrefixes="ann" xmlns="http://www.w3.org/2001/XMLSchema">
+  <import schemaLocation="callfire-data.xsd" namespace="http://api.callfire.com/data" />
+  <simpleType name="FaultCode">
+    <restriction base="string">
+      <enumeration value="BAD_REQUEST" />
+      <enumeration value="FORBIDDEN" />
+      <enumeration value="NOT_FOUND" />
+      <enumeration value="UNAVAILABLE" />
+      <enumeration value="TIMEOUT" />
+      <enumeration value="NOT_IMPLEMENTED" />
+    </restriction>
+  </simpleType>
+  <simpleType name="IdList">
+    <list itemType="long" />
+  </simpleType>
+  <element name="ServiceFaultInfo">
+    <annotation>
+      <documentation>
+        <ann:summary xmlns:ann="http://api.callfire.com/annotations">Info on cause of service error</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <sequence>
+        <element name="FaultCode" type="tns:FaultCode" />
+        <element minOccurs="0" name="Message" type="string" />
+        <element minOccurs="0" name="Detail" type="string" />
+      </sequence>
+    </complexType>
+  </element>
+  <complexType name="QueryResult" abstract="true">
+    <sequence>
+      <element name="TotalResults" type="long">
+        <annotation>
+          <documentation>
+            <ann:summary xmlns:ann="http://api.callfire.com/annotations">Results count</ann:summary>
+          </documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <element name="CreatedId" type="long">
+    <annotation>
+      <documentation>
+        <ann:summary xmlns:ann="http://api.callfire.com/annotations">Unique ID of resource</ann:summary>
+      </documentation>
+    </annotation>
+  </element>
+  <complexType name="IdRequest">
+    <sequence>
+      <element name="Id" type="long">
+        <annotation>
+          <documentation>
+            <ann:summary xmlns:ann="http://api.callfire.com/annotations">Unique ID of resource</ann:summary>
+            <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">135</ann:demoValue>
+          </documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="Query">
+    <sequence>
+      <element minOccurs="0" default="1000" name="MaxResults" type="long">
+        <annotation>
+          <documentation>
+            <ann:summary xmlns:ann="http://api.callfire.com/annotations">Max number of results to return limited to 1000 (default: 1000)</ann:summary>
+            <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">1000</ann:demoValue>
+          </documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" default="0" name="FirstResult" type="long">
+        <annotation>
+          <documentation>
+            <ann:summary xmlns:ann="http://api.callfire.com/annotations">Start of next result set (default: 0)</ann:summary>
+            <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">0</ann:demoValue>
+          </documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="SendRequest" abstract="true">
+    <sequence>
+      <element minOccurs="0" name="RequestId" type="anyURI">
+        <annotation>
+          <documentation>
+            <ann:summary xmlns:ann="http://api.callfire.com/annotations">Unique ID, used to de-dup requests and make sure request is not processed twice</ann:summary>
+            <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">MyUniqueIdForThisRequest</ann:demoValue>
+          </documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="Type" type="data:BroadcastType">
+        <annotation>
+          <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <jaxb:bindings node="ancestor::xs:annotation/.." xmlns:jaxb="http://java.sun.com/xml/ns/jaxb">
+              <ann:annotate ann:requiredIn="POST" xmlns:ann="http://api.callfire.com/annotations" />
+            </jaxb:bindings>
+          </xs:appinfo>
+          <documentation>
+            <ann:summary xmlns:ann="http://api.callfire.com/annotations">Type of Broadcast</ann:summary>
+            <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">TEXT</ann:demoValue>
+          </documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" default="API Send" name="BroadcastName" type="string">
+        <annotation>
+          <documentation>
+            <ann:summary xmlns:ann="http://api.callfire.com/annotations">Title of Broadcast (default: API Send)</ann:summary>
+            <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">My Send Broadcast</ann:demoValue>
+          </documentation>
+        </annotation>
+      </element>
+      <element maxOccurs="unbounded" name="ToNumber" type="data:ToNumber">
+        <annotation>
+          <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <jaxb:bindings node="ancestor::xs:annotation/..">
+              <ann:annotate ann:restParam="To" ann:requiredIn="POST" xmlns:ann="http://api.callfire.com/annotations" />
+            </jaxb:bindings>
+          </xs:appinfo>
+          <documentation>
+            <ann:summary xmlns:ann="http://api.callfire.com/annotations">List of E.164 11 digit numbers space or comma separated</ann:summary>
+            <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">13105551212 18185551212</ann:demoValue>
+            <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">+13105551213,+18185551213</ann:demoValue>
+          </documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" default="false" name="ScrubBroadcastDuplicates" type="boolean">
+        <annotation>
+          <documentation>
+            <ann:summary xmlns:ann="http://api.callfire.com/annotations">Scrub duplicates (default: false)</ann:summary>
+            <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">false</ann:demoValue>
+          </documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <element name="GetBroadcast" type="tns:IdRequest">
+    <annotation>
+      <documentation>
+        <ann:summary xmlns:ann="http://api.callfire.com/annotations">Broadcast request by unique ID</ann:summary>
+      </documentation>
+    </annotation>
+  </element>
+  <element name="QueryBroadcasts">
+    <annotation>
+      <documentation>
+        <ann:summary xmlns:ann="http://api.callfire.com/annotations">Broadcasts request by query</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:Query">
+          <sequence>
+            <element minOccurs="0" name="Type">
+              <annotation>
+                <documentation>
+                  <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">TEXT</ann:demoValue>
+                </documentation>
+              </annotation>
+              <simpleType>
+                <list itemType="data:BroadcastType" />
+              </simpleType>
+            </element>
+            <element minOccurs="0" name="Running" type="boolean">
+              <annotation>
+                <documentation>
+                  <ann:summary xmlns:ann="http://api.callfire.com/annotations">Filter on running Broadcasts</ann:summary>
+                  <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">false</ann:demoValue>
+                </documentation>
+              </annotation>
+            </element>
+            <element minOccurs="0" name="LabelName" type="string">
+              <annotation>
+                <documentation>
+                  <ann:summary xmlns:ann="http://api.callfire.com/annotations">Label that result must have to be included</ann:summary>
+                  <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">MyLabel</ann:demoValue>
+                </documentation>
+              </annotation>
+            </element>
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <element name="BroadcastQueryResult">
+    <annotation>
+      <documentation>
+        <ann:summary xmlns:ann="http://api.callfire.com/annotations">List of Broadcasts returned from query</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:QueryResult">
+          <sequence>
+            <element minOccurs="0" maxOccurs="unbounded" ref="data:Broadcast" />
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <element name="GetBroadcastStats">
+    <annotation>
+      <documentation>
+        <ann:summary xmlns:ann="http://api.callfire.com/annotations">BroadcastStats request by unique ID</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:IdRequest">
+          <sequence>
+            <element minOccurs="0" name="IntervalBegin" type="dateTime">
+              <annotation>
+                <documentation>
+                  <ann:summary xmlns:ann="http://api.callfire.com/annotations">Beginning of DateTime interval to search on</ann:summary>
+                  <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">2012-01-01T21:32:52Z</ann:demoValue>
+                </documentation>
+              </annotation>
+            </element>
+            <element minOccurs="0" name="IntervalEnd" type="dateTime">
+              <annotation>
+                <documentation>
+                  <ann:summary xmlns:ann="http://api.callfire.com/annotations">End of DateTime interval to search on</ann:summary>
+                  <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">2013-10-26T05:36:10Z</ann:demoValue>
+                </documentation>
+              </annotation>
+            </element>
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <simpleType name="BroadcastCommand">
+    <restriction base="string">
+      <enumeration value="START" />
+      <enumeration value="STOP" />
+      <enumeration value="ARCHIVE" />
+    </restriction>
+  </simpleType>
+  <complexType name="BroadcastRequest">
+    <sequence>
+      <element minOccurs="0" name="RequestId" type="anyURI">
+        <annotation>
+          <documentation>
+            <ann:summary xmlns:ann="http://api.callfire.com/annotations">Unique ID of web request to de-dup on</ann:summary>
+            <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">MyUUIDForDeDupping</ann:demoValue>
+          </documentation>
+        </annotation>
+      </element>
+      <element ref="data:Broadcast">
+        <annotation>
+          <documentation>
+            <ann:summary xmlns:ann="http://api.callfire.com/annotations">Broadcast info</ann:summary>
+          </documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <element name="CreateBroadcast" type="tns:BroadcastRequest">
+    <annotation>
+      <documentation>
+        <ann:summary xmlns:ann="http://api.callfire.com/annotations">Create Broadcast using attached info</ann:summary>
+      </documentation>
+    </annotation>
+  </element>
+  <element name="UpdateBroadcast" type="tns:BroadcastRequest">
+    <annotation>
+      <documentation>
+        <ann:summary xmlns:ann="http://api.callfire.com/annotations">Update Broadcast using attached info</ann:summary>
+      </documentation>
+    </annotation>
+  </element>
+  <element name="ControlBroadcast">
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:IdRequest">
+          <sequence>
+            <element minOccurs="0" name="RequestId" type="anyURI" />
+            <element minOccurs="0" name="Command" type="tns:BroadcastCommand" />
+            <element minOccurs="0" name="MaxActive" type="int">
+              <annotation>
+                <documentation>
+                  <ann:summary xmlns:ann="http://api.callfire.com/annotations">Max simultaneous calls</ann:summary>
+                  <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">50</ann:demoValue>
+                </documentation>
+              </annotation>
+            </element>
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <element name="GetContactBatch" type="tns:IdRequest">
+    <annotation>
+      <documentation>
+        <ann:summary xmlns:ann="http://api.callfire.com/annotations">ContactBatch request by unique ID</ann:summary>
+      </documentation>
+    </annotation>
+  </element>
+  <element name="QueryContactBatches">
+    <annotation>
+      <documentation>
+        <ann:summary xmlns:ann="http://api.callfire.com/annotations">ContactBatches request by query</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:Query">
+          <sequence>
+            <element name="BroadcastId" type="long">
+              <annotation>
+                <documentation>
+                  <ann:summary xmlns:ann="http://api.callfire.com/annotations">Unique ID of Broadcast</ann:summary>
+                </documentation>
+              </annotation>
+            </element>
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <element name="ContactBatchQueryResult">
+    <annotation>
+      <documentation>
+        <ann:summary xmlns:ann="http://api.callfire.com/annotations">List of ContactBatches returned from query</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:QueryResult">
+          <sequence>
+            <element minOccurs="0" maxOccurs="unbounded" ref="data:ContactBatch" />
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <element name="CreateContactBatch">
+    <annotation>
+      <documentation>
+        <ann:summary xmlns:ann="http://api.callfire.com/annotations">Create ContactBatch using attached info</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <sequence>
+        <element minOccurs="0" name="RequestId" type="anyURI" />
+        <element name="BroadcastId" type="long">
+          <annotation>
+            <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+              <jaxb:bindings node="ancestor::xs:annotation/..">
+                <ann:annotate ann:requiredIn="POST" xmlns:ann="http://api.callfire.com/annotations" />
+              </jaxb:bindings>
+            </xs:appinfo>
+            <documentation>
+              <ann:summary xmlns:ann="http://api.callfire.com/annotations">Id of Broadcast</ann:summary>
+            </documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" default="API Contact Batch" name="Name" type="string" />
+        <choice>
+          <element maxOccurs="unbounded" name="ToNumber" type="data:ToNumber">
+            <annotation>
+              <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                <jaxb:bindings node="ancestor::xs:annotation/..">
+                  <ann:annotate ann:restParam="To" xmlns:ann="http://api.callfire.com/annotations" />
+                </jaxb:bindings>
+              </xs:appinfo>
+              <documentation>
+                <ann:summary xmlns:ann="http://api.callfire.com/annotations">List of E.164 11 digit numbers space or comma separated</ann:summary>
+                <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">+13105551212 +13105551223</ann:demoValue>
+                <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">13105551234,1310555145</ann:demoValue>
+              </documentation>
+            </annotation>
+          </element>
+          <element name="ContactListId" type="long" />
+        </choice>
+        <element minOccurs="0" default="false" name="ScrubBroadcastDuplicates" type="boolean" />
+      </sequence>
+    </complexType>
+  </element>
+  <element name="ControlContactBatch">
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:IdRequest">
+          <sequence>
+            <element minOccurs="0" name="Name" type="string" />
+            <element minOccurs="0" name="Enabled" type="boolean" />
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <element name="GetBroadcastSchedule" type="tns:IdRequest">
+    <annotation>
+      <documentation>
+        <ann:summary xmlns:ann="http://api.callfire.com/annotations">BroadcastSchedule request by unique ID</ann:summary>
+      </documentation>
+    </annotation>
+  </element>
+  <element name="QueryBroadcastSchedules">
+    <annotation>
+      <documentation>
+        <ann:summary xmlns:ann="http://api.callfire.com/annotations">BroadcastSchedules request by query</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:Query">
+          <sequence>
+            <element name="BroadcastId" type="long">
+              <annotation>
+                <documentation>
+                  <ann:summary xmlns:ann="http://api.callfire.com/annotations">Unique ID of Broadcast</ann:summary>
+                </documentation>
+              </annotation>
+            </element>
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <element name="BroadcastScheduleQueryResult">
+    <annotation>
+      <documentation>
+        <ann:summary xmlns:ann="http://api.callfire.com/annotations">List of BroadcastSchedules returned from query</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:QueryResult">
+          <sequence>
+            <element minOccurs="0" maxOccurs="unbounded" ref="data:BroadcastSchedule" />
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <element name="CreateBroadcastSchedule">
+    <annotation>
+      <documentation>
+        <ann:summary xmlns:ann="http://api.callfire.com/annotations">Create BroadcastSchedule using attached info</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <sequence>
+        <element minOccurs="0" name="RequestId" type="anyURI" />
+        <element name="BroadcastId" type="long" />
+        <element ref="data:BroadcastSchedule" />
+      </sequence>
+    </complexType>
+  </element>
+  <element name="DeleteBroadcastSchedule" type="tns:IdRequest">
+    <annotation>
+      <documentation>
+        <ann:summary xmlns:ann="http://api.callfire.com/annotations">Delete BroadcastSchedule identified by unique ID</ann:summary>
+      </documentation>
+    </annotation>
+  </element>
+  <element name="GetSubscription" type="tns:IdRequest">
+    <annotation>
+      <documentation>
+        <ann:summary xmlns:ann="http://api.callfire.com/annotations">Subscription request by unique ID</ann:summary>
+      </documentation>
+    </annotation>
+  </element>
+  <element name="QuerySubscriptions" type="tns:Query">
+    <annotation>
+      <documentation>
+        <ann:summary xmlns:ann="http://api.callfire.com/annotations">Subscriptions request by query</ann:summary>
+      </documentation>
+    </annotation>
+  </element>
+  <element name="SubscriptionQueryResult">
+    <annotation>
+      <documentation>
+        <ann:summary xmlns:ann="http://api.callfire.com/annotations">List of Subscriptions returned from query</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:QueryResult">
+          <sequence>
+            <element minOccurs="0" maxOccurs="unbounded" ref="data:Subscription" />
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <complexType name="SubscriptionRequest">
+    <sequence>
+      <element minOccurs="0" name="RequestId" type="anyURI">
+        <annotation>
+          <documentation>
+            <ann:summary xmlns:ann="http://api.callfire.com/annotations">Unique ID of web request needed for de-duping</ann:summary>
+            <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">1</ann:demoValue>
+          </documentation>
+        </annotation>
+      </element>
+      <element ref="data:Subscription" />
+    </sequence>
+  </complexType>
+  <element name="CreateSubscription" type="tns:SubscriptionRequest">
+    <annotation>
+      <documentation>
+        <ann:summary xmlns:ann="http://api.callfire.com/annotations">Create Subscription using attached info</ann:summary>
+      </documentation>
+    </annotation>
+  </element>
+  <element name="UpdateSubscription" type="tns:SubscriptionRequest">
+    <annotation>
+      <documentation>
+        <ann:summary xmlns:ann="http://api.callfire.com/annotations">Update Subscription using attached info</ann:summary>
+      </documentation>
+    </annotation>
+  </element>
+  <element name="DeleteSubscription" type="tns:IdRequest">
+    <annotation>
+      <documentation>
+        <ann:summary xmlns:ann="http://api.callfire.com/annotations">Delete Subscription identified by unique ID</ann:summary>
+      </documentation>
+    </annotation>
+  </element>
+  <element name="SendText">
+    <annotation>
+      <documentation>
+        <ann:summary xmlns:ann="http://api.callfire.com/annotations">Data (ToNumber and Message) needed to start a text campaign</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:SendRequest">
+          <sequence>
+            <element ref="data:TextBroadcastConfig">
+              <annotation>
+                <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                  <jaxb:bindings node="ancestor::xs:annotation/..">
+                    <ann:annotate ann:restCondition="Type=TEXT" xmlns:ann="http://api.callfire.com/annotations" />
+                  </jaxb:bindings>
+                </xs:appinfo>
+                <documentation>
+                  <ann:condition field="Type" value="TEXT" xmlns:ann="http://api.callfire.com/annotations" />
+                </documentation>
+              </annotation>
+            </element>
+            <element minOccurs="0" name="BroadcastId" type="long">
+              <annotation>
+                <documentation>
+                  <ann:summary>BroadcastId to send message from</ann:summary>
+                  <ann:demoValue>1</ann:demoValue>
+                </documentation>
+              </annotation>
+            </element>
+            <element minOccurs="0" default="false" name="UseDefaultBroadcast" type="boolean">
+              <annotation>
+                <documentation>
+                  <ann:summary>If true send text through existing default broadcast (default: false)</ann:summary>
+                  <ann:demoValue>true</ann:demoValue>
+                </documentation>
+              </annotation>
+            </element>
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <element name="GetText" type="tns:IdRequest">
+    <annotation>
+      <documentation>
+        <ann:summary>Text request by unique ID</ann:summary>
+      </documentation>
+    </annotation>
+  </element>
+  <complexType name="ActionQuery">
+    <complexContent mixed="false">
+      <extension base="tns:Query">
+        <sequence>
+          <element minOccurs="0" name="BroadcastId" type="long">
+            <annotation>
+              <documentation>
+                <ann:summary>BroadcastId to query on</ann:summary>
+                <ann:demoValue>1</ann:demoValue>
+              </documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="BatchId" type="long">
+            <annotation>
+              <documentation>
+                <ann:summary>BatchId to query on</ann:summary>
+                <ann:demoValue>1</ann:demoValue>
+              </documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="State">
+            <annotation>
+              <documentation>
+                <ann:summary>List of Action States to query on</ann:summary>
+                <ann:demoValue>FINISHED TIMEOUT</ann:demoValue>
+              </documentation>
+            </annotation>
+            <simpleType>
+              <list itemType="data:ActionState" />
+            </simpleType>
+          </element>
+          <element minOccurs="0" name="Result">
+            <annotation>
+              <documentation>
+                <ann:summary>List of Results to query on</ann:summary>
+                <ann:demoValue>SENT RECEIVED</ann:demoValue>
+              </documentation>
+            </annotation>
+            <simpleType>
+              <list itemType="data:Result" />
+            </simpleType>
+          </element>
+          <element minOccurs="0" name="Inbound" type="boolean">
+            <annotation>
+              <documentation>
+                <ann:summary>Is call inbound</ann:summary>
+                <ann:demoValue>true</ann:demoValue>
+              </documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="IntervalBegin" type="dateTime">
+            <annotation>
+              <documentation>
+                <ann:summary>Beginning of DateTime interval to search on</ann:summary>
+                <ann:demoValue>2012-01-01T21:32:52Z</ann:demoValue>
+              </documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="IntervalEnd" type="dateTime">
+            <annotation>
+              <documentation>
+                <ann:summary>End of DateTime interval to search on</ann:summary>
+                <ann:demoValue>2013-10-26T05:36:10Z</ann:demoValue>
+              </documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="FromNumber" type="data:PhoneNumber">
+            <annotation>
+              <documentation>
+                <ann:summary>E.164 11 digit number</ann:summary>
+                <ann:demoValue>13105551212</ann:demoValue>
+              </documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="ToNumber" type="data:PhoneNumber">
+            <annotation>
+              <documentation>
+                <ann:summary>E.164 11 digit number</ann:summary>
+                <ann:demoValue>18185551212</ann:demoValue>
+              </documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="LabelName" type="string">
+            <annotation>
+              <documentation>
+                <ann:summary>Label that result must have to be included</ann:summary>
+                <ann:demoValue>MyLabel</ann:demoValue>
+              </documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="QueryTexts" type="tns:ActionQuery">
+    <annotation>
+      <documentation>
+        <ann:summary>Texts request by query</ann:summary>
+      </documentation>
+    </annotation>
+  </element>
+  <element name="TextQueryResult">
+    <annotation>
+      <documentation>
+        <ann:summary>List of Texts returned from query</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:QueryResult">
+          <sequence>
+            <element minOccurs="0" maxOccurs="unbounded" ref="data:Text" />
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <element name="GetAutoReply" type="tns:IdRequest">
+    <annotation>
+      <documentation>
+        <ann:summary>AutoReply request by unique ID</ann:summary>
+      </documentation>
+    </annotation>
+  </element>
+  <element name="QueryAutoReplies">
+    <annotation>
+      <documentation>
+        <ann:summary>List of Autoreplies returned from query</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:Query">
+          <sequence>
+            <element minOccurs="0" name="Number" type="data:PhoneNumber">
+              <annotation>
+                <documentation>
+                  <ann:summary>E.164 11 digit number</ann:summary>
+                  <ann:demoValue>18185551212</ann:demoValue>
+                </documentation>
+              </annotation>
+            </element>
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <element name="AutoReplyQueryResult">
+    <annotation>
+      <documentation>
+        <ann:summary>List of AutoReplies returned from query</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:QueryResult">
+          <sequence>
+            <element minOccurs="0" maxOccurs="unbounded" ref="data:AutoReply" />
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <element name="CreateAutoReply">
+    <annotation>
+      <documentation>
+        <ann:summary>Create AutoReply using attached info</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <sequence>
+        <element minOccurs="0" name="RequestId" type="anyURI" />
+        <element ref="data:AutoReply" />
+      </sequence>
+    </complexType>
+  </element>
+  <element name="DeleteAutoReply" type="tns:IdRequest">
+    <annotation>
+      <documentation>
+        <ann:summary>Delete AutoReply identified by unique ID</ann:summary>
+      </documentation>
+    </annotation>
+  </element>
+  <element name="SendCall">
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:SendRequest">
+          <choice>
+            <element ref="data:VoiceBroadcastConfig">
+              <annotation>
+                <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                  <jaxb:bindings node="ancestor::xs:annotation/..">
+                    <ann:annotate ann:restCondition="Type=VOICE" />
+                  </jaxb:bindings>
+                </xs:appinfo>
+                <documentation>
+                  <ann:condition field="Type" value="VOICE" />
+                </documentation>
+              </annotation>
+            </element>
+            <element ref="data:IvrBroadcastConfig">
+              <annotation>
+                <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                  <jaxb:bindings node="ancestor::xs:annotation/..">
+                    <ann:annotate ann:restCondition="Type=IVR" />
+                  </jaxb:bindings>
+                </xs:appinfo>
+                <documentation>
+                  <ann:condition field="Type" value="IVR" />
+                </documentation>
+              </annotation>
+            </element>
+          </choice>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <element name="GetCall" type="tns:IdRequest">
+    <annotation>
+      <documentation>
+        <ann:summary>Call request by unique ID</ann:summary>
+      </documentation>
+    </annotation>
+  </element>
+  <element name="QueryCalls" type="tns:ActionQuery">
+    <annotation>
+      <documentation>
+        <ann:summary>Calls request by query</ann:summary>
+      </documentation>
+    </annotation>
+  </element>
+  <element name="CallQueryResult">
+    <annotation>
+      <documentation>
+        <ann:summary>List of Calls returned from query</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:QueryResult">
+          <sequence>
+            <element minOccurs="0" maxOccurs="unbounded" ref="data:Call" />
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <simpleType name="SoundFormat">
+    <restriction base="string">
+      <enumeration value="WAV" />
+      <enumeration value="MP3" />
+    </restriction>
+  </simpleType>
+  <element name="CreateSound">
+    <annotation>
+      <documentation>
+        <ann:summary>Create Sound using attached info</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <sequence>
+        <element minOccurs="0" name="Name" type="string">
+          <annotation>
+            <documentation>
+              <ann:summary>The name of your sound. This name is included in SoundMeta and shown in the web interface.</ann:summary>
+              <ann:demoValue>My API Test Sound</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <choice>
+          <element xmime:expectedContentTypes="application/octet-stream" name="Data" type="base64Binary">
+            <annotation>
+              <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                <jaxb:bindings node="ancestor::xs:annotation/..">
+                  <ann:annotate ann:restParamType="file" ann:requiredIn="POST" />
+                </jaxb:bindings>
+              </xs:appinfo>
+              <documentation>
+                <ann:summary>MP3 or WAV bytes. Base64 encoded bytes can be provided inline. Capable clients can avoid the 33% encoding overhead by sending the data as an MTOM attachement</ann:summary>
+              </documentation>
+            </annotation>
+          </element>
+          <element name="RecordingCall">
+            <annotation>
+              <documentation>
+                <ann:summary>Initiates a call to record a new sound over the phone.</ann:summary>
+              </documentation>
+            </annotation>
+            <complexType>
+              <sequence>
+                <element name="ToNumber" type="data:PhoneNumber">
+                  <annotation>
+                    <documentation>
+                      <ann:summary>E.164 11 digit number to call to record a new sound.</ann:summary>
+                      <ann:demoValue>13105551212</ann:demoValue>
+                    </documentation>
+                  </annotation>
+                </element>
+              </sequence>
+            </complexType>
+          </element>
+          <element name="SoundText" type="string" />
+        </choice>
+        <element minOccurs="0" default="FEMALE1" name="SoundTextVoice" type="data:Voice" />
+      </sequence>
+    </complexType>
+  </element>
+  <element name="GetSoundMeta" type="tns:IdRequest">
+    <annotation>
+      <documentation>
+        <ann:summary>SoundMeta request by unique ID</ann:summary>
+      </documentation>
+    </annotation>
+  </element>
+  <element name="GetSoundData">
+    <annotation>
+      <documentation>
+        <ann:summary>SoundData request by unique ID</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:IdRequest">
+          <sequence>
+            <element minOccurs="0" default="MP3" name="Format" type="tns:SoundFormat">
+              <annotation>
+                <documentation>
+                  <ann:summary>Specifies the format of the returned sound data.</ann:summary>
+                </documentation>
+              </annotation>
+            </element>
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <element xmime:expectedContentTypes="application/octet-stream" name="SoundData" type="base64Binary">
+    <annotation>
+      <documentation>
+        <ann:summary>SoundData as application/octet-stream</ann:summary>
+      </documentation>
+    </annotation>
+  </element>
+  <element name="QuerySoundMeta" type="tns:Query">
+    <annotation>
+      <documentation>
+        <ann:summary>SoundMeta request by query</ann:summary>
+      </documentation>
+    </annotation>
+  </element>
+  <element name="SoundMetaQueryResult">
+    <annotation>
+      <documentation>
+        <ann:summary>List of SoundMeta returned from query</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:QueryResult">
+          <sequence>
+            <element minOccurs="0" maxOccurs="unbounded" ref="data:SoundMeta" />
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <element name="GetRecordingData">
+    <annotation>
+      <documentation>
+        <ann:summary>RecordingData request by unique ID or CallId/Name Pair</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <sequence>
+        <choice>
+          <sequence>
+            <element name="CallId" type="long">
+              <annotation>
+                <documentation>
+                  <ann:summary>Unique ID of call</ann:summary>
+                  <ann:demoValue>357</ann:demoValue>
+                </documentation>
+              </annotation>
+            </element>
+            <element name="Name" type="string">
+              <annotation>
+                <documentation>
+                  <ann:summary>Name of sound data as defined in IVR</ann:summary>
+                  <ann:demoValue>customerResponse</ann:demoValue>
+                </documentation>
+              </annotation>
+            </element>
+          </sequence>
+          <element name="RecordingId" type="long">
+            <annotation>
+              <documentation>
+                <ann:summary>Unique ID of recording</ann:summary>
+                <ann:demoValue>531</ann:demoValue>
+              </documentation>
+            </annotation>
+          </element>
+        </choice>
+        <element minOccurs="0" default="MP3" name="Format" type="tns:SoundFormat">
+          <annotation>
+            <documentation>
+              <ann:summary>Format of the returned recording.</ann:summary>
+              <ann:demoValue>MP3</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+      </sequence>
+    </complexType>
+  </element>
+  <element xmime:expectedContentTypes="application/octet-stream" name="RecordingData" type="base64Binary">
+    <annotation>
+      <documentation>
+        <ann:summary>Raw binary sound data</ann:summary>
+      </documentation>
+    </annotation>
+  </element>
+  <element name="GetContact" type="tns:IdRequest">
+    <annotation>
+      <documentation>
+        <ann:summary>Contact request by unique ID</ann:summary>
+      </documentation>
+    </annotation>
+  </element>
+  <element name="GetContactHistory">
+    <annotation>
+      <documentation>
+        <ann:summary>ContactHistory request by unique ID</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:Query">
+          <sequence>
+            <element name="ContactId" type="long">
+              <annotation>
+                <documentation>
+                  <ann:summary>Contact to get history</ann:summary>
+                </documentation>
+              </annotation>
+            </element>
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <element name="QueryContacts">
+    <annotation>
+      <documentation>
+        <ann:summary>Contacts request by query which can include String, Field, and ContactListId</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:Query">
+          <sequence>
+            <element minOccurs="0" name="Field" type="string">
+              <annotation>
+                <documentation>
+                  <ann:summary>Field to filter by</ann:summary>
+                </documentation>
+              </annotation>
+            </element>
+            <element minOccurs="0" name="ContactListId" type="long">
+              <annotation>
+                <documentation>
+                  <ann:summary>ContactList to filter by</ann:summary>
+                </documentation>
+              </annotation>
+            </element>
+            <element minOccurs="0" name="String" type="string">
+              <annotation>
+                <documentation>
+                  <ann:summary>Substring contained in Contact to filter by</ann:summary>
+                </documentation>
+              </annotation>
+            </element>
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <element name="ContactQueryResult">
+    <annotation>
+      <documentation>
+        <ann:summary>List of Contacts returned from query</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:QueryResult">
+          <sequence>
+            <element minOccurs="0" maxOccurs="unbounded" ref="data:Contact" />
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <element name="UpdateContacts">
+    <annotation>
+      <documentation>
+        <ann:summary>Update Contacts using attached info</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <sequence>
+        <element minOccurs="0" maxOccurs="unbounded" ref="data:Contact">
+          <annotation>
+            <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+              <jaxb:bindings node="ancestor::xs:annotation/..">
+                <ann:annotate ann:restIndexedArray="true" />
+              </jaxb:bindings>
+            </xs:appinfo>
+          </annotation>
+        </element>
+      </sequence>
+    </complexType>
+  </element>
+  <element name="RemoveContacts">
+    <complexType>
+      <sequence>
+        <element name="ContactId" type="tns:IdList" />
+      </sequence>
+    </complexType>
+  </element>
+  <element name="QueryContactLists" type="tns:Query">
+    <annotation>
+      <documentation>
+        <ann:summary>ContactLists request by query</ann:summary>
+      </documentation>
+    </annotation>
+  </element>
+  <element name="ContactListQueryResult">
+    <annotation>
+      <documentation>
+        <ann:summary>List of ContactLists returned from query</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:QueryResult">
+          <sequence>
+            <element minOccurs="0" maxOccurs="unbounded" ref="data:ContactList" />
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <element name="GetContactList" type="tns:IdRequest">
+    <annotation>
+      <documentation>
+        <ann:summary>Contact list request by unique ID</ann:summary>
+      </documentation>
+    </annotation>
+  </element>
+  <element name="ContactSource">
+    <annotation>
+      <documentation>
+        <ann:summary>List of contacts, numbers, contactIds, or csv file.</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <choice>
+        <element maxOccurs="unbounded" ref="data:Contact">
+          <annotation>
+            <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+              <jaxb:bindings node="ancestor::xs:annotation/..">
+                <ann:annotate ann:restIndexedArray="true" />
+              </jaxb:bindings>
+            </xs:appinfo>
+          </annotation>
+        </element>
+        <element name="ContactId" type="tns:IdList">
+          <annotation>
+            <documentation>
+              <ann:summary>List of existing contact ids</ann:summary>
+            </documentation>
+          </annotation>
+        </element>
+        <element xmime:expectedContentTypes="application/octet-stream" name="File" type="base64Binary">
+          <annotation>
+            <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+              <jaxb:bindings node="ancestor::xs:annotation/..">
+                <ann:annotate ann:restParamType="file" />
+              </jaxb:bindings>
+            </xs:appinfo>
+            <documentation>
+              <ann:summary>Csv file attachment containing list of contacts or numbers</ann:summary>
+            </documentation>
+          </annotation>
+        </element>
+        <element name="Numbers">
+          <annotation>
+            <documentation>
+              <ann:summary>List of E.164 11 digit numbers space or comma seperated and optional fieldName</ann:summary>
+              <ann:demoValue>+12345678912 +12345678923</ann:demoValue>
+              <ann:demoValue>workPhone:+12345678912,+12345678923</ann:demoValue>
+            </documentation>
+          </annotation>
+          <complexType>
+            <simpleContent>
+              <extension base="data:PhoneNumberList">
+                <attribute default="homePhone" name="fieldName" type="string">
+                  <annotation>
+                    <documentation>
+                      <ann:summary>field number should be assigned to homePhone, workPhone or mobilePhone (default: homePhone)</ann:summary>
+                    </documentation>
+                  </annotation>
+                </attribute>
+              </extension>
+            </simpleContent>
+          </complexType>
+        </element>
+      </choice>
+    </complexType>
+  </element>
+  <element name="CreateContactList">
+    <annotation>
+      <documentation>
+        <ann:summary>Create ContactList using attached info</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <sequence>
+        <element minOccurs="0" name="RequestId" type="anyURI">
+          <annotation>
+            <documentation>
+              <ann:summary>Unique ID, used to de-dup requests and make sure request is not processed twice</ann:summary>
+              <ann:demoValue>MyUniqueIdForThisRequest</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <element name="Name" type="string">
+          <annotation>
+            <documentation>
+              <ann:summary>Name of contact list</ann:summary>
+              <ann:demoValue>My College Friends</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" default="true" name="Validate" type="boolean">
+          <annotation>
+            <documentation>
+              <ann:summary>Turn off list validation (default: true)</ann:summary>
+              <ann:demoValue>false</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <element ref="tns:ContactSource" />
+      </sequence>
+    </complexType>
+  </element>
+  <element name="DeleteContactList" type="tns:IdRequest">
+    <annotation>
+      <documentation>
+        <ann:summary>Delete ContactList identified by unique ID</ann:summary>
+      </documentation>
+    </annotation>
+  </element>
+  <complexType name="ContactListRequest">
+    <sequence>
+      <element name="ContactListId" type="long">
+        <annotation>
+          <documentation>
+            <ann:summary>Unique ID of ContactList</ann:summary>
+            <ann:demoValue>123</ann:demoValue>
+          </documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" default="true" name="Validate" type="boolean">
+        <annotation>
+          <documentation>
+            <ann:summary>Turn off list validation (default: true)</ann:summary>
+            <ann:demoValue>false</ann:demoValue>
+          </documentation>
+        </annotation>
+      </element>
+      <element ref="tns:ContactSource" />
+    </sequence>
+  </complexType>
+  <element name="AddContactsToList" type="tns:ContactListRequest">
+    <annotation>
+      <documentation>
+        <ann:summary>Add attached numbers to contact list</ann:summary>
+      </documentation>
+    </annotation>
+  </element>
+  <element name="RemoveContactsFromList">
+    <annotation>
+      <documentation>
+        <ann:summary>Remove attached numbers from contact list</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <sequence>
+        <element name="ContactListId" type="long">
+          <annotation>
+            <documentation>
+              <ann:summary>Unique ID of ContactList</ann:summary>
+              <ann:demoValue>123</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <choice>
+          <element name="ContactId" type="tns:IdList">
+            <annotation>
+              <documentation>
+                <ann:summary>List of existing contact ids</ann:summary>
+              </documentation>
+            </annotation>
+          </element>
+          <element name="Numbers" type="data:PhoneNumberList">
+            <annotation>
+              <documentation>
+                <ann:summary>List E.164 11 digit numbers space or comma seperated</ann:summary>
+                <ann:demoValue>13105551212 18185551212</ann:demoValue>
+                <ann:demoValue>+13105551212,+18185551212</ann:demoValue>
+              </documentation>
+            </annotation>
+          </element>
+        </choice>
+      </sequence>
+    </complexType>
+  </element>
+  <element name="GetNumber">
+    <annotation>
+      <documentation>
+        <ann:summary>Number request by 11 digit telephone number</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <sequence>
+        <element name="Number" type="data:PhoneNumber">
+          <annotation>
+            <documentation>
+              <ann:summary>11 digit telephone number</ann:summary>
+              <ann:demoValue>18185551212</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+      </sequence>
+    </complexType>
+  </element>
+  <complexType name="RegionQuery">
+    <complexContent mixed="false">
+      <extension base="tns:Query">
+        <sequence>
+          <element ref="data:Region" />
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="QueryRegions" type="tns:RegionQuery">
+    <annotation>
+      <documentation>
+        <ann:summary>Regions request by query</ann:summary>
+      </documentation>
+    </annotation>
+  </element>
+  <element name="RegionQueryResult">
+    <annotation>
+      <documentation>
+        <ann:summary>List of Regions returned from query</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:QueryResult">
+          <sequence>
+            <element minOccurs="0" maxOccurs="unbounded" ref="data:Region" />
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <element name="QueryNumbers">
+    <annotation>
+      <documentation>
+        <ann:summary>Numbers request by query</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:RegionQuery">
+          <sequence>
+            <element minOccurs="0" name="LabelName" type="string">
+              <annotation>
+                <documentation>
+                  <ann:summary>Label that number must have to be included</ann:summary>
+                  <ann:demoValue>MyLabel</ann:demoValue>
+                </documentation>
+              </annotation>
+            </element>
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <element name="NumberQueryResult">
+    <annotation>
+      <documentation>
+        <ann:summary>List of Numbers returned from query</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:QueryResult">
+          <sequence>
+            <element minOccurs="0" maxOccurs="unbounded" ref="data:Number" />
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <element name="SearchAvailableNumbers">
+    <complexType>
+      <sequence>
+        <element minOccurs="0" ref="data:Region" />
+        <element minOccurs="0" default="false" name="TollFree" type="boolean" />
+        <element name="Count" type="int">
+          <annotation>
+            <documentation>
+              <ann:summary>Keywords request by query</ann:summary>
+            </documentation>
+          </annotation>
+        </element>
+      </sequence>
+    </complexType>
+  </element>
+  <element name="ConfigureNumber">
+    <complexType>
+      <sequence>
+        <element name="Number" type="data:PhoneNumber" />
+        <element ref="data:NumberConfiguration" />
+      </sequence>
+    </complexType>
+  </element>
+  <element name="QueryKeywords" type="tns:Query">
+    <annotation>
+      <documentation>
+        <ann:summary>Keywords request by query</ann:summary>
+      </documentation>
+    </annotation>
+  </element>
+  <element name="KeywordQueryResult">
+    <annotation>
+      <documentation>
+        <ann:summary>List of Keywords returned from query</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:QueryResult">
+          <sequence>
+            <element minOccurs="0" maxOccurs="unbounded" ref="data:Keyword" />
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <element name="SearchAvailableKeywords">
+    <complexType>
+      <sequence>
+        <element name="Keywords" type="data:KeywordList" />
+      </sequence>
+    </complexType>
+  </element>
+  <element name="CreateNumberOrder">
+    <annotation>
+      <documentation>
+        <ann:summary>Create NumberOrder using attached info</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <sequence>
+        <element minOccurs="0" name="Numbers" type="data:PhoneNumberList">
+          <annotation>
+            <documentation>
+              <ann:summary>List E.164 11 digit numbers space seperated</ann:summary>
+              <ann:demoValue>13105551212 18185551212</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" name="Keywords" type="data:KeywordList">
+          <annotation>
+            <documentation>
+              <ann:summary>List of keywords space seperated</ann:summary>
+              <ann:demoValue>CHOCOLATE VANILLA</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" name="BulkLocal">
+          <annotation>
+            <documentation>
+              <ann:summary>Local numbers to aquire</ann:summary>
+            </documentation>
+          </annotation>
+          <complexType>
+            <sequence>
+              <element name="Count" type="int">
+                <annotation>
+                  <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                    <jaxb:bindings node="ancestor::xs:annotation/..">
+                      <ann:annotate ann:restParam="localCount" />
+                    </jaxb:bindings>
+                  </xs:appinfo>
+                </annotation>
+              </element>
+              <element ref="data:Region" />
+            </sequence>
+          </complexType>
+        </element>
+        <element minOccurs="0" name="BulkTollFree">
+          <annotation>
+            <documentation>
+              <ann:summary>Toll free numbers to aquire</ann:summary>
+            </documentation>
+          </annotation>
+          <complexType>
+            <sequence>
+              <element name="Count" type="int">
+                <annotation>
+                  <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                    <jaxb:bindings node="ancestor::xs:annotation/..">
+                      <ann:annotate ann:restParam="tollFreeCount" />
+                    </jaxb:bindings>
+                  </xs:appinfo>
+                  <documentation>
+                    <ann:summary>Amount of phone numbers to aquire</ann:summary>
+                    <ann:demoValue>3</ann:demoValue>
+                  </documentation>
+                </annotation>
+              </element>
+            </sequence>
+          </complexType>
+        </element>
+      </sequence>
+    </complexType>
+  </element>
+  <element name="GetNumberOrder" type="tns:IdRequest">
+    <annotation>
+      <documentation>
+        <ann:summary>NumberOrder request by unique ID</ann:summary>
+      </documentation>
+    </annotation>
+  </element>
+  <element name="Release">
+    <annotation>
+      <documentation>
+        <ann:summary>Release leased number / keyword in account</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <sequence>
+        <element name="Number" type="data:PhoneNumber" />
+        <element minOccurs="0" name="Keyword" type="string" />
+      </sequence>
+    </complexType>
+  </element>
+  <element name="DeleteLabel">
+    <complexType>
+      <sequence>
+        <element name="LabelName" type="string">
+          <annotation>
+            <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+              <jaxb:bindings node="ancestor::xs:annotation/..">
+                <ann:annotate ann:requiredIn="DELETE" />
+              </jaxb:bindings>
+            </xs:appinfo>
+            <documentation>
+              <ann:summary>Label name</ann:summary>
+              <ann:demoValue>MyLabel</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+      </sequence>
+    </complexType>
+  </element>
+  <element name="QueryLabels" type="tns:Query" />
+  <element name="LabelQueryResult">
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:QueryResult">
+          <sequence>
+            <element minOccurs="0" maxOccurs="unbounded" ref="data:Label" />
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <complexType name="IdLabelRequest">
+    <complexContent mixed="false">
+      <extension base="tns:IdRequest">
+        <sequence>
+          <element name="LabelName" type="string">
+            <annotation>
+              <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                <jaxb:bindings node="ancestor::xs:annotation/..">
+                  <ann:annotate ann:requiredIn="POST,DELETE" />
+                </jaxb:bindings>
+              </xs:appinfo>
+              <documentation>
+                <ann:summary>Label name</ann:summary>
+                <ann:demoValue>MyLabel</ann:demoValue>
+              </documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="LabelBroadcast" type="tns:IdLabelRequest" />
+  <element name="UnlabelBroadcast" type="tns:IdLabelRequest" />
+  <complexType name="NumberLabelRequest">
+    <sequence>
+      <element name="Number" type="data:PhoneNumber">
+        <annotation>
+          <documentation>
+            <ann:summary>List of E.164 11 digit numbers space seperated and optional fieldName</ann:summary>
+          </documentation>
+        </annotation>
+      </element>
+      <element name="LabelName" type="string">
+        <annotation>
+          <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <jaxb:bindings node="ancestor::xs:annotation/..">
+              <ann:annotate ann:requiredIn="POST,DELETE" />
+            </jaxb:bindings>
+          </xs:appinfo>
+          <documentation>
+            <ann:summary>Label name</ann:summary>
+            <ann:demoValue>MyLabel</ann:demoValue>
+          </documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <element name="LabelNumber" type="tns:NumberLabelRequest" />
+  <element name="UnlabelNumber" type="tns:NumberLabelRequest" />
+</schema>

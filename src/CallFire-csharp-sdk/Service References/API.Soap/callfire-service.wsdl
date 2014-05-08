@@ -1,0 +1,956 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:svc="http://api.callfire.com/service/xsd" xmlns:tns="http://api.callfire.com/service/wsdl" xmlns:data="http://api.callfire.com/data" xmlns:ann="http://api.callfire.com/annotations" targetNamespace="http://api.callfire.com/service/wsdl" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <jaxws:bindings xmlns:jaxws="http://java.sun.com/xml/ns/jaxws">
+    <jaxws:enableWrapperStyle>false</jaxws:enableWrapperStyle>
+  </jaxws:bindings>
+  <types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import schemaLocation="callfire-service.xsd" namespace="http://api.callfire.com/service/xsd" />
+    </xs:schema>
+  </types>
+  <message name="CreatedId">
+    <part name="Id" element="svc:CreatedId" />
+  </message>
+  <message name="ServiceFault">
+    <part name="Fault" element="svc:ServiceFaultInfo" />
+  </message>
+  <message name="Empty" />
+  <message name="GetBroadcast">
+    <part name="Request" element="svc:GetBroadcast" />
+  </message>
+  <message name="Broadcast">
+    <part name="Broadcast" element="data:Broadcast" />
+  </message>
+  <message name="QueryBroadcasts">
+    <part name="Query" element="svc:QueryBroadcasts" />
+  </message>
+  <message name="BroadcastQueryResult">
+    <part name="Response" element="svc:BroadcastQueryResult" />
+  </message>
+  <message name="GetBroadcastStats">
+    <part name="Request" element="svc:GetBroadcastStats" />
+  </message>
+  <message name="BroadcastStats">
+    <part name="BroadcastStats" element="data:BroadcastStats" />
+  </message>
+  <message name="CreateBroadcast">
+    <part name="Create" element="svc:CreateBroadcast" />
+  </message>
+  <message name="UpdateBroadcast">
+    <part name="Update" element="svc:UpdateBroadcast" />
+  </message>
+  <message name="ControlBroadcast">
+    <part name="Control" element="svc:ControlBroadcast" />
+  </message>
+  <message name="GetContactBatch">
+    <part name="Request" element="svc:GetContactBatch" />
+  </message>
+  <message name="ContactBatch">
+    <part name="Batch" element="data:ContactBatch" />
+  </message>
+  <message name="QueryContactBatches">
+    <part name="Query" element="svc:QueryContactBatches" />
+  </message>
+  <message name="ContactBatches">
+    <part name="Response" element="svc:ContactBatchQueryResult" />
+  </message>
+  <message name="CreateContactBatch">
+    <part name="Create" element="svc:CreateContactBatch" />
+  </message>
+  <message name="ControlContactBatch">
+    <part name="Update" element="svc:ControlContactBatch" />
+  </message>
+  <message name="GetBroadcastSchedule">
+    <part name="Request" element="svc:GetBroadcastSchedule" />
+  </message>
+  <message name="BroadcastSchedule">
+    <part name="Schedule" element="data:BroadcastSchedule" />
+  </message>
+  <message name="QueryBroadcastSchedules">
+    <part name="Query" element="svc:QueryBroadcastSchedules" />
+  </message>
+  <message name="BroadcastSchedules">
+    <part name="Response" element="svc:BroadcastScheduleQueryResult" />
+  </message>
+  <message name="CreateBroadcastSchedule">
+    <part name="Create" element="svc:CreateBroadcastSchedule" />
+  </message>
+  <message name="DeleteBroadcastSchedule">
+    <part name="Delete" element="svc:DeleteBroadcastSchedule" />
+  </message>
+  <message name="GetSubscription">
+    <part name="Request" element="svc:GetSubscription" />
+  </message>
+  <message name="Subscription">
+    <part name="Subscription" element="data:Subscription" />
+  </message>
+  <message name="QuerySubscriptions">
+    <part name="Request" element="svc:QuerySubscriptions" />
+  </message>
+  <message name="SubscriptionQueryResult">
+    <part name="Response" element="svc:SubscriptionQueryResult" />
+  </message>
+  <message name="CreateSubscription">
+    <part name="Request" element="svc:CreateSubscription" />
+  </message>
+  <message name="UpdateSubscription">
+    <part name="Request" element="svc:UpdateSubscription" />
+  </message>
+  <message name="DeleteSubscription">
+    <part name="Request" element="svc:DeleteSubscription" />
+  </message>
+  <message name="SendText">
+    <part name="Request" element="svc:SendText" />
+  </message>
+  <message name="GetText">
+    <part name="Request" element="svc:GetText" />
+  </message>
+  <message name="Text">
+    <part name="Text" element="data:Text" />
+  </message>
+  <message name="QueryTexts">
+    <part name="Request" element="svc:QueryTexts" />
+  </message>
+  <message name="TextQueryResult">
+    <part name="Response" element="svc:TextQueryResult" />
+  </message>
+  <message name="GetAutoReply">
+    <part name="Request" element="svc:GetAutoReply" />
+  </message>
+  <message name="AutoReply">
+    <part name="Response" element="data:AutoReply" />
+  </message>
+  <message name="QueryAutoReplies">
+    <part name="Request" element="svc:QueryAutoReplies" />
+  </message>
+  <message name="AutoReplyQueryResult">
+    <part name="Response" element="svc:AutoReplyQueryResult" />
+  </message>
+  <message name="CreateAutoReply">
+    <part name="Request" element="svc:CreateAutoReply" />
+  </message>
+  <message name="DeleteAutoReply">
+    <part name="Request" element="svc:DeleteAutoReply" />
+  </message>
+  <message name="SendCall">
+    <part name="Request" element="svc:SendCall" />
+  </message>
+  <message name="GetCall">
+    <part name="Request" element="svc:GetCall" />
+  </message>
+  <message name="Call">
+    <part name="Call" element="data:Call" />
+  </message>
+  <message name="QueryCalls">
+    <part name="Request" element="svc:QueryCalls" />
+  </message>
+  <message name="CallQueryResult">
+    <part name="Response" element="svc:CallQueryResult" />
+  </message>
+  <message name="CreateSound">
+    <part name="Create" element="svc:CreateSound" />
+  </message>
+  <message name="GetSoundMeta">
+    <part name="Request" element="svc:GetSoundMeta" />
+  </message>
+  <message name="SoundMeta">
+    <part name="Meta" element="data:SoundMeta" />
+  </message>
+  <message name="QuerySoundMeta">
+    <part name="Request" element="svc:QuerySoundMeta" />
+  </message>
+  <message name="SoundMetaQueryResult">
+    <part name="Meta" element="svc:SoundMetaQueryResult" />
+  </message>
+  <message name="GetSoundData">
+    <part name="Get" element="svc:GetSoundData" />
+  </message>
+  <message name="SoundData">
+    <part name="Data" element="svc:SoundData" />
+  </message>
+  <message name="GetRecordingData">
+    <part name="Get" element="svc:GetRecordingData" />
+  </message>
+  <message name="RecordingData">
+    <part name="Data" element="svc:RecordingData" />
+  </message>
+  <message name="GetContact">
+    <part name="Request" element="svc:GetContact" />
+  </message>
+  <message name="Contact">
+    <part name="Request" element="data:Contact" />
+  </message>
+  <message name="GetContactHistory">
+    <part name="Request" element="svc:GetContactHistory" />
+  </message>
+  <message name="ContactHistory">
+    <part name="Request" element="data:ContactHistory" />
+  </message>
+  <message name="QueryContacts">
+    <part name="Request" element="svc:QueryContacts" />
+  </message>
+  <message name="ContactQueryResult">
+    <part name="Request" element="svc:ContactQueryResult" />
+  </message>
+  <message name="UpdateContacts">
+    <part name="Request" element="svc:UpdateContacts" />
+  </message>
+  <message name="RemoveContacts">
+    <part name="Request" element="svc:RemoveContacts" />
+  </message>
+  <message name="QueryContactLists">
+    <part name="Request" element="svc:QueryContactLists" />
+  </message>
+  <message name="ContactListQueryResult">
+    <part name="Request" element="svc:ContactListQueryResult" />
+  </message>
+  <message name="CreateContactList">
+    <part name="Request" element="svc:CreateContactList" />
+  </message>
+  <message name="DeleteContactList">
+    <part name="Request" element="svc:DeleteContactList" />
+  </message>
+  <message name="GetContactList">
+    <part name="Request" element="svc:GetContactList" />
+  </message>
+  <message name="ContactList">
+    <part name="Request" element="data:ContactList" />
+  </message>
+  <message name="AddContactsToList">
+    <part name="Request" element="svc:AddContactsToList" />
+  </message>
+  <message name="RemoveContactsFromList">
+    <part name="Request" element="svc:RemoveContactsFromList" />
+  </message>
+  <message name="GetNumber">
+    <part name="Request" element="svc:GetNumber" />
+  </message>
+  <message name="Number">
+    <part name="Response" element="data:Number" />
+  </message>
+  <message name="QueryRegions">
+    <part name="Request" element="svc:QueryRegions" />
+  </message>
+  <message name="RegionQueryResult">
+    <part name="Response" element="svc:RegionQueryResult" />
+  </message>
+  <message name="QueryNumbers">
+    <part name="Request" element="svc:QueryNumbers" />
+  </message>
+  <message name="NumberQueryResult">
+    <part name="Response" element="svc:NumberQueryResult" />
+  </message>
+  <message name="SearchAvailableNumbers">
+    <part name="Request" element="svc:SearchAvailableNumbers" />
+  </message>
+  <message name="ConfigureNumber">
+    <part name="Request" element="svc:ConfigureNumber" />
+  </message>
+  <message name="QueryKeywords">
+    <part name="Request" element="svc:QueryKeywords" />
+  </message>
+  <message name="KeywordQueryResult">
+    <part name="Response" element="svc:KeywordQueryResult" />
+  </message>
+  <message name="SearchAvailableKeywords">
+    <part name="Request" element="svc:SearchAvailableKeywords" />
+  </message>
+  <message name="CreateNumberOrder">
+    <part name="Request" element="svc:CreateNumberOrder" />
+  </message>
+  <message name="GetNumberOrder">
+    <part name="Request" element="svc:GetNumberOrder" />
+  </message>
+  <message name="NumberOrder">
+    <part name="Request" element="data:NumberOrder" />
+  </message>
+  <message name="Release">
+    <part name="Request" element="svc:Release" />
+  </message>
+  <message name="DeleteLabel">
+    <part name="DeleteLabel" element="svc:DeleteLabel" />
+  </message>
+  <message name="QueryLabels">
+    <part name="QueryLabels" element="svc:QueryLabels" />
+  </message>
+  <message name="QueryLabelsResult">
+    <part name="Response" element="svc:LabelQueryResult" />
+  </message>
+  <message name="LabelBroadcast">
+    <part name="LabelBroadcast" element="svc:LabelBroadcast" />
+  </message>
+  <message name="UnlabelBroadcast">
+    <part name="UnlabelBroadcast" element="svc:UnlabelBroadcast" />
+  </message>
+  <message name="LabelNumber">
+    <part name="LabelNumber" element="svc:LabelNumber" />
+  </message>
+  <message name="UnlabelNumber">
+    <part name="UnlabelNumber" element="svc:UnlabelNumber" />
+  </message>
+  <portType name="BroadcastServicePortType">
+    <documentation>
+      <ann:restOperation path="broadcast" />
+      <ann:summary>Operations for creating and managing outbound call and texts broadcasts.</ann:summary>
+      <ann:description>&lt;p&gt; A Broadcast consists of a configuration for the outbound call or text experience, a set of recipient contacts organized into contact batches, and an optional schedule of dates and times at which the broadcast should automatically start and stop. &lt;/p&gt; &lt;p&gt; The Call Service and Text Service provide convenience methods that encapsulate the creation, population and starting of broadcasts. The Broadcast Service is only required for advanced use cases involving delayed or scheduled starts, multiple contact batches, or changing configurations over time. &lt;/p&gt;</ann:description>
+      <ann:link>https://www.callfire.com/help/docs/voice-broadcast</ann:link>
+      <ann:link>https://www.callfire.com/help/docs/text-broadcast</ann:link>
+    </documentation>
+    <operation name="CreateBroadcast">
+      <documentation>
+        <ann:summary>Creates a new Broadcast</ann:summary>
+        <ann:description>&lt;p&gt;This operation creates a Broadcast campaign and returns a broadcastId. To see the status of this campaign call &lt;code&gt;GetBroadcast&lt;/code&gt; with the returned broadcastId. &lt;/p&gt; &lt;p&gt;There are 3 types of Broadcast: TEXT, IVR, or VOICE. Select the appropriate config to match the broadcast type, TextBroadcastConfig, IvrBroadcastConfig, or VoiceBroadcastConfig. Prefer the Text Service operations (ex: &lt;code&gt;SendText&lt;/code&gt;) and Call Service operations (ex: &lt;code&gt;SendCall&lt;/code&gt;) over this operation when managing simple text and call campaigns since those operations are simpler and more concise. &lt;/p&gt;</ann:description>
+        <ann:link>https://www.callfire.com/help/docs/voice-broadcast/creating-campaign</ann:link>
+        <ann:link>https://www.callfire.com/help/docs/text-broadcast/creating-campaign</ann:link>
+      </documentation>
+      <input name="CreateBroadcast" message="tns:CreateBroadcast" />
+      <output name="BroadcastId" message="tns:CreatedId" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="QueryBroadcasts">
+      <documentation>
+        <ann:summary>Lists existing Broadcasts</ann:summary>
+        <ann:description>&lt;p&gt;Use this operation to see the status of Broadcasts in account. Filter by type of campaign whether currently running. Returns a list of Broadcast info such as campaign name, type, status, ect... &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="QueryBroadcasts" message="tns:QueryBroadcasts" />
+      <output name="BroadcastQueryResult" message="tns:BroadcastQueryResult" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="GetBroadcast">
+      <documentation>
+        <ann:restOperation path="{Id}" />
+        <ann:summary>Gets a single Broadcast by ID</ann:summary>
+        <ann:description>&lt;p&gt;Use ID returned from &lt;code&gt;CreateBroadcast&lt;/code&gt; or from &lt;code&gt;QueryBroadcast&lt;/code&gt; to retreive information on indivual Broadcast. Include info such as campaign name, type, status, ect... &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="GetBroadcast" message="tns:GetBroadcast" />
+      <output name="Broadcast" message="tns:Broadcast" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="UpdateBroadcast">
+      <documentation>
+        <ann:restOperation path="{id}" />
+        <ann:summary>Updates an existing Broadcast's configuration</ann:summary>
+        <ann:description>&lt;p&gt;Update existing broadcast's configuration such as time zone restrictions or retry logic. Currently all fields from config are updated so the 'Message' field needs to be populated just like in &lt;code&gt;CreateBroadcast&lt;/code&gt; operation. &lt;/p&gt; &lt;p&gt;Use unique ID to specify broadcast. Need to provide dummy 'Name' field Broadcast even though the field will not be overwritten. &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="UpdateBroadcast" message="tns:UpdateBroadcast" />
+      <output name="UpdateBroadcastResponse" message="tns:Empty" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="GetBroadcastStats">
+      <documentation>
+        <ann:restOperation path="{Id}/stats" />
+        <ann:summary>Gets performance and result statistics for a Broadcast</ann:summary>
+        <ann:description>&lt;p&gt;Get broadcast stats by broadcastId or by interval range. Stats include information like billed amount, billed duration, actions count, attempt count, etc... &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="GetBroadcastStats" message="tns:GetBroadcastStats" />
+      <output name="BroadcastStats" message="tns:BroadcastStats" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="ControlBroadcast">
+      <documentation>
+        <ann:restOperation path="{Id}/control" />
+        <ann:summary>Starts, Stops or Archives a Broadcast</ann:summary>
+        <ann:description>&lt;p&gt;Apply command START, STOP, or ARCHIVE to Broadcast. Also can change the max active count of Broadcast. &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="ControlBroadcast" message="tns:ControlBroadcast" />
+      <output name="ControlBroadcastResponse" message="tns:Empty" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="CreateContactBatch">
+      <documentation>
+        <ann:restOperation path="{BroadcastId}/batch" />
+        <ann:summary>Creates a new ContactBatch</ann:summary>
+        <ann:description>&lt;p&gt;Contact Batch is a list of contacts to associate with a broadcast. Use this operation to attach a list of contacts to an existing Campaign. A list of ToNumbers or an existing Contact List ID is required to create and attach the Contact List. Returned is the unique contactListId that can be used in &lt;code&gt;ControlContactBatch&lt;/code&gt; to enable or disable this batch. &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="CreateContactBatch" message="tns:CreateContactBatch" />
+      <output name="ContactBatchId" message="tns:CreatedId" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="QueryContactBatches">
+      <documentation>
+        <ann:restOperation path="{BroadcastId}/batch" />
+        <ann:summary>Lists a Broadcast's ContactBatch</ann:summary>
+        <ann:description>&lt;p&gt;Return list of Contact Batches associated with this Broadcast. The contactBatchIds returned from this campaign can then be used to enable, disable, or delete the individual Batches. &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="QueryContactBatches" message="tns:QueryContactBatches" />
+      <output name="ContactBatches" message="tns:ContactBatches" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="GetContactBatch">
+      <documentation>
+        <ann:restOperation path="batch/{Id}" />
+        <ann:summary>Gets a ContactBatch by ID</ann:summary>
+        <ann:description>&lt;p&gt;Retrieve info on individual Contact Batch using contactId returned from &lt;code&gt;CreateContactBatch&lt;/code&gt; &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="GetContactBatch" message="tns:GetContactBatch" />
+      <output name="ContactBatchResponse" message="tns:ContactBatch" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="ControlContactBatch">
+      <documentation>
+        <ann:restOperation path="batch/{Id}/control" />
+        <ann:summary>Enables or Disables a Broadcast's ContactBatch</ann:summary>
+        <ann:description>&lt;p&gt;This operation provides the ability to enable or disable on a Broadcast the list of contacts associated with a ContactBatch. &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="ControlContactBatch" message="tns:ControlContactBatch" />
+      <output name="ControlContactBatchResponse" message="tns:Empty" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="CreateBroadcastSchedule">
+      <documentation>
+        <ann:restOperation path="{BroadcastId}/schedule" />
+        <ann:summary>Creates a new Schedule for a Broadcast</ann:summary>
+        <ann:description>&lt;p&gt;Broadcast can be set to run at scheduled times a prescribed by BroadcastSchedule. Can pick start time, stop time, begin date, and day of week. Returns broadcastScheduleId that can be used in &lt;code&gt;GetBroadcastSchedule&lt;/code&gt; and &lt;code&gt;DeleteBroadcastSchedule&lt;/code&gt; &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="CreateBroadcastSchedule" message="tns:CreateBroadcastSchedule" />
+      <output name="BroadcastScheduleId" message="tns:CreatedId" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="QueryBroadcastSchedule">
+      <documentation>
+        <ann:restOperation path="{BroadcastId}/schedule" />
+        <ann:summary>Lists existing BroadcastSchedules</ann:summary>
+        <ann:description>&lt;p&gt;List information about Broadcast Schedules attached to a Broadcast. &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="QueryBroadcastSchedule" message="tns:QueryBroadcastSchedules" />
+      <output name="BroadcastSchedules" message="tns:BroadcastSchedules" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="GetBroadcastSchedule">
+      <documentation>
+        <ann:restOperation path="schedule/{Id}" />
+        <ann:summary>Gets a BroadcastSchedule by ID</ann:summary>
+        <ann:description>&lt;p&gt;List information about individual Broadcast Schedule attached to a Broadcast. &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="GetBroadcastSchedule" message="tns:GetBroadcastSchedule" />
+      <output name="BroadcastScheduleResponse" message="tns:BroadcastSchedule" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="DeleteBroadcastSchedule">
+      <documentation>
+        <ann:restOperation path="schedule/{Id}" />
+        <ann:summary>Deletes a BroadcastSchedule by ID</ann:summary>
+        <ann:description>&lt;p&gt;Delete BroadcastSchedule associated with a Broadcast. &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="DeleteBroadcastSchedule" message="tns:DeleteBroadcastSchedule" />
+      <output name="DeleteBroadcastServiceResponse" message="tns:Empty" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+  </portType>
+  <portType name="SubscriptionServicePortType">
+    <documentation>
+      <ann:restOperation path="subscription" />
+      <ann:summary>Provides operations for creating and managing CallFire subscriptions which listen for account events.</ann:summary>
+      <ann:description>&lt;p&gt; CallFire account events, such as &lt;code&gt;TextSent&lt;/code&gt; or &lt;code&gt;CallFinished&lt;/code&gt;, can be listened for (subscribed to) by registering a postback URI endpoint, either an email address or web service URL, that CallFire can publish the event info to. Subscription service is used for registering and managing these postback URI endpoints. &lt;/p&gt; &lt;p&gt; A typical use case would be for determining the status of a &lt;code&gt;SendText&lt;/code&gt; request which is an asynchronous operation. The status of the Text can be obtained either by polling the GetText / QueryText operations (pull strategy) or more efficiently by registering with Subscription Service a postback internet endpoint URL for receiving 'textsent' and 'textfinished' events to. &lt;/p&gt; &lt;p&gt; Currently supports TextSent, TextFinished, CallFinished, and CampaignFinished events. &lt;/p&gt;</ann:description>
+      <ann:link>https://www.callfire.com/api-documentation/postback-guide</ann:link>
+    </documentation>
+    <operation name="CreateSubscription">
+      <documentation>
+        <ann:summary>Creates a new subscription for CallFire event notifications</ann:summary>
+        <ann:description>&lt;p&gt;&lt;code&gt;CreateSubscription&lt;/code&gt; registers a URI endpoint to start receiving CallFire notification events on. Returned is the subscriptionId that can be used later to query, update, or delete the subscription. The subscriptionId is also returned as part of all notification events as 'subscriptionId'. &lt;/p&gt; &lt;p&gt;A URI endpoint will need to be provided that can handle the HTTP notification events coming from CallFire.com. &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="Create" message="tns:CreateSubscription" />
+      <output name="SubscriptionId" message="tns:CreatedId" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="QuerySubscriptions">
+      <documentation>
+        <ann:summary>Get a list of registered subscriptions</ann:summary>
+        <ann:description>&lt;p&gt;Return a list of all subscriptions registered to an account. Subscriptions returned contain info like id, enabled, endpoint, filter, etc... &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="QuerySubscriptions" message="tns:QuerySubscriptions" />
+      <output name="SubscriptionQueryResult" message="tns:SubscriptionQueryResult" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="GetSubscription">
+      <documentation>
+        <ann:restOperation path="{Id}" />
+        <ann:summary>Gets an existing individual subscription by ID</ann:summary>
+        <ann:description>&lt;p&gt;Return a subscription registered to an account using subscriptionId returned from &lt;code&gt;CreateSubscription&lt;/code&gt; request. Subscription returned contain info like id, enabled, endpoint, filter, etc... &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="GetSubscription" message="tns:GetSubscription" />
+      <output name="Response" message="tns:Subscription" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="UpdateSubscription">
+      <documentation>
+        <ann:restOperation path="{id}" />
+        <ann:summary>Updates an existing subscription</ann:summary>
+        <ann:description>&lt;p&gt;Update existing subscription by ID&lt;/p&gt; &lt;p&gt;Use this to enable or disable notification events, change the notification endpoint URI, or change the filtering so only receive notification for a subset of events. &lt;/p&gt; &lt;p&gt;UpdateSubscription service call returns no response.&lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="UpdateSubscription" message="tns:UpdateSubscription" />
+      <output name="UpdateSubscriptionResponse" message="tns:Empty" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="DeleteSubscription">
+      <documentation>
+        <ann:restOperation path="{Id}" />
+        <ann:summary>Deletes a subscription by ID</ann:summary>
+        <ann:description>&lt;p&gt;Delete subscription to stop receiving CallFire notification events at the registered URI postback endpoint. &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="DeleteSubscription" message="tns:DeleteSubscription" />
+      <output name="DeleteSubscriptionResponse" message="tns:Empty" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+  </portType>
+  <portType name="TextServicePortType">
+    <documentation>
+      <ann:restOperation path="text" />
+      <ann:summary>Sending and receiving text messages and managing auto-replies</ann:summary>
+      <ann:description>&lt;p&gt;Operations for sending and receiving text messages and managing auto-replies &lt;a href="https://www.callfire.com/api-documentation/text-broadcast-guide"&gt;Text Broadcast Guide&lt;/a&gt; The operations defined here should be preferred over BroadcastService methods when appropriate since the &lt;code&gt;TextService&lt;/code&gt; operations are more consise and selective in the input parameters. &lt;/p&gt;</ann:description>
+      <ann:link>https://www.callfire.com/help/docs/text-broadcast</ann:link>
+    </documentation>
+    <operation name="SendText">
+      <documentation>
+        <ann:restOperation method="POST" />
+        <ann:summary>Send text message and return broadcastId</ann:summary>
+        <ann:description>&lt;p&gt;Sending a text message requires at least a toNumber and a message. &lt;code&gt;SendText&lt;/code&gt; starts a text campaign and returns the broadcastId if campaign is successful started. This returned broadcastId can be passed to &lt;code&gt;QueryTexts&lt;/code&gt; to get state of text messages in campaign and get list of individual textId for use in &lt;code&gt;GetText&lt;/code&gt; calls. The broadcastId can also be passed to &lt;code&gt;GetBroadcastStats&lt;/code&gt; to get information about the text campaign, such as BilledAmount, Duration, State, etc... &lt;/p&gt; &lt;p&gt;The industry standard is for text messages to be limited to 160 characters or less. If the message is over 160 characters then a &lt;code&gt;BigMessageStrategy&lt;/code&gt; should be selected in the &lt;code&gt;TextBroadcastConfig&lt;/code&gt;. &lt;/p&gt;</ann:description>
+        <ann:link>https://www.callfire.com/help/docs/text-broadcast</ann:link>
+      </documentation>
+      <input name="SendText" message="tns:SendText" />
+      <output name="BroadcastId" message="tns:CreatedId" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="QueryTexts">
+      <documentation>
+        <ann:summary>List sent and received text messages</ann:summary>
+        <ann:description>&lt;p&gt;Query for text messages using standard ActionQuery which filters on batchId, broadcastId, toNumber, etc... Returns a list of text messages and all associated info. See &lt;code&gt;GetText&lt;/code&gt; to return just a single text action by id. &lt;/p&gt;</ann:description>
+        <ann:link>https://www.callfire.com/help/docs/text-broadcast</ann:link>
+      </documentation>
+      <input name="QueryTexts" message="tns:QueryTexts" />
+      <output name="TextQueryResult" message="tns:TextQueryResult" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="GetText">
+      <documentation>
+        <ann:restOperation path="{Id}" />
+        <ann:summary>Gets a text message by ID</ann:summary>
+        <ann:description>&lt;p&gt;Return individual text message. See &lt;code&gt;QueryTexts&lt;/code&gt; to return a list of text messages and determine individual textIds. &lt;/p&gt; &lt;p&gt;General usage is to start a text campaign using &lt;code&gt;SendText&lt;/code&gt;, then to pass returned broadcastId to &lt;code&gt;QueryTexts&lt;/code&gt; to determine textIds of text messages created. This &lt;code&gt;GetText&lt;/code&gt; can then be called with unique textId to determine info and state of text message. &lt;/p&gt;</ann:description>
+        <ann:link>https://www.callfire.com/help/docs/text-broadcast</ann:link>
+      </documentation>
+      <input name="GetText" message="tns:GetText" />
+      <output name="Text" message="tns:Text" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="CreateAutoReply">
+      <documentation>
+        <ann:restOperation path="auto-reply" method="POST" />
+        <ann:summary>Configures a new auto-reply</ann:summary>
+        <ann:description>&lt;p&gt;Create and configure new autoreply message for existing Did&lt;/p&gt; &lt;p&gt;Auto-Replys are text message replys sent to a customer when a customer replys to a text message from a campaign. A keyword will need to have been purchased before an Auto-Reply can be created. &lt;/p&gt;</ann:description>
+        <ann:link>https://www.callfire.com/help/docs/keywords/setting-auto-reply</ann:link>
+      </documentation>
+      <input name="CreateAutoReply" message="tns:CreateAutoReply" />
+      <output name="AutoReplyId" message="tns:CreatedId" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="QueryAutoReplies">
+      <documentation>
+        <ann:restOperation path="auto-reply" />
+        <ann:summary>Lists configured auto-replies</ann:summary>
+        <ann:description>Query for autoreplies using optional number</ann:description>
+      </documentation>
+      <input name="QueryAutoReplies" message="tns:QueryAutoReplies" />
+      <output name="AutoReplyQueryResult" message="tns:AutoReplyQueryResult" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="GetAutoReply">
+      <documentation>
+        <ann:restOperation path="auto-reply/{Id}" />
+        <ann:summary>Gets an auto-reply by ID</ann:summary>
+        <ann:description>&lt;p&gt;Returns autoreply by id or error if doesn't exist&lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="GetAutoReply" message="tns:GetAutoReply" />
+      <output name="AutoReply" message="tns:AutoReply" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="DeleteAutoReply">
+      <documentation>
+        <ann:restOperation path="auto-reply/{Id}" />
+        <ann:summary>Deletes an auto-reply by ID</ann:summary>
+        <ann:description>&lt;p&gt;Delete autoreply by id if exists. Returns error if doesn't exist &lt;/p&gt;</ann:description>
+        <ann:link>https://www.callfire.com/help/docs/keywords/providing-opt-out</ann:link>
+      </documentation>
+      <input name="Request" message="tns:DeleteAutoReply" />
+      <output name="Empty" message="tns:Empty" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+  </portType>
+  <portType name="CallServicePortType">
+    <documentation>
+      <ann:restOperation path="call" />
+      <ann:summary>Provides operations for sending calls, viewing their results, and managing sound files</ann:summary>
+      <ann:description>&lt;p&gt;Operations for sending and receiving calls, uploading IVRs, and managing sound files. &lt;a href="https://www.callfire.com/api-documentation/voice-broadcast-guide"&gt;Broadcast Guide&lt;/a&gt; The operations defined here should be preferred over BroadcastService methods when appropriate since the &lt;code&gt;CallService&lt;/code&gt; operations are more consise and selective in the input parameters. &lt;/p&gt;</ann:description>
+      <ann:link>https://www.callfire.com/api-documentation/voice-broadcast-guide</ann:link>
+      <ann:link>https://www.callfire.com/help/docs/interactive-voice-response-ivr</ann:link>
+    </documentation>
+    <operation name="SendCall">
+      <documentation>
+        <ann:restOperation method="POST" />
+        <ann:summary>Creates a call broadcast, adds numbers to it, and sends it immediately</ann:summary>
+        <ann:description>&lt;p&gt;Start sending calls using &lt;code&gt;VoiceBroadcastConfig&lt;/code&gt; or by setting up an IVR using &lt;code&gt;IvrBroadcastConfig&lt;/code&gt;. Sending a call requires at least a ToNumber and sound id or an IVR. The returned broadcastId can be passed to &lt;code&gt;QueryCalls&lt;/code&gt; to get state of call actions in campaign and get list of individual callIds for use in &lt;code&gt;GetCall&lt;/code&gt; request. The broadcastId can also be passed to &lt;code&gt;GetBroadcastStats&lt;/code&gt; to get information about the call campaign, such as BilledAmount, Duration, State, etc... &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="SendCall" message="tns:SendCall" />
+      <output name="BroadcastId" message="tns:CreatedId" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="QueryCalls">
+      <documentation>
+        <ann:summary>Lists inbound and outbound calls</ann:summary>
+        <ann:description>&lt;p&gt;Query for calls using standard ActionQuery which filters on batchId, broadcastId, toNumber, etc... Returns a list of calls and all associated info. See &lt;code&gt;GetCall&lt;/code&gt; to return just a single call action by id. &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="QueryCalls" message="tns:QueryCalls" />
+      <output name="CallQueryResult" message="tns:CallQueryResult" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="GetCall">
+      <documentation>
+        <ann:restOperation path="{Id}" />
+        <ann:summary>Gets a call by ID</ann:summary>
+        <ann:description>&lt;p&gt;Return individual call action. See &lt;code&gt;QueryCalls&lt;/code&gt; to return a list of call actions and determine individual callIds. &lt;/p&gt; &lt;p&gt;General usage is to start a call campaign using &lt;code&gt;SendCall&lt;/code&gt;, then to pass returned broadcastId to &lt;code&gt;QueryCalls&lt;/code&gt; to determine callIds of call actions created. This &lt;code&gt;GetCall&lt;/code&gt; can then be called with unique callId to determine info and state of call action. &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="GetCall" message="tns:GetCall" />
+      <output name="Call" message="tns:Call" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="CreateSound">
+      <documentation>
+        <ann:restOperation path="sound" />
+        <ann:summary>Creates a new CallFire-hosted sound for use in calls.</ann:summary>
+        <ann:description>&lt;p&gt;There are two ways to create a sound: (1) uploading a pre-recorded WAV or MP3, or (2) initiating a call to record a sound over the phone. &lt;/p&gt; &lt;p&gt;Duplicate uploads are not allowed. If a duplicate sound data are provided, a new sound is not created. Instead, the ID of the previous sound is returned. &lt;/p&gt; &lt;p&gt;Recording a sound over the phone works by first creating a sound asset using the RecordingCall option, then call the ToNumber to record live voice as sound. If sound is created using RecordingCall then need to wait for sound to be active by calling &lt;code&gt;GetSoundMeta&lt;/code&gt; until Status = 'ACTIVE'. &lt;/p&gt; &lt;p&gt;Use the returned soundId in a subsequent &lt;code&gt;SendCall&lt;/code&gt; request.&lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="CreateSound" message="tns:CreateSound" />
+      <output name="SoundMetaId" message="tns:CreatedId" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="QuerySoundMeta">
+      <documentation>
+        <ann:restOperation path="sound" />
+        <ann:summary>Lists sounds available for use in calls.</ann:summary>
+        <ann:description>&lt;p&gt;Return list of sound meta info that includes id, status, name, length, etc... This operation only returns meta info, not the actual sound data. The raw binary sound data can be obtained from the &lt;code&gt;GetSoundData&lt;/code&gt;. &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="QuerySoundMeta" message="tns:QuerySoundMeta" />
+      <output name="SoundMetaQueryResult" message="tns:SoundMetaQueryResult" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="GetSoundMeta">
+      <documentation>
+        <ann:restOperation path="sound/{Id}" />
+        <ann:summary>Gets metadata for a sound for use in calls</ann:summary>
+        <ann:description>&lt;p&gt;Return sound meta info for specified sound that includes id, status, name, length, etc... This operation only returns meta info, not the actual sound data. The raw binary sound data can be obtained from the &lt;code&gt;GetSoundData&lt;/code&gt;. &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="GetSoundMeta" message="tns:GetSoundMeta" />
+      <output name="SoundMeta" message="tns:SoundMeta" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="GetSoundData">
+      <documentation>
+        <ann:summary>Gets binary data for a sound that's available for use in calls</ann:summary>
+        <ann:description>&lt;p&gt;Returns the raw binary data in specified format from specified sound. If no format is specified will return MP3 data. &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="GetSoundData" message="tns:GetSoundData" />
+      <output name="SoundData" message="tns:SoundData" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="GetRecordingData">
+      <documentation>
+        <ann:summary>Gets the binary data for a sound recorded from a past call</ann:summary>
+        <ann:description>&lt;p&gt;Recording from calls can be retrieved here using CallId / Name pair. Sounds may be given a name, unique within a call, in the IVR using the record tag and varname attribute. This allows them to be requested by name in this API. &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="GetRecordingData" message="tns:GetRecordingData" />
+      <output name="RecordingData" message="tns:RecordingData" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+  </portType>
+  <portType name="ContactServicePortType">
+    <documentation>
+      <ann:restOperation path="contact" />
+      <ann:summary>Provides operations for managing contact lists</ann:summary>
+      <ann:description>&lt;a href="https://www.callfire.com/help/docs/getting-started/managing-contacts"&gt;Managing Contacts&lt;/a&gt;</ann:description>
+      <ann:link>https://www.callfire.com/help/docs/getting-started/managing-contacts</ann:link>
+    </documentation>
+    <operation name="QueryContacts">
+      <documentation>
+        <ann:summary>Lists existing contacts</ann:summary>
+        <ann:link>https://www.callfire.com/help/docs/getting-started/managing-contacts/contact-lists</ann:link>
+        <ann:description>&lt;p&gt;Query for existing contacts using optional filters such as ContactListId, Field, etc... Returns a list of contacts and all associated info. See &lt;code&gt;GetContact&lt;/code&gt; to return just a single contact by id. &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="QueryContacts" message="tns:QueryContacts" />
+      <output name="ContactQueryResult" message="tns:ContactQueryResult" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="UpdateContacts">
+      <documentation>
+        <ann:summary>Updates existing contacts</ann:summary>
+        <ann:link>https://www.callfire.com/help/docs/getting-started/managing-contacts/contact-lists</ann:link>
+      </documentation>
+      <input name="UpdateContacts" message="tns:UpdateContacts" />
+      <output name="UpdateContactsResponse" message="tns:Empty" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="RemoveContacts">
+      <documentation>
+        <ann:restOperation method="DELETE" />
+        <ann:summary>Removes contacts</ann:summary>
+        <ann:description>&lt;p&gt;Delete contacts identified by contactIds from system. If id points to non-existent contact the id will be ignored and processing will continue. &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="RemoveContacts" message="tns:RemoveContacts" />
+      <output name="RemoveContactsResponse" message="tns:Empty" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="GetContact">
+      <documentation>
+        <ann:restOperation path="{Id}" />
+        <ann:summary>Gets the contact by ID</ann:summary>
+        <ann:description>&lt;p&gt;Return individual contact by ID. See QueryContacts to return a list of contacts and determine individual contactIds. &lt;/p&gt; &lt;p&gt;Note: GetContact returns all contact fields however when using PHP SoapClient only the predifined fields (lastName, mobileNumber, firstName, homePhone, workPhone, and zipcode) will show in $response. This is problem with SoapClient, not the underlying Soap message. Use our PHP REST API or another PHP SOAP client to work around the problem. &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="GetContact" message="tns:GetContact" />
+      <output name="Contact" message="tns:Contact" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="GetContactHistory">
+      <documentation>
+        <ann:restOperation path="{ContactId}/history" />
+        <ann:summary>Gets a contact's history by contact ID</ann:summary>
+        <ann:description>&lt;p&gt;List all calls and texts associated with a contact. &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="GetContactHistory" message="tns:GetContactHistory" />
+      <output name="ContactHistory" message="tns:ContactHistory" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="CreateContactList">
+      <documentation>
+        <ann:restOperation path="list" />
+        <ann:summary>Create new contact list and add to account</ann:summary>
+        <ann:description>&lt;p&gt;Add contact list to account using 1 of 4 inputs: list of contacts, numbers string, list of contactIds, or csv file containing contacts or numbers. If more then one ContactSource specified then only load from 1 source with precedence as listed above. &lt;/p&gt; &lt;p&gt;On import contact lists go through seven system safeguards that check the accuracy of the list. For example, our system checks if a number is formatted correctly, is invalid, is duplicated in another contact list, or is on your Do Not Contact list. API calls have their default validation error resolutions set differently then the defaults set on the CallFire web site under Settings | List Validation. The API validation defaults are: &lt;table&gt; &lt;tr&gt;&lt;td&gt;LIST_COLUMNS_UNMAPPED&lt;/td&gt;&lt;td&gt;Resolution USE_DEFAULT_COLUMNS&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;LIST_HAS_DUPLICATE_NUMBERS&lt;/td&gt;&lt;td&gt;Resolution SCRUB&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;LIST_HAS_DNC_CONTACTS&lt;/td&gt;&lt;td&gt;Resolution SCRUB&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;LIST_HAS_CONTACT_CONFLICTS&lt;/td&gt;&lt;td&gt;Resolution MERGE&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;LIST_HAS_INVALID_NUMBERS&lt;/td&gt;&lt;td&gt;Resolution SCRUB&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; &lt;/p&gt;</ann:description>
+        <ann:link>https://www.callfire.com/help/docs/getting-started/managing-contacts/contact-lists</ann:link>
+      </documentation>
+      <input name="CreateContactList" message="tns:CreateContactList" />
+      <output name="ContactListId" message="tns:CreatedId" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="QueryContactLists">
+      <documentation>
+        <ann:restOperation path="list" />
+        <ann:summary>Lists existing contact lists</ann:summary>
+        <ann:description>&lt;p&gt;Query for existing contact lists. Currently does no filtering and returns all contact lists. &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="QueryContactLists" message="tns:QueryContactLists" />
+      <output name="ContactListQueryResult" message="tns:ContactListQueryResult" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="DeleteContactList">
+      <documentation>
+        <ann:restOperation path="list/{Id}" />
+        <ann:summary>Deletes a contact list by ID</ann:summary>
+        <ann:description>&lt;p&gt;Delete contact list identified by id. &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="DeleteContactList" message="tns:DeleteContactList" />
+      <output name="DeleteContactListResponse" message="tns:Empty" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="AddContactsToList">
+      <documentation>
+        <ann:restOperation path="list/{ContactListId}/add" />
+        <ann:summary>Adds contacts to an existing list</ann:summary>
+        <ann:description>&lt;p&gt;See CreateContactList. Currently only supports adding ContactSource numbers, not contact lists, contactId lists, or csv files. &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="AddContactsToList" message="tns:AddContactsToList" />
+      <output name="AddContactsToListResponse" message="tns:Empty" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="GetContactList">
+      <documentation>
+        <ann:restOperation path="list/{Id}" />
+        <ann:summary>Gets the contact list by ID</ann:summary>
+        <ann:description>&lt;p&gt;Return individual contact list by ID. See QueryContactLists to return a list of contact lists and determine individual contactListIds. &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="GetContactList" message="tns:GetContactList" />
+      <output name="ContactList" message="tns:ContactList" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="RemoveContactsFromList">
+      <documentation>
+        <ann:restOperation path="list/{ContactListId}/remove" />
+        <ann:summary>Removes contacts from a list without deleting the contacts</ann:summary>
+      </documentation>
+      <input name="RemoveContactsFromList" message="tns:RemoveContactsFromList" />
+      <output name="RemoveContactsFromListResponse" message="tns:Empty" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+  </portType>
+  <portType name="NumberServicePortType">
+    <documentation>
+      <ann:restOperation path="number" />
+      <ann:summary>Operations for buying and configuring numbers and keywords.</ann:summary>
+      <ann:description>&lt;p&gt;Find and provision toll-free and local numbers and keywords using the number service. To aquire a number or keyword first search for available inventory using either &lt;code&gt;SearchAvailableNumbers&lt;/code&gt; or &lt;code&gt;SearchAvailableKeywords&lt;/code&gt;. Then provision that asset using the &lt;code&gt;CreateNumberOrder&lt;/code&gt; operation. &lt;/p&gt;</ann:description>
+      <ann:link>https://www.callfire.com/help/docs/keywords</ann:link>
+    </documentation>
+    <operation name="QueryRegions">
+      <documentation>
+        <ann:restOperation path="regions" />
+        <ann:summary>Queries regions for use in subsequent searches and purchase requests</ann:summary>
+        <ann:description>&lt;p&gt;Use a know subset of info on a region to query for the full set of info on a region. Example, if you know the city you can query for phone number prefixes, rate-centers, etc... associated with that city. &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="Request" message="tns:QueryRegions" />
+      <output name="Response" message="tns:RegionQueryResult" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="QueryNumbers">
+      <documentation>
+        <ann:summary>Lists numbers owned by your account</ann:summary>
+        <ann:description>&lt;p&gt;Search for numbers already purchased and in your account by region info such as prefix, city, state, zipcode, rate center, etc... Returns info on the numbers in your account such as status, lease info, configuration, etc... &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="QueryNumbers" message="tns:QueryNumbers" />
+      <output name="NumberQueryResult" message="tns:NumberQueryResult" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="GetNumber">
+      <documentation>
+        <ann:restOperation path="{Number}" />
+        <ann:summary>Get information about a single number owned by your account</ann:summary>
+        <ann:description>&lt;p&gt;Select number, using 11 digit E.164 format, already purchased and in your account. Returns info on the number in your account such as status, lease info, configuration, etc... &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="GetNumber" message="tns:GetNumber" />
+      <output name="Number" message="tns:Number" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="ConfigureNumber">
+      <documentation>
+        <ann:restOperation path="{Number}" />
+        <ann:summary>Configure a number owned by your account</ann:summary>
+        <ann:description>&lt;p&gt;Update number configuration, such as ENABLE / DISABLE or turn call recording on, using 11 diget E.164 format to select number. No response is returned. &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="ConfigureNumber" message="tns:ConfigureNumber" />
+      <output name="ConfigureNumberResponse" message="tns:Empty" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="SearchAvailableNumbers">
+      <documentation>
+        <ann:restOperation path="search" />
+        <ann:summary>Search for new numbers that are available for purchase</ann:summary>
+        <ann:description>&lt;p&gt;Find numbers available for purchase using either TollFree = true or by region info, such as prefix, city, zipcode, etc... The max count of numbers to return must also be specified. &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="SearchAvailableNumbers" message="tns:SearchAvailableNumbers" />
+      <output name="AvailableNumbers" message="tns:NumberQueryResult" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="QueryKeywords">
+      <documentation>
+        <ann:restOperation path="keyword" />
+        <ann:summary>Lists keywords owned by your account</ann:summary>
+        <ann:description>&lt;p&gt;Get info such as status, lease dates, etc... on keywords owned by your account. &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="QueryKeywords" message="tns:QueryKeywords" />
+      <output name="KeywordQueryResult" message="tns:KeywordQueryResult" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="SearchAvailableKeywords">
+      <documentation>
+        <ann:restOperation path="keyword/search" />
+        <ann:summary>Search for keywords available for purchase</ann:summary>
+        <ann:description>&lt;p&gt;Supply list of keywords to see if they are available for purchase. If keyword is available for purchase it will be returned in result. If not available then it will not be returned in result. &lt;/p&gt; &lt;p&gt;Once available keywords are found they can be purchase using &lt;code&gt;CreateNumberOrder&lt;/code&gt;</ann:description>
+      </documentation>
+      <input name="SearchAvailableKeywords" message="tns:SearchAvailableKeywords" />
+      <output name="AvailableKeywordList" message="tns:KeywordQueryResult" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="CreateNumberOrder">
+      <documentation>
+        <ann:restOperation path="order" />
+        <ann:summary>Order new numbers and/or keywords</ann:summary>
+        <ann:description>&lt;p&gt;Purchase numbers and keywords by creating a number order that includes a list of numbers, list of keywords, region info, or specifying toll-free. OrderId is returned from request. &lt;p&gt;Creating a number order is an asynchronous process. The returned orderId can be used in a &lt;code&gt;GetNumberOrder&lt;/code&gt; request to see the status of the order. However, there is no guarantee the order will be finished by the time &lt;code&gt;GetNumberOrder&lt;/code&gt; is called therefore the &lt;code&gt;GetNumberOrder&lt;/code&gt; operation must be polled (no more than once a second) untill the order is in a terminal state (FINISHED or ERRORED). &lt;/p&gt; &lt;p&gt;The recommended way to determine if an order is finished is not to poll but to use a &lt;a href="https://www.callfire.com/api-documentation/postback-guide"&gt;Postback&lt;/a&gt;. See &lt;code&gt;SubscriptionService&lt;/code&gt; for information on registering a postback using subscriptions.</ann:description>
+        <ann:link>https://www.callfire.com/help/docs/keywords/purchasing-keyword</ann:link>
+        <ann:link>https://www.callfire.com/api-documentation/postback-guide</ann:link>
+      </documentation>
+      <input name="CreateNumberOrder" message="tns:CreateNumberOrder" />
+      <output name="NumberOrderId" message="tns:CreatedId" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="GetNumberOrder">
+      <documentation>
+        <ann:restOperation path="order/{Id}" />
+        <ann:summary>Get the status and results of a previous order</ann:summary>
+        <ann:description>&lt;p&gt;Returns information on the order status, cost, and assets aquired.&lt;/p&gt; &lt;p&gt;Since &lt;code&gt;CreateNumberOrder&lt;/code&gt; is an asynchronous process this &lt;code&gt;GetNumberOrder&lt;/code&gt; operation may need to be polled for up to 20 seconds at a rate of no more than once a second to determine when the order is in a terminal state of FINISHED or ERRORED. Order will be in 'PROCESSING' status untill finished. &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="GetNumberOrder" message="tns:GetNumberOrder" />
+      <output name="NumberOrder" message="tns:NumberOrder" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="Release">
+      <documentation>
+        <ann:restOperation method="PUT" path="release" />
+        <ann:summary>Disable auto-renew for a number or keyword</ann:summary>
+        <ann:description>&lt;p&gt;CallFire's system automatically "renews" your numbers and keywords each month and bills you accordingly. When you no longer need a number or keyword, you can easily 'Release' it and stop your recurring monthly charge. &lt;/p&gt; &lt;p&gt;Once you release a keyword, you will not be able to repurchase it for a month after the release becomes effective. For example, if your keyword is slated to auto-renew for another month on April 29th, and you release it on April 15th, you will still be able to use it until April 29th. However, you will not be able to repurchase it until May 29th. Therefore, please be sure of your decision before releasing. &lt;/p&gt;</ann:description>
+        <ann:link>https://www.callfire.com/help/docs/keywords/releasing-keyword</ann:link>
+      </documentation>
+      <input name="Release" message="tns:Release" />
+      <output name="ReleaseResponse" message="tns:Empty" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+  </portType>
+  <portType name="LabelServicePortType">
+    <documentation>
+      <ann:restOperation path="label" />
+      <ann:summary>Operations for labeling and querying objects by label</ann:summary>
+      <ann:description>&lt;p&gt;Labels allow you to organize broadcasts, numbers, calls and texts into groups that make sense for your application. Attach labels to any of these objects by using &lt;code&gt;LabelNumber&lt;/code&gt; or &lt;code&gt;LabelBroadcast&lt;/code&gt;. Labels use name as their identifier instead of id. &lt;/p&gt;</ann:description>
+    </documentation>
+    <operation name="DeleteLabel">
+      <documentation>
+        <ann:summary>Removes a label from all labeled objects and deletes it</ann:summary>
+        <ann:description>&lt;p&gt;Delete label identified by name. All broadcasts and numbers currently containing the label will have the label association removed. &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="Delete" message="tns:DeleteLabel" />
+      <output name="DeleteResponse" message="tns:Empty" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="QueryLabels">
+      <documentation>
+        <ann:summary>Returns all defined labels</ann:summary>
+        <ann:description>&lt;p&gt;Return list of all defined label names. The labels may be associated with broadcasts or numbers. &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="Query" message="tns:QueryLabels" />
+      <output name="QueryResult" message="tns:QueryLabelsResult" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="LabelBroadcast">
+      <documentation>
+        <ann:restOperation method="POST" path="broadcast/{Id}" />
+        <ann:summary>Adds a label to a broadcast, creating the label if it doesn't already exist</ann:summary>
+        <ann:description>&lt;p&gt;Label broadcast (Voice, Text, or IVR) by specifying broadcastId and label name. If label name doesn't currently exist on system it will be created and saved. &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="LabelBroadcast" message="tns:LabelBroadcast" />
+      <output name="Result" message="tns:Empty" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="UnlabelBroadcast">
+      <documentation>
+        <ann:restOperation method="DELETE" path="broadcast/{Id}" />
+        <ann:summary>Removes a label from a single broadcast</ann:summary>
+        <ann:description>&lt;p&gt;Remove label from broadcast. This doesn't remove label from system, it just removes association between broadcast and label.</ann:description>
+      </documentation>
+      <input name="UnlabelBroadcast" message="tns:UnlabelBroadcast" />
+      <output name="Result" message="tns:Empty" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="LabelNumber">
+      <documentation>
+        <ann:restOperation method="POST" path="number/{Number}" />
+        <ann:summary>Adds a label to a single number</ann:summary>
+        <ann:description>&lt;p&gt;Label number by specifying E.164 11 digit number identifier and label name. If label name doesn't currently exist on system it will be created and saved. &lt;/p&gt;</ann:description>
+      </documentation>
+      <input name="LabelNumber" message="tns:LabelNumber" />
+      <output name="Result" message="tns:Empty" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+    <operation name="UnlabelNumber">
+      <documentation>
+        <ann:restOperation method="DELETE" path="number/{Number}" />
+        <ann:summary>Removes a label from a single number</ann:summary>
+        <ann:description>&lt;p&gt;Remove label from number. This doesn't remove label from system, it just removes association between number and label.</ann:description>
+      </documentation>
+      <input name="UnlabelNumber" message="tns:UnlabelNumber" />
+      <output name="Result" message="tns:Empty" />
+      <fault name="Fault" message="tns:ServiceFault" />
+    </operation>
+  </portType>
+</definitions>

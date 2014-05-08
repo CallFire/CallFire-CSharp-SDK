@@ -1,0 +1,1671 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:tns="http://api.callfire.com/data" xmlns:ann="http://api.callfire.com/annotations" elementFormDefault="qualified" targetNamespace="http://api.callfire.com/data" jaxb:version="2.0" xmlns="http://www.w3.org/2001/XMLSchema">
+  <import schemaLocation="callfire-ann.xsd" namespace="http://api.callfire.com/annotations" />
+  <simpleType name="PhoneDigit">
+    <restriction base="string">
+      <pattern value="[0-9#\*]" />
+    </restriction>
+  </simpleType>
+  <simpleType name="PhoneNumber">
+    <restriction base="string">
+      <pattern value="([a-zA-Z_]+)|(\+?[0-9]+)" />
+    </restriction>
+  </simpleType>
+  <simpleType name="PhoneNumberList">
+    <list itemType="tns:PhoneNumber" />
+  </simpleType>
+  <simpleType name="KeywordList">
+    <list itemType="string" />
+  </simpleType>
+  <simpleType name="ActionState">
+    <restriction base="string">
+      <enumeration value="READY" />
+      <enumeration value="SELECTED" />
+      <enumeration value="FINISHED" />
+      <enumeration value="DNC" />
+      <enumeration value="DUP" />
+      <enumeration value="INVALID" />
+      <enumeration value="TIMEOUT" />
+    </restriction>
+  </simpleType>
+  <simpleType name="Result">
+    <restriction base="string">
+      <enumeration value="LA" />
+      <enumeration value="AM" />
+      <enumeration value="BUSY" />
+      <enumeration value="DNC" />
+      <enumeration value="XFER" />
+      <enumeration value="XFER_LEG" />
+      <enumeration value="NO_ANS" />
+      <enumeration value="UNDIALED" />
+      <enumeration value="SENT" />
+      <enumeration value="RECEIVED" />
+      <enumeration value="DNT" />
+      <enumeration value="TOO_BIG" />
+      <enumeration value="INTERNAL_ERROR" />
+      <enumeration value="CARRIER_ERROR" />
+      <enumeration value="CARRIER_TEMP_ERROR" />
+    </restriction>
+  </simpleType>
+  <simpleType name="RetryPhoneType">
+    <restriction base="string">
+      <enumeration value="FIRST_NUMBER" />
+      <enumeration value="HOME_PHONE" />
+      <enumeration value="WORK_PHONE" />
+      <enumeration value="MOBILE_PHONE" />
+    </restriction>
+  </simpleType>
+  <simpleType name="BroadcastType">
+    <restriction base="string">
+      <enumeration value="VOICE" />
+      <enumeration value="IVR" />
+      <enumeration value="TEXT" />
+    </restriction>
+  </simpleType>
+  <simpleType name="InboundType">
+    <restriction base="string">
+      <enumeration value="TRACKING" />
+      <enumeration value="IVR" />
+    </restriction>
+  </simpleType>
+  <simpleType name="DayOfWeek">
+    <restriction base="string">
+      <enumeration value="SUNDAY" />
+      <enumeration value="MONDAY" />
+      <enumeration value="TUESDAY" />
+      <enumeration value="WEDNESDAY" />
+      <enumeration value="THURSDAY" />
+      <enumeration value="FRIDAY" />
+      <enumeration value="SATURDAY" />
+    </restriction>
+  </simpleType>
+  <simpleType name="BroadcastStatus">
+    <restriction base="string">
+      <enumeration value="START_PENDING" />
+      <enumeration value="RUNNING" />
+      <enumeration value="STOPPED" />
+      <enumeration value="FINISHED" />
+      <enumeration value="ARCHIVED" />
+    </restriction>
+  </simpleType>
+  <simpleType name="BatchStatus">
+    <restriction base="string">
+      <enumeration value="NEW" />
+      <enumeration value="VALIDATING" />
+      <enumeration value="ERRORS" />
+      <enumeration value="SOURCE_ERROR" />
+      <enumeration value="ACTIVE" />
+    </restriction>
+  </simpleType>
+  <simpleType name="ContactListStatus">
+    <restriction base="string">
+      <enumeration value="ACTIVE" />
+      <enumeration value="VALIDATING" />
+      <enumeration value="ERRORS" />
+      <enumeration value="DELETED" />
+      <enumeration value="PARSE_FAILED" />
+      <enumeration value="COLUMN_TOO_LARGE" />
+    </restriction>
+  </simpleType>
+  <simpleType name="AnsweringMachineConfig">
+    <restriction base="string">
+      <enumeration value="AM_ONLY" />
+      <enumeration value="AM_AND_LIVE" />
+      <enumeration value="LIVE_WITH_AMD" />
+      <enumeration value="LIVE_IMMEDIATE" />
+    </restriction>
+  </simpleType>
+  <simpleType name="BigMessageStrategy">
+    <restriction base="string">
+      <enumeration value="SEND_MULTIPLE" />
+      <enumeration value="DO_NOT_SEND" />
+      <enumeration value="TRIM" />
+    </restriction>
+  </simpleType>
+  <simpleType name="NotificationFormat">
+    <restriction base="string">
+      <enumeration value="XML" />
+      <enumeration value="JSON" />
+      <enumeration value="SOAP" />
+      <enumeration value="EMAIL" />
+    </restriction>
+  </simpleType>
+  <simpleType name="SubscriptionTriggerEvent">
+    <restriction base="string">
+      <enumeration value="UNDEFINED_EVENT" />
+      <enumeration value="INBOUND_CALL_FINISHED" />
+      <enumeration value="INBOUND_TEXT_FINISHED" />
+      <enumeration value="OUTBOUND_CALL_FINISHED" />
+      <enumeration value="OUTBOUND_TEXT_FINISHED" />
+      <enumeration value="CAMPAIGN_STARTED" />
+      <enumeration value="CAMPAIGN_STOPPED" />
+      <enumeration value="CAMPAIGN_FINISHED" />
+    </restriction>
+  </simpleType>
+  <simpleType name="NumberStatus">
+    <restriction base="string">
+      <enumeration value="PENDING" />
+      <enumeration value="ACTIVE" />
+      <enumeration value="RELEASED" />
+      <enumeration value="UNAVAILABLE" />
+    </restriction>
+  </simpleType>
+  <simpleType name="NumberFeature">
+    <restriction base="string">
+      <enumeration value="UNSUPPORTED" />
+      <enumeration value="PENDING" />
+      <enumeration value="DISABLED" />
+      <enumeration value="ENABLED" />
+    </restriction>
+  </simpleType>
+  <simpleType name="OrderStatus">
+    <restriction base="string">
+      <enumeration value="NEW" />
+      <enumeration value="PROCESSING" />
+      <enumeration value="FINISHED" />
+      <enumeration value="ERRORED" />
+      <enumeration value="VOID" />
+      <enumeration value="WAIT_FOR_PAYMENT" />
+      <enumeration value="ADJUSTED" />
+    </restriction>
+  </simpleType>
+  <simpleType name="SoundStatus">
+    <restriction base="string">
+      <enumeration value="PENDING">
+        <annotation>
+          <documentation>
+            <ann:summary xmlns:ann="http://api.callfire.com/annotations">Sound is being created/processed, and is not ready for use.</ann:summary>
+          </documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ACTIVE">
+        <annotation>
+          <documentation>
+            <ann:summary xmlns:ann="http://api.callfire.com/annotations">Sound is available for download/use.</ann:summary>
+          </documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="FAILED">
+        <annotation>
+          <documentation>
+            <ann:summary xmlns:ann="http://api.callfire.com/annotations">Sound creation failed and is not recoverable.</ann:summary>
+          </documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ARCHIVED">
+        <annotation>
+          <documentation>
+            <ann:summary xmlns:ann="http://api.callfire.com/annotations">Sound has been archived and will be excluded from query results.</ann:summary>
+          </documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="Voice">
+    <restriction base="string">
+      <pattern value="(MALE1)|(FEMALE1)|(FEMALE2)|(SPANISH1)" />
+    </restriction>
+  </simpleType>
+  <complexType name="InboundConfig" abstract="true">
+    <attribute name="id" type="long">
+      <annotation>
+        <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+          <jaxb:bindings node="ancestor::xs:annotation/.." xmlns:jaxb="http://java.sun.com/xml/ns/jaxb">
+            <ann:annotate ann:excludeFromOperations="Update" xmlns:ann="http://api.callfire.com/annotations" />
+          </jaxb:bindings>
+        </xs:appinfo>
+        <documentation>
+          <ann:summary xmlns:ann="http://api.callfire.com/annotations">Unique ID of InboundConfig</ann:summary>
+          <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">1</ann:demoValue>
+        </documentation>
+      </annotation>
+    </attribute>
+  </complexType>
+  <complexType name="BroadcastConfig" abstract="true">
+    <sequence>
+      <element minOccurs="0" name="Created" type="dateTime">
+        <annotation>
+          <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <jaxb:bindings node="ancestor::xs:annotation/..">
+              <ann:annotate ann:excludeFromOperations="Create" xmlns:ann="http://api.callfire.com/annotations" />
+            </jaxb:bindings>
+          </xs:appinfo>
+          <documentation>
+            <ann:summary xmlns:ann="http://api.callfire.com/annotations">DateTime Broadcast was created 'CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm]'</ann:summary>
+            <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">2012-10-26T21:32:52Z</ann:demoValue>
+          </documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="FromNumber" type="tns:PhoneNumber">
+        <annotation>
+          <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <jaxb:bindings node="ancestor::xs:annotation/..">
+              <ann:annotate ann:restParam="From" xmlns:ann="http://api.callfire.com/annotations" />
+            </jaxb:bindings>
+          </xs:appinfo>
+          <documentation>
+            <ann:summary xmlns:ann="http://api.callfire.com/annotations">E.164 11 digit number or short code</ann:summary>
+            <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">13105551212</ann:demoValue>
+          </documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" ref="tns:LocalTimeZoneRestriction" />
+      <element minOccurs="0" name="RetryConfig">
+        <annotation>
+          <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <jaxb:bindings node="ancestor::xs:annotation/..">
+              <ann:annotate ann:sinceVersion="1.1" xmlns:ann="http://api.callfire.com/annotations" />
+            </jaxb:bindings>
+          </xs:appinfo>
+          <documentation>
+            <ann:summary xmlns:ann="http://api.callfire.com/annotations">Retry logic for broadcast</ann:summary>
+          </documentation>
+        </annotation>
+        <complexType>
+          <sequence>
+            <element minOccurs="0" default="1" name="MaxAttempts" type="int">
+              <annotation>
+                <documentation>
+                  <ann:summary xmlns:ann="http://api.callfire.com/annotations">Max attempts to retry broadcast (default: 1)</ann:summary>
+                  <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">1</ann:demoValue>
+                </documentation>
+              </annotation>
+            </element>
+            <element minOccurs="0" default="60" name="MinutesBetweenAttempts" type="int">
+              <annotation>
+                <documentation>
+                  <ann:summary xmlns:ann="http://api.callfire.com/annotations">Minutes between broadcast attempts (default: 60)</ann:summary>
+                  <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">60</ann:demoValue>
+                </documentation>
+              </annotation>
+            </element>
+            <element name="RetryResults">
+              <annotation>
+                <documentation>
+                  <ann:summary xmlns:ann="http://api.callfire.com/annotations">Conditions to retry on</ann:summary>
+                  <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">BUSY NO_ANS</ann:demoValue>
+                </documentation>
+              </annotation>
+              <simpleType>
+                <list itemType="tns:Result" />
+              </simpleType>
+            </element>
+            <element minOccurs="0" name="RetryPhoneTypes">
+              <annotation>
+                <documentation>
+                  <ann:summary xmlns:ann="http://api.callfire.com/annotations">Phone types to call in retry</ann:summary>
+                  <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">FIRST_NUMBER HOME_PHONE</ann:demoValue>
+                </documentation>
+              </annotation>
+              <simpleType>
+                <list itemType="tns:RetryPhoneType" />
+              </simpleType>
+            </element>
+          </sequence>
+        </complexType>
+      </element>
+    </sequence>
+    <attribute name="id" type="long">
+      <annotation>
+        <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+          <jaxb:bindings node="ancestor::xs:annotation/..">
+            <ann:annotate ann:excludeFromOperations="Create,Send,Update" xmlns:ann="http://api.callfire.com/annotations" />
+          </jaxb:bindings>
+        </xs:appinfo>
+        <documentation>
+          <ann:summary xmlns:ann="http://api.callfire.com/annotations">Unique ID of BroadcastConfig</ann:summary>
+          <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">1</ann:demoValue>
+        </documentation>
+      </annotation>
+    </attribute>
+  </complexType>
+  <complexType name="ToNumber">
+    <simpleContent>
+      <extension base="tns:PhoneNumber">
+        <attribute name="ClientData" type="string" />
+        <anyAttribute processContents="lax" />
+      </extension>
+    </simpleContent>
+  </complexType>
+  <complexType name="ActionRecord" abstract="true">
+    <sequence>
+      <element name="Result" type="tns:Result" />
+      <element name="FinishTime" type="dateTime">
+        <annotation>
+          <documentation>
+            <ann:summary xmlns:ann="http://api.callfire.com/annotations">DateTime action finished in 'CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm]' format</ann:summary>
+            <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">2012-10-26T21:32:52Z</ann:demoValue>
+          </documentation>
+        </annotation>
+      </element>
+      <element name="BilledAmount" type="float">
+        <annotation>
+          <documentation>
+            <ann:summary xmlns:ann="http://api.callfire.com/annotations">Credits charged for call or text</ann:summary>
+            <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">1.00</ann:demoValue>
+          </documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" maxOccurs="unbounded" name="QuestionResponse">
+        <annotation>
+          <documentation>
+            <ann:summary xmlns:ann="http://api.callfire.com/annotations">Question / Response pair defined in IVR campaign with &lt;a href="https://www.callfire.com/help/docs/callfire-xml/tags/stash"&gt;'stash'.&lt;/a&gt;</ann:summary>
+          </documentation>
+        </annotation>
+        <complexType>
+          <sequence>
+            <element name="Question" type="string">
+              <annotation>
+                <documentation>
+                  <ann:summary xmlns:ann="http://api.callfire.com/annotations">IVR stash 'varname'</ann:summary>
+                  <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">question1</ann:demoValue>
+                </documentation>
+              </annotation>
+            </element>
+            <element name="Response" type="string">
+              <annotation>
+                <documentation>
+                  <ann:summary xmlns:ann="http://api.callfire.com/annotations">IVR stash value associated with 'varname'</ann:summary>
+                  <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">1</ann:demoValue>
+                </documentation>
+              </annotation>
+            </element>
+          </sequence>
+        </complexType>
+      </element>
+    </sequence>
+    <attribute name="id" type="long" use="required" />
+  </complexType>
+  <complexType name="Action">
+    <sequence>
+      <element name="FromNumber" type="tns:PhoneNumber">
+        <annotation>
+          <documentation>
+            <ann:summary xmlns:ann="http://api.callfire.com/annotations">E.164 11 digit number or short code</ann:summary>
+            <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">67076</ann:demoValue>
+          </documentation>
+        </annotation>
+      </element>
+      <element name="ToNumber" type="tns:ToNumber">
+        <annotation>
+          <documentation>
+            <ann:summary xmlns:ann="http://api.callfire.com/annotations">List of E.164 11 digit numbers space seperated</ann:summary>
+            <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">13105551212 18185551212</ann:demoValue>
+          </documentation>
+        </annotation>
+      </element>
+      <element name="State" type="tns:ActionState">
+        <annotation>
+          <documentation>
+            <ann:summary xmlns:ann="http://api.callfire.com/annotations">Current State of Action</ann:summary>
+            <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">FINISHED</ann:demoValue>
+          </documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="BatchId" type="long">
+        <annotation>
+          <documentation>
+            <ann:summary xmlns:ann="http://api.callfire.com/annotations">Unique ID of Batch associated with Action</ann:summary>
+            <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">123</ann:demoValue>
+          </documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="BroadcastId" type="long">
+        <annotation>
+          <documentation>
+            <ann:summary xmlns:ann="http://api.callfire.com/annotations">Unique ID of Broadcast associated with Action</ann:summary>
+            <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">123</ann:demoValue>
+          </documentation>
+        </annotation>
+      </element>
+      <element name="ContactId" type="long">
+        <annotation>
+          <documentation>
+            <ann:summary xmlns:ann="http://api.callfire.com/annotations">Unique ID of Contact associated with Action</ann:summary>
+            <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">123</ann:demoValue>
+          </documentation>
+        </annotation>
+      </element>
+      <element name="Inbound" type="boolean">
+        <annotation>
+          <documentation>
+            <ann:summary xmlns:ann="http://api.callfire.com/annotations">Is inbound Action</ann:summary>
+            <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">false</ann:demoValue>
+          </documentation>
+        </annotation>
+      </element>
+      <element name="Created" type="dateTime">
+        <annotation>
+          <documentation>
+            <ann:summary xmlns:ann="http://api.callfire.com/annotations">DateTime Action was created 'CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm]'</ann:summary>
+            <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">2012-10-26T21:32:52Z</ann:demoValue>
+          </documentation>
+        </annotation>
+      </element>
+      <element name="Modified" type="dateTime">
+        <annotation>
+          <documentation>
+            <ann:summary xmlns:ann="http://api.callfire.com/annotations">DateTime Action was modified 'CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm]'</ann:summary>
+            <ann:demoValue xmlns:ann="http://api.callfire.com/annotations">2012-10-26T21:32:52Z</ann:demoValue>
+          </documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="FinalResult" type="tns:Result">
+        <annotation>
+          <documentation>
+            <ann:summary xmlns:ann="http://api.callfire.com/annotations" />
+            <ann:demoValue>NO_ANS</ann:demoValue>
+          </documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" maxOccurs="unbounded" ref="tns:Label" />
+    </sequence>
+    <attribute name="id" type="long" use="required">
+      <annotation>
+        <documentation>
+          <ann:summary>Unique ID of action</ann:summary>
+          <ann:demoValue>123</ann:demoValue>
+        </documentation>
+      </annotation>
+    </attribute>
+  </complexType>
+  <element name="Broadcast">
+    <annotation>
+      <documentation>
+        <ann:summary>A TEXT, IVR, or VOICE Broadcast</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <sequence>
+        <element minOccurs="0" name="Name" type="string">
+          <annotation>
+            <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+              <jaxb:bindings node="ancestor::xs:annotation/..">
+                <ann:annotate ann:requiredIn="POST" />
+              </jaxb:bindings>
+            </xs:appinfo>
+            <documentation>
+              <ann:summary>Name of Broadcast</ann:summary>
+              <ann:demoValue>My Test Broadcast</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" name="Status" type="tns:BroadcastStatus">
+          <annotation>
+            <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+              <jaxb:bindings node="ancestor::xs:annotation/..">
+                <ann:annotate ann:excludeFromOperations="Create" />
+              </jaxb:bindings>
+            </xs:appinfo>
+            <documentation>
+              <ann:summary>Status of Broadcast (response only)</ann:summary>
+              <ann:demoValue>FINISHED</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" name="LastModified" type="dateTime">
+          <annotation>
+            <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+              <jaxb:bindings node="ancestor::xs:annotation/..">
+                <ann:annotate ann:excludeFromOperations="Create" />
+              </jaxb:bindings>
+            </xs:appinfo>
+            <documentation>
+              <ann:summary>Last Modified 'CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm]'</ann:summary>
+              <ann:demoValue>2012-10-26T21:32:52Z</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" name="Type" type="tns:BroadcastType">
+          <annotation>
+            <documentation>
+              <ann:summary>Type of Broadcast</ann:summary>
+              <ann:demoValue>TEXT</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <choice>
+          <element ref="tns:VoiceBroadcastConfig">
+            <annotation>
+              <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                <jaxb:bindings node="ancestor::xs:annotation/..">
+                  <ann:annotate ann:restCondition="Type=VOICE" />
+                </jaxb:bindings>
+              </xs:appinfo>
+              <documentation>
+                <ann:summary>Configuration of a Voice Broadcast</ann:summary>
+                <ann:condition field="Type" value="VOICE" />
+              </documentation>
+            </annotation>
+          </element>
+          <element ref="tns:TextBroadcastConfig">
+            <annotation>
+              <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                <jaxb:bindings node="ancestor::xs:annotation/..">
+                  <ann:annotate ann:restCondition="Type=TEXT" />
+                </jaxb:bindings>
+              </xs:appinfo>
+              <documentation>
+                <ann:summary>Configuration of a Text Broadcast</ann:summary>
+                <ann:condition field="Type" value="TEXT" />
+              </documentation>
+            </annotation>
+          </element>
+          <element ref="tns:IvrBroadcastConfig">
+            <annotation>
+              <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                <jaxb:bindings node="ancestor::xs:annotation/..">
+                  <ann:annotate ann:restCondition="Type=IVR" />
+                </jaxb:bindings>
+              </xs:appinfo>
+              <documentation>
+                <ann:summary>Configuration of an IVR Broadcast</ann:summary>
+                <ann:condition field="Type" value="IVR" />
+              </documentation>
+            </annotation>
+          </element>
+        </choice>
+      </sequence>
+      <attribute name="id" type="long">
+        <annotation>
+          <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <jaxb:bindings node="ancestor::xs:annotation/..">
+              <ann:annotate ann:excludeFromOperations="Create" />
+            </jaxb:bindings>
+          </xs:appinfo>
+          <documentation>
+            <ann:summary>Unique ID of Broadcast</ann:summary>
+            <ann:demoValue>1</ann:demoValue>
+          </documentation>
+        </annotation>
+      </attribute>
+    </complexType>
+  </element>
+  <element name="VoiceBroadcastConfig">
+    <annotation>
+      <documentation>
+        <ann:summary>Configuration needed for a Voice Broadcast</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:BroadcastConfig">
+          <sequence>
+            <element minOccurs="0" name="AnsweringMachineConfig" type="tns:AnsweringMachineConfig">
+              <annotation>
+                <documentation>
+                  <ann:summary>Action to take if machine answers</ann:summary>
+                  <ann:demoValue>LIVE_IMMEDIATE</ann:demoValue>
+                </documentation>
+              </annotation>
+            </element>
+            <choice minOccurs="0">
+              <element name="LiveSoundText" type="string" />
+              <element name="LiveSoundId" type="long">
+                <annotation>
+                  <documentation>
+                    <ann:summary>ID of Sound to play if call answered by live person</ann:summary>
+                    <ann:demoValue>123</ann:demoValue>
+                  </documentation>
+                </annotation>
+              </element>
+            </choice>
+            <element minOccurs="0" name="LiveSoundTextVoice" type="tns:Voice" />
+            <choice minOccurs="0">
+              <element name="MachineSoundText" type="string" />
+              <element name="MachineSoundId" type="long">
+                <annotation>
+                  <documentation>
+                    <ann:summary>ID of Sound to play if call answered by machine</ann:summary>
+                    <ann:demoValue>124</ann:demoValue>
+                  </documentation>
+                </annotation>
+              </element>
+            </choice>
+            <element minOccurs="0" name="MachineSoundTextVoice" type="tns:Voice" />
+            <choice minOccurs="0">
+              <element name="TransferSoundText" type="string" />
+              <element name="TransferSoundId" type="long">
+                <annotation>
+                  <documentation>
+                    <ann:summary>ID of Sound to play if call transfered</ann:summary>
+                    <ann:demoValue>125</ann:demoValue>
+                  </documentation>
+                </annotation>
+              </element>
+            </choice>
+            <element minOccurs="0" name="TransferSoundTextVoice" type="tns:Voice" />
+            <element minOccurs="0" name="TransferDigit" type="tns:PhoneDigit">
+              <annotation>
+                <documentation>
+                  <ann:summary>Phone digit call transfers on if pressed</ann:summary>
+                  <ann:demoValue>1</ann:demoValue>
+                </documentation>
+              </annotation>
+            </element>
+            <element minOccurs="0" name="TransferNumber" type="tns:PhoneNumber">
+              <annotation>
+                <documentation>
+                  <ann:summary>Number to transfer call to</ann:summary>
+                  <ann:demoValue>18185551212</ann:demoValue>
+                </documentation>
+              </annotation>
+            </element>
+            <choice minOccurs="0">
+              <element name="DncSoundText" type="string" />
+              <element name="DncSoundId" type="long">
+                <annotation>
+                  <documentation>
+                    <ann:summary>Do Not Call unique ID of sound</ann:summary>
+                    <ann:demoValue>12345</ann:demoValue>
+                  </documentation>
+                </annotation>
+              </element>
+            </choice>
+            <element minOccurs="0" name="DncSoundTextVoice" type="tns:Voice" />
+            <element minOccurs="0" name="DncDigit" type="tns:PhoneDigit">
+              <annotation>
+                <documentation>
+                  <ann:summary>Do Not Call Digit</ann:summary>
+                  <ann:demoValue>9</ann:demoValue>
+                </documentation>
+              </annotation>
+            </element>
+            <element minOccurs="0" name="MaxActiveTransfers" type="int">
+              <annotation>
+                <documentation>
+                  <ann:summary>Max Transfers</ann:summary>
+                  <ann:demoValue>1</ann:demoValue>
+                </documentation>
+              </annotation>
+            </element>
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <element name="TextBroadcastConfig">
+    <annotation>
+      <documentation>
+        <ann:summary>Configuration needed for a Text Broadcast</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:BroadcastConfig">
+          <sequence>
+            <element name="Message" type="string">
+              <annotation>
+                <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                  <jaxb:bindings node="ancestor::xs:annotation/..">
+                    <ann:annotate ann:requiredIn="POST" />
+                  </jaxb:bindings>
+                </xs:appinfo>
+                <documentation>
+                  <ann:summary>160 char or less message to be sent in text broadcast. Use rented 'keyword' in message if need response</ann:summary>
+                  <ann:demoValue>use your phone to text YOUR_KEYWORD to 67076, and we'll send you special coupons that you can use in our store.</ann:demoValue>
+                </documentation>
+              </annotation>
+            </element>
+            <element minOccurs="0" default="SEND_MULTIPLE" name="BigMessageStrategy" type="tns:BigMessageStrategy">
+              <annotation>
+                <appinfo>
+                  <jaxb:property generateIsSetMethod="true" />
+                </appinfo>
+                <documentation>
+                  <ann:summary>Set strategy if message is over 160 chars (default: SEND_MULTIPLE)</ann:summary>
+                  <ann:demoValue>SEND_MULTIPLE</ann:demoValue>
+                </documentation>
+              </annotation>
+            </element>
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <element name="IvrBroadcastConfig">
+    <annotation>
+      <documentation>
+        <ann:summary>Configuration needed for an IVR Broadcast</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:BroadcastConfig">
+          <sequence>
+            <element minOccurs="0" name="DialplanXml" type="string">
+              <annotation>
+                <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                  <jaxb:bindings node="ancestor::xs:annotation/..">
+                    <ann:annotate ann:restParamType="file" ann:requiredIn="POST" />
+                  </jaxb:bindings>
+                </xs:appinfo>
+                <documentation>
+                  <ann:summary>IVR xml document describing dialplan</ann:summary>
+                </documentation>
+              </annotation>
+            </element>
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <element name="CallTrackingConfig">
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:InboundConfig">
+          <sequence>
+            <element minOccurs="0" name="TransferNumber">
+              <simpleType>
+                <list itemType="tns:PhoneNumber" />
+              </simpleType>
+            </element>
+            <element minOccurs="0" default="false" name="Screen" type="boolean">
+              <annotation>
+                <appinfo>
+                  <jaxb:property generateIsSetMethod="true" />
+                </appinfo>
+              </annotation>
+            </element>
+            <element minOccurs="0" default="false" name="Record" type="boolean">
+              <annotation>
+                <appinfo>
+                  <jaxb:property generateIsSetMethod="true" />
+                </appinfo>
+              </annotation>
+            </element>
+            <element minOccurs="0" name="IntroSoundId" type="long" />
+            <element minOccurs="0" name="WhisperSoundId" type="long" />
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <element name="IvrInboundConfig">
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:InboundConfig">
+          <sequence>
+            <element minOccurs="0" name="DialplanXml" type="string">
+              <annotation>
+                <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                  <jaxb:bindings node="ancestor::xs:annotation/..">
+                    <ann:annotate ann:restParamType="file" />
+                  </jaxb:bindings>
+                </xs:appinfo>
+              </annotation>
+            </element>
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <element name="LocalTimeZoneRestriction">
+    <annotation>
+      <documentation>
+        <ann:summary>Restrict the times your compaign can run</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <sequence>
+        <element minOccurs="0" name="BeginTime" type="time">
+          <annotation>
+            <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+              <jaxb:bindings node="ancestor::xs:annotation/..">
+                <ann:annotate ann:restParam="LocalRestrictBegin" />
+              </jaxb:bindings>
+            </xs:appinfo>
+            <documentation>
+              <ann:summary>Earliest time a client can be contacted in the timezone associated with the number's NPA/NXX</ann:summary>
+              <ann:demoValue>09:00:00</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" name="EndTime" type="time">
+          <annotation>
+            <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+              <jaxb:bindings node="ancestor::xs:annotation/..">
+                <ann:annotate ann:restParam="LocalRestrictEnd" />
+              </jaxb:bindings>
+            </xs:appinfo>
+            <documentation>
+              <ann:summary>Latest time a client can be contacted in the timezone associated with the number's NPA/NXX</ann:summary>
+              <ann:demoValue>17:00:00</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+      </sequence>
+    </complexType>
+  </element>
+  <element name="ContactBatch">
+    <complexType>
+      <sequence>
+        <element name="Name" type="string">
+          <annotation>
+            <documentation>
+              <ann:summary>Name of Contact Batch</ann:summary>
+              <ann:demoValue>My TestContact Batch</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <element name="Status" type="tns:BatchStatus" />
+        <element name="BroadcastId" type="long">
+          <annotation>
+            <documentation>
+              <ann:summary>ID of Broadcast this Batch is attached to</ann:summary>
+              <ann:demoValue>3</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <element name="Created" type="dateTime" />
+        <element minOccurs="0" name="Size" type="int">
+          <annotation>
+            <documentation>
+              <ann:summary>Contact count in this Batch</ann:summary>
+              <ann:demoValue>3</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" name="Remaining" type="int" />
+      </sequence>
+      <attribute name="id" type="long" use="required" />
+    </complexType>
+  </element>
+  <element name="BroadcastSchedule">
+    <complexType>
+      <sequence>
+        <element name="StartTimeOfDay" type="time">
+          <annotation>
+            <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+              <jaxb:bindings node="ancestor::xs:annotation/..">
+                <ann:annotate ann:requiredIn="POST" />
+              </jaxb:bindings>
+            </xs:appinfo>
+            <documentation>
+              <ann:summary>Earliest time a client can be contacted in the timezone associated with the number's NPA/NXX</ann:summary>
+              <ann:demoValue>09:00:00</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <element name="StopTimeOfDay" type="time">
+          <annotation>
+            <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+              <jaxb:bindings node="ancestor::xs:annotation/..">
+                <ann:annotate ann:requiredIn="POST" />
+              </jaxb:bindings>
+            </xs:appinfo>
+            <documentation>
+              <ann:summary>Latest time a client can be contacted in the timezone associated with the number's NPA/NXX</ann:summary>
+              <ann:demoValue>17:00:00</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <element name="TimeZone" type="string">
+          <annotation>
+            <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+              <jaxb:bindings node="ancestor::xs:annotation/..">
+                <ann:annotate ann:requiredIn="POST" />
+              </jaxb:bindings>
+            </xs:appinfo>
+            <documentation>
+              <ann:summary>Time Zone</ann:summary>
+              <ann:demoValue>PST</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" name="BeginDate" type="date">
+          <annotation>
+            <documentation>
+              <ann:summary>Start date of Campaign</ann:summary>
+              <ann:demoValue>2012-01-01</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" name="EndDate" type="date">
+          <annotation>
+            <documentation>
+              <ann:summary>End date of Campaign</ann:summary>
+              <ann:demoValue>2014-01-01</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <element name="DaysOfWeek">
+          <simpleType>
+            <list itemType="tns:DayOfWeek" />
+          </simpleType>
+        </element>
+      </sequence>
+      <attribute name="id" type="long">
+        <annotation>
+          <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <jaxb:bindings node="ancestor::xs:annotation/..">
+              <ann:annotate ann:excludeFromOperations="Create" />
+            </jaxb:bindings>
+          </xs:appinfo>
+          <documentation>
+            <ann:summary>Unique ID of Broadcast Schedule</ann:summary>
+            <ann:demoValue>1</ann:demoValue>
+          </documentation>
+        </annotation>
+      </attribute>
+    </complexType>
+  </element>
+  <element name="BroadcastStats">
+    <complexType>
+      <sequence>
+        <element name="UsageStats">
+          <complexType>
+            <sequence>
+              <element name="Duration" type="int">
+                <annotation>
+                  <documentation>
+                    <ann:summary>Duration of calls in seconds</ann:summary>
+                    <ann:demoValue>2033</ann:demoValue>
+                  </documentation>
+                </annotation>
+              </element>
+              <element name="BilledDuration" type="int">
+                <annotation>
+                  <documentation>
+                    <ann:summary>Duration of calls billed in seconds</ann:summary>
+                    <ann:demoValue>2033</ann:demoValue>
+                  </documentation>
+                </annotation>
+              </element>
+              <element name="BilledAmount" type="float">
+                <annotation>
+                  <documentation>
+                    <ann:summary>Billed credits</ann:summary>
+                    <ann:demoValue>153.00</ann:demoValue>
+                  </documentation>
+                </annotation>
+              </element>
+              <element name="Attempts" type="int">
+                <annotation>
+                  <documentation>
+                    <ann:summary>Attempted Texts and Calls</ann:summary>
+                    <ann:demoValue>432</ann:demoValue>
+                  </documentation>
+                </annotation>
+              </element>
+              <element name="Actions" type="int">
+                <annotation>
+                  <documentation>
+                    <ann:summary>Text and Calls placed</ann:summary>
+                    <ann:demoValue>321</ann:demoValue>
+                  </documentation>
+                </annotation>
+              </element>
+            </sequence>
+          </complexType>
+        </element>
+        <element minOccurs="0" maxOccurs="unbounded" name="ResultStat">
+          <complexType>
+            <sequence>
+              <element name="Result" type="tns:Result" />
+              <element name="Attempts" type="int">
+                <annotation>
+                  <documentation>
+                    <ann:summary>Text and Calls attempted</ann:summary>
+                    <ann:demoValue>20</ann:demoValue>
+                  </documentation>
+                </annotation>
+              </element>
+              <element name="Actions" type="int">
+                <annotation>
+                  <documentation>
+                    <ann:summary>Text and Calls placed</ann:summary>
+                    <ann:demoValue>20</ann:demoValue>
+                  </documentation>
+                </annotation>
+              </element>
+            </sequence>
+          </complexType>
+        </element>
+        <element name="ActionStatistics">
+          <complexType>
+            <sequence>
+              <element name="Unattempted" type="int" />
+              <element name="RetryWait" type="int" />
+              <element name="Finished" type="int" />
+            </sequence>
+          </complexType>
+        </element>
+      </sequence>
+    </complexType>
+  </element>
+  <element name="CallRecord">
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:ActionRecord">
+          <sequence>
+            <element minOccurs="0" name="OriginateTime" type="dateTime" />
+            <element minOccurs="0" name="AnswerTime" type="dateTime" />
+            <element name="Duration" type="int">
+              <annotation>
+                <documentation>
+                  <ann:summary>Duration of call in seconds</ann:summary>
+                  <ann:demoValue>25</ann:demoValue>
+                </documentation>
+              </annotation>
+            </element>
+            <element minOccurs="0" maxOccurs="unbounded" ref="tns:RecordingMeta" />
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <element name="Call">
+    <annotation>
+      <documentation>
+        <ann:summary>Call Information</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:Action">
+          <sequence>
+            <element minOccurs="0" maxOccurs="unbounded" ref="tns:CallRecord" />
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <element name="SoundMeta">
+    <annotation>
+      <documentation>
+        <ann:summary>Sounds are prerecorded audio stored on CallFire, and made available for use in voice broadcasts and IVRs.</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <sequence>
+        <element name="Status" type="tns:SoundStatus" />
+        <element name="Name" type="string">
+          <annotation>
+            <documentation>
+              <ann:summary>Name of sound meta</ann:summary>
+            </documentation>
+          </annotation>
+        </element>
+        <element name="Created" type="dateTime">
+          <annotation>
+            <documentation>
+              <ann:summary>DateTime when sound was created</ann:summary>
+            </documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" name="LengthInSeconds" type="int">
+          <annotation>
+            <documentation>
+              <ann:summary>Duration of stored sound in seconds</ann:summary>
+            </documentation>
+          </annotation>
+        </element>
+      </sequence>
+      <attribute name="id" type="long" use="required" />
+    </complexType>
+  </element>
+  <element name="RecordingMeta">
+    <annotation>
+      <documentation>
+        <ann:summary>Recordings are audio recorded during a call.</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <sequence>
+        <element name="Name" type="string" />
+        <element name="Created" type="dateTime" />
+        <element minOccurs="0" name="LengthInSeconds" type="int" />
+        <element minOccurs="0" name="Link" type="string" />
+      </sequence>
+      <attribute name="id" type="long" use="required" />
+    </complexType>
+  </element>
+  <element name="TextRecord">
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:ActionRecord">
+          <sequence>
+            <element name="Message" type="string" />
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <element name="Text">
+    <complexType>
+      <complexContent mixed="false">
+        <extension base="tns:Action">
+          <sequence>
+            <element minOccurs="0" name="Message" type="string" />
+            <element minOccurs="0" maxOccurs="unbounded" ref="tns:TextRecord" />
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <element name="AutoReply">
+    <complexType>
+      <sequence>
+        <element name="Number" type="tns:PhoneNumber">
+          <annotation>
+            <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+              <jaxb:bindings node="ancestor::xs:annotation/..">
+                <ann:annotate ann:requiredIn="POST" />
+              </jaxb:bindings>
+            </xs:appinfo>
+            <documentation>
+              <ann:summary>Phone number to configure an auto reply message</ann:summary>
+            </documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" name="Keyword" type="string" />
+        <element name="Match" type="string" />
+        <element name="Message" type="string" />
+      </sequence>
+      <attribute name="id" type="long">
+        <annotation>
+          <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <jaxb:bindings node="ancestor::xs:annotation/..">
+              <ann:annotate ann:excludeFromOperations="Create" />
+            </jaxb:bindings>
+          </xs:appinfo>
+          <documentation>
+            <ann:summary>Unique ID of Text Auto Reply</ann:summary>
+          </documentation>
+        </annotation>
+      </attribute>
+    </complexType>
+  </element>
+  <element name="Subscription">
+    <annotation>
+      <documentation>
+        <ann:summary>Subscribe to a CallFire postback notification event, such as 'textnotification', by registering a callback URI endpoint where events will get published to.</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <sequence>
+        <element minOccurs="0" name="Enabled" type="boolean">
+          <annotation>
+            <documentation>
+              <ann:summary>Enable publishing of postback notifications for subscribed events.</ann:summary>
+              <ann:demoValue>true</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" name="Endpoint" type="anyURI">
+          <annotation>
+            <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+              <jaxb:bindings node="ancestor::xs:annotation/..">
+                <ann:annotate ann:requiredIn="POST" />
+              </jaxb:bindings>
+            </xs:appinfo>
+            <documentation>
+              <ann:summary>Email or URI endpoint to publish notification event to.</ann:summary>
+              <ann:demoValue>http://www.yourwebsite.com/somephpfile.php</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" default="XML" name="NotificationFormat" type="tns:NotificationFormat">
+          <annotation>
+            <documentation>
+              <ann:demoValue>XML</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" name="TriggerEvent" type="tns:SubscriptionTriggerEvent">
+          <annotation>
+            <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+              <jaxb:bindings node="ancestor::xs:annotation/..">
+                <ann:annotate ann:requiredIn="POST" ann:sinceVersion="1.1" />
+              </jaxb:bindings>
+            </xs:appinfo>
+            <documentation>
+              <ann:summary>Event to trigger on</ann:summary>
+              <ann:demoValue>CAMPAIGN_FINISHED</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" name="SubscriptionFilter">
+          <annotation>
+            <documentation>
+              <ann:summary>Filter the type of notification events published to postback URI endpoint.</ann:summary>
+            </documentation>
+          </annotation>
+          <complexType>
+            <sequence>
+              <element minOccurs="0" name="BroadcastId" type="long">
+                <annotation>
+                  <documentation>
+                    <ann:summary>Broadcast ID to filter on</ann:summary>
+                    <ann:demoValue>123</ann:demoValue>
+                  </documentation>
+                </annotation>
+              </element>
+              <element minOccurs="0" name="BatchId" type="long">
+                <annotation>
+                  <documentation>
+                    <ann:summary>Batch ID to filter on</ann:summary>
+                    <ann:demoValue>123</ann:demoValue>
+                  </documentation>
+                </annotation>
+              </element>
+              <element minOccurs="0" name="FromNumber" type="tns:PhoneNumber">
+                <annotation>
+                  <documentation>
+                    <ann:summary>From number (11 digit) or shortcode to filter on</ann:summary>
+                    <ann:demoValue>123</ann:demoValue>
+                  </documentation>
+                </annotation>
+              </element>
+              <element minOccurs="0" name="ToNumber" type="tns:PhoneNumber">
+                <annotation>
+                  <documentation>
+                    <ann:summary>E.164 11 digit phone number</ann:summary>
+                    <ann:demoValue>13105551212</ann:demoValue>
+                  </documentation>
+                </annotation>
+              </element>
+              <element minOccurs="0" name="Inbound" type="boolean">
+                <annotation>
+                  <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                    <jaxb:bindings node="ancestor::xs:annotation/..">
+                      <ann:annotate ann:deprecatedVersion="1.1" />
+                    </jaxb:bindings>
+                  </xs:appinfo>
+                  <documentation>
+                    <ann:summary>Deprecated, use TriggerEvent</ann:summary>
+                  </documentation>
+                </annotation>
+              </element>
+            </sequence>
+          </complexType>
+        </element>
+      </sequence>
+      <attribute name="id" type="long">
+        <annotation>
+          <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <jaxb:bindings node="ancestor::xs:annotation/..">
+              <ann:annotate ann:excludeFromOperations="Create" />
+            </jaxb:bindings>
+          </xs:appinfo>
+          <documentation>
+            <ann:summary>Unique ID of Subscription</ann:summary>
+            <ann:demoValue>123</ann:demoValue>
+          </documentation>
+        </annotation>
+      </attribute>
+    </complexType>
+  </element>
+  <element name="Contact">
+    <annotation>
+      <documentation>
+        <ann:summary>Info about the people you want to contact. Any info needed can be stored under Contact as an extra attribute.</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <attribute name="id" type="long">
+        <annotation>
+          <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <jaxb:bindings node="ancestor::xs:annotation/..">
+              <ann:annotate ann:excludeFromOperations="Create" />
+            </jaxb:bindings>
+          </xs:appinfo>
+          <documentation>
+            <ann:summary>Unique ID of Contact</ann:summary>
+            <ann:demoValue>123</ann:demoValue>
+          </documentation>
+        </annotation>
+      </attribute>
+      <attribute name="firstName" type="string">
+        <annotation>
+          <documentation>
+            <ann:summary>First name</ann:summary>
+            <ann:demoValue>John</ann:demoValue>
+          </documentation>
+        </annotation>
+      </attribute>
+      <attribute name="lastName" type="string">
+        <annotation>
+          <documentation>
+            <ann:summary>Last name</ann:summary>
+            <ann:demoValue>Doe</ann:demoValue>
+          </documentation>
+        </annotation>
+      </attribute>
+      <attribute name="zipcode" type="string">
+        <annotation>
+          <documentation>
+            <ann:summary>5 digit zipcode</ann:summary>
+            <ann:demoValue>98154</ann:demoValue>
+          </documentation>
+        </annotation>
+      </attribute>
+      <attribute name="homePhone" type="tns:PhoneNumber">
+        <annotation>
+          <documentation>
+            <ann:summary>E.164 11 digit number</ann:summary>
+            <ann:demoValue>18185551212</ann:demoValue>
+          </documentation>
+        </annotation>
+      </attribute>
+      <attribute name="workPhone" type="tns:PhoneNumber">
+        <annotation>
+          <documentation>
+            <ann:summary>E.164 11 digit number</ann:summary>
+            <ann:demoValue>18185551313</ann:demoValue>
+          </documentation>
+        </annotation>
+      </attribute>
+      <attribute name="mobilePhone" type="tns:PhoneNumber">
+        <annotation>
+          <documentation>
+            <ann:summary>E.164 11 digit number</ann:summary>
+            <ann:demoValue>18185551414</ann:demoValue>
+          </documentation>
+        </annotation>
+      </attribute>
+      <attribute name="externalId" type="string">
+        <annotation>
+          <documentation>
+            <ann:summary>id of contact defined by external system (NATION_BUILDER, GOOGLE_GROUPS, etc...)</ann:summary>
+            <ann:demoValue>nb-1010</ann:demoValue>
+          </documentation>
+        </annotation>
+      </attribute>
+      <attribute name="externalSystem" type="string">
+        <annotation>
+          <documentation>
+            <ann:summary>System where externalId was generated from (NATION_BUILDER, GOOGLE_GROUPS, etc...)</ann:summary>
+            <ann:demoValue>NATION_BUILDER</ann:demoValue>
+          </documentation>
+        </annotation>
+      </attribute>
+      <anyAttribute processContents="lax" />
+    </complexType>
+  </element>
+  <element name="ContactHistory">
+    <annotation>
+      <documentation>
+        <ann:summary>List Calls or Texts associated with Contact</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <choice minOccurs="0" maxOccurs="unbounded">
+        <element ref="tns:Call" />
+        <element ref="tns:Text" />
+      </choice>
+    </complexType>
+  </element>
+  <element name="ContactList">
+    <annotation>
+      <documentation>
+        <ann:summary>List of Contacts</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <sequence>
+        <element name="Name" type="string" />
+        <element name="Size" type="integer" />
+        <element name="Created" type="dateTime" />
+        <element name="Status" type="tns:ContactListStatus" />
+      </sequence>
+      <attribute name="id" type="long" use="required" />
+    </complexType>
+  </element>
+  <element name="Region">
+    <annotation>
+      <documentation>
+        <ann:summary>Region of number represented by city, state, prefix, etc...</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <sequence>
+        <element minOccurs="0" name="Prefix" type="string">
+          <annotation>
+            <documentation>
+              <ann:summary>4-7 digit prefix</ann:summary>
+              <ann:demoValue>1920659</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" name="City" type="string">
+          <annotation>
+            <documentation>
+              <ann:summary>Name of a city</ann:summary>
+              <ann:demoValue>Seattle</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" name="State" type="string">
+          <annotation>
+            <documentation>
+              <ann:summary>State abbreviation</ann:summary>
+              <ann:demoValue>WA</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" name="Zipcode" type="string">
+          <annotation>
+            <documentation>
+              <ann:summary>5 digit zipcode</ann:summary>
+              <ann:demoValue>98154</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" name="Country" type="string">
+          <annotation>
+            <documentation>
+              <ann:summary>2 digit country code</ann:summary>
+              <ann:demoValue>US</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" name="Lata" type="string">
+          <annotation>
+            <documentation>
+              <ann:summary>Lata</ann:summary>
+              <ann:demoValue>674</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" name="RateCenter" type="string">
+          <annotation>
+            <documentation>
+              <ann:demoValue>SEATTLE</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" name="Latitude" type="float">
+          <annotation>
+            <documentation>
+              <ann:summary>Latitude</ann:summary>
+              <ann:demoValue>47.61</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" name="Longitude" type="float">
+          <annotation>
+            <documentation>
+              <ann:summary>Longitude</ann:summary>
+              <ann:demoValue>-122.331</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" name="TimeZone" type="string">
+          <annotation>
+            <documentation>
+              <ann:demoValue>America/Los_Angeles</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+      </sequence>
+    </complexType>
+  </element>
+  <element name="LeaseInfo">
+    <annotation>
+      <documentation>
+        <ann:summary>Info about Lease</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <sequence>
+        <element minOccurs="0" name="LeaseBegin" type="date">
+          <annotation>
+            <documentation>
+              <ann:summary>Date lease began</ann:summary>
+            </documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" name="LeaseEnd" type="date">
+          <annotation>
+            <documentation>
+              <ann:summary>Date lease ends</ann:summary>
+            </documentation>
+          </annotation>
+        </element>
+        <element name="AutoRenew" type="boolean">
+          <annotation>
+            <documentation>
+              <ann:summary>Is lease set to renew each month</ann:summary>
+            </documentation>
+          </annotation>
+        </element>
+      </sequence>
+    </complexType>
+  </element>
+  <element name="Number">
+    <annotation>
+      <documentation>
+        <ann:summary>Info about Number like Region</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <sequence>
+        <element name="Number" type="tns:PhoneNumber">
+          <annotation>
+            <documentation>
+              <ann:summary>11 digit E.164 number</ann:summary>
+              <ann:demoValue>13105551212</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <element name="NationalFormat" type="string">
+          <annotation>
+            <documentation>
+              <ann:summary>Phone number formatted for local</ann:summary>
+              <ann:demoValue>(310) 555-1212</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <element name="TollFree" type="boolean">
+          <annotation>
+            <documentation>
+              <ann:summary>Is toll free number</ann:summary>
+              <ann:demoValue>false</ann:demoValue>
+            </documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" ref="tns:Region" />
+        <element minOccurs="0" name="Status" type="tns:NumberStatus" />
+        <element minOccurs="0" ref="tns:LeaseInfo" />
+        <element minOccurs="0" ref="tns:NumberConfiguration" />
+      </sequence>
+    </complexType>
+  </element>
+  <element name="NumberConfiguration">
+    <annotation>
+      <documentation>
+        <ann:summary>Configure Call and Text features</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <sequence>
+        <element minOccurs="0" name="CallFeature" type="tns:NumberFeature" />
+        <element minOccurs="0" name="TextFeature" type="tns:NumberFeature" />
+        <element minOccurs="0" name="InboundCallConfigurationType" type="tns:InboundType" />
+        <element minOccurs="0" name="InboundCallConfiguration">
+          <complexType>
+            <choice>
+              <element ref="tns:CallTrackingConfig">
+                <annotation>
+                  <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                    <jaxb:bindings node="ancestor::xs:annotation/..">
+                      <ann:annotate ann:restCondition="InboundCallConfigurationType=TRACKING" />
+                    </jaxb:bindings>
+                  </xs:appinfo>
+                  <documentation>
+                    <ann:condition field="InboundCallConfigurationType" value="TRACKING" />
+                  </documentation>
+                </annotation>
+              </element>
+              <element ref="tns:IvrInboundConfig">
+                <annotation>
+                  <xs:appinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                    <jaxb:bindings node="ancestor::xs:annotation/..">
+                      <ann:annotate ann:restCondition="InboundCallConfigurationType=IVR" />
+                    </jaxb:bindings>
+                  </xs:appinfo>
+                  <documentation>
+                    <ann:condition field="InboundCallConfigurationType" value="IVR" />
+                  </documentation>
+                </annotation>
+              </element>
+            </choice>
+          </complexType>
+        </element>
+      </sequence>
+    </complexType>
+  </element>
+  <element name="Keyword">
+    <annotation>
+      <documentation>
+        <ann:summary>Info on Keyword like status and lease info</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <sequence>
+        <element name="ShortCode" type="tns:PhoneNumber" />
+        <element name="Keyword" type="string" />
+        <element minOccurs="0" name="Status" type="tns:NumberStatus" />
+        <element minOccurs="0" ref="tns:LeaseInfo" />
+      </sequence>
+    </complexType>
+  </element>
+  <complexType name="NumberOrderItem">
+    <sequence>
+      <element name="Ordered" type="int" />
+      <element name="UnitCost" type="float" />
+      <element minOccurs="0" name="Fulfilled">
+        <simpleType>
+          <list itemType="string" />
+        </simpleType>
+      </element>
+    </sequence>
+  </complexType>
+  <element name="NumberOrder">
+    <annotation>
+      <documentation>
+        <ann:summary>Info on NumberOrder like id, status, and cost</ann:summary>
+      </documentation>
+    </annotation>
+    <complexType>
+      <sequence>
+        <element name="Status" type="tns:OrderStatus" />
+        <element name="Created" type="dateTime" />
+        <element name="TotalCost" type="float" />
+        <element minOccurs="0" name="LocalNumbers" type="tns:NumberOrderItem" />
+        <element minOccurs="0" name="TollFreeNumbers" type="tns:NumberOrderItem" />
+        <element minOccurs="0" name="Keywords" type="tns:NumberOrderItem" />
+      </sequence>
+      <attribute name="id" type="long" use="required" />
+    </complexType>
+  </element>
+  <element name="Label">
+    <complexType>
+      <sequence>
+        <element name="Name" type="string" />
+      </sequence>
+    </complexType>
+  </element>
+</schema>
