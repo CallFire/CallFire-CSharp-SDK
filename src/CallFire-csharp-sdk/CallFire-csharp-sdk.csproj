@@ -51,12 +51,17 @@
   <ItemGroup>
     <Compile Include="API\CallfireClient.cs" />
     <Compile Include="API\CallfireClients.cs" />
+    <Compile Include="API\IBroadcastClient.cs" />
     <Compile Include="API\ICallfireClient.cs" />
     <Compile Include="API\Rest\BaseRestClient.cs" />
+    <Compile Include="API\Rest\BroadcastRest\BroadcastRestRouteObjects.cs" />
+    <Compile Include="API\Rest\BroadcastRest\BroadcastRestRouteParameters.cs" />
+    <Compile Include="API\Rest\BroadcastRest\RestBroadcastClient.cs" />
     <Compile Include="API\Rest\CallfireRestRoute.cs" />
     <Compile Include="API\Soap\BaseSoapClient.cs" />
     <Compile Include="API\Soap\BroadcastServicePortTypeClient.cs" />
     <Compile Include="API\Soap\IBroadcastServicePortTypeClient.cs" />
+    <Compile Include="API\Soap\SoapBroadcastClient.cs" />
     <Compile Include="Common\DataManagement\callfire-data.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\API.Soap\Reference.cs">
