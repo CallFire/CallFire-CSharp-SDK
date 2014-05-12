@@ -13,5 +13,11 @@ namespace Callfire_csharp_sdk.Tests
         {
             Assert.IsNotNull(Client);
         }
+
+        [Test]
+        public void Should_create_broadcast_client()
+        {
+            Assert.IsNotNull(Client.Broadcasts);
+        }
     }
 }

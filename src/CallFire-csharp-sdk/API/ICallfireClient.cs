@@ -2,5 +2,6 @@
 {
     public interface ICallfireClient
     {
+        IBroadcastClient Broadcasts { get; }
     }
 }

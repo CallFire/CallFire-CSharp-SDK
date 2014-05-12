@@ -50,7 +50,7 @@ namespace CallFire_csharp_sdk.API.Rest
 
         private static string GetTypeNameForRoute()
         {
-            return typeof(T).Name.ToLower().Substring(2);
+            return typeof(T).Name.ToLower();
         }
     }
 }
