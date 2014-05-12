@@ -36,7 +36,7 @@ namespace CallFire_csharp_sdk.API.Rest.BroadcastRest
                         .MaxResults(queryBroadcasts.MaxResults)
                         .FirstResult(queryBroadcasts.FirstResult)
                         .Type(type.ToString())
-                        .Running(queryBroadcasts.Running, queryBroadcasts.RunningSpecified)
+                        .Running(queryBroadcasts.Running)
                         .LabelName(queryBroadcasts.LabelName))));
         }
 

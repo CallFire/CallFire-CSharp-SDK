@@ -38,7 +38,7 @@ namespace Callfire_csharp_sdk.Tests.Rest
         [Test]
         public void Test_QueryBroadcast()
         {
-            var queryBroadcast = new CfQueryBroadcasts(1000, 0, CfBroadcastType.Text, true, false, null);
+            var queryBroadcast = new CfQueryBroadcasts(1000, 0, CfBroadcastType.Text, null, null);
             Client.QueryBroadcasts(queryBroadcast);
 
             JsonClientMock.AssertWasCalled(c => c.Send<BroadcastQueryResult>(Arg<string>.Is.Equal(HttpMethods.Get),

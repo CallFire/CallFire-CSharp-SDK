@@ -27,7 +27,7 @@ namespace CallFire_csharp_sdk.API.Soap
             var type = BroadcastTypeMapper.ToSoapBroadcastType(queryBroadcasts.Type);
             return BroadcastQueryResultMapper.FromSoapBroadcastQueryResult(
                 BroadcastService.QueryBroadcasts(new QueryBroadcasts(queryBroadcasts.MaxResults,
-                    queryBroadcasts.FirstResult, type.ToString(), queryBroadcasts.Running,
+                    queryBroadcasts.FirstResult, type.ToString(), queryBroadcasts.Running.HasValue && queryBroadcasts.Running.Value,
                     queryBroadcasts.LabelName)));
         }
 

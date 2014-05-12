@@ -26,9 +26,9 @@ namespace CallFire_csharp_sdk.API.Rest.BroadcastRest
             return this;
         }
 
-        public BroadcastRestRouteParameters Running(bool running, bool runningSpecified)
+        public BroadcastRestRouteParameters Running(bool? running)
         {
-            if (runningSpecified)
+            if (running.HasValue)
             {
                 Add("Running", running.ToString());
             }
