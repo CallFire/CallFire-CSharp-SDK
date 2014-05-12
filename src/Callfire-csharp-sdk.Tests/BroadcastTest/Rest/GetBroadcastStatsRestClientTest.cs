@@ -29,6 +29,8 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
             var usageStats = new BroadcastStatsUsageStats(Duration, BilledDuration, BilledAmount, Attempts, Actions);
 
             var resultStat = new BroadcastStatsResultStat[1];
+            Result = "result";
+            resultStat[0] = new BroadcastStatsResultStat(Result, Attempts, Actions);
 
             Unattempted = 2;
             RetryWait = 0;

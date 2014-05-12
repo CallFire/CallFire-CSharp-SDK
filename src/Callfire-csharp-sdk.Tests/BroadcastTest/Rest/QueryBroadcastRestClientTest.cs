@@ -19,12 +19,21 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
             JsonServiceClientMock = MockRepository.GenerateMock<JsonServiceClient>();
             Client = new RestBroadcastClient(JsonServiceClientMock);
 
+            var queryBroadcast = new Broadcast[1];
+            BroadcastId = 1;
+            BroadcastName = "broadcast";
+            BroadcastLastModified = DateTime.Now;
+            queryBroadcast[0] = new Broadcast(BroadcastId, BroadcastName, BroadcastStatus.RUNNING, BroadcastLastModified, BroadcastType.IVR, null);
+
             MaxResult = 5;
-            var cfBroadcastQueryResult = new BroadcastQueryResult(1, new Broadcast[1]);
+            FirstResult = 0;
+            LabelName = "labelName";
+
+            var cfBroadcastQueryResult = new BroadcastQueryResult(1, queryBroadcast);
 
             JsonServiceClientMock
                 .Stub(j => j.Send<BroadcastQueryResult>(Arg<string>.Is.Equal(HttpMethods.Get),
-                    Arg<string>.Is.Equal(String.Format("/broadcast?MaxResults={0}&FirstResult={1}", MaxResult, FirstResult)),
+                    Arg<string>.Is.Equal(String.Format("/broadcast?MaxResults={0}&FirstResult={1}&Type={2}&LabelName={3}", MaxResult, FirstResult, BroadcastType.IVR.ToString(), LabelName)),
                     Arg<object>.Is.Null))
                 .Return(cfBroadcastQueryResult);
         }

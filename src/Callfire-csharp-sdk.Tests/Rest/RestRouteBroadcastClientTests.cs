@@ -38,30 +38,30 @@ namespace Callfire_csharp_sdk.Tests.Rest
         [Test]
         public void Test_QueryBroadcast()
         {
-            var queryBroadcast = new CfQueryBroadcasts(1000, 0, null, true, false, null);
+            var queryBroadcast = new CfQueryBroadcasts(1000, 0, CfBroadcastType.Text, true, false, null);
             Client.QueryBroadcasts(queryBroadcast);
 
             JsonClientMock.AssertWasCalled(c => c.Send<BroadcastQueryResult>(Arg<string>.Is.Equal(HttpMethods.Get),
-                Arg<string>.Is.Equal("/broadcast?MaxResults=1000&FirstResult=0"),
+                Arg<string>.Is.Equal("/broadcast?MaxResults=1000&FirstResult=0&Type=TEXT"),
                 Arg<object>.Is.Null));
             
             queryBroadcast.Running = true;
             queryBroadcast.LabelName = "labelName1";
             Client.QueryBroadcasts(queryBroadcast);
-
+            
             JsonClientMock.AssertWasCalled(c => c.Send<BroadcastQueryResult>(Arg<string>.Is.Equal(HttpMethods.Get),
-                Arg<string>.Is.Equal("/broadcast?MaxResults=1000&FirstResult=0&Running=True&LabelName=labelName1"),
+                Arg<string>.Is.Equal("/broadcast?MaxResults=1000&FirstResult=0&Type=TEXT&Running=True&LabelName=labelName1"),
                 Arg<object>.Is.Null));
             
             queryBroadcast.FirstResult = 1;
             queryBroadcast.MaxResults = 600;
             queryBroadcast.Running = false;
             queryBroadcast.LabelName = "labelName2";
-            queryBroadcast.Type = CfBroadcastType.Text.ToString();
+            queryBroadcast.Type = CfBroadcastType.Ivr;
             Client.QueryBroadcasts(queryBroadcast);
 
-            JsonClientMock.AssertWasCalled(c => c.Send<BroadcastQueryResult>(Arg<string>.Is.Equal(HttpMethods.Get), 
-                Arg<string>.Is.Equal("/broadcast?MaxResults=600&FirstResult=1&Type=Text&Running=False&LabelName=labelName2"),
+            JsonClientMock.AssertWasCalled(c => c.Send<BroadcastQueryResult>(Arg<string>.Is.Equal(HttpMethods.Get),
+                Arg<string>.Is.Equal("/broadcast?MaxResults=600&FirstResult=1&Type=IVR&Running=False&LabelName=labelName2"),
                 Arg<object>.Is.Null));
         }
 

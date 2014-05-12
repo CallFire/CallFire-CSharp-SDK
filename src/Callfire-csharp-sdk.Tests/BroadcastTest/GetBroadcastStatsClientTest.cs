@@ -16,6 +16,8 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
         protected int Attempts;
         protected int Actions;
 
+        protected string Result;
+
         protected int Unattempted;
         protected int RetryWait;
         protected int Finished;
@@ -53,6 +55,19 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
             Assert.AreEqual(Unattempted, actionStatistics.Unattempted);
             Assert.AreEqual(RetryWait, actionStatistics.RetryWait);
             Assert.AreEqual(Finished, actionStatistics.Finished);
+        }
+
+        [Test]
+        public void Test_GetBroadcastStats_ResultStat()
+        {
+            var broadcastStats = Client.GetBroadcastStats(BroadcastId);
+            Assert.IsNotNull(broadcastStats);
+
+            var resultStats = broadcastStats.ResultStat[0];
+            Assert.IsNotNull(resultStats);
+            Assert.AreEqual(Result, resultStats.Result);
+            Assert.AreEqual(Attempts, resultStats.Attempts);
+            Assert.AreEqual(Actions, resultStats.Actions);
         }
     }
 }

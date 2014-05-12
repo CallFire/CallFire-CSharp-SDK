@@ -28,7 +28,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
             {
                 return DicSoapBroadcastCommands[source];
             }
-            throw new Exception(string.Format("Exception: Not supported. The source {0} is not validated to be mapped", source));
+            throw new NotSupportedException(string.Format("Exception: Not supported. The source {0} is not validated to be mapped", source));
         }
 
         internal static BroadcastCommand ToSoapContactBatch(CfBroadcastCommand source)
@@ -37,7 +37,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
             {
                 return DicBroadcastCommands[source];
             }
-            throw new Exception(string.Format("Exception: Not supported. The source {0} is not validated to be mapped", source));
+            throw new NotSupportedException(string.Format("Exception: Not supported. The source {0} is not validated to be mapped", source));
         }
     }
 }
