@@ -1,5 +1,4 @@
-﻿using System;
-using CallFire_csharp_sdk.API;
+﻿using CallFire_csharp_sdk.API;
 using CallFire_csharp_sdk.Common.DataManagement;
 using NUnit.Framework;
 
@@ -9,37 +8,16 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
     public abstract class GetBroadcastClientTests
     {
         protected IBroadcastClient Client;
-        
         protected long BroadcastId;
-        protected string BroadcastName;
-        protected DateTime BroadcastLastModified;
+        protected CfBroadcast ExpectedBroadcast;
         
-        protected long ConfigId;
-        protected DateTime ConfigCreated;
-        protected string ConfigFromNumber;
-        protected DateTime ConfigBeginTime;
-        protected DateTime ConfigEndTime;
-        protected int ConfigMaxAttempts;
-        protected int ConfigMinutesBetweenAttempts;
-        protected string ConfigRetryResults;
-        protected string ConfigRetryPhoneTypes;
-        
-        protected string TextConfigMessage;
-        
-        protected string IvrConfigDialplanXml;
+        protected CfLocalTimeZoneRestriction LocalTimeZoneRestriction;
+        protected CfBroadcastConfigRetryConfig BroadcastConfigRestryConfig;
 
-        protected object VoiceConfigItem;
-        protected string VoiceConfigLiveSoundTextVoice;
-        protected object VoiceConfigItem1;
-        protected string VoiceConfigMachineSoundTextVoice;
-        protected object VoiceConfigItem2;
-        protected string VoiceConfigTransferSoundTextVoice;
-        protected string VoiceConfigTransferDigit;
-        protected string VoiceConfigTransferNumber;
-        protected object VoiceConfigItem3;
-        protected string VoiceConfigDncSoundTextVoice;
-        protected string VoiceConfigDncDigit;
-        protected int VoiceConfigMaxActiveTransfers;
+        protected CfTextBroadcastConfig ExpectedTextBroadcastConfig;
+        protected CfIvrBroadcastConfig ExpectedIvrBroadcastConfig;
+        protected CfVoiceBroadcastConfig ExpectedVoiceBroadcastConfig;
+       
 
         [Test]
         public void Test_GetBroadcastThatDoesNotExist()
@@ -58,10 +36,10 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
 
             Assert.IsNotNull(broadcast);
             Assert.AreEqual(BroadcastId, broadcast.Id);
-            Assert.AreEqual(BroadcastName, broadcast.Name);
-            Assert.AreEqual(CfBroadcastStatus.Running, broadcast.Status);
-            Assert.AreEqual(BroadcastLastModified, broadcast.LastModified);
-            Assert.AreEqual(CfBroadcastType.Text, broadcast.Type);
+            Assert.AreEqual(ExpectedBroadcast.Name, broadcast.Name);
+            Assert.AreEqual(ExpectedBroadcast.Status, broadcast.Status);
+            Assert.AreEqual(ExpectedBroadcast.LastModified, broadcast.LastModified);
+            Assert.AreEqual(ExpectedBroadcast.Type, broadcast.Type);
             Assert.IsNull(broadcast.Item);
         }
 
@@ -75,13 +53,13 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
             var textBroadcastConfig = broadcast.Item as CfTextBroadcastConfig;
 
             Assert.IsNotNull(textBroadcastConfig);
-            Assert.AreEqual(ConfigId, textBroadcastConfig.Id);
-            Assert.AreEqual(ConfigCreated, textBroadcastConfig.Created);
-            Assert.AreEqual(ConfigFromNumber, textBroadcastConfig.FromNumber);
-            Assert.AreEqual(TextConfigMessage, textBroadcastConfig.Message);
-            Assert.AreEqual(CfBigMessageStrategy.SendMultiple, textBroadcastConfig.BigMessageStrategy);
+            Assert.AreEqual(ExpectedTextBroadcastConfig.Id, textBroadcastConfig.Id);
+            Assert.AreEqual(ExpectedTextBroadcastConfig.Created, textBroadcastConfig.Created);
+            Assert.AreEqual(ExpectedTextBroadcastConfig.FromNumber, textBroadcastConfig.FromNumber);
+            Assert.AreEqual(ExpectedTextBroadcastConfig.Message, textBroadcastConfig.Message);
+            Assert.AreEqual(ExpectedTextBroadcastConfig.BigMessageStrategy, textBroadcastConfig.BigMessageStrategy);
         }
-
+        
         [Test]
         public void Test_GetBroadcast_of_type_BroadcastIvr()
         {
@@ -92,10 +70,10 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
             var ivrBroadcastConfig = broadcast.Item as CfIvrBroadcastConfig;
 
             Assert.IsNotNull(ivrBroadcastConfig);
-            Assert.AreEqual(ConfigId, ivrBroadcastConfig.Id);
-            Assert.AreEqual(ConfigCreated, ivrBroadcastConfig.Created);
-            Assert.AreEqual(ConfigFromNumber, ivrBroadcastConfig.FromNumber);
-            Assert.AreEqual(IvrConfigDialplanXml, ivrBroadcastConfig.DialplanXml);
+            Assert.AreEqual(ExpectedIvrBroadcastConfig.Id, ivrBroadcastConfig.Id);
+            Assert.AreEqual(ExpectedIvrBroadcastConfig.Created, ivrBroadcastConfig.Created);
+            Assert.AreEqual(ExpectedIvrBroadcastConfig.FromNumber, ivrBroadcastConfig.FromNumber);
+            Assert.AreEqual(ExpectedIvrBroadcastConfig.DialplanXml, ivrBroadcastConfig.DialplanXml);
         }
 
         [Test]
@@ -108,21 +86,21 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
             var voiceBroadcastConfig = broadcast.Item as CfVoiceBroadcastConfig;
 
             Assert.IsNotNull(voiceBroadcastConfig);
-            Assert.AreEqual(ConfigId, voiceBroadcastConfig.Id);
-            Assert.AreEqual(ConfigCreated, voiceBroadcastConfig.Created);
-            Assert.AreEqual(ConfigFromNumber, voiceBroadcastConfig.FromNumber);
-            Assert.AreEqual(VoiceConfigItem, voiceBroadcastConfig.Item);
-            Assert.AreEqual(VoiceConfigLiveSoundTextVoice, voiceBroadcastConfig.LiveSoundTextVoice);
-            Assert.AreEqual(VoiceConfigItem1, voiceBroadcastConfig.Item1);
-            Assert.AreEqual(VoiceConfigMachineSoundTextVoice, voiceBroadcastConfig.MachineSoundTextVoice);
-            Assert.AreEqual(VoiceConfigItem2, voiceBroadcastConfig.Item2);
-            Assert.AreEqual(VoiceConfigTransferSoundTextVoice, voiceBroadcastConfig.TransferSoundTextVoice);
-            Assert.AreEqual(VoiceConfigTransferDigit, voiceBroadcastConfig.TransferDigit);
-            Assert.AreEqual(VoiceConfigTransferNumber, voiceBroadcastConfig.TransferNumber);
-            Assert.AreEqual(VoiceConfigItem3, voiceBroadcastConfig.Item3);
-            Assert.AreEqual(VoiceConfigDncSoundTextVoice, voiceBroadcastConfig.DncSoundTextVoice);
-            Assert.AreEqual(VoiceConfigDncDigit, voiceBroadcastConfig.DncDigit);
-            Assert.AreEqual(VoiceConfigMaxActiveTransfers, voiceBroadcastConfig.MaxActiveTransfers);
+            Assert.AreEqual(ExpectedVoiceBroadcastConfig.Id, voiceBroadcastConfig.Id);
+            Assert.AreEqual(ExpectedVoiceBroadcastConfig.Created, voiceBroadcastConfig.Created);
+            Assert.AreEqual(ExpectedVoiceBroadcastConfig.FromNumber, voiceBroadcastConfig.FromNumber);
+            Assert.AreEqual(ExpectedVoiceBroadcastConfig.Item, voiceBroadcastConfig.Item);
+            Assert.AreEqual(ExpectedVoiceBroadcastConfig.LiveSoundTextVoice, voiceBroadcastConfig.LiveSoundTextVoice);
+            Assert.AreEqual(ExpectedVoiceBroadcastConfig.Item1, voiceBroadcastConfig.Item1);
+            Assert.AreEqual(ExpectedVoiceBroadcastConfig.MachineSoundTextVoice, voiceBroadcastConfig.MachineSoundTextVoice);
+            Assert.AreEqual(ExpectedVoiceBroadcastConfig.Item2, voiceBroadcastConfig.Item2);
+            Assert.AreEqual(ExpectedVoiceBroadcastConfig.TransferSoundTextVoice, voiceBroadcastConfig.TransferSoundTextVoice);
+            Assert.AreEqual(ExpectedVoiceBroadcastConfig.TransferDigit, voiceBroadcastConfig.TransferDigit);
+            Assert.AreEqual(ExpectedVoiceBroadcastConfig.TransferNumber, voiceBroadcastConfig.TransferNumber);
+            Assert.AreEqual(ExpectedVoiceBroadcastConfig.Item3, voiceBroadcastConfig.Item3);
+            Assert.AreEqual(ExpectedVoiceBroadcastConfig.DncSoundTextVoice, voiceBroadcastConfig.DncSoundTextVoice);
+            Assert.AreEqual(ExpectedVoiceBroadcastConfig.DncDigit, voiceBroadcastConfig.DncDigit);
+            Assert.AreEqual(ExpectedVoiceBroadcastConfig.MaxActiveTransfers, voiceBroadcastConfig.MaxActiveTransfers);
         }
 
         [Test]
@@ -153,8 +131,8 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
             var localTimeZoneRestriction = textBroadcastConfig.LocalTimeZoneRestriction;
 
             Assert.IsNotNull(localTimeZoneRestriction);
-            Assert.AreEqual(ConfigBeginTime, localTimeZoneRestriction.BeginTime);
-            Assert.AreEqual(ConfigEndTime, localTimeZoneRestriction.EndTime);
+            Assert.AreEqual(LocalTimeZoneRestriction.BeginTime, localTimeZoneRestriction.BeginTime);
+            Assert.AreEqual(LocalTimeZoneRestriction.EndTime, localTimeZoneRestriction.EndTime);
         }
 
         [Test]
@@ -185,10 +163,10 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
             var retryConfig = textBroadcastConfig.RetryConfig;
 
             Assert.IsNotNull(retryConfig);
-            Assert.AreEqual(ConfigMaxAttempts, retryConfig.MaxAttempts);
-            Assert.AreEqual(ConfigMinutesBetweenAttempts, retryConfig.MinutesBetweenAttempts);
-            Assert.AreEqual(ConfigRetryResults, retryConfig.RetryResults);
-            Assert.AreEqual(ConfigRetryPhoneTypes, retryConfig.RetryPhoneTypes);
+            Assert.AreEqual(BroadcastConfigRestryConfig.MaxAttempts, retryConfig.MaxAttempts);
+            Assert.AreEqual(BroadcastConfigRestryConfig.MinutesBetweenAttempts, retryConfig.MinutesBetweenAttempts);
+            Assert.AreEqual(BroadcastConfigRestryConfig.RetryResults, retryConfig.RetryResults);
+            Assert.AreEqual(BroadcastConfigRestryConfig.RetryPhoneTypes, retryConfig.RetryPhoneTypes);
         }
     }
 }

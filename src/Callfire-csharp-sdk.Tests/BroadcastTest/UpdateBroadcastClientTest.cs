@@ -12,7 +12,6 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
 
         protected long BroadcastId;
         protected string BroadcastName;
-        protected DateTime BroadcastLastModified;
 
         [Test]
         public void Test_UpdateBroadcast()

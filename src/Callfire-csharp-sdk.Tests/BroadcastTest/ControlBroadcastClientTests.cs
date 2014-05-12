@@ -10,14 +10,12 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
     {
         protected IBroadcastClient Client;
 
-        protected long Id;
-        protected string RequestId;
-        protected int MaxActive;
-
+        protected CfControlBroadcast ExpectedControlBroadcast;
+        
         [Test]
         public void Test_ControlBroadcast()
         {
-            var controlBroadcast = new CfControlBroadcast(Id, RequestId, CfBroadcastCommand.Start, MaxActive);
+            var controlBroadcast = new CfControlBroadcast(ExpectedControlBroadcast.Id, ExpectedControlBroadcast.RequestId, CfBroadcastCommand.Start, ExpectedControlBroadcast.MaxActive);
             Client.ControlBroadcast(controlBroadcast);
         }
     }

@@ -16,23 +16,15 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Soap
             Client = new SoapBroadcastClient(BroadcastServiceMock);
             BroadcastId = 1;
 
-            Duration = 5;
-            BilledDuration = 5;
-            BilledAmount = 2;
-            Attempts = 10;
-            Actions = 2;
-            var usageStats = new BroadcastStatsUsageStats(Duration, BilledDuration, BilledAmount, Attempts, Actions);
+            ExpectedUsageStats = new BroadcastStatsUsageStats(5, 5, 2, 10, 2);
 
             var resultStat = new BroadcastStatsResultStat[1];
-            Result = "result";
-            resultStat[0] = new BroadcastStatsResultStat(Result, Attempts, Actions);
+            ExpectedResultStat = new BroadcastStatsResultStat("result", 2, 3);
+            resultStat[0] = ExpectedResultStat;
 
-            Unattempted = 2;
-            RetryWait = 0;
-            Finished = 10;
-            var actionStatistics = new BroadcastStatsActionStatistics(Unattempted, RetryWait, Finished);
-            
-            var expectedBroadcastStats = new BroadcastStats(usageStats, resultStat, actionStatistics);
+            ExpectedActionsStatistics = new BroadcastStatsActionStatistics(2, 0, 10);
+
+            var expectedBroadcastStats = new BroadcastStats(ExpectedUsageStats, resultStat, ExpectedActionsStatistics);
             BroadcastServiceMock
                 .Stub(b => b.GetBroadcastStats(Arg<GetBroadcastStats>.Matches(x => x.Id == BroadcastId)))
                 .Return(expectedBroadcastStats);

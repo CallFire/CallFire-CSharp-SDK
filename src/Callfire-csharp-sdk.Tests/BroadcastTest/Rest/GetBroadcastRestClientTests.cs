@@ -21,61 +21,46 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
             JsonServiceClientMock = MockRepository.GenerateMock<JsonServiceClient>();
             Client = new RestBroadcastClient(JsonServiceClientMock);
 
-            BroadcastName = "broadcast1";
-            BroadcastLastModified = DateTime.Now;
+            ExpectedBroadcast = new CfBroadcast(1, "broadcast", CfBroadcastStatus.Running, DateTime.Now, CfBroadcastType.Voice, null);
+            
+            CreateExpectedBroadcast(1);
 
-            CreateExpectedBroadcast(1, BroadcastName, CfBroadcastStatus.Running, BroadcastLastModified, CfBroadcastType.Text, null);
+            LocalTimeZoneRestriction = new CfLocalTimeZoneRestriction(DateTime.Now, DateTime.Now);
+            BroadcastConfigRestryConfig = new CfBroadcastConfigRetryConfig(1000, 2, "retryResult", "retryPhoneTypes");
+            ExpectedTextBroadcastConfig = new CfTextBroadcastConfig(1, DateTime.Now, "fromNumber", null, BroadcastConfigRestryConfig, "Message", CfBigMessageStrategy.SendMultiple);
+            ExpectedBroadcast.Type = CfBroadcastType.Text;
+            ExpectedBroadcast.Item = ExpectedTextBroadcastConfig;
 
-            ConfigId = 1;
-            ConfigCreated = DateTime.Now;
-            ConfigFromNumber = "fromNumber";
-            ConfigBeginTime = DateTime.Now;
-            ConfigEndTime = DateTime.Now;
-            ConfigMaxAttempts = 1000;
-            ConfigMinutesBetweenAttempts = 2;
-            ConfigRetryResults = "retryResult";
-            ConfigRetryPhoneTypes = "retryPhoneTypes";
+            CreateExpectedBroadcast(2);
 
-            TextConfigMessage = "Message";
+            ExpectedTextBroadcastConfig.LocalTimeZoneRestriction = LocalTimeZoneRestriction;
+            ExpectedTextBroadcastConfig.RetryConfig = null;
+            ExpectedBroadcast.Type = CfBroadcastType.Text;
+            ExpectedBroadcast.Item = ExpectedTextBroadcastConfig;
 
-            var localTimeZoneRestriction = new CfLocalTimeZoneRestriction(ConfigBeginTime, ConfigEndTime);
-            var broadcastConfigRestryConfig = new CfBroadcastConfigRetryConfig(ConfigMaxAttempts, ConfigMinutesBetweenAttempts, ConfigRetryResults, ConfigRetryPhoneTypes);
-            var textBroadcastConfig = new CfTextBroadcastConfig(ConfigId, ConfigCreated, ConfigFromNumber, null, broadcastConfigRestryConfig, TextConfigMessage, CfBigMessageStrategy.SendMultiple);
-            CreateExpectedBroadcast(2, BroadcastName, CfBroadcastStatus.Running, BroadcastLastModified, CfBroadcastType.Text, textBroadcastConfig);
+            CreateExpectedBroadcast(3);
 
-            textBroadcastConfig = new CfTextBroadcastConfig(ConfigId, ConfigCreated, ConfigFromNumber, localTimeZoneRestriction, null, TextConfigMessage, CfBigMessageStrategy.SendMultiple);
-            CreateExpectedBroadcast(3, BroadcastName, CfBroadcastStatus.Running, BroadcastLastModified, CfBroadcastType.Text, textBroadcastConfig);
+            ExpectedIvrBroadcastConfig = new CfIvrBroadcastConfig(1, DateTime.Now, "fromNumber", LocalTimeZoneRestriction, BroadcastConfigRestryConfig, "dialplanXml");
+            ExpectedBroadcast.Type = CfBroadcastType.Ivr;
+            ExpectedBroadcast.Item = ExpectedIvrBroadcastConfig;
+            CreateExpectedBroadcast(4);
 
-            IvrConfigDialplanXml = "dialplanXml";
-            var ivrBroadcastConfig = new CfIvrBroadcastConfig(ConfigId, ConfigCreated,
-                ConfigFromNumber, localTimeZoneRestriction, broadcastConfigRestryConfig, IvrConfigDialplanXml);
-            CreateExpectedBroadcast(4, BroadcastName, CfBroadcastStatus.Running, BroadcastLastModified, CfBroadcastType.Ivr, ivrBroadcastConfig);
+            ExpectedVoiceBroadcastConfig = new CfVoiceBroadcastConfig(1, DateTime.Now, "fromNumber",
+                LocalTimeZoneRestriction, BroadcastConfigRestryConfig, CfAnsweringMachineConfig.AmAndLive, "item",
+                "liveSoundTextVoice", "item1", "machineSoundTextVoice", "item2", "tranferSoudnTextVoice", "1", "123456",
+                "item3", "DncSoundTextVoice", "1", 5);
 
-            VoiceConfigItem = "item";
-            VoiceConfigLiveSoundTextVoice = "liveSoundTextVoice";
-            VoiceConfigItem1 = "item1";
-            VoiceConfigMachineSoundTextVoice = "machineSoundTextVoice";
-            VoiceConfigItem2 = "item2";
-            VoiceConfigTransferSoundTextVoice = "tranferSoudnTextVoice";
-            VoiceConfigTransferDigit = "1";
-            VoiceConfigTransferNumber = "123456";
-            VoiceConfigItem3 = "item3";
-            VoiceConfigDncSoundTextVoice = "DncSoundTextVoice";
-            VoiceConfigDncDigit = "1";
-            VoiceConfigMaxActiveTransfers = 5;
-            var voiceBroadcastConfig = new CfVoiceBroadcastConfig(ConfigId, ConfigCreated,
-                ConfigFromNumber, localTimeZoneRestriction, broadcastConfigRestryConfig,
-                CfAnsweringMachineConfig.AmAndLive, VoiceConfigItem, VoiceConfigLiveSoundTextVoice, VoiceConfigItem1,
-                VoiceConfigMachineSoundTextVoice, VoiceConfigItem2, VoiceConfigTransferSoundTextVoice, VoiceConfigTransferDigit,
-                VoiceConfigTransferNumber, VoiceConfigItem3, VoiceConfigDncSoundTextVoice, VoiceConfigDncDigit,
-                VoiceConfigMaxActiveTransfers);
-            CreateExpectedBroadcast(5, BroadcastName, CfBroadcastStatus.Running, BroadcastLastModified, CfBroadcastType.Voice, voiceBroadcastConfig);
+            ExpectedBroadcast.Type = CfBroadcastType.Voice;
+            ExpectedBroadcast.Item = ExpectedVoiceBroadcastConfig;
+            CreateExpectedBroadcast(5);
         }
 
-        private void CreateExpectedBroadcast(long broadcastId, string broadcastName, CfBroadcastStatus broadcastStatus, DateTime broadcastLastModified, CfBroadcastType broadcastType, CfBroadcastConfig broadcastCongif)
+        private void CreateExpectedBroadcast(long broadcastId)
         {
-            var expectedBroadcast = BroadcastMapper.ToSoapBroadcast(new CfBroadcast(broadcastId, broadcastName, broadcastStatus, broadcastLastModified, broadcastType, broadcastCongif));
-
+            var expectedBroadcast = new Broadcast(broadcastId, ExpectedBroadcast.Name,
+                BroadcastStatusMapper.ToSoapBroadcastStatus(ExpectedBroadcast.Status), ExpectedBroadcast.LastModified,
+                BroadcastTypeMapper.ToSoapBroadcastType(ExpectedBroadcast.Type),
+                BroadcastConfigMapper.ToBroadcastConfig(ExpectedBroadcast.Item, ExpectedBroadcast.Type));
             JsonServiceClientMock
                 .Stub(j => j.Send<Broadcast>(Arg<string>.Is.Equal(HttpMethods.Get), 
                     Arg<string>.Is.Equal(String.Format("/broadcast/{0}", broadcastId)),

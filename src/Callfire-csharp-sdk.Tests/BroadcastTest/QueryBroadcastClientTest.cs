@@ -11,9 +11,8 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
     {
         protected IBroadcastClient Client;
 
-        protected long MaxResult;
-        protected long FirstResult;
-        protected string LabelName;
+        protected CfQueryBroadcasts ExpectedQueryBroadcast;
+        
         protected long BroadcastId;
         protected string BroadcastName;
         protected DateTime BroadcastLastModified;
@@ -21,7 +20,7 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
         [Test]
         public void Test_QueryBroadcast()
         {
-            var cfQueryBroadcasts = new CfQueryBroadcasts(MaxResult, FirstResult, CfBroadcastType.Ivr, true, false, LabelName);
+            var cfQueryBroadcasts = new CfQueryBroadcasts(ExpectedQueryBroadcast.MaxResults, ExpectedQueryBroadcast.FirstResult, CfBroadcastType.Ivr, true, false, ExpectedQueryBroadcast.LabelName);
             
             var cfBroadcastQueryResult = Client.QueryBroadcasts(cfQueryBroadcasts);
             Assert.IsNotNull(cfBroadcastQueryResult);
@@ -30,7 +29,7 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
         [Test]
         public void Test_Broadcast()
         {
-            var cfQueryBroadcasts = new CfQueryBroadcasts(MaxResult, FirstResult, CfBroadcastType.Ivr, true, false, LabelName);
+            var cfQueryBroadcasts = new CfQueryBroadcasts(ExpectedQueryBroadcast.MaxResults, ExpectedQueryBroadcast.FirstResult, CfBroadcastType.Ivr, true, false, ExpectedQueryBroadcast.LabelName);
 
             var cfBroadcastQueryResult = Client.QueryBroadcasts(cfQueryBroadcasts);
             Assert.IsNotNull(cfBroadcastQueryResult);

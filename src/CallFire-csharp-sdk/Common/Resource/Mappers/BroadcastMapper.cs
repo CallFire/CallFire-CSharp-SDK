@@ -11,7 +11,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
             {
                 return null;
             }
-            var broadcastConfig = BroadcastConfigMapper.FromBroadcastConfigRetryConfig(source.Item, source.Type);
+            var broadcastConfig = BroadcastConfigMapper.FromBroadcastConfig(source.Item, source.Type);
             return new CfBroadcast(source.id, source.Name, BroadcastStatusMapper.FromSoapBroadcastStatus(source.Status),
                 source.LastModified, BroadcastTypeMapper.FromSoapBroadcastType(source.Type), broadcastConfig);
         }
@@ -22,7 +22,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
             {
                 return null;
             }
-            var broadcastConfig = BroadcastConfigMapper.ToBroadcastConfigRetryConfig(source.Item, source.Type);
+            var broadcastConfig = BroadcastConfigMapper.ToBroadcastConfig(source.Item, source.Type);
             return new Broadcast(source.Id, source.Name,
                 BroadcastStatusMapper.ToSoapBroadcastStatus(source.Status), source.LastModified,
                 BroadcastTypeMapper.ToSoapBroadcastType(source.Type), broadcastConfig);

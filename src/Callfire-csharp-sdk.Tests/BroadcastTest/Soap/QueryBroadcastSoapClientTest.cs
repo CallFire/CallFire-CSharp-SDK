@@ -1,5 +1,7 @@
 ﻿using System;
 using CallFire_csharp_sdk.API.Soap;
+using CallFire_csharp_sdk.Common.DataManagement;
+using CallFire_csharp_sdk.Common.Resource;
 using NUnit.Framework;
 using Rhino.Mocks;
 
@@ -22,17 +24,15 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Soap
             BroadcastLastModified = DateTime.Now;
             queryBroadcast[0] = new Broadcast(BroadcastId, BroadcastName, BroadcastStatus.RUNNING, BroadcastLastModified, BroadcastType.IVR, null);
 
-            MaxResult = 5;
-            FirstResult = 0;
-            LabelName = "labelName";
+            ExpectedQueryBroadcast = new CfQueryBroadcasts(5, 0, CfBroadcastType.Ivr, true, false, "labelName");
 
             var cfBroadcastQueryResult = new BroadcastQueryResult(1, queryBroadcast);
 
             BroadcastServiceMock
-                .Stub(b => b.QueryBroadcasts(Arg<QueryBroadcasts>.Matches(x => x.MaxResults == MaxResult &&
-                                                                               x.FirstResult == FirstResult &&
+                .Stub(b => b.QueryBroadcasts(Arg<QueryBroadcasts>.Matches(x => x.MaxResults == ExpectedQueryBroadcast.MaxResults &&
+                                                                               x.FirstResult == ExpectedQueryBroadcast.FirstResult &&
                                                                                x.Type == BroadcastType.IVR.ToString() &&
-                                                                               x.LabelName == LabelName)))
+                                                                               x.LabelName == ExpectedQueryBroadcast.LabelName)))
                 .Return(cfBroadcastQueryResult);
         }
     }

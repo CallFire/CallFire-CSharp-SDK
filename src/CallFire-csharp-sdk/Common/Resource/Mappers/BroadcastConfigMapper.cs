@@ -1,70 +1,69 @@
-﻿using CallFire_csharp_sdk.API.Soap;
+﻿using System;
+using System.Collections.Generic;
+using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common.DataManagement;
 
 namespace CallFire_csharp_sdk.Common.Resource.Mappers
 {
     class BroadcastConfigMapper
     {
-        internal static CfBroadcastConfig FromBroadcastConfigRetryConfig(BroadcastConfig source, BroadcastType type)
+        private static readonly Dictionary<BroadcastType, Func<BroadcastConfig, CfBroadcastConfig>>
+        DictionaryFromConfig = new Dictionary<BroadcastType, Func<BroadcastConfig, CfBroadcastConfig>>
         {
-            if (source == null)
+            {
+                BroadcastType.IVR,
+                x => IvrBroadcastConfigMapper.FromSoapIvrBroadcastConfig((IvrBroadcastConfig) x)
+            },
+
+            {
+                BroadcastType.TEXT,
+                x => TextBroadcastConfigMapper.FromSoapTextBroadcastConfig((TextBroadcastConfig) x)
+            },
+
+            {
+                BroadcastType.VOICE,
+                x => VoiceBroadcastConfigMapper.FromSoapVoiceBroadcastConfig((VoiceBroadcastConfig) x)
+            }
+        };
+
+        private static readonly Dictionary<CfBroadcastType, Func<CfBroadcastConfig, BroadcastConfig>>
+        DictionaryToConfig = new Dictionary<CfBroadcastType, Func<CfBroadcastConfig, BroadcastConfig>>
+        {
+            {
+                CfBroadcastType.Ivr,
+                x => IvrBroadcastConfigMapper.ToSoapIvrBroadcastConfig((CfIvrBroadcastConfig) x)
+            },
+
+            {
+                CfBroadcastType.Text,
+                x => TextBroadcastConfigMapper.ToSoapTextBroadcastConfig((CfTextBroadcastConfig) x)
+            },
+
+            {
+                CfBroadcastType.Voice,
+                x => VoiceBroadcastConfigMapper.ToSoapVoiceBroadcastConfig((CfVoiceBroadcastConfig) x)
+            }
+        };
+
+        internal static CfBroadcastConfig FromBroadcastConfig(BroadcastConfig source,
+        BroadcastType type)
+        {
+            if (source == null || !DictionaryFromConfig.ContainsKey(type))
             {
                 return null;
             }
-            CfBroadcastConfig broadcastConfig = null;
-            switch (type)
-            {
-                case BroadcastType.IVR:
-                    {
-                        var item = source as IvrBroadcastConfig;
-                        broadcastConfig = IvrBroadcastConfigMapper.FromSoapIvrBroadcastConfig(item);
-                    }
-                    break;
-                case BroadcastType.TEXT:
-                    {
-                        var item = source as TextBroadcastConfig;
-                        broadcastConfig = TextBroadcastConfigMapper.FromSoapTextBroadcastConfig(item);
-                    }
-                    break;
-                case BroadcastType.VOICE:
-                    {
-                        var item = source as VoiceBroadcastConfig;
-                        broadcastConfig = VoiceBroadcastConfigMapper.FromSoapVoiceBroadcastConfig(item);
-                    }
-                    break;
-            }
-            return broadcastConfig;
+
+            return DictionaryFromConfig[type].Invoke(source);
         }
-        
-        internal static BroadcastConfig ToBroadcastConfigRetryConfig(CfBroadcastConfig source, CfBroadcastType type)
+
+        internal static BroadcastConfig ToBroadcastConfig(CfBroadcastConfig source, CfBroadcastType type)
         {
-            if (source == null)
+            if (source == null || !DictionaryToConfig.ContainsKey(type))
             {
                 return null;
             }
-            BroadcastConfig broadcastConfig = null;
-            switch (type)
-            {
-                case CfBroadcastType.Ivr:
-                    {
-                        var item = source as CfIvrBroadcastConfig;
-                        broadcastConfig = IvrBroadcastConfigMapper.ToSoapIvrBroadcastConfig(item);
-                    }
-                    break;
-                case CfBroadcastType.Text:
-                    {
-                        var item = source as CfTextBroadcastConfig;
-                        broadcastConfig = TextBroadcastConfigMapper.ToSoapTextBroadcastConfig(item);
-                    }
-                    break;
-                case CfBroadcastType.Voice:
-                    {
-                        var item = source as CfVoiceBroadcastConfig;
-                        broadcastConfig = VoiceBroadcastConfigMapper.ToSoapVoiceBroadcastConfig(item);
-                    }
-                    break;
-            }
-            return broadcastConfig;
+
+            return DictionaryToConfig[type].Invoke(source);
         }
     }
 }

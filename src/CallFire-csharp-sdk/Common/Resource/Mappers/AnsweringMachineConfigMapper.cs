@@ -29,7 +29,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
             {
                 return DicSoapAnsweringMachineConfig[source];
             }
-            throw new NotSupportedException(string.Format("Exception: Not supported. The source {0} is not validated to be mapped", source));
+            throw new NotSupportedException(string.Format("The source {0} is not validated to be mapped", source));
         }
 
         internal static AnsweringMachineConfig ToSoapAnsweringMachineConfig(CfAnsweringMachineConfig source)
@@ -38,7 +38,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
             {
                 return DicAnsweringMachineConfig[source];
             }
-            throw new NotSupportedException(string.Format("Exception: Not supported. The source {0} is not validated to be mapped", source));
+            throw new NotSupportedException(string.Format("The source {0} is not validated to be mapped", source));
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using CallFire_csharp_sdk.API.Rest.BroadcastRest;
 using CallFire_csharp_sdk.API.Soap;
+using CallFire_csharp_sdk.Common.DataManagement;
+using CallFire_csharp_sdk.Common.Resource;
 using NUnit.Framework;
 using Rhino.Mocks;
 using ServiceStack.Common.Web;
@@ -25,15 +27,13 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
             BroadcastLastModified = DateTime.Now;
             queryBroadcast[0] = new Broadcast(BroadcastId, BroadcastName, BroadcastStatus.RUNNING, BroadcastLastModified, BroadcastType.IVR, null);
 
-            MaxResult = 5;
-            FirstResult = 0;
-            LabelName = "labelName";
+            ExpectedQueryBroadcast = new CfQueryBroadcasts(5, 0, CfBroadcastType.Ivr, true, false, "labelName");
 
             var cfBroadcastQueryResult = new BroadcastQueryResult(1, queryBroadcast);
 
             JsonServiceClientMock
                 .Stub(j => j.Send<BroadcastQueryResult>(Arg<string>.Is.Equal(HttpMethods.Get),
-                    Arg<string>.Is.Equal(String.Format("/broadcast?MaxResults={0}&FirstResult={1}&Type={2}&LabelName={3}", MaxResult, FirstResult, BroadcastType.IVR.ToString(), LabelName)),
+                    Arg<string>.Is.Equal(String.Format("/broadcast?MaxResults={0}&FirstResult={1}&Type={2}&LabelName={3}", ExpectedQueryBroadcast.MaxResults, ExpectedQueryBroadcast.FirstResult, BroadcastType.IVR.ToString(), ExpectedQueryBroadcast.LabelName)),
                     Arg<object>.Is.Null))
                 .Return(cfBroadcastQueryResult);
         }

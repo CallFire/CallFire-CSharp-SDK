@@ -29,7 +29,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
             {
                 return DicSoapBroadcastType[source];
             }
-            throw new NotSupportedException(string.Format("Exception: Not supported. The source {0} is not validated to be mapped", source));
+            throw new NotSupportedException(string.Format("The source {0} is not validated to be mapped", source));
         }
 
         internal static BroadcastType ToSoapBroadcastType(CfBroadcastType source)
@@ -38,7 +38,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
             {
                 return DicBroadcastType[source];
             }
-            throw new NotSupportedException(string.Format("Exception: Not supported. The source {0} is not validated to be mapped", source));
+            throw new NotSupportedException(string.Format("The source {0} is not validated to be mapped", source));
         }
     }
 }

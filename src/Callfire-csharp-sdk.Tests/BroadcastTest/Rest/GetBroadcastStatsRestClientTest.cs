@@ -21,23 +21,15 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
 
             BroadcastId = 1;
 
-            Duration = 5;
-            BilledDuration = 5;
-            BilledAmount = 2;
-            Attempts = 10;
-            Actions = 2;
-            var usageStats = new BroadcastStatsUsageStats(Duration, BilledDuration, BilledAmount, Attempts, Actions);
+            ExpectedUsageStats = new BroadcastStatsUsageStats(5, 5, 2, 10, 2);
 
             var resultStat = new BroadcastStatsResultStat[1];
-            Result = "result";
-            resultStat[0] = new BroadcastStatsResultStat(Result, Attempts, Actions);
+            ExpectedResultStat = new BroadcastStatsResultStat("result", 2, 3);
+            resultStat[0] = ExpectedResultStat;
 
-            Unattempted = 2;
-            RetryWait = 0;
-            Finished = 10;
-            var actionStatistics = new BroadcastStatsActionStatistics(Unattempted, RetryWait, Finished);
+            ExpectedActionsStatistics = new BroadcastStatsActionStatistics(2, 0, 10);
 
-            var expectedBroadcastStats = new BroadcastStats(usageStats, resultStat, actionStatistics);
+            var expectedBroadcastStats = new BroadcastStats(ExpectedUsageStats, resultStat, ExpectedActionsStatistics);
 
             JsonServiceClientMock
                 .Stub(j => j.Send<BroadcastStats>(Arg<string>.Is.Equal(HttpMethods.Get),
