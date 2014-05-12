@@ -17,5 +17,13 @@ namespace CallFire_csharp_sdk.API
         CfBroadcastStats GetBroadcastStats(long id);
 
         void ControlBroadcast(CfControlBroadcast controlBroadcast);
+
+        long CreateContactBatch(CfCreateContactBatch createContactBatch);
+
+        CfContactBatchQueryResult QueryContactBatches(CfQueryContactBatches queryContactBatches);
+
+        CfContactBatch GetContactBatch(long id);
+
+        void ControlContactBatch(CfControlContactBatch controlContactBatch);
     }
 }
