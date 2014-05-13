@@ -76,10 +76,11 @@ namespace CallFire_csharp_sdk.API.Rest.BroadcastRest
 
         public CfContactBatchQueryResult QueryContactBatches(CfQueryContactBatches cfQueryContactBatches)
         {
-            var queryContactBatches = new QueryContactBatches(cfQueryContactBatches.MaxResults,
-                cfQueryContactBatches.FirstResult, cfQueryContactBatches.BroadcastId);
-            return ContactBatchQueryResultMapper.FromSoapContactBatchQueryResult(BaseRequest<ContactBatchQueryResult>(HttpMethods.Get, queryContactBatches,
-                new CallfireRestRoute<Broadcast>(queryContactBatches.BroadcastId, null, BroadcastRestRouteObjects.Batch, null)));
+            return ContactBatchQueryResultMapper.FromSoapContactBatchQueryResult(BaseRequest<ContactBatchQueryResult>(HttpMethods.Get, null,
+                new CallfireRestRoute<Broadcast>(cfQueryContactBatches.BroadcastId, null, BroadcastRestRouteObjects.Batch, 
+                    new BroadcastRestRouteParameters()
+                        .MaxResults(cfQueryContactBatches.MaxResults)
+                        .FirstResult(cfQueryContactBatches.FirstResult))));
         }
 
         public CfContactBatch GetContactBatch(long id)
