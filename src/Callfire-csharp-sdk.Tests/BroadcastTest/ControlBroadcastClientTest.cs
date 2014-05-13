@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Callfire_csharp_sdk.Tests.BroadcastTest
 {
     [TestFixture]
-    public abstract class ControlBroadcastClientTests
+    public abstract class ControlBroadcastClientTest
     {
         protected IBroadcastClient Client;
 

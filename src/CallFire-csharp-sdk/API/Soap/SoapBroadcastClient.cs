@@ -86,7 +86,7 @@ namespace CallFire_csharp_sdk.API.Soap
                     BroadcastScheduleMapper.ToSoapBroadcastSchedule(createBroadcastSchedule.BroadcastSchedule)));
         }
 
-        public CfBroadcastScheduleQueryResult QueryBroadcastSchedule(CfQueryBroadcastSchedule queryBroadcastSchedule)
+        public CfBroadcastScheduleQueryResult QueryBroadcastSchedule(CfQueryBroadcastSchedules queryBroadcastSchedule)
         {
             return
                 BroadcastScheduleQueryResultMapper.FromSoapBroadcastScheduleQueryResult(

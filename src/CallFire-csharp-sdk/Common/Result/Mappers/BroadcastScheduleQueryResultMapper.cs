@@ -14,6 +14,10 @@ namespace CallFire_csharp_sdk.Common.Result.Mappers
                 return null;
             }
             var broadcastSchedule = source.BroadcastSchedule;
+            if (broadcastSchedule == null)
+            {
+                return new CfBroadcastScheduleQueryResult(source.TotalResults, null);
+            }
             var newBroadcastScheduleArray = new CfBroadcastSchedule[broadcastSchedule.Count()];
             for (var i = 0; i < broadcastSchedule.Count(); i++)
             {
@@ -30,6 +34,10 @@ namespace CallFire_csharp_sdk.Common.Result.Mappers
                 return null;
             }
             var broadcastSchedule = source.BroadcastSchedule;
+            if (broadcastSchedule == null)
+            {
+                return new BroadcastScheduleQueryResult(source.TotalResults, null);
+            }
             var newBroadcastScheduleArray = new BroadcastSchedule[broadcastSchedule.Count()];
             for (var i = 0; i < broadcastSchedule.Count(); i++)
             {

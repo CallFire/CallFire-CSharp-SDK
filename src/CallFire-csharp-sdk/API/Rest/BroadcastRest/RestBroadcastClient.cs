@@ -105,7 +105,7 @@ namespace CallFire_csharp_sdk.API.Rest.BroadcastRest
                 new CallfireRestRoute<Broadcast>(createBroadcastSchedule.BroadcastId, null, BroadcastRestRouteObjects.Schedule, null));
         }
 
-        public CfBroadcastScheduleQueryResult QueryBroadcastSchedule(CfQueryBroadcastSchedule cfQueryBroadcastSchedule)
+        public CfBroadcastScheduleQueryResult QueryBroadcastSchedule(CfQueryBroadcastSchedules cfQueryBroadcastSchedule)
         {
             return BroadcastScheduleQueryResultMapper.FromSoapBroadcastScheduleQueryResult(BaseRequest<BroadcastScheduleQueryResult>(HttpMethods.Get, null,
                 new CallfireRestRoute<Broadcast>(cfQueryBroadcastSchedule.BroadcastId, null, BroadcastRestRouteObjects.Schedule,

@@ -28,7 +28,7 @@ namespace CallFire_csharp_sdk.API
 
         long CreateBroadcastSchedule(CfCreateBroadcastSchedule createBroadcastSchedule);
 
-        CfBroadcastScheduleQueryResult QueryBroadcastSchedule(CfQueryBroadcastSchedule queryBroadcastSchedule);
+        CfBroadcastScheduleQueryResult QueryBroadcastSchedule(CfQueryBroadcastSchedules queryBroadcastSchedule);
 
         CfBroadcastSchedule GetBroadcastSchedule(long id);
 

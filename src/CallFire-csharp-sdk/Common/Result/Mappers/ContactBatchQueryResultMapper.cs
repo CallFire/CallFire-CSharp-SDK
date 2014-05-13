@@ -14,6 +14,10 @@ namespace CallFire_csharp_sdk.Common.Result.Mappers
                 return null;
             }
             var contactBatch = source.ContactBatch;
+            if (contactBatch == null)
+            {
+                return new CfContactBatchQueryResult(source.TotalResults, null);
+            }
             var newContactBatchArray = new CfContactBatch[contactBatch.Count()];
             for (var i = 0; i < contactBatch.Count(); i++)
             {
@@ -30,6 +34,10 @@ namespace CallFire_csharp_sdk.Common.Result.Mappers
                 return null;
             }
             var contactBatch = source.ContactBatch;
+            if (contactBatch == null)
+            {
+                return new ContactBatchQueryResult(source.TotalResults, null);
+            }
             var newContactBatchArray = new ContactBatch[contactBatch.Count()];
             for (var i = 0; i < contactBatch.Count(); i++)
             {
