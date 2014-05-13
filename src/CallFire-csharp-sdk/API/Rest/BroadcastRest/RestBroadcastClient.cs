@@ -64,5 +64,36 @@ namespace CallFire_csharp_sdk.API.Rest.BroadcastRest
             BaseRequest<string>(HttpMethods.Put, controlBroadcast,
                 new CallfireRestRoute<Broadcast>(controlBroadcast.Id, null, BroadcastRestRouteObjects.Control, null));
         }
+
+        public long CreateContactBatch(CfCreateContactBatch cfCreateContactBatch)
+        {
+            var createContactBatch = new CreateContactBatch(cfCreateContactBatch.RequestId,
+                cfCreateContactBatch.BroadcastId, cfCreateContactBatch.Name, cfCreateContactBatch.Items,
+                cfCreateContactBatch.ScrubBroadcastDuplicates);
+            return BaseRequest<long>(HttpMethods.Post, createContactBatch,
+                new CallfireRestRoute<Broadcast>(createContactBatch.BroadcastId, null, BroadcastRestRouteObjects.Batch, null));
+        }
+
+        public CfContactBatchQueryResult QueryContactBatches(CfQueryContactBatches cfQueryContactBatches)
+        {
+            return ContactBatchQueryResultMapper.FromSoapContactBatchQueryResult(BaseRequest<ContactBatchQueryResult>(HttpMethods.Get, null,
+                new CallfireRestRoute<Broadcast>(cfQueryContactBatches.BroadcastId, null, BroadcastRestRouteObjects.Batch, 
+                    new BroadcastRestRouteParameters()
+                        .MaxResults(cfQueryContactBatches.MaxResults)
+                        .FirstResult(cfQueryContactBatches.FirstResult))));
+        }
+
+        public CfContactBatch GetContactBatch(long id)
+        {
+            return ContactBatchMapper.FromSoapContactBatch(BaseRequest<ContactBatch>(HttpMethods.Get, null,
+                new CallfireRestRoute<Broadcast>(id, BroadcastRestRouteObjects.Batch, null, null)));
+        }
+
+        public void ControlContactBatch(CfControlContactBatch cfControlContactBatch)
+        {
+            var controlContactBatch = new ControlContactBatch(cfControlContactBatch.Id, cfControlContactBatch.Name, cfControlContactBatch.Enabled);
+            BaseRequest<string>(HttpMethods.Put, controlContactBatch,
+                new CallfireRestRoute<Broadcast>(controlContactBatch.Id, BroadcastRestRouteObjects.Batch, BroadcastRestRouteObjects.Control, null));
+        }
     }
 }

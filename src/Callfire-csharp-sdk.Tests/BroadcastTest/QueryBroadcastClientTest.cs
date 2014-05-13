@@ -27,7 +27,7 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
         }
 
         [Test]
-        public void Test_Broadcast()
+        public void Test_QueryBroadcast_properties()
         {
             var cfQueryBroadcasts = new CfQueryBroadcasts(ExpectedQueryBroadcast.MaxResults, ExpectedQueryBroadcast.FirstResult, CfBroadcastType.Ivr, null, ExpectedQueryBroadcast.LabelName);
 

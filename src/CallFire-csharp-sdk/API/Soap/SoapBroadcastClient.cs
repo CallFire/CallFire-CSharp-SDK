@@ -51,5 +51,31 @@ namespace CallFire_csharp_sdk.API.Soap
             BroadcastService.ControlBroadcast(new ControlBroadcast(controlBroadcast.Id, controlBroadcast.RequestId,
                 BroadcastCommandMapper.ToSoapContactBatch(controlBroadcast.Command), controlBroadcast.MaxActive));
         }
+
+        public long CreateContactBatch(CfCreateContactBatch createContactBatch)
+        {
+            return
+                BroadcastService.CreateContactBatch(new CreateContactBatch(createContactBatch.RequestId,
+                    createContactBatch.BroadcastId, createContactBatch.Name, createContactBatch.Items,
+                    createContactBatch.ScrubBroadcastDuplicates));
+        }
+
+        public CfContactBatchQueryResult QueryContactBatches(CfQueryContactBatches queryContactBatches)
+        {
+            return ContactBatchQueryResultMapper.FromSoapContactBatchQueryResult(
+                BroadcastService.QueryContactBatches(new QueryContactBatches(queryContactBatches.MaxResults,
+                    queryContactBatches.FirstResult, queryContactBatches.BroadcastId)));
+        }
+
+        public CfContactBatch GetContactBatch(long id)
+        {
+            return ContactBatchMapper.FromSoapContactBatch(BroadcastService.GetContactBatch(new IdRequest(id)));
+        }
+
+        public void ControlContactBatch(CfControlContactBatch controlContactBatch)
+        {
+            BroadcastService.ControlContactBatch(new ControlContactBatch(controlContactBatch.Id,
+                controlContactBatch.Name, controlContactBatch.Enabled));
+        }
     }
 }

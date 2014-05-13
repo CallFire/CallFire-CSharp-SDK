@@ -61,18 +61,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BroadcastTest\ControlBroadcastClientTests.cs" />
+    <Compile Include="BroadcastTest\ControlContactBatchClientTest.cs" />
     <Compile Include="BroadcastTest\CreateBroadcastClientTest.cs" />
+    <Compile Include="BroadcastTest\CreateContactBatchClientTest.cs" />
     <Compile Include="BroadcastTest\GetBroadcastStatsClientTest.cs" />
+    <Compile Include="BroadcastTest\GetContactBatchClientTest.cs" />
     <Compile Include="BroadcastTest\QueryBroadcastClientTest.cs" />
+    <Compile Include="BroadcastTest\QueryContactBatchClientTest.cs" />
     <Compile Include="BroadcastTest\Rest\ControlBroadcastRestClientTests.cs" />
+    <Compile Include="BroadcastTest\Rest\ControlContactBatchRestClientTest.cs" />
     <Compile Include="BroadcastTest\Rest\CreateBroadcastRestClientTests.cs" />
+    <Compile Include="BroadcastTest\Rest\CreateContactBatchRestClientTest.cs" />
     <Compile Include="BroadcastTest\Rest\GetBroadcastStatsRestClientTest.cs" />
+    <Compile Include="BroadcastTest\Rest\GetContactBatchRestClientTest.cs" />
     <Compile Include="BroadcastTest\Rest\QueryBroadcastRestClientTest.cs" />
+    <Compile Include="BroadcastTest\Rest\QueryContactBatchRestClientTest.cs" />
     <Compile Include="BroadcastTest\Rest\UpdateBroadcastRestClientTest.cs" />
     <Compile Include="BroadcastTest\Soap\ControlBroadcastSoapClientTests.cs" />
+    <Compile Include="BroadcastTest\Soap\ControlContactBatchSoapClientTest.cs" />
     <Compile Include="BroadcastTest\Soap\CreateBroadcastSoapClientTest.cs" />
+    <Compile Include="BroadcastTest\Soap\CreateContactBatchSoapClientTest.cs" />
     <Compile Include="BroadcastTest\Soap\GetBroadcastStatsSoapClientTest.cs" />
+    <Compile Include="BroadcastTest\Soap\GetContactBatchSoapClientTest.cs" />
     <Compile Include="BroadcastTest\Soap\QueryBroadcastSoapClientTest.cs" />
+    <Compile Include="BroadcastTest\Soap\QueryContactBatchSoapClientTest.cs" />
     <Compile Include="BroadcastTest\Soap\UpdateBroadcastSoapClientTest.cs" />
     <Compile Include="BroadcastTest\UpdateBroadcastClientTest.cs" />
     <Compile Include="ClientCreationTests.cs" />
