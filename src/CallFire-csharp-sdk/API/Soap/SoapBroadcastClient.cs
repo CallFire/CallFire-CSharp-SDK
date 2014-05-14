@@ -9,7 +9,7 @@ namespace CallFire_csharp_sdk.API.Soap
     internal class SoapBroadcastClient : BaseSoapClient, IBroadcastClient
     {
         internal SoapBroadcastClient(string username, string password)
-            : base(username, password)
+            : base(username, password, TypeInterface.Broadcast)
         {
         }
 

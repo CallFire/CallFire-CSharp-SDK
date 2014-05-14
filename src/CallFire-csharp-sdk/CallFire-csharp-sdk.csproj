@@ -73,7 +73,11 @@
     <Compile Include="API\Soap\BroadcastSoap\QueryBroadcastsExtended.cs" />
     <Compile Include="API\Soap\BroadcastSoap\QueryContactBatchesExtended.cs" />
     <Compile Include="API\Soap\IBroadcastServicePortTypeClient.cs" />
+    <Compile Include="API\Soap\ISubscriptionServicePortTypeClient.cs" />
     <Compile Include="API\Soap\SoapBroadcastClient.cs" />
+    <Compile Include="API\Soap\SoapSubscriptionClient.cs" />
+    <Compile Include="API\Soap\SubscriptionServicePortTypeClient.cs" />
+    <Compile Include="API\Soap\TypeInterface.cs" />
     <Compile Include="Common\DataManagement\callfire-data.cs" />
     <Compile Include="Common\Resource\CfBroadcastCommand.cs" />
     <Compile Include="Common\Resource\CfControlBroadcast.cs" />
@@ -97,6 +101,7 @@
     <Compile Include="Common\Resource\Extended\ContactBatchExtended.cs" />
     <Compile Include="Common\Resource\Extended\IvrBroadcastConfigExtended.cs" />
     <Compile Include="Common\Resource\Extended\LocalTimeZoneRestrictionExtended.cs" />
+    <Compile Include="Common\Resource\Extended\QueryExtended.cs" />
     <Compile Include="Common\Resource\Extended\SubscriptionExtended.cs" />
     <Compile Include="Common\Resource\Extended\SubscriptionRequestExtended.cs" />
     <Compile Include="Common\Resource\Extended\SubscriptionSubscriptionFilterExtended.cs" />
