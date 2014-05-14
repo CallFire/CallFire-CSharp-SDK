@@ -8,7 +8,7 @@ using Rhino.Mocks;
 namespace Callfire_csharp_sdk.Tests.BroadcastTest.Soap
 {
     [TestFixture]
-    public class GetBroadcastSoapClientTests : GetBroadcastClientTests
+    public class GetBroadcastSoapClientTests : GetBroadcastClientTest
     {
         protected IBroadcastServicePortTypeClient BroadcastServiceMock;
 

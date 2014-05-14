@@ -3,7 +3,7 @@ using CallFire_csharp_sdk.Common.DataManagement;
 
 namespace CallFire_csharp_sdk.Common.Resource.Mappers
 {
-    public class LocalTimeZoneRestrictionMapper
+    internal class LocalTimeZoneRestrictionMapper
     {
         internal static CfLocalTimeZoneRestriction FromSoapLocalTimeZoneRestriction(LocalTimeZoneRestriction source)
         {

@@ -8,17 +8,17 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
     {
         internal static CfBroadcastStatsResultStat[] FromSoapBroadcastResultStat(BroadcastStatsResultStat[] source)
         {
-            if (source == null)
+            CfBroadcastStatsResultStat[] result = null;
+            if (source != null)
             {
-                return null;
-            }
-            var result = new CfBroadcastStatsResultStat[source.Count()];
-            for (var i = 0; i < source.Count(); i++)
-            {
-                var item = source[i];
-                if (item != null)
+                result = new CfBroadcastStatsResultStat[source.Count()];
+                for (var i = 0; i < source.Count(); i++)
                 {
-                    result[i] = new CfBroadcastStatsResultStat(item.Result, item.Attempts, item.Actions);
+                    var item = source[i];
+                    if (item != null)
+                    {
+                        result[i] = new CfBroadcastStatsResultStat(item.Result, item.Attempts, item.Actions);
+                    }
                 }
             }
             return result;
@@ -26,17 +26,17 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
 
         internal static BroadcastStatsResultStat[] ToSoapBroadcastResultStat(CfBroadcastStatsResultStat[] source)
         {
-            if (source == null)
+            BroadcastStatsResultStat[] result = null;
+            if (source != null)
             {
-                return null;
-            }
-            var result = new BroadcastStatsResultStat[source.Count()];
-            for (var i = 0; i < source.Count(); i++)
-            {
-                var item = source[i];
-                if (item != null)
+                result = new BroadcastStatsResultStat[source.Count()];
+                for (var i = 0; i < source.Count(); i++)
                 {
-                    result[i] = new BroadcastStatsResultStat(item.Result, item.Attempts, item.Actions);
+                    var item = source[i];
+                    if (item != null)
+                    {
+                        result[i] = new BroadcastStatsResultStat(item.Result, item.Attempts, item.Actions);
+                    }
                 }
             }
             return result;

@@ -5,7 +5,7 @@ using CallFire_csharp_sdk.Common.Resource.Mappers;
 
 namespace CallFire_csharp_sdk.Common.Result.Mappers
 {
-    public class ContactBatchQueryResultMapper
+    internal class ContactBatchQueryResultMapper
     {
         internal static CfContactBatchQueryResult FromSoapContactBatchQueryResult(ContactBatchQueryResult source)
         {
@@ -13,12 +13,17 @@ namespace CallFire_csharp_sdk.Common.Result.Mappers
             {
                 return null;
             }
-            var contactBatch = source.ContactBatch;
-            var newContactBatchArray = new CfContactBatch[contactBatch.Count()];
-            for (var i = 0; i < contactBatch.Count(); i++)
+
+            CfContactBatch[] newContactBatchArray = null;
+            if (source.ContactBatch != null)
             {
-                var item = contactBatch[i];
-                newContactBatchArray[i] = ContactBatchMapper.FromSoapContactBatch(item);
+                var contactBatch = source.ContactBatch;
+                newContactBatchArray = new CfContactBatch[contactBatch.Count()];
+                for (var i = 0; i < contactBatch.Count(); i++)
+                {
+                    var item = contactBatch[i];
+                    newContactBatchArray[i] = ContactBatchMapper.FromSoapContactBatch(item);
+                }
             }
             return new CfContactBatchQueryResult(source.TotalResults, newContactBatchArray);
         }
@@ -29,12 +34,17 @@ namespace CallFire_csharp_sdk.Common.Result.Mappers
             {
                 return null;
             }
-            var contactBatch = source.ContactBatch;
-            var newContactBatchArray = new ContactBatch[contactBatch.Count()];
-            for (var i = 0; i < contactBatch.Count(); i++)
+
+            ContactBatch[] newContactBatchArray = null;
+            if (source.ContactBatch != null)
             {
-                var item = contactBatch[i];
-                newContactBatchArray[i] = ContactBatchMapper.ToSoapContactBatch(item);
+                var contactBatch = source.ContactBatch;
+                newContactBatchArray = new ContactBatch[contactBatch.Count()];
+                for (var i = 0; i < contactBatch.Count(); i++)
+                {
+                    var item = contactBatch[i];
+                    newContactBatchArray[i] = ContactBatchMapper.ToSoapContactBatch(item);
+                }
             }
             return new ContactBatchQueryResult(source.TotalResults, newContactBatchArray);
         }

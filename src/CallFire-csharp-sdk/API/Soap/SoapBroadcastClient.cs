@@ -77,5 +77,32 @@ namespace CallFire_csharp_sdk.API.Soap
             BroadcastService.ControlContactBatch(new ControlContactBatch(controlContactBatch.Id,
                 controlContactBatch.Name, controlContactBatch.Enabled));
         }
+
+        public long CreateBroadcastSchedule(CfCreateBroadcastSchedule createBroadcastSchedule)
+        {
+            return
+                BroadcastService.CreateBroadcastSchedule(new CreateBroadcastSchedule(createBroadcastSchedule.RequestId,
+                    createBroadcastSchedule.BroadcastId,
+                    BroadcastScheduleMapper.ToSoapBroadcastSchedule(createBroadcastSchedule.BroadcastSchedule)));
+        }
+
+        public CfBroadcastScheduleQueryResult QueryBroadcastSchedule(CfQueryBroadcastSchedules queryBroadcastSchedule)
+        {
+            return
+                BroadcastScheduleQueryResultMapper.FromSoapBroadcastScheduleQueryResult(
+                    BroadcastService.QueryBroadcastSchedule(
+                        new QueryBroadcastSchedules(queryBroadcastSchedule.MaxResults,
+                            queryBroadcastSchedule.FirstResult, queryBroadcastSchedule.BroadcastId)));
+        }
+
+        public CfBroadcastSchedule GetBroadcastSchedule(long id)
+        {
+            return BroadcastScheduleMapper.FromSoapBroadcastSchedule(BroadcastService.GetBroadcastSchedule(new IdRequest(id)));
+        }
+
+        public void DeleteBroadcastSchedule(long id)
+        {
+            BroadcastService.DeleteBroadcastSchedule(new IdRequest(id));
+        }
     }
 }

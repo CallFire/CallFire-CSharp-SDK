@@ -3,7 +3,7 @@ using CallFire_csharp_sdk.Common.DataManagement;
 
 namespace CallFire_csharp_sdk.Common.Resource.Mappers
 {
-    class BroadcastConfigRetryConfigMapper
+    internal class BroadcastConfigRetryConfigMapper
     {
         internal static CfBroadcastConfigRetryConfig FromBroadcastConfigRetryConfig(BroadcastConfigRetryConfig source)
         {

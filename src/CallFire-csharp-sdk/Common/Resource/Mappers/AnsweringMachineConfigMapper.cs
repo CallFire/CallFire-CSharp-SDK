@@ -5,7 +5,7 @@ using CallFire_csharp_sdk.Common.DataManagement;
 
 namespace CallFire_csharp_sdk.Common.Resource.Mappers
 {
-    class AnsweringMachineConfigMapper
+    internal class AnsweringMachineConfigMapper
     {
         private static readonly Dictionary<AnsweringMachineConfig, CfAnsweringMachineConfig> DicSoapAnsweringMachineConfig = new Dictionary<AnsweringMachineConfig, CfAnsweringMachineConfig>
         {

@@ -95,5 +95,34 @@ namespace CallFire_csharp_sdk.API.Rest.BroadcastRest
             BaseRequest<string>(HttpMethods.Put, controlContactBatch,
                 new CallfireRestRoute<Broadcast>(controlContactBatch.Id, BroadcastRestRouteObjects.Batch, BroadcastRestRouteObjects.Control, null));
         }
+
+        public long CreateBroadcastSchedule(CfCreateBroadcastSchedule cfCreateBroadcastSchedule)
+        {
+            var createBroadcastSchedule = new CreateBroadcastSchedule(cfCreateBroadcastSchedule.RequestId,
+                cfCreateBroadcastSchedule.BroadcastId,
+                BroadcastScheduleMapper.ToSoapBroadcastSchedule(cfCreateBroadcastSchedule.BroadcastSchedule));
+            return BaseRequest<long>(HttpMethods.Post, createBroadcastSchedule,
+                new CallfireRestRoute<Broadcast>(createBroadcastSchedule.BroadcastId, null, BroadcastRestRouteObjects.Schedule, null));
+        }
+
+        public CfBroadcastScheduleQueryResult QueryBroadcastSchedule(CfQueryBroadcastSchedules cfQueryBroadcastSchedule)
+        {
+            return BroadcastScheduleQueryResultMapper.FromSoapBroadcastScheduleQueryResult(BaseRequest<BroadcastScheduleQueryResult>(HttpMethods.Get, null,
+                new CallfireRestRoute<Broadcast>(cfQueryBroadcastSchedule.BroadcastId, null, BroadcastRestRouteObjects.Schedule,
+                    new BroadcastRestRouteParameters()
+                        .MaxResults(cfQueryBroadcastSchedule.MaxResults)
+                        .FirstResult(cfQueryBroadcastSchedule.FirstResult))));
+        }
+
+        public CfBroadcastSchedule GetBroadcastSchedule(long id)
+        {
+            return BroadcastScheduleMapper.FromSoapBroadcastSchedule(BaseRequest<BroadcastSchedule>(HttpMethods.Get, null,
+                new CallfireRestRoute<Broadcast>(id, BroadcastRestRouteObjects.Schedule, null, null)));
+        }
+
+        public void DeleteBroadcastSchedule(long id)
+        {
+            BaseRequest<string>(HttpMethods.Delete, null, new CallfireRestRoute<Broadcast>(id, BroadcastRestRouteObjects.Schedule, null, null));
+        }
     }
 }

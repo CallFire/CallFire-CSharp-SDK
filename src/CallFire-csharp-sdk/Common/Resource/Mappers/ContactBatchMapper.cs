@@ -3,7 +3,7 @@ using CallFire_csharp_sdk.Common.DataManagement;
 
 namespace CallFire_csharp_sdk.Common.Resource.Mappers
 {
-    public class ContactBatchMapper
+    internal class ContactBatchMapper
     {
         internal static CfContactBatch FromSoapContactBatch(ContactBatch source)
         {

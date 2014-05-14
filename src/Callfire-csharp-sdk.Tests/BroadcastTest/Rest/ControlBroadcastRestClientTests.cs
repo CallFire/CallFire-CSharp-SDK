@@ -9,7 +9,7 @@ using ServiceStack.ServiceClient.Web;
 namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
 {
     [TestFixture]
-    class ControlBroadcastRestClientTests : ControlBroadcastClientTests
+    class ControlBroadcastRestClientTests : ControlBroadcastClientTest
     {
         protected JsonServiceClient JsonServiceClientMock;
 

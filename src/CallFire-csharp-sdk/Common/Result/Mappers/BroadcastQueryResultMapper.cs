@@ -5,7 +5,7 @@ using CallFire_csharp_sdk.Common.Resource.Mappers;
 
 namespace CallFire_csharp_sdk.Common.Result.Mappers
 {
-    class BroadcastQueryResultMapper
+    internal class BroadcastQueryResultMapper
     {
         internal static CfBroadcastQueryResult FromSoapBroadcastQueryResult(BroadcastQueryResult source)
         {
@@ -13,12 +13,17 @@ namespace CallFire_csharp_sdk.Common.Result.Mappers
             {
                 return null;
             }
-            var broadcast = source.Broadcast;
-            var newBroadcastArray = new CfBroadcast[broadcast.Count()];
-            for (var i = 0; i < broadcast.Count(); i++)
+
+            CfBroadcast[] newBroadcastArray = null;
+            if (source.Broadcast != null)
             {
-                var item = broadcast[i];
-                newBroadcastArray[i] = BroadcastMapper.FromSoapBroadCast(item);
+                var broadcast = source.Broadcast;
+                newBroadcastArray = new CfBroadcast[broadcast.Count()];
+                for (var i = 0; i < broadcast.Count(); i++)
+                {
+                    var item = broadcast[i];
+                    newBroadcastArray[i] = BroadcastMapper.FromSoapBroadCast(item);
+                }
             }
             return new CfBroadcastQueryResult(source.TotalResults, newBroadcastArray);
         }
@@ -29,12 +34,17 @@ namespace CallFire_csharp_sdk.Common.Result.Mappers
             {
                 return null;
             }
-            var broadcast = source.Broadcast;
-            var newBroadcastArray = new Broadcast[broadcast.Count()];
-            for (var i = 0; i < broadcast.Count(); i++)
+
+            Broadcast[] newBroadcastArray = null;
+            if (source.Broadcast != null)
             {
-                var item = broadcast[i];
-                newBroadcastArray[i] = BroadcastMapper.ToSoapBroadcast(item);
+                var broadcast = source.Broadcast;
+                newBroadcastArray = new Broadcast[broadcast.Count()];
+                for (var i = 0; i < broadcast.Count(); i++)
+                {
+                    var item = broadcast[i];
+                    newBroadcastArray[i] = BroadcastMapper.ToSoapBroadcast(item);
+                }
             }
             return new BroadcastQueryResult(source.TotalResults, newBroadcastArray);
         }

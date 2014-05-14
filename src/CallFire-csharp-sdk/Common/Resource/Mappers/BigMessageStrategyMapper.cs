@@ -5,7 +5,7 @@ using CallFire_csharp_sdk.Common.DataManagement;
 
 namespace CallFire_csharp_sdk.Common.Resource.Mappers
 {
-    class BigMessageStrategyMapper
+    internal class BigMessageStrategyMapper
     {
         internal static readonly Dictionary<BigMessageStrategy, CfBigMessageStrategy> DicSoapBigMessageStrategy = new Dictionary
             <BigMessageStrategy, CfBigMessageStrategy>
