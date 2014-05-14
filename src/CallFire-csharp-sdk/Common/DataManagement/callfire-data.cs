@@ -528,6 +528,17 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfSubscription
     {
+        public CfSubscription(long id, bool enabled, string endpoint, CfNotificationFormat notificationFormat,
+            CfSubscriptionTriggerEvent triggerEvent, CfSubscriptionSubscriptionFilter subscriptionFilter)
+        {
+            Id = id;
+            Enabled = enabled;
+            Endpoint = endpoint;
+            NotificationFormat = notificationFormat;
+            TriggerEvent = triggerEvent;
+            SubscriptionFilter = subscriptionFilter;
+        }
+
         public CfSubscription()
         {
             NotificationFormat = CfNotificationFormat.Xml;
@@ -568,6 +579,15 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfSubscriptionSubscriptionFilter
     {
+        public CfSubscriptionSubscriptionFilter(long broadcastId, long batchId, string fromNumber, string toNumber, bool inbound)
+        {
+            BroadcastId = broadcastId;
+            BatchId = batchId;
+            FromNumber = fromNumber;
+            ToNumber = toNumber;
+            Inbound = inbound;
+        }
+
         public long BroadcastId { get; set; }
 
         public long BatchId { get; set; }

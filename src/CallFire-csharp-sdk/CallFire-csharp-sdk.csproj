@@ -53,11 +53,13 @@
     <Compile Include="API\CallfireClients.cs" />
     <Compile Include="API\IBroadcastClient.cs" />
     <Compile Include="API\ICallfireClient.cs" />
+    <Compile Include="API\ISubscriptionClient.cs" />
     <Compile Include="API\Rest\BaseRestClient.cs" />
     <Compile Include="API\Rest\BroadcastRest\BroadcastRestRouteObjects.cs" />
     <Compile Include="API\Rest\BroadcastRest\BroadcastRestRouteParameters.cs" />
     <Compile Include="API\Rest\BroadcastRest\RestBroadcastClient.cs" />
     <Compile Include="API\Rest\CallfireRestRoute.cs" />
+    <Compile Include="API\Rest\RestSubscriptionClient.cs" />
     <Compile Include="API\Soap\BaseSoapClient.cs" />
     <Compile Include="API\Soap\BroadcastServicePortTypeClient.cs" />
     <Compile Include="API\Soap\BroadcastSoap\BroadcastRequestExtended.cs" />
@@ -82,6 +84,7 @@
     <Compile Include="Common\Resource\CfQueryBroadcasts.cs" />
     <Compile Include="Common\Resource\CfQueryBroadcastSchedule.cs" />
     <Compile Include="Common\Resource\CfQueryContactBatches.cs" />
+    <Compile Include="Common\Resource\CfSubscriptionRequest.cs" />
     <Compile Include="Common\Resource\CfUniqueResource.cs" />
     <Compile Include="Common\Resource\Extended\BroadcastConfigExtended.cs" />
     <Compile Include="Common\Resource\Extended\BroadcastConfigRetryConfigExtended.cs" />
@@ -94,6 +97,9 @@
     <Compile Include="Common\Resource\Extended\ContactBatchExtended.cs" />
     <Compile Include="Common\Resource\Extended\IvrBroadcastConfigExtended.cs" />
     <Compile Include="Common\Resource\Extended\LocalTimeZoneRestrictionExtended.cs" />
+    <Compile Include="Common\Resource\Extended\SubscriptionExtended.cs" />
+    <Compile Include="Common\Resource\Extended\SubscriptionRequestExtended.cs" />
+    <Compile Include="Common\Resource\Extended\SubscriptionSubscriptionFilterExtended.cs" />
     <Compile Include="Common\Resource\Extended\TextBroadcastConfigExtended.cs" />
     <Compile Include="Common\Resource\Extended\VoiceBroadcastConfigExtended.cs" />
     <Compile Include="Common\Resource\Mappers\ActionStatisticsMapper.cs" />
@@ -111,7 +117,11 @@
     <Compile Include="Common\Resource\Mappers\ContactBatchMapper.cs" />
     <Compile Include="Common\Resource\Mappers\IvrBroadcastConfigMapper.cs" />
     <Compile Include="Common\Resource\Mappers\LocalTimeZoneRestrictionMapper.cs" />
+    <Compile Include="Common\Resource\Mappers\NotificationFormatMapper.cs" />
     <Compile Include="Common\Resource\Mappers\ResultStatMapper.cs" />
+    <Compile Include="Common\Resource\Mappers\SubscriptionMapper.cs" />
+    <Compile Include="Common\Resource\Mappers\SubscriptionSubscriptionFilterMapper.cs" />
+    <Compile Include="Common\Resource\Mappers\SubscriptionTriggerEventMapper.cs" />
     <Compile Include="Common\Resource\Mappers\TextBroadcastConfigMapper.cs" />
     <Compile Include="Common\Resource\Mappers\UsageStatsMapper.cs" />
     <Compile Include="Common\Resource\Mappers\VoiceBroadcastConfigMapper.cs" />
@@ -119,12 +129,15 @@
     <Compile Include="Common\Result\CfBroadcastScheduleQueryResult.cs" />
     <Compile Include="Common\Result\CfContactBatchQueryResult.cs" />
     <Compile Include="Common\Result\CfQueryResult.cs" />
+    <Compile Include="Common\Result\CfSubscriptionQueryResult.cs" />
     <Compile Include="Common\Result\Extended\BroadcastQueryResultExtended.cs" />
     <Compile Include="Common\Result\Extended\BroadcastScheduleQueryResultExtended.cs" />
     <Compile Include="Common\Result\Extended\ContactBatchQueryResultExtended.cs" />
+    <Compile Include="Common\Result\Extended\SubscriptionQueryResultExtended.cs" />
     <Compile Include="Common\Result\Mappers\BroadcastQueryResultMapper.cs" />
     <Compile Include="Common\Result\Mappers\BroadcastScheduleQueryResultMapper.cs" />
     <Compile Include="Common\Result\Mappers\ContactBatchQueryResultMapper.cs" />
+    <Compile Include="Common\Result\Mappers\SubscriptionQueryResultMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\API.Soap\Reference.cs">
       <AutoGen>True</AutoGen>
