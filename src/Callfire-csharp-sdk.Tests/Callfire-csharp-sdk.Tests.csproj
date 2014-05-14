@@ -110,7 +110,9 @@
     <Compile Include="Soap\SoapClientCreationTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CallFire-csharp-sdk\CallFire-csharp-sdk.csproj">

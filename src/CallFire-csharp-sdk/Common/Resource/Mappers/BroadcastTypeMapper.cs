@@ -5,7 +5,7 @@ using CallFire_csharp_sdk.Common.DataManagement;
 
 namespace CallFire_csharp_sdk.Common.Resource.Mappers
 {
-    class BroadcastTypeMapper
+    internal class BroadcastTypeMapper
     {
         internal static readonly Dictionary<BroadcastType, CfBroadcastType> DicSoapBroadcastType = new Dictionary
             <BroadcastType, CfBroadcastType>

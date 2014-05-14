@@ -5,7 +5,7 @@ using CallFire_csharp_sdk.Common.DataManagement;
 
 namespace CallFire_csharp_sdk.Common.Resource.Mappers
 {
-    public class BatchStatusMapper
+    internal class BatchStatusMapper
     {
         private static readonly Dictionary<BatchStatus, CfBatchStatus> DicSoapBatchStatus =
             new Dictionary<BatchStatus, CfBatchStatus>

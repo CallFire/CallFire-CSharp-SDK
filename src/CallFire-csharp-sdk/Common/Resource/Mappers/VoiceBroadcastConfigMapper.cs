@@ -3,7 +3,7 @@ using CallFire_csharp_sdk.Common.DataManagement;
 
 namespace CallFire_csharp_sdk.Common.Resource.Mappers
 {
-    class VoiceBroadcastConfigMapper
+    internal class VoiceBroadcastConfigMapper
     {
         internal static CfVoiceBroadcastConfig FromSoapVoiceBroadcastConfig(VoiceBroadcastConfig source)
         {

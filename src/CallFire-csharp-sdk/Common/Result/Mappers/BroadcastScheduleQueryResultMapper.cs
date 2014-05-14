@@ -5,7 +5,7 @@ using CallFire_csharp_sdk.Common.Resource.Mappers;
 
 namespace CallFire_csharp_sdk.Common.Result.Mappers
 {
-    class BroadcastScheduleQueryResultMapper
+    internal class BroadcastScheduleQueryResultMapper
     {
         internal static CfBroadcastScheduleQueryResult FromSoapBroadcastScheduleQueryResult(BroadcastScheduleQueryResult source)
         {
@@ -13,16 +13,17 @@ namespace CallFire_csharp_sdk.Common.Result.Mappers
             {
                 return null;
             }
-            var broadcastSchedule = source.BroadcastSchedule;
-            if (broadcastSchedule == null)
+
+            CfBroadcastSchedule[] newBroadcastScheduleArray = null;
+            if (source.BroadcastSchedule != null)
             {
-                return new CfBroadcastScheduleQueryResult(source.TotalResults, null);
-            }
-            var newBroadcastScheduleArray = new CfBroadcastSchedule[broadcastSchedule.Count()];
-            for (var i = 0; i < broadcastSchedule.Count(); i++)
-            {
-                var item = broadcastSchedule[i];
-                newBroadcastScheduleArray[i] = BroadcastScheduleMapper.FromSoapBroadcastSchedule(item);
+                var broadcastSchedule = source.BroadcastSchedule;
+                newBroadcastScheduleArray = new CfBroadcastSchedule[broadcastSchedule.Count()];
+                for (var i = 0; i < broadcastSchedule.Count(); i++)
+                {
+                    var item = broadcastSchedule[i];
+                    newBroadcastScheduleArray[i] = BroadcastScheduleMapper.FromSoapBroadcastSchedule(item);
+                }
             }
             return new CfBroadcastScheduleQueryResult(source.TotalResults, newBroadcastScheduleArray);
         }
@@ -33,16 +34,17 @@ namespace CallFire_csharp_sdk.Common.Result.Mappers
             {
                 return null;
             }
-            var broadcastSchedule = source.BroadcastSchedule;
-            if (broadcastSchedule == null)
+
+            BroadcastSchedule[] newBroadcastScheduleArray = null;
+            if (source.BroadcastSchedule != null)
             {
-                return new BroadcastScheduleQueryResult(source.TotalResults, null);
-            }
-            var newBroadcastScheduleArray = new BroadcastSchedule[broadcastSchedule.Count()];
-            for (var i = 0; i < broadcastSchedule.Count(); i++)
-            {
-                var item = broadcastSchedule[i];
-                newBroadcastScheduleArray[i] = BroadcastScheduleMapper.ToSoapBroadcastSchedule(item);
+                var broadcastSchedule = source.BroadcastSchedule;
+                newBroadcastScheduleArray = new BroadcastSchedule[broadcastSchedule.Count()];
+                for (var i = 0; i < broadcastSchedule.Count(); i++)
+                {
+                    var item = broadcastSchedule[i];
+                    newBroadcastScheduleArray[i] = BroadcastScheduleMapper.ToSoapBroadcastSchedule(item);
+                }
             }
             return new BroadcastScheduleQueryResult(source.TotalResults, newBroadcastScheduleArray);
         }

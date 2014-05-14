@@ -3,7 +3,7 @@ using CallFire_csharp_sdk.Common.DataManagement;
 
 namespace CallFire_csharp_sdk.Common.Resource.Mappers
 {
-    class BroadcastScheduleMapper
+    internal class BroadcastScheduleMapper
     {
         internal static CfBroadcastSchedule FromSoapBroadcastSchedule(BroadcastSchedule source)
         {
