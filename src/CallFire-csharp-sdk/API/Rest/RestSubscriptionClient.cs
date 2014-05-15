@@ -1,5 +1,4 @@
-﻿using CallFire_csharp_sdk.API.Rest.BroadcastRest;
-using CallFire_csharp_sdk.API.Soap;
+﻿using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
 using CallFire_csharp_sdk.Common.Resource.Mappers;
@@ -32,7 +31,7 @@ namespace CallFire_csharp_sdk.API.Rest
         public CfSubscriptionQueryResult QuerySubscriptions(CfQuery cfQuerySubscriptions)
         {
             return SubscriptionQueryResultMapper.FromSoapSubscriptionQueryResult( BaseRequest<SubscriptionQueryResult>(HttpMethods.Get, null,
-                        new CallfireRestRoute<Subscription>(null, null, null, new BroadcastRestRouteParameters()
+                        new CallfireRestRoute<Subscription>(null, null, null, new RestRouteParameters()
                             .MaxResults(cfQuerySubscriptions.MaxResults)
                             .FirstResult(cfQuerySubscriptions.FirstResult))));
         }
@@ -45,10 +44,13 @@ namespace CallFire_csharp_sdk.API.Rest
 
         public void UpdateSubscription(CfSubscriptionRequest cfUpdateSubscription)
         {
-            var subsription = cfUpdateSubscription.Subscription;
+            var subscription = cfUpdateSubscription.Subscription;
             var subscriptionRequest = new SubscriptionRequest(cfUpdateSubscription.RequestId,
                 SubscriptionMapper.ToSoapSubscription(cfUpdateSubscription.Subscription));
-            BaseRequest<string>(HttpMethods.Put, subscriptionRequest, new CallfireRestRoute<Subscription>(subsription.Id));
+            if (subscription != null)
+            {
+                BaseRequest<string>(HttpMethods.Put, subscriptionRequest, new CallfireRestRoute<Subscription>(subscription.Id));
+            }
         }
 
         public void DeleteSubscription(long id)

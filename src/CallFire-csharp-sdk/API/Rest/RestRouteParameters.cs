@@ -1,23 +1,23 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 
-namespace CallFire_csharp_sdk.API.Rest.BroadcastRest
+namespace CallFire_csharp_sdk.API.Rest
 {
-    internal class BroadcastRestRouteParameters : Dictionary<string, string>
+    internal class RestRouteParameters : Dictionary<string, string>
     {
-        public BroadcastRestRouteParameters MaxResults(long maxResults)
+        public RestRouteParameters MaxResults(long maxResults)
         {
             Add("MaxResults", maxResults.ToString(CultureInfo.InvariantCulture));
             return this;
         }
 
-        public BroadcastRestRouteParameters FirstResult(long firstResult)
+        public RestRouteParameters FirstResult(long firstResult)
         {
             Add("FirstResult", firstResult.ToString(CultureInfo.InvariantCulture));
             return this;
         }
 
-        public BroadcastRestRouteParameters Type(string type)
+        public RestRouteParameters Type(string type)
         {
             if (type != null)
             {
@@ -26,7 +26,7 @@ namespace CallFire_csharp_sdk.API.Rest.BroadcastRest
             return this;
         }
 
-        public BroadcastRestRouteParameters Running(bool? running)
+        public RestRouteParameters Running(bool? running)
         {
             if (running.HasValue)
             {
@@ -35,7 +35,7 @@ namespace CallFire_csharp_sdk.API.Rest.BroadcastRest
             return this;
         }
 
-        public BroadcastRestRouteParameters LabelName(string labelName)
+        public RestRouteParameters LabelName(string labelName)
         {
             if (labelName != null)
             {

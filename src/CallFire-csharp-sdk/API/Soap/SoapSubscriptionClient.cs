@@ -13,7 +13,7 @@ namespace CallFire_csharp_sdk.API.Soap
         {
         }
 
-        internal SoapSubscriptionClient(IBroadcastServicePortTypeClient client)
+        internal SoapSubscriptionClient(ISubscriptionServicePortTypeClient client)
             : base(client)
         {
         }

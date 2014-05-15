@@ -1,5 +1,4 @@
 ﻿using CallFire_csharp_sdk.API.Rest;
-using CallFire_csharp_sdk.API.Rest.BroadcastRest;
 using CallFire_csharp_sdk.API.Soap;
 
 namespace CallFire_csharp_sdk.API

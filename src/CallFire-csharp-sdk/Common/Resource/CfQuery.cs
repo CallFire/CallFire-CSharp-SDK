@@ -11,5 +11,11 @@
             MaxResults = 1000;
             FirstResult = 0;
         }
+
+        public CfQuery(long maxResult, long firstResult)
+        {
+            MaxResults = maxResult;
+            FirstResult = firstResult;
+        }
     }
 }

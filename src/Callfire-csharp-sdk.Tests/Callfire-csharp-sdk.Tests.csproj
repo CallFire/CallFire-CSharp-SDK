@@ -108,6 +108,21 @@
     <Compile Include="BroadcastTest\GetBroadcastClientTest.cs" />
     <Compile Include="BroadcastTest\Soap\GetBroadcastSoapClientTests.cs" />
     <Compile Include="Soap\SoapClientCreationTests.cs" />
+    <Compile Include="SubscriptionTest\CreateSubscriptionClientTest.cs" />
+    <Compile Include="SubscriptionTest\DeleteSubscriptionClientTest.cs" />
+    <Compile Include="SubscriptionTest\GetSubscriptionClientTest.cs" />
+    <Compile Include="SubscriptionTest\QuerySubscriptionsClientTest.cs" />
+    <Compile Include="SubscriptionTest\Rest\CreateSubscriptionRestClientTest.cs" />
+    <Compile Include="SubscriptionTest\Rest\DeleteSubscriptionRestClientTest.cs" />
+    <Compile Include="SubscriptionTest\Rest\GetSubscriptionRestClientTest.cs" />
+    <Compile Include="SubscriptionTest\Rest\QuerySubscriptionsRestClientTest.cs" />
+    <Compile Include="SubscriptionTest\Rest\UpdateSubscriptionRestClientTest.cs" />
+    <Compile Include="SubscriptionTest\Soap\CreateSubscriptionSoapClientTest.cs" />
+    <Compile Include="SubscriptionTest\Soap\DeleteSubscriptionSoapClientTest.cs" />
+    <Compile Include="SubscriptionTest\Soap\GetSubscriptionSoapClientTest.cs" />
+    <Compile Include="SubscriptionTest\Soap\QuerySubscriptionsSoapClientTest.cs" />
+    <Compile Include="SubscriptionTest\Soap\UpdateSubscriptionSoapClientTest.cs" />
+    <Compile Include="SubscriptionTest\UpdateSubscriptionClientTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

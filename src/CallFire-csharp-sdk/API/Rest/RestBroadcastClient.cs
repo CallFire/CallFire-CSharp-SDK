@@ -7,7 +7,7 @@ using CallFire_csharp_sdk.Common.Result.Mappers;
 using ServiceStack.Common.Web;
 using ServiceStack.ServiceClient.Web;
 
-namespace CallFire_csharp_sdk.API.Rest.BroadcastRest
+namespace CallFire_csharp_sdk.API.Rest
 {
     public class RestBroadcastClient : BaseRestClient<Broadcast>, IBroadcastClient
     {
@@ -32,7 +32,7 @@ namespace CallFire_csharp_sdk.API.Rest.BroadcastRest
             var type = BroadcastTypeMapper.ToSoapBroadcastType(queryBroadcasts.Type);
             return BroadcastQueryResultMapper.FromSoapBroadcastQueryResult(BaseRequest<BroadcastQueryResult>(HttpMethods.Get, null,
                 new CallfireRestRoute<Broadcast>(null, null, null,
-                    new BroadcastRestRouteParameters()
+                    new RestRouteParameters()
                         .MaxResults(queryBroadcasts.MaxResults)
                         .FirstResult(queryBroadcasts.FirstResult)
                         .Type(type.ToString())
@@ -78,7 +78,7 @@ namespace CallFire_csharp_sdk.API.Rest.BroadcastRest
         {
             return ContactBatchQueryResultMapper.FromSoapContactBatchQueryResult(BaseRequest<ContactBatchQueryResult>(HttpMethods.Get, null,
                 new CallfireRestRoute<Broadcast>(cfQueryContactBatches.BroadcastId, null, BroadcastRestRouteObjects.Batch, 
-                    new BroadcastRestRouteParameters()
+                    new RestRouteParameters()
                         .MaxResults(cfQueryContactBatches.MaxResults)
                         .FirstResult(cfQueryContactBatches.FirstResult))));
         }
@@ -109,7 +109,7 @@ namespace CallFire_csharp_sdk.API.Rest.BroadcastRest
         {
             return BroadcastScheduleQueryResultMapper.FromSoapBroadcastScheduleQueryResult(BaseRequest<BroadcastScheduleQueryResult>(HttpMethods.Get, null,
                 new CallfireRestRoute<Broadcast>(cfQueryBroadcastSchedule.BroadcastId, null, BroadcastRestRouteObjects.Schedule,
-                    new BroadcastRestRouteParameters()
+                    new RestRouteParameters()
                         .MaxResults(cfQueryBroadcastSchedule.MaxResults)
                         .FirstResult(cfQueryBroadcastSchedule.FirstResult))));
         }

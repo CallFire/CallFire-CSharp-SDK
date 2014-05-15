@@ -1,4 +1,4 @@
-﻿using CallFire_csharp_sdk.API.Rest.BroadcastRest;
+﻿using CallFire_csharp_sdk.API.Rest;
 using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common.Resource;
 using NUnit.Framework;
