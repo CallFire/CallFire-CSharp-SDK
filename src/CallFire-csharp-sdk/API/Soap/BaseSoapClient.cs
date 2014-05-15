@@ -2,26 +2,22 @@
 
 namespace CallFire_csharp_sdk.API.Soap
 {
-    internal abstract class BaseSoapClient
+    internal abstract class BaseSoapClient<T>
+        where T: IClient
     {
         private const string SoapEndpointAddress = "https://www.callfire.com/api/1.1/wsdl/callfire-service.wsdl";
         internal readonly IBroadcastServicePortTypeClient BroadcastService;
         internal readonly ISubscriptionServicePortTypeClient SubscriptionService;
 
-        internal BaseSoapClient(string username, string password, TypeInterface type)
+        internal BaseSoapClient(string username, string password)
         {
-            switch (type)
+            if (typeof(T) == typeof(IBroadcastServicePortTypeClient))
             {
-                case TypeInterface.Broadcast:
-                {
-                    BroadcastService = CreateBroadcastSoapServiceClient(username, password);
-                    break;
-                }
-                case TypeInterface.Subscription:
-                {
-                    SubscriptionService = CreateSubscriptionSoapServiceClient(username, password);
-                    break;
-                }
+                BroadcastService = CreateBroadcastSoapServiceClient(username, password);
+            }
+            if (typeof(T) == typeof(ISubscriptionServicePortTypeClient))
+            {
+                SubscriptionService = CreateSubscriptionSoapServiceClient(username, password);
             }
         }
 

@@ -6,10 +6,10 @@ using CallFire_csharp_sdk.Common.Result.Mappers;
 
 namespace CallFire_csharp_sdk.API.Soap
 {
-    class SoapSubscriptionClient : BaseSoapClient, ISubscriptionClient
+    class SoapSubscriptionClient : BaseSoapClient<ISubscriptionClient>, ISubscriptionClient
     {
         internal SoapSubscriptionClient(string username, string password)
-            : base(username, password, TypeInterface.Subscription)
+            : base(username, password)
         {
         }
 

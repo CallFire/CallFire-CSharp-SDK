@@ -6,10 +6,10 @@ using CallFire_csharp_sdk.Common.Result.Mappers;
 
 namespace CallFire_csharp_sdk.API.Soap
 {
-    internal class SoapBroadcastClient : BaseSoapClient, IBroadcastClient
+    internal class SoapBroadcastClient : BaseSoapClient<IBroadcastClient>, IBroadcastClient
     {
         internal SoapBroadcastClient(string username, string password)
-            : base(username, password, TypeInterface.Broadcast)
+            : base(username, password)
         {
         }
 

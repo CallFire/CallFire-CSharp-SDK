@@ -40,9 +40,9 @@ namespace CallFire_csharp_sdk.API
                 {
                     return _subscriptionClient;
                 }
-                return _client == CallfireClients.Rest
-                    ? (_subscriptionClient = new RestSubscriptionClient(_username, _password)) : 
-                    null;  //(_subscriptionClient = new SoapBroadcastClient(_username, _password));
+                return _client == CallfireClients.Rest ?
+                    (_subscriptionClient = new RestSubscriptionClient(_username, _password)) :
+                    (_subscriptionClient = new SoapSubscriptionClient(_username, _password));
             }
         }
     }

@@ -4,7 +4,7 @@ using CallFire_csharp_sdk.Common.Result;
 
 namespace CallFire_csharp_sdk.API
 {
-    public interface IBroadcastClient
+    public interface IBroadcastClient : IClient
     {
         long CreateBroadcast(CfBroadcast broadcast);
 

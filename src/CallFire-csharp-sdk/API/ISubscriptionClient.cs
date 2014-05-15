@@ -4,7 +4,7 @@ using CallFire_csharp_sdk.Common.Result;
 
 namespace CallFire_csharp_sdk.API
 {
-    public interface ISubscriptionClient
+    public interface ISubscriptionClient : IClient
     {
         long CreateSubscription(CfSubscriptionRequest cfCreateSubscription);
 

@@ -53,6 +53,7 @@
     <Compile Include="API\CallfireClients.cs" />
     <Compile Include="API\IBroadcastClient.cs" />
     <Compile Include="API\ICallfireClient.cs" />
+    <Compile Include="API\IClient.cs" />
     <Compile Include="API\ISubscriptionClient.cs" />
     <Compile Include="API\Rest\BaseRestClient.cs" />
     <Compile Include="API\Rest\BroadcastRestRouteObjects.cs" />
@@ -77,7 +78,6 @@
     <Compile Include="API\Soap\SoapBroadcastClient.cs" />
     <Compile Include="API\Soap\SoapSubscriptionClient.cs" />
     <Compile Include="API\Soap\SubscriptionServicePortTypeClient.cs" />
-    <Compile Include="API\Soap\TypeInterface.cs" />
     <Compile Include="Common\DataManagement\callfire-data.cs" />
     <Compile Include="Common\Resource\CfBroadcastCommand.cs" />
     <Compile Include="Common\Resource\CfControlBroadcast.cs" />
