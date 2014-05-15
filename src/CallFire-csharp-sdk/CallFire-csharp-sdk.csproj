@@ -63,6 +63,7 @@
     <Compile Include="API\Rest\RestSubscriptionClient.cs" />
     <Compile Include="API\Soap\BaseSoapClient.cs" />
     <Compile Include="API\Soap\BroadcastServicePortTypeClient.cs" />
+    <Compile Include="Common\Resource\BiDictionary.cs" />
     <Compile Include="Common\Resource\Extended\BroadcastRequestExtended.cs" />
     <Compile Include="Common\Resource\Extended\ControlBroadcastExtended.cs" />
     <Compile Include="Common\Resource\Extended\ControlContactBatchExtended.cs" />

@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BiDictionaryTest.cs" />
     <Compile Include="BroadcastTest\ControlBroadcastClientTest.cs" />
     <Compile Include="BroadcastTest\ControlContactBatchClientTest.cs" />
     <Compile Include="BroadcastTest\CreateBroadcastClientTest.cs" />

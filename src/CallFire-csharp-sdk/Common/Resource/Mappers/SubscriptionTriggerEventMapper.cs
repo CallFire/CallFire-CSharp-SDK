@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common.DataManagement;
 
@@ -7,7 +6,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
 {
     internal class SubscriptionTriggerEventMapper
     {
-        private static readonly Dictionary<SubscriptionTriggerEvent, CfSubscriptionTriggerEvent> DicSoapSubscriptionTriggerEvent = new Dictionary
+        private static readonly BiDictionary<SubscriptionTriggerEvent, CfSubscriptionTriggerEvent> DicSubscriptionTriggerEvent = new BiDictionary
            <SubscriptionTriggerEvent, CfSubscriptionTriggerEvent>
         {
             {SubscriptionTriggerEvent.CAMPAIGN_FINISHED, CfSubscriptionTriggerEvent.CampaignFinished},
@@ -20,24 +19,11 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
             {SubscriptionTriggerEvent.UNDEFINED_EVENT, CfSubscriptionTriggerEvent.UndefinedEvent}
         };
 
-        private static readonly Dictionary<CfSubscriptionTriggerEvent, SubscriptionTriggerEvent> DicSubscriptionTriggerEvent = new Dictionary
-           <CfSubscriptionTriggerEvent, SubscriptionTriggerEvent>
-        {
-            {CfSubscriptionTriggerEvent.CampaignFinished, SubscriptionTriggerEvent.CAMPAIGN_FINISHED},
-            {CfSubscriptionTriggerEvent.CampaignStarted, SubscriptionTriggerEvent.CAMPAIGN_STARTED},
-            {CfSubscriptionTriggerEvent.CampaignStopped, SubscriptionTriggerEvent.CAMPAIGN_STOPPED},
-            {CfSubscriptionTriggerEvent.InboundCallFinished, SubscriptionTriggerEvent.INBOUND_CALL_FINISHED},
-            {CfSubscriptionTriggerEvent.InboundTextFinished, SubscriptionTriggerEvent.INBOUND_TEXT_FINISHED},
-            {CfSubscriptionTriggerEvent.OutboundCallFinished, SubscriptionTriggerEvent.OUTBOUND_CALL_FINISHED},
-            {CfSubscriptionTriggerEvent.OutboundTextFinished, SubscriptionTriggerEvent.OUTBOUND_TEXT_FINISHED},
-            {CfSubscriptionTriggerEvent.UndefinedEvent, SubscriptionTriggerEvent.UNDEFINED_EVENT}
-        };
-
         internal static CfSubscriptionTriggerEvent FromSoapSubscriptionTriggerEvent(SubscriptionTriggerEvent source)
         {
-            if (DicSoapSubscriptionTriggerEvent.ContainsKey(source))
+            if (DicSubscriptionTriggerEvent.ContainsKey(source))
             {
-                return DicSoapSubscriptionTriggerEvent[source];
+                return DicSubscriptionTriggerEvent[source];
             }
             throw new NotSupportedException(string.Format("The source {0} is not validated to be mapped", source));
         }
