@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace CallFire_csharp_sdk.Common.Resource
 {
-    internal class BiDictionary<TKey1, TKey2> : IEnumerable<KeyValuePair<TKey1, TKey2>>
+    internal class TwoWayMapper<TKey1, TKey2> : IEnumerable<KeyValuePair<TKey1, TKey2>>
     {
         public Dictionary<TKey1, TKey2> Dictionary1 { get; set; }
 
         public Dictionary<TKey2, TKey1> Dictionary2 { get; set; }
         
-        public BiDictionary()
+        public TwoWayMapper()
         {
             Dictionary1 = new Dictionary<TKey1, TKey2>();
             Dictionary2 = new Dictionary<TKey2, TKey1>();

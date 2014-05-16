@@ -6,7 +6,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
 {
     internal class AnsweringMachineConfigMapper
     {
-        private static readonly BiDictionary<AnsweringMachineConfig, CfAnsweringMachineConfig> DicAnsweringMachineConfig = new BiDictionary<AnsweringMachineConfig, CfAnsweringMachineConfig>
+        private static readonly TwoWayMapper<AnsweringMachineConfig, CfAnsweringMachineConfig> DicAnsweringMachineConfig = new TwoWayMapper<AnsweringMachineConfig, CfAnsweringMachineConfig>
         {
             {AnsweringMachineConfig.AM_AND_LIVE, CfAnsweringMachineConfig.AmAndLive},
             {AnsweringMachineConfig.AM_ONLY, CfAnsweringMachineConfig.AmOnly},

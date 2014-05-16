@@ -45,12 +45,13 @@ namespace CallFire_csharp_sdk.API.Rest
         public void UpdateSubscription(CfSubscriptionRequest cfUpdateSubscription)
         {
             var subscription = cfUpdateSubscription.Subscription;
+            if (subscription == null)
+            {
+                return;
+            }
             var subscriptionRequest = new SubscriptionRequest(cfUpdateSubscription.RequestId,
                 SubscriptionMapper.ToSoapSubscription(cfUpdateSubscription.Subscription));
-            if (subscription != null)
-            {
-                BaseRequest<string>(HttpMethods.Put, subscriptionRequest, new CallfireRestRoute<Subscription>(subscription.Id));
-            }
+            BaseRequest<string>(HttpMethods.Put, subscriptionRequest, new CallfireRestRoute<Subscription>(subscription.Id));
         }
 
         public void DeleteSubscription(long id)

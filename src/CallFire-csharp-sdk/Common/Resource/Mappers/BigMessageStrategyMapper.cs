@@ -6,7 +6,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
 {
     internal class BigMessageStrategyMapper
     {
-        internal static readonly BiDictionary<BigMessageStrategy, CfBigMessageStrategy> DicBigMessageStrategy = new BiDictionary
+        internal static readonly TwoWayMapper<BigMessageStrategy, CfBigMessageStrategy> DicBigMessageStrategy = new TwoWayMapper
             <BigMessageStrategy, CfBigMessageStrategy>
         {
             {BigMessageStrategy.DO_NOT_SEND, CfBigMessageStrategy.DoNotSend},

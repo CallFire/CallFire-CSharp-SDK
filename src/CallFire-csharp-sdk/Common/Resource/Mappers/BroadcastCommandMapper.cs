@@ -5,7 +5,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
 {
     internal class BroadcastCommandMapper
     {
-        internal static readonly BiDictionary<BroadcastCommand, CfBroadcastCommand> DicBroadcastCommands = new BiDictionary
+        internal static readonly TwoWayMapper<BroadcastCommand, CfBroadcastCommand> DicBroadcastCommands = new TwoWayMapper
             <BroadcastCommand, CfBroadcastCommand>
         {
             {BroadcastCommand.ARCHIVE, CfBroadcastCommand.Archive},

@@ -6,8 +6,8 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
 {
     internal class BatchStatusMapper
     {
-        private static readonly BiDictionary<BatchStatus, CfBatchStatus> DicBatchStatus =
-            new BiDictionary<BatchStatus, CfBatchStatus>
+        private static readonly TwoWayMapper<BatchStatus, CfBatchStatus> DicBatchStatus =
+            new TwoWayMapper<BatchStatus, CfBatchStatus>
             {
                 {BatchStatus.ACTIVE, CfBatchStatus.Active},
                 {BatchStatus.ERRORS, CfBatchStatus.Errors},

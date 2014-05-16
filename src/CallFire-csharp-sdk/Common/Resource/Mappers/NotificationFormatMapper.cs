@@ -6,7 +6,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
 {
     internal class NotificationFormatMapper
     {
-        private static readonly BiDictionary<NotificationFormat, CfNotificationFormat> DicNotificationFormat = new BiDictionary
+        private static readonly TwoWayMapper<NotificationFormat, CfNotificationFormat> DicNotificationFormat = new TwoWayMapper
             <NotificationFormat, CfNotificationFormat>
         {
             {NotificationFormat.EMAIL, CfNotificationFormat.Email},

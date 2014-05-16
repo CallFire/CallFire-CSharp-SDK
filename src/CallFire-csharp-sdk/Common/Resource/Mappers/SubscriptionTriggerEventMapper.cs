@@ -6,7 +6,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
 {
     internal class SubscriptionTriggerEventMapper
     {
-        private static readonly BiDictionary<SubscriptionTriggerEvent, CfSubscriptionTriggerEvent> DicSubscriptionTriggerEvent = new BiDictionary
+        private static readonly TwoWayMapper<SubscriptionTriggerEvent, CfSubscriptionTriggerEvent> DicSubscriptionTriggerEvent = new TwoWayMapper
            <SubscriptionTriggerEvent, CfSubscriptionTriggerEvent>
         {
             {SubscriptionTriggerEvent.CAMPAIGN_FINISHED, CfSubscriptionTriggerEvent.CampaignFinished},

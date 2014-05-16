@@ -7,7 +7,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
     internal class BroadcastTypeMapper
     {
         
-        internal static readonly BiDictionary<BroadcastType, CfBroadcastType> DicBroadcastType = new BiDictionary
+        internal static readonly TwoWayMapper<BroadcastType, CfBroadcastType> DicBroadcastType = new TwoWayMapper
             <BroadcastType, CfBroadcastType>
         {
             {BroadcastType.IVR, CfBroadcastType.Ivr},
