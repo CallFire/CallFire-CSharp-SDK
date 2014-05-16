@@ -1,4 +1,4 @@
-﻿using CallFire_csharp_sdk.API.Rest.BroadcastRest;
+﻿using CallFire_csharp_sdk.API.Rest;
 using CallFire_csharp_sdk.API.Soap;
 
 namespace CallFire_csharp_sdk.API
@@ -9,6 +9,7 @@ namespace CallFire_csharp_sdk.API
         private readonly string _password;
         private readonly CallfireClients _client;
         private IBroadcastClient _broadcastClient;
+        private ISubscriptionClient _subscriptionClient;
 
         public CallfireClient(string username, string password, CallfireClients client)
         {
@@ -28,6 +29,20 @@ namespace CallFire_csharp_sdk.API
                 return _client == CallfireClients.Rest ?
                     (_broadcastClient = new RestBroadcastClient(_username, _password)) :
                     (_broadcastClient = new SoapBroadcastClient(_username, _password));
+            }
+        }
+
+        public ISubscriptionClient Subscription
+        {
+            get
+            {
+                if (_subscriptionClient != null)
+                {
+                    return _subscriptionClient;
+                }
+                return _client == CallfireClients.Rest ?
+                    (_subscriptionClient = new RestSubscriptionClient(_username, _password)) :
+                    (_subscriptionClient = new SoapSubscriptionClient(_username, _password));
             }
         }
     }

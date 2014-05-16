@@ -1,5 +1,5 @@
 ﻿using System;
-using CallFire_csharp_sdk.API.Rest.BroadcastRest;
+using CallFire_csharp_sdk.API.Rest;
 using NUnit.Framework;
 using Rhino.Mocks;
 using ServiceStack.Common.Web;

@@ -33,15 +33,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ServiceStack.Common">
-      <HintPath>..\packages\ServiceStack.Common.3.9.71\lib\net35\ServiceStack.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Interfaces">
-      <HintPath>..\packages\ServiceStack.Common.3.9.71\lib\net35\ServiceStack.Interfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Text, Version=3.9.11.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ServiceStack.Common, Version=3.9.71.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ServiceStack.Text.3.9.71\lib\net35\ServiceStack.Text.dll</HintPath>
+      <HintPath>..\lib\ServiceStack\ServiceStack.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\ServiceStack\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text, Version=3.9.71.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\ServiceStack\ServiceStack.Text.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -53,25 +55,32 @@
     <Compile Include="API\CallfireClients.cs" />
     <Compile Include="API\IBroadcastClient.cs" />
     <Compile Include="API\ICallfireClient.cs" />
+    <Compile Include="API\IClient.cs" />
+    <Compile Include="API\ISubscriptionClient.cs" />
     <Compile Include="API\Rest\BaseRestClient.cs" />
-    <Compile Include="API\Rest\BroadcastRest\BroadcastRestRouteObjects.cs" />
-    <Compile Include="API\Rest\BroadcastRest\BroadcastRestRouteParameters.cs" />
-    <Compile Include="API\Rest\BroadcastRest\RestBroadcastClient.cs" />
+    <Compile Include="API\Rest\BroadcastRestRouteObjects.cs" />
+    <Compile Include="API\Rest\RestRouteParameters.cs" />
+    <Compile Include="API\Rest\RestBroadcastClient.cs" />
     <Compile Include="API\Rest\CallfireRestRoute.cs" />
+    <Compile Include="API\Rest\RestSubscriptionClient.cs" />
     <Compile Include="API\Soap\BaseSoapClient.cs" />
     <Compile Include="API\Soap\BroadcastServicePortTypeClient.cs" />
-    <Compile Include="API\Soap\BroadcastSoap\BroadcastRequestExtended.cs" />
-    <Compile Include="API\Soap\BroadcastSoap\ControlBroadcastExtended.cs" />
-    <Compile Include="API\Soap\BroadcastSoap\ControlContactBatchExtended.cs" />
-    <Compile Include="API\Soap\BroadcastSoap\CreateBroadcastScheduleExtended.cs" />
-    <Compile Include="API\Soap\BroadcastSoap\CreateContactBatchExtended.cs" />
-    <Compile Include="API\Soap\BroadcastSoap\GetBroadcastStatsExtended.cs" />
-    <Compile Include="API\Soap\BroadcastSoap\IdRequestExtended.cs" />
-    <Compile Include="API\Soap\BroadcastSoap\QueryBroadcastSchedulesExtended.cs" />
-    <Compile Include="API\Soap\BroadcastSoap\QueryBroadcastsExtended.cs" />
-    <Compile Include="API\Soap\BroadcastSoap\QueryContactBatchesExtended.cs" />
+    <Compile Include="Common\Resource\TwoWayMapper.cs" />
+    <Compile Include="Common\Resource\Extended\BroadcastRequestExtended.cs" />
+    <Compile Include="Common\Resource\Extended\ControlBroadcastExtended.cs" />
+    <Compile Include="Common\Resource\Extended\ControlContactBatchExtended.cs" />
+    <Compile Include="Common\Resource\Extended\CreateBroadcastScheduleExtended.cs" />
+    <Compile Include="Common\Resource\Extended\CreateContactBatchExtended.cs" />
+    <Compile Include="Common\Resource\Extended\GetBroadcastStatsExtended.cs" />
+    <Compile Include="Common\Resource\Extended\IdRequestExtended.cs" />
+    <Compile Include="Common\Resource\Extended\QueryBroadcastSchedulesExtended.cs" />
+    <Compile Include="Common\Resource\Extended\QueryBroadcastsExtended.cs" />
+    <Compile Include="Common\Resource\Extended\QueryContactBatchesExtended.cs" />
     <Compile Include="API\Soap\IBroadcastServicePortTypeClient.cs" />
+    <Compile Include="API\Soap\ISubscriptionServicePortTypeClient.cs" />
     <Compile Include="API\Soap\SoapBroadcastClient.cs" />
+    <Compile Include="API\Soap\SoapSubscriptionClient.cs" />
+    <Compile Include="API\Soap\SubscriptionServicePortTypeClient.cs" />
     <Compile Include="Common\DataManagement\callfire-data.cs" />
     <Compile Include="Common\Resource\CfBroadcastCommand.cs" />
     <Compile Include="Common\Resource\CfControlBroadcast.cs" />
@@ -82,6 +91,7 @@
     <Compile Include="Common\Resource\CfQueryBroadcasts.cs" />
     <Compile Include="Common\Resource\CfQueryBroadcastSchedule.cs" />
     <Compile Include="Common\Resource\CfQueryContactBatches.cs" />
+    <Compile Include="Common\Resource\CfSubscriptionRequest.cs" />
     <Compile Include="Common\Resource\CfUniqueResource.cs" />
     <Compile Include="Common\Resource\Extended\BroadcastConfigExtended.cs" />
     <Compile Include="Common\Resource\Extended\BroadcastConfigRetryConfigExtended.cs" />
@@ -94,6 +104,10 @@
     <Compile Include="Common\Resource\Extended\ContactBatchExtended.cs" />
     <Compile Include="Common\Resource\Extended\IvrBroadcastConfigExtended.cs" />
     <Compile Include="Common\Resource\Extended\LocalTimeZoneRestrictionExtended.cs" />
+    <Compile Include="Common\Resource\Extended\QueryExtended.cs" />
+    <Compile Include="Common\Resource\Extended\SubscriptionExtended.cs" />
+    <Compile Include="Common\Resource\Extended\SubscriptionRequestExtended.cs" />
+    <Compile Include="Common\Resource\Extended\SubscriptionSubscriptionFilterExtended.cs" />
     <Compile Include="Common\Resource\Extended\TextBroadcastConfigExtended.cs" />
     <Compile Include="Common\Resource\Extended\VoiceBroadcastConfigExtended.cs" />
     <Compile Include="Common\Resource\Mappers\ActionStatisticsMapper.cs" />
@@ -111,7 +125,11 @@
     <Compile Include="Common\Resource\Mappers\ContactBatchMapper.cs" />
     <Compile Include="Common\Resource\Mappers\IvrBroadcastConfigMapper.cs" />
     <Compile Include="Common\Resource\Mappers\LocalTimeZoneRestrictionMapper.cs" />
+    <Compile Include="Common\Resource\Mappers\NotificationFormatMapper.cs" />
     <Compile Include="Common\Resource\Mappers\ResultStatMapper.cs" />
+    <Compile Include="Common\Resource\Mappers\SubscriptionMapper.cs" />
+    <Compile Include="Common\Resource\Mappers\SubscriptionSubscriptionFilterMapper.cs" />
+    <Compile Include="Common\Resource\Mappers\SubscriptionTriggerEventMapper.cs" />
     <Compile Include="Common\Resource\Mappers\TextBroadcastConfigMapper.cs" />
     <Compile Include="Common\Resource\Mappers\UsageStatsMapper.cs" />
     <Compile Include="Common\Resource\Mappers\VoiceBroadcastConfigMapper.cs" />
@@ -119,12 +137,15 @@
     <Compile Include="Common\Result\CfBroadcastScheduleQueryResult.cs" />
     <Compile Include="Common\Result\CfContactBatchQueryResult.cs" />
     <Compile Include="Common\Result\CfQueryResult.cs" />
+    <Compile Include="Common\Result\CfSubscriptionQueryResult.cs" />
     <Compile Include="Common\Result\Extended\BroadcastQueryResultExtended.cs" />
     <Compile Include="Common\Result\Extended\BroadcastScheduleQueryResultExtended.cs" />
     <Compile Include="Common\Result\Extended\ContactBatchQueryResultExtended.cs" />
+    <Compile Include="Common\Result\Extended\SubscriptionQueryResultExtended.cs" />
     <Compile Include="Common\Result\Mappers\BroadcastQueryResultMapper.cs" />
     <Compile Include="Common\Result\Mappers\BroadcastScheduleQueryResultMapper.cs" />
     <Compile Include="Common\Result\Mappers\ContactBatchQueryResultMapper.cs" />
+    <Compile Include="Common\Result\Mappers\SubscriptionQueryResultMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\API.Soap\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -138,7 +159,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config" />
     <None Include="Service References\API.Soap\callfire-ann.xsd">
       <SubType>Designer</SubType>
     </None>

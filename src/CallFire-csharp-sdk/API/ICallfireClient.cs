@@ -3,5 +3,7 @@
     public interface ICallfireClient
     {
         IBroadcastClient Broadcasts { get; }
+
+        ISubscriptionClient Subscription { get; }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common.DataManagement;
 
@@ -7,7 +6,8 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
 {
     internal class BroadcastTypeMapper
     {
-        internal static readonly Dictionary<BroadcastType, CfBroadcastType> DicSoapBroadcastType = new Dictionary
+        
+        internal static readonly TwoWayMapper<BroadcastType, CfBroadcastType> DicBroadcastType = new TwoWayMapper
             <BroadcastType, CfBroadcastType>
         {
             {BroadcastType.IVR, CfBroadcastType.Ivr},
@@ -15,19 +15,11 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
             {BroadcastType.VOICE, CfBroadcastType.Voice},
         };
 
-        internal static readonly Dictionary<CfBroadcastType, BroadcastType> DicBroadcastType = new Dictionary
-            <CfBroadcastType, BroadcastType>
-        {
-            {CfBroadcastType.Ivr, BroadcastType.IVR},
-            {CfBroadcastType.Text, BroadcastType.TEXT},
-            {CfBroadcastType.Voice, BroadcastType.VOICE},
-        };
-
         internal static CfBroadcastType FromSoapBroadcastType(BroadcastType source)
         {
-            if (DicSoapBroadcastType.ContainsKey(source))
+            if (DicBroadcastType.ContainsKey(source))
             {
-                return DicSoapBroadcastType[source];
+                return DicBroadcastType[source];
             }
             throw new NotSupportedException(string.Format("The source {0} is not validated to be mapped", source));
         }

@@ -1,4 +1,4 @@
-﻿namespace CallFire_csharp_sdk.API.Rest.BroadcastRest
+﻿namespace CallFire_csharp_sdk.API.Rest
 {
     internal class BroadcastRestRouteObjects
     {
