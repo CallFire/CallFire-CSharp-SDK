@@ -122,6 +122,8 @@ publish/
 *.[Pp]ublish.xml
 *.azurePubxml
 
+!src/lib/*.dll
+
 # NuGet Packages Directory
 packages/
 ## TODO: If the tool you use requires repositories.config uncomment the next line
