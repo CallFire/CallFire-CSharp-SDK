@@ -61,11 +61,23 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
                 BroadcastStatusMapper.ToSoapBroadcastStatus(ExpectedBroadcast.Status), ExpectedBroadcast.LastModified,
                 BroadcastTypeMapper.ToSoapBroadcastType(ExpectedBroadcast.Type),
                 BroadcastConfigMapper.ToBroadcastConfig(ExpectedBroadcast.Item, ExpectedBroadcast.Type));
+
+            var resource = string.Format("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" + 
+                            "<r:Resource xmlns=\"http://api.callfire.com/data\" xmlns:r=\"http://api.callfire.com/resource\">" +
+                                    "<Broadcast id=\"{0}\">" + 
+                                        "<Name>{1}</Name>" + 
+                                        "<Status>{2}</Status>" +
+                                        "<LastModified>{3}</LastModified>" + 
+                                        "<Type>{4}</Type>" +
+                                    "</Broadcast>" +
+                            "</r:Resource>", broadcastId, ExpectedBroadcast.Name, BroadcastStatusMapper.ToSoapBroadcastStatus(ExpectedBroadcast.Status),
+                            ExpectedBroadcast.LastModified, BroadcastTypeMapper.ToSoapBroadcastType(ExpectedBroadcast.Type));
+
             XmlServiceClientMock
-                .Stub(j => j.Send<Broadcast>(Arg<string>.Is.Equal(HttpMethods.Get), 
+                .Stub(j => j.Send<string>(Arg<string>.Is.Equal(HttpMethods.Get), 
                     Arg<string>.Is.Equal(String.Format("/broadcast/{0}", broadcastId)),
                     Arg<object>.Is.Null))
-                .Return(expectedBroadcast);
+                .Return(resource);
         }
     }
 }

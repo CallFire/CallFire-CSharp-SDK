@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.Xml.Serialization;
-using CallFire_csharp_sdk.API.Soap;
 using NUnit.Framework;
 
 namespace Callfire_csharp_sdk.Tests
@@ -17,16 +16,16 @@ namespace Callfire_csharp_sdk.Tests
             Assert.IsNotNull(broadcast);
         }
 
-        public ResourceList<Broadcast> DeserializeList(string filePath)
+        public ResourceList DeserializeList(string filePath)
         {
-            var broadcast = new ResourceList<Broadcast>();
+            var broadcast = new ResourceList();
 
             if (File.Exists(filePath))
             {
-                var serializer = new XmlSerializer(typeof(ResourceList<Broadcast>));
+                var serializer = new XmlSerializer(typeof(ResourceList));
                 TextReader reader = new StreamReader(Path);
 
-                broadcast = (ResourceList<Broadcast>)serializer.Deserialize(reader);
+                broadcast = (ResourceList)serializer.Deserialize(reader);
                 reader.Close();
             }
 

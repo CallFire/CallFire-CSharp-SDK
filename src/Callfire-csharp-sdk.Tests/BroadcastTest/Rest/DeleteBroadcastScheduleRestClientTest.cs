@@ -19,11 +19,12 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
             Client = new RestBroadcastClient(XmlServiceClientMock);
 
             BroadcastScheduleId = 1;
-            
+
             XmlServiceClientMock
-                .Stub(j => j.Send<long>(Arg<string>.Is.Equal(HttpMethods.Delete),
+                .Stub(j => j.Send<string>(Arg<string>.Is.Equal(HttpMethods.Delete),
                     Arg<string>.Is.Equal(String.Format("/broadcast/schedule/{0}", BroadcastScheduleId)),
-                    Arg<object>.Is.Null));
+                    Arg<object>.Is.Null))
+                .Return(string.Empty);
         }
     }
 }

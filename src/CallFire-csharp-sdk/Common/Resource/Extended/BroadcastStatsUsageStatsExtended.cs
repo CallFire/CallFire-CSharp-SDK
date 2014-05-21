@@ -12,5 +12,9 @@ namespace CallFire_csharp_sdk.API.Soap
             Attempts = attempts;
             Actions = actions;
         }
+
+        public BroadcastStatsUsageStats()
+        {
+        }
     }
 }

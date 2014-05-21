@@ -5,10 +5,10 @@
 // ReSharper disable once CheckNamespace
 public class ResourceReference
 {
-    [XmlAttribute("Id")]
+    [XmlElement("Id")]
     public long Id { get; set; }
 
-    [XmlAttribute("Location")]
+    [XmlElement("Location")]
     public string Location { get; set; }
 }
 

@@ -21,12 +21,20 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
             XmlServiceClientMock = MockRepository.GenerateMock<XmlServiceClient>();
             Client = new RestBroadcastClient(XmlServiceClientMock);
 
+            BroadcastScheduleId = 4889;
             BroadcastSchedule = new CfBroadcastSchedule(BroadcastScheduleId, DateTime.Now, DateTime.Now, "timeZone", DateTime.Now, DateTime.Now, "daysOfWeek");
             CreateBroadcastSchedule = new CfCreateBroadcastSchedule("requestId", BroadcastScheduleId, BroadcastSchedule);
-            
+
+            var response = string.Format(
+                "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
+                "<r:ResourceReference xmlns=\"http://api.callfire.com/data\" xmlns:r=\"http://api.callfire.com/resource\">" +
+                "<r:Id>{0}</r:Id>" +
+                "<r:Location>https://www.callfire.com/api/1.1/rest//broadcast/{0}/schedule</r:Location>" +
+                "</r:ResourceReference>", BroadcastScheduleId);
+
             XmlServiceClientMock.Stub(
                 j =>
-                    j.Send<long>(Arg<string>.Is.Equal(HttpMethods.Post),
+                    j.Send<string>(Arg<string>.Is.Equal(HttpMethods.Post),
                         Arg<string>.Is.Equal(string.Format("/broadcast/{0}/schedule", BroadcastScheduleId)),
                         Arg<CreateBroadcastSchedule>.Matches(x => x.RequestId == CreateBroadcastSchedule.RequestId &&
                                                                   x.BroadcastId == CreateBroadcastSchedule.BroadcastId &&
@@ -37,7 +45,7 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
                                                                   x.BroadcastSchedule.StartTimeOfDay == BroadcastSchedule.StartTimeOfDay &&
                                                                   x.BroadcastSchedule.StopTimeOfDay == BroadcastSchedule.StopTimeOfDay &&
                                                                   x.BroadcastSchedule.DaysOfWeek == BroadcastSchedule.DaysOfWeek)))
-                .Return(BroadcastScheduleId);
+                .Return(response);
         }
     }
 }

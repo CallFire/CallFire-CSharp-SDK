@@ -24,13 +24,14 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
         {
             var queryResult = Client.QueryBroadcasts(CfQueryBroadcasts);
             Assert.NotNull(queryResult);
-            Assert.AreEqual(1, queryResult.TotalResults);
+            Assert.NotNull(queryResult.Broadcast);
         }
 
         [Test]
         public void Test_GetBroadcast()
         {
-            Client.GetBroadcast(1);
+            var broadcast = Client.GetBroadcast(1838228001);
+            Assert.IsNotNull(broadcast);
         }
     }
 }
