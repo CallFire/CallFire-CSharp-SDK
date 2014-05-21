@@ -20,7 +20,7 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
             var localTimeZoneRestriction = new CfLocalTimeZoneRestriction(DateTime.Now, DateTime.Now);
             var broadcastConfigRestryConfig = new CfBroadcastConfigRetryConfig(1000, 2, "retryResult", "retryPhoneTypes");
             var expectedTextBroadcastConfig = new CfTextBroadcastConfig(1, DateTime.Now, "fromNumber", localTimeZoneRestriction, broadcastConfigRestryConfig, "Test", CfBigMessageStrategy.DoNotSend);
-            ExpectedBroadcast = new CfBroadcast(14897, "broadcast", CfBroadcastStatus.Running, DateTime.Now, CfBroadcastType.Text, expectedTextBroadcastConfig);
+            ExpectedBroadcast = new CfBroadcast(14898, "broadcast", CfBroadcastStatus.Running, DateTime.Now, CfBroadcastType.Text, expectedTextBroadcastConfig);
 
             CfQueryBroadcasts = new CfQueryBroadcasts(100, 0, CfBroadcastType.Text, null, null);
 

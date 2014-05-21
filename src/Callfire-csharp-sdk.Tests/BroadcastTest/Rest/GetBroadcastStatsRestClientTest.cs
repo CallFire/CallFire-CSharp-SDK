@@ -1,23 +1,22 @@
 ﻿using System;
 using CallFire_csharp_sdk.API.Rest;
 using CallFire_csharp_sdk.API.Soap;
+using CallFire_csharp_sdk.Common;
 using NUnit.Framework;
 using Rhino.Mocks;
-using ServiceStack.Common.Web;
-using ServiceStack.ServiceClient.Web;
 
 namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
 {
     [TestFixture]
     class GetBroadcastStatsRestClientTest : GetBroadcastStatsClientTest
     {
-        protected XmlServiceClient XmlServiceClientMock;
+        internal HttpClient HttpClientMock;
 
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            XmlServiceClientMock = MockRepository.GenerateMock<XmlServiceClient>();
-            Client = new RestBroadcastClient(XmlServiceClientMock);
+            HttpClientMock = MockRepository.GenerateMock<HttpClient>();
+            Client = new RestBroadcastClient(HttpClientMock);
 
             BroadcastId = 1;
 
@@ -30,12 +29,12 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
             ExpectedActionsStatistics = new BroadcastStatsActionStatistics(2, 0, 10);
 
             var expectedBroadcastStats = new BroadcastStats(ExpectedUsageStats, resultStat, ExpectedActionsStatistics);
-            
-            XmlServiceClientMock
-                .Stub(j => j.Send<BroadcastStats>(Arg<string>.Is.Equal(HttpMethods.Get),
-                    Arg<string>.Is.Equal(String.Format("/broadcast/{0}/stats", BroadcastId)),
-                    Arg<object>.Is.Null))
-                .Return(expectedBroadcastStats);
+
+            HttpClientMock
+                .Stub(j => j.Send(Arg<string>.Is.Equal(String.Format("/broadcast/{0}/stats", BroadcastId)),
+                    Arg<HttpMethod>.Is.Equal(HttpMethod.Get),
+                    Arg<string>.Is.Anything))
+                .Return("");//expectedBroadcastStats);
         }
     }
 }

@@ -1,12 +1,11 @@
 ﻿using System.Linq;
 using CallFire_csharp_sdk.API.Soap;
+using CallFire_csharp_sdk.Common;
 using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
 using CallFire_csharp_sdk.Common.Resource.Mappers;
 using CallFire_csharp_sdk.Common.Result;
 using CallFire_csharp_sdk.Common.Result.Mappers;
-using ServiceStack.Common.Web;
-using ServiceStack.ServiceClient.Web;
 
 namespace CallFire_csharp_sdk.API.Rest
 {
@@ -17,7 +16,7 @@ namespace CallFire_csharp_sdk.API.Rest
         {
         }
 
-        internal RestBroadcastClient(XmlServiceClient xmlClient)
+        internal RestBroadcastClient(HttpClient xmlClient)
             : base(xmlClient)
         {
         }
@@ -31,7 +30,7 @@ namespace CallFire_csharp_sdk.API.Rest
         public CfBroadcastQueryResult QueryBroadcasts(CfQueryBroadcasts queryBroadcasts)
         {
             var type = BroadcastTypeMapper.ToSoapBroadcastType(queryBroadcasts.Type);
-            var resource = BaseRequest<ResourceList>(HttpMethods.Get, null, 
+            var resource = BaseRequest<ResourceList>(HttpMethod.Get, null, 
                 new CallfireRestRoute<Broadcast>(null, null, null, new RestRouteParameters()
                         .MaxResults(queryBroadcasts.MaxResults)
                         .FirstResult(queryBroadcasts.FirstResult)
@@ -55,19 +54,19 @@ namespace CallFire_csharp_sdk.API.Rest
 
         public CfBroadcast GetBroadcast(long id)
         {
-            var resource = BaseRequest<Resource>(HttpMethods.Get, null, new CallfireRestRoute<Broadcast>(id));
+            var resource = BaseRequest<Resource>(HttpMethod.Get, null, new CallfireRestRoute<Broadcast>(id));
             return BroadcastMapper.FromSoapBroadCast(resource.Resources as Broadcast);
         }
 
         public void UpdateBroadcast(CfBroadcast cfBroadcast)
         {
             var broadcast = BroadcastMapper.ToSoapBroadcast(cfBroadcast);
-            BaseRequest(HttpMethods.Put, broadcast, new CallfireRestRoute<Broadcast>(broadcast.id));
+            BaseRequest<string>(HttpMethod.Put, broadcast, new CallfireRestRoute<Broadcast>(broadcast.id));
         }
 
         public CfBroadcastStats GetBroadcastStats(long id)
         {
-            var resource = BaseRequest<Resource>(HttpMethods.Get, null,
+            var resource = BaseRequest<Resource>(HttpMethod.Get, null,
                 new CallfireRestRoute<Broadcast>(id, null, BroadcastRestRouteObjects.Stats, null));
             return BroadcastStatsMapper.FromSoapBroadcastStats(resource.Resources as BroadcastStats);
         }
@@ -76,7 +75,7 @@ namespace CallFire_csharp_sdk.API.Rest
         {
             var controlBroadcast = new ControlBroadcast(cfControlBroadcast.Id, cfControlBroadcast.RequestId,
                 BroadcastCommandMapper.ToSoapContactBatch(cfControlBroadcast.Command), cfControlBroadcast.MaxActive);
-            BaseRequest(HttpMethods.Put, controlBroadcast,
+            BaseRequest<string>(HttpMethod.Put, controlBroadcast,
                 new CallfireRestRoute<Broadcast>(controlBroadcast.Id, null, BroadcastRestRouteObjects.Control, null));
         }
 
@@ -85,14 +84,14 @@ namespace CallFire_csharp_sdk.API.Rest
             var createContactBatch = new CreateContactBatch(cfCreateContactBatch.RequestId,
                 cfCreateContactBatch.BroadcastId, cfCreateContactBatch.Name, cfCreateContactBatch.Items,
                 cfCreateContactBatch.ScrubBroadcastDuplicates);
-            var resource = BaseRequest<ResourceReference>(HttpMethods.Post, createContactBatch,
+            var resource = BaseRequest<ResourceReference>(HttpMethod.Post, createContactBatch,
                 new CallfireRestRoute<Broadcast>(createContactBatch.BroadcastId, null, BroadcastRestRouteObjects.Batch, null));
             return resource.Id;
         }
 
         public CfContactBatchQueryResult QueryContactBatches(CfQueryContactBatches cfQueryContactBatches)
         {
-            var resource = BaseRequest<ResourceList>(HttpMethods.Get, null,
+            var resource = BaseRequest<ResourceList>(HttpMethod.Get, null,
                 new CallfireRestRoute<Broadcast>(cfQueryContactBatches.BroadcastId, null,
                     BroadcastRestRouteObjects.Batch,
                     new RestRouteParameters()
@@ -115,7 +114,7 @@ namespace CallFire_csharp_sdk.API.Rest
 
         public CfContactBatch GetContactBatch(long id)
         {
-            var resource = BaseRequest<Resource>(HttpMethods.Get, null,
+            var resource = BaseRequest<Resource>(HttpMethod.Get, null,
                 new CallfireRestRoute<Broadcast>(id, BroadcastRestRouteObjects.Batch, null, null));
             return ContactBatchMapper.FromSoapContactBatch(resource.Resources as ContactBatch);
         }
@@ -123,7 +122,7 @@ namespace CallFire_csharp_sdk.API.Rest
         public void ControlContactBatch(CfControlContactBatch cfControlContactBatch)
         {
             var controlContactBatch = new ControlContactBatch(cfControlContactBatch.Id, cfControlContactBatch.Name, cfControlContactBatch.Enabled);
-            BaseRequest(HttpMethods.Put, controlContactBatch,
+            BaseRequest<string>(HttpMethod.Put, controlContactBatch,
                 new CallfireRestRoute<Broadcast>(controlContactBatch.Id, BroadcastRestRouteObjects.Batch, BroadcastRestRouteObjects.Control, null));
         }
 
@@ -132,14 +131,14 @@ namespace CallFire_csharp_sdk.API.Rest
             var createBroadcastSchedule = new CreateBroadcastSchedule(cfCreateBroadcastSchedule.RequestId,
                 cfCreateBroadcastSchedule.BroadcastId,
                 BroadcastScheduleMapper.ToSoapBroadcastSchedule(cfCreateBroadcastSchedule.BroadcastSchedule));
-            var resource = BaseRequest<ResourceReference>(HttpMethods.Post, createBroadcastSchedule,
+            var resource = BaseRequest<ResourceReference>(HttpMethod.Post, createBroadcastSchedule,
                 new CallfireRestRoute<Broadcast>(createBroadcastSchedule.BroadcastId, null, BroadcastRestRouteObjects.Schedule, null));
             return resource.Id;
         }
 
         public CfBroadcastScheduleQueryResult QueryBroadcastSchedule(CfQueryBroadcastSchedules cfQueryBroadcastSchedule)
         {
-            var resource = BaseRequest<ResourceList>(HttpMethods.Get, null,
+            var resource = BaseRequest<ResourceList>(HttpMethod.Get, null,
                 new CallfireRestRoute<Broadcast>(cfQueryBroadcastSchedule.BroadcastId, null,
                     BroadcastRestRouteObjects.Schedule,
                     new RestRouteParameters()
@@ -162,14 +161,14 @@ namespace CallFire_csharp_sdk.API.Rest
 
         public CfBroadcastSchedule GetBroadcastSchedule(long id)
         {
-            var resource = BaseRequest<Resource>(HttpMethods.Get, null,
+            var resource = BaseRequest<Resource>(HttpMethod.Get, null,
                 new CallfireRestRoute<Broadcast>(id, BroadcastRestRouteObjects.Schedule, null, null));
             return BroadcastScheduleMapper.FromSoapBroadcastSchedule(resource.Resources as BroadcastSchedule);
         }
 
         public void DeleteBroadcastSchedule(long id)
         {
-            BaseRequest(HttpMethods.Delete, null, new CallfireRestRoute<Broadcast>(id, BroadcastRestRouteObjects.Schedule, null, null));
+            BaseRequest<string>(HttpMethod.Delete, null, new CallfireRestRoute<Broadcast>(id, BroadcastRestRouteObjects.Schedule, null, null));
         }
     }
 }

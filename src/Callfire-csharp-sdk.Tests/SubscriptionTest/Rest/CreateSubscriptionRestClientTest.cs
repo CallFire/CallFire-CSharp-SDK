@@ -1,25 +1,24 @@
 ﻿using CallFire_csharp_sdk.API.Rest;
 using CallFire_csharp_sdk.API.Soap;
+using CallFire_csharp_sdk.Common;
 using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
 using CallFire_csharp_sdk.Common.Resource.Mappers;
 using NUnit.Framework;
 using Rhino.Mocks;
-using ServiceStack.Common.Web;
-using ServiceStack.ServiceClient.Web;
 
 namespace Callfire_csharp_sdk.Tests.SubscriptionTest.Rest
 {
     [TestFixture]
     public class CreateSubscriptionRestClientTest : CreateSubscriptionClientTest
     {
-        protected XmlServiceClient XmlServiceClientMock;
+        internal HttpClient HttpClientMock;
 
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            XmlServiceClientMock = MockRepository.GenerateMock<XmlServiceClient>();
-            Client = new RestSubscriptionClient(XmlServiceClientMock);
+            HttpClientMock = MockRepository.GenerateMock<HttpClient>();
+            Client = new RestSubscriptionClient(HttpClientMock);
 
             SubscriptionId = 14561;
             SubscriptionFilter = new CfSubscriptionSubscriptionFilter(1, 5, "fromNumber", "toNumber", true);
@@ -36,8 +35,8 @@ namespace Callfire_csharp_sdk.Tests.SubscriptionTest.Rest
                               "<r:Location>https://www.callfire.com/api/1.1/rest/subscription/{0}</r:Location>" +
                         "</r:ResourceReference>", SubscriptionId);
 
-            XmlServiceClientMock
-                .Stub(j => j.Send<string>(Arg<string>.Is.Equal(HttpMethods.Post), Arg<string>.Is.Equal("/subscription"),
+            HttpClientMock
+                .Stub(j => j.Send(Arg<string>.Is.Equal("/subscription"), Arg<HttpMethod>.Is.Equal(HttpMethod.Post), 
                     Arg<SubscriptionRequest>.Matches(x => x.RequestId == SubscriptionRequest.RequestId &&
                                                           x.Subscription.id == Subscription.Id &&
                                                           x.Subscription.Enabled == Subscription.Enabled &&

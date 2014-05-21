@@ -1,25 +1,22 @@
 ﻿using System;
 using CallFire_csharp_sdk.API.Rest;
-using CallFire_csharp_sdk.API.Soap;
+using CallFire_csharp_sdk.Common;
 using CallFire_csharp_sdk.Common.DataManagement;
-using CallFire_csharp_sdk.Common.Resource.Mappers;
 using NUnit.Framework;
 using Rhino.Mocks;
-using ServiceStack.Common.Web;
-using ServiceStack.ServiceClient.Web;
 
 namespace Callfire_csharp_sdk.Tests.SubscriptionTest.Rest
 {
     [TestFixture]
     public class GetSubscriptionRestClientTest : GetSubscriptionClientTest
     {
-        protected XmlServiceClient XmlServiceClientMock;
+        internal HttpClient HttpClientMock;
 
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            XmlServiceClientMock = MockRepository.GenerateMock<XmlServiceClient>();
-            Client = new RestSubscriptionClient(XmlServiceClientMock);
+            HttpClientMock = MockRepository.GenerateMock<HttpClient>();
+            Client = new RestSubscriptionClient(HttpClientMock);
 
             SubscriptionId = 1;
             SubscriptionFilter = new CfSubscriptionSubscriptionFilter(1, 5, "fromNumber", "toNumber", true);
@@ -35,10 +32,11 @@ namespace Callfire_csharp_sdk.Tests.SubscriptionTest.Rest
 
         private void GenerateMock(CfSubscription subscription)
         {
-            XmlServiceClientMock
-                .Stub(j => j.Send<Subscription>(Arg<string>.Is.Equal(HttpMethods.Get), Arg<string>.Is.Equal(String.Format("/subscription/{0}", SubscriptionId)),
+            HttpClientMock
+                .Stub(j => j.Send(Arg<string>.Is.Equal(String.Format("/subscription/{0}", SubscriptionId)),
+                    Arg<HttpMethod>.Is.Equal(HttpMethod.Get),
                     Arg<object>.Is.Null))
-                .Return(SubscriptionMapper.ToSoapSubscription(subscription));
+                .Return("");//SubscriptionMapper.ToSoapSubscription(subscription));
         }
     }
 }

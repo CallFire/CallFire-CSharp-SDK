@@ -1,27 +1,26 @@
 ﻿using System;
 using CallFire_csharp_sdk.API.Rest;
 using CallFire_csharp_sdk.API.Soap;
+using CallFire_csharp_sdk.Common;
 using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
 using CallFire_csharp_sdk.Common.Result;
 using CallFire_csharp_sdk.Common.Result.Mappers;
 using NUnit.Framework;
 using Rhino.Mocks;
-using ServiceStack.Common.Web;
-using ServiceStack.ServiceClient.Web;
 
 namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
 {
     [TestFixture]
     public class QueryBroadcastSchedulerRestClientTest : QueryBroadcastScheduleClientTest
     {
-        protected XmlServiceClient XmlServiceClientMock;
+        internal HttpClient HttpClientMock;
 
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            XmlServiceClientMock = MockRepository.GenerateMock<XmlServiceClient>();
-            Client = new RestBroadcastClient(XmlServiceClientMock);
+            HttpClientMock = MockRepository.GenerateMock<HttpClient>();
+            Client = new RestBroadcastClient(HttpClientMock);
 
             BroadcastId = 1;
             QueryBroadcastSchedule = new CfQueryBroadcastSchedules(100, 1, BroadcastId);
@@ -45,12 +44,12 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
 
         private void GenerateMock(BroadcastScheduleQueryResult broadcastScheduleQueryResult)
         {
-            XmlServiceClientMock
-                .Stub(j => j.Send<BroadcastScheduleQueryResult>(Arg<string>.Is.Equal(HttpMethods.Get),
-                    Arg<string>.Is.Equal(String.Format("/broadcast/{0}/schedule?MaxResults={1}&FirstResult={2}",
+            HttpClientMock
+                .Stub(j => j.Send(Arg<string>.Is.Equal(String.Format("/broadcast/{0}/schedule?MaxResults={1}&FirstResult={2}",
                         BroadcastId, QueryBroadcastSchedule.MaxResults, QueryBroadcastSchedule.FirstResult)),
+                    Arg<HttpMethod>.Is.Equal(HttpMethod.Get),
                     Arg<object>.Is.Null))
-                .Return(broadcastScheduleQueryResult);
+                .Return("");//broadcastScheduleQueryResult);
         }
     }
 }

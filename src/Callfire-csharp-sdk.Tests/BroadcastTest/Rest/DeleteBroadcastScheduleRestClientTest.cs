@@ -1,29 +1,28 @@
 ﻿using System;
 using CallFire_csharp_sdk.API.Rest;
+using CallFire_csharp_sdk.Common;
 using NUnit.Framework;
 using Rhino.Mocks;
-using ServiceStack.Common.Web;
-using ServiceStack.ServiceClient.Web;
 
 namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
 {
     [TestFixture]
     public class DeleteBroadcastScheduleRestClientTest : DeleteBroadcastScheduleClientTest
     {
-        protected XmlServiceClient XmlServiceClientMock;
+        internal HttpClient HttpClientMock;
 
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            XmlServiceClientMock = MockRepository.GenerateMock<XmlServiceClient>();
-            Client = new RestBroadcastClient(XmlServiceClientMock);
+            HttpClientMock = MockRepository.GenerateMock<HttpClient>();
+            Client = new RestBroadcastClient(HttpClientMock);
 
             BroadcastScheduleId = 1;
 
-            XmlServiceClientMock
-                .Stub(j => j.Send<string>(Arg<string>.Is.Equal(HttpMethods.Delete),
-                    Arg<string>.Is.Equal(String.Format("/broadcast/schedule/{0}", BroadcastScheduleId)),
-                    Arg<object>.Is.Null))
+            HttpClientMock
+                .Stub(j => j.Send(Arg<string>.Is.Equal(String.Format("/broadcast/schedule/{0}", BroadcastScheduleId)),
+                    Arg<HttpMethod>.Is.Equal(HttpMethod.Delete),
+                    Arg<string>.Is.Anything))
                 .Return(string.Empty);
         }
     }

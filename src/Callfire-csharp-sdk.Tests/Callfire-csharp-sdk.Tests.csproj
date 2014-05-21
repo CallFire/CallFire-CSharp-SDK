@@ -105,7 +105,6 @@
     <Compile Include="BroadcastTest\UpdateBroadcastClientTest.cs" />
     <Compile Include="ClientCreationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rest\RestRouteBroadcastClientTests.cs" />
     <Compile Include="BroadcastTest\Rest\GetBroadcastRestClientTests.cs" />
     <Compile Include="Rest\CallfireRestRouteTests.cs" />
     <Compile Include="Rest\RestClientCreationTests.cs" />

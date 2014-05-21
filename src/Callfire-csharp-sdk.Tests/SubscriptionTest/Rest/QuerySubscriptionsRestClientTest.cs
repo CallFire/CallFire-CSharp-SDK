@@ -1,27 +1,24 @@
 ﻿using System;
 using CallFire_csharp_sdk.API.Rest;
-using CallFire_csharp_sdk.API.Soap;
+using CallFire_csharp_sdk.Common;
 using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
 using CallFire_csharp_sdk.Common.Result;
-using CallFire_csharp_sdk.Common.Result.Mappers;
 using NUnit.Framework;
 using Rhino.Mocks;
-using ServiceStack.Common.Web;
-using ServiceStack.ServiceClient.Web;
 
 namespace Callfire_csharp_sdk.Tests.SubscriptionTest.Rest
 {
     [TestFixture]
     public class QuerySubscriptionsRestClientTest : QuerySubscriptionsClientTest
     {
-        protected XmlServiceClient XmlServiceClientMock;
+        internal HttpClient HttpClientMock;
 
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            XmlServiceClientMock = MockRepository.GenerateMock<XmlServiceClient>();
-            Client = new RestSubscriptionClient(XmlServiceClientMock);
+            HttpClientMock = MockRepository.GenerateMock<HttpClient>();
+            Client = new RestSubscriptionClient(HttpClientMock);
 
             Query = new CfQuery(100, 0);
 
@@ -43,10 +40,15 @@ namespace Callfire_csharp_sdk.Tests.SubscriptionTest.Rest
 
         private void GenerateMock(CfSubscriptionQueryResult subscriptionQueryResult, CfQuery query)
         {
-            XmlServiceClientMock
-                .Stub(j => j.Send<SubscriptionQueryResult>(Arg<string>.Is.Equal(HttpMethods.Get), Arg<string>.Is.Equal(String.Format("/subscription?MaxResults={0}&FirstResult={1}", query.MaxResults, query.FirstResult)),
-                    Arg<object>.Is.Null))
-                .Return(SubscriptionQueryResultMapper.ToSoapSubscriptionQueryResult(subscriptionQueryResult));
+            HttpClientMock
+                .Stub(
+                    j =>
+                        j.Send(
+                            Arg<string>.Is.Equal(String.Format("/subscription?MaxResults={0}&FirstResult={1}",
+                                query.MaxResults, query.FirstResult)),
+                            Arg<HttpMethod>.Is.Equal(HttpMethod.Get),
+                            Arg<object>.Is.Null))
+                .Return("");//SubscriptionQueryResultMapper.ToSoapSubscriptionQueryResult(subscriptionQueryResult));
         }
     }
 }
