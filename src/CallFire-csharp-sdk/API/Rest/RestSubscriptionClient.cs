@@ -1,10 +1,9 @@
 ﻿using CallFire_csharp_sdk.API.Soap;
+using CallFire_csharp_sdk.Common;
 using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
 using CallFire_csharp_sdk.Common.Resource.Mappers;
 using CallFire_csharp_sdk.Common.Result;
-using ServiceStack.Common.Web;
-using ServiceStack.ServiceClient.Web;
 
 namespace CallFire_csharp_sdk.API.Rest
 {
@@ -15,7 +14,7 @@ namespace CallFire_csharp_sdk.API.Rest
         {
         }
 
-        internal RestSubscriptionClient(XmlServiceClient xmlClient)
+        internal RestSubscriptionClient(HttpClient xmlClient)
             : base(xmlClient)
         {
         }

@@ -1,17 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Xml;
+﻿using System.Net.Cache;
 using CallFire_csharp_sdk.API.Soap;
+using CallFire_csharp_sdk.Common;
 using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
 using CallFire_csharp_sdk.Common.Resource.Mappers;
 using CallFire_csharp_sdk.Common.Result;
 using CallFire_csharp_sdk.Common.Result.Mappers;
-using RestSharp.Deserializers;
-using RestSharp.Serializers;
-using ServiceStack.Common;
-using ServiceStack.Common.Web;
-using ServiceStack.ServiceClient.Web;
 
 namespace CallFire_csharp_sdk.API.Rest
 {
@@ -22,7 +16,7 @@ namespace CallFire_csharp_sdk.API.Rest
         {
         }
 
-        internal RestBroadcastClient(XmlServiceClient xmlClient)
+        internal RestBroadcastClient(HttpClient xmlClient)
             : base(xmlClient)
         {
         }
@@ -36,7 +30,7 @@ namespace CallFire_csharp_sdk.API.Rest
         public CfBroadcastQueryResult QueryBroadcasts(CfQueryBroadcasts queryBroadcasts)
         {
             var type = BroadcastTypeMapper.ToSoapBroadcastType(queryBroadcasts.Type);
-            var resource = BaseRequest<ResourceList<Broadcast>>(HttpMethods.Get, null, 
+            var resource = BaseRequest<ResourceList<Broadcast>>(HttpMethod.Get, null, 
                 new CallfireRestRoute<Broadcast>(null, null, null, new RestRouteParameters()
                         .MaxResults(queryBroadcasts.MaxResults)
                         .FirstResult(queryBroadcasts.FirstResult)
