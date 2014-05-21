@@ -21,9 +21,10 @@ namespace Callfire_csharp_sdk.Tests.SubscriptionTest.Rest
             SubscriptionId = 1;
             
             XmlServiceClientMock
-                .Stub(j => j.Send<long>(Arg<string>.Is.Equal(HttpMethods.Delete),
+                .Stub(j => j.Send<string>(Arg<string>.Is.Equal(HttpMethods.Delete),
                     Arg<string>.Is.Equal(String.Format("/subscription/{0}", SubscriptionId)),
-                    Arg<object>.Is.Null));
+                    Arg<object>.Is.Null))
+                .Return(string.Empty);
         }
     }
 }

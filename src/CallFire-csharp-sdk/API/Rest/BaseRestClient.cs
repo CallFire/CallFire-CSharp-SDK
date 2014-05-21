@@ -1,8 +1,5 @@
 ﻿using System.IO;
-using System.Text;
-using System.Xml;
 using System.Xml.Serialization;
-using RestSharp;
 using ServiceStack.Common.Web;
 using ServiceStack.ServiceClient.Web;
 
@@ -31,30 +28,25 @@ namespace CallFire_csharp_sdk.API.Rest
         {
             XmlClient = xmlClient;
         }
-        /*
-        public T GetById(long id)
-        {
-            return BaseRequest<T>(Method.GET, null, new CallfireRestRoute<T>(id));
-        }
-        */
+        
         public long Create(T objectToCreate)
         {
             var resourcerReference = BaseRequest<ResourceReference>(HttpMethods.Post, objectToCreate, new CallfireRestRoute<T>(null));
             return resourcerReference.Id;
         }
 
-        public void Delete(long id)
-        {
-            //BaseRequest<object>(Method.DELETE, null, new CallfireRestRoute<T>(id));
-        }
-
         public TU BaseRequest<TU>(string method, object request, CallfireRestRoute<T> route)
         {
             var response = XmlClient.Send<string>(method, route.ToString(), request);
             
-            var serializer = new XmlSerializer(typeof(TU));
-            TextReader reader=new StringReader(response);
-            return (TU)serializer.Deserialize(reader);
+            var serializer = new XmlSerializer(typeof (TU));
+            TextReader reader = new StringReader(response);
+            return (TU) serializer.Deserialize(reader);
+        }
+
+        public void BaseRequest(string method, object request, CallfireRestRoute<T> route)
+        {
+            XmlClient.Send<string>(method, route.ToString(), request);
         }
     }
 }

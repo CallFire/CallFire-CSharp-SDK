@@ -32,7 +32,7 @@ namespace Callfire_csharp_sdk.Tests.SubscriptionTest.Rest
             var triggerEvent = SubscriptionTriggerEventMapper.ToSoapSubscriptionTriggerEvent(Subscription.TriggerEvent);
             
             XmlServiceClientMock
-                .Stub(j => j.Send<long>(Arg<string>.Is.Equal(HttpMethods.Put),
+                .Stub(j => j.Send<string>(Arg<string>.Is.Equal(HttpMethods.Put),
                     Arg<string>.Is.Equal(String.Format("/subscription/{0}", SubscriptionId)),
                     Arg<SubscriptionRequest>.Matches(x => x.RequestId == SubscriptionRequest.RequestId &&
                                                           x.Subscription.id == Subscription.Id &&
@@ -44,7 +44,8 @@ namespace Callfire_csharp_sdk.Tests.SubscriptionTest.Rest
                                                           x.Subscription.SubscriptionFilter.BatchId == SubscriptionFilter.BatchId &&
                                                           x.Subscription.SubscriptionFilter.FromNumber == SubscriptionFilter.FromNumber &&
                                                           x.Subscription.SubscriptionFilter.ToNumber == SubscriptionFilter.ToNumber &&
-                                                          x.Subscription.SubscriptionFilter.Inbound == SubscriptionFilter.Inbound)));
+                                                          x.Subscription.SubscriptionFilter.Inbound == SubscriptionFilter.Inbound)))
+                .Return(string.Empty);
         }
     }
 }

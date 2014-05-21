@@ -1,8 +1,10 @@
-﻿using CallFire_csharp_sdk.API.Soap;
+﻿using System.Linq;
+using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
 using CallFire_csharp_sdk.Common.Resource.Mappers;
 using CallFire_csharp_sdk.Common.Result;
+using CallFire_csharp_sdk.Common.Result.Mappers;
 using ServiceStack.Common.Web;
 using ServiceStack.ServiceClient.Web;
 
@@ -24,20 +26,34 @@ namespace CallFire_csharp_sdk.API.Rest
         {
             var subscriptionRequest = new SubscriptionRequest(cfCreateSubscription.RequestId, 
                 SubscriptionMapper.ToSoapSubscription(cfCreateSubscription.Subscription));
-            return 0;//BaseRequest<long>(Method.POST, subscriptionRequest, new CallfireRestRoute<Subscription>(null));
+            var resource = BaseRequest<ResourceReference>(HttpMethods.Post, subscriptionRequest, new CallfireRestRoute<Subscription>(null));
+            return resource.Id;
         }
 
         public CfSubscriptionQueryResult QuerySubscriptions(CfQuery cfQuerySubscriptions)
         {
-            return null;/* SubscriptionQueryResultMapper.FromSoapSubscriptionQueryResult( BaseRequest<SubscriptionQueryResult>(Method.GET, null,
-                        new CallfireRestRoute<Subscription>(null, null, null, new RestRouteParameters()
-                            .MaxResults(cfQuerySubscriptions.MaxResults)
-                            .FirstResult(cfQuerySubscriptions.FirstResult))));*/
+            var resource = BaseRequest<ResourceList>(HttpMethods.Get, null,
+                new CallfireRestRoute<Subscription>(null, null, null, new RestRouteParameters()
+                    .MaxResults(cfQuerySubscriptions.MaxResults)
+                    .FirstResult(cfQuerySubscriptions.FirstResult)));
+
+            Subscription[] subscription = null;
+            if (resource.Resource.Any())
+            {
+                subscription = new Subscription[resource.Resource.Count()];
+                for (var i = 0; i < resource.Resource.Count(); i++)
+                {
+                    subscription[i] = resource.Resource[i] as Subscription;
+                }
+            }
+            var subscriptionQueryResult = new SubscriptionQueryResult(resource.TotalResults, subscription);
+            return SubscriptionQueryResultMapper.FromSoapSubscriptionQueryResult(subscriptionQueryResult);
         }
 
         public CfSubscription GetSubscription(long id)
         {
-            return null; // SubscriptionMapper.FromSoapSubscription(BaseRequest<Subscription>(Method.GET, null, new CallfireRestRoute<Subscription>(id)));
+            var resource = BaseRequest<Resource>(HttpMethods.Get, null, new CallfireRestRoute<Subscription>(id));
+            return SubscriptionMapper.FromSoapSubscription(resource.Resources as Subscription);
         }
 
         public void UpdateSubscription(CfSubscriptionRequest cfUpdateSubscription)
@@ -49,12 +65,12 @@ namespace CallFire_csharp_sdk.API.Rest
             }
             var subscriptionRequest = new SubscriptionRequest(cfUpdateSubscription.RequestId,
                 SubscriptionMapper.ToSoapSubscription(cfUpdateSubscription.Subscription));
-           // BaseRequest(HttpMethods.Put, subscriptionRequest, new CallfireRestRoute<Subscription>(subscription.Id));
+            BaseRequest(HttpMethods.Put, subscriptionRequest, new CallfireRestRoute<Subscription>(subscription.Id));
         }
 
         public void DeleteSubscription(long id)
         {
-           // BaseRequest(HttpMethods.Delete, null, new CallfireRestRoute<Subscription>(id));
+            BaseRequest(HttpMethods.Delete, null, new CallfireRestRoute<Subscription>(id));
         }
     }
 }

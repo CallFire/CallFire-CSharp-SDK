@@ -11,5 +11,9 @@ namespace CallFire_csharp_sdk.API.Soap
             ToNumber = toNumber;
             Inbound = inbound;
         }
+
+        public SubscriptionSubscriptionFilter()
+        {
+        }
     }
 }
