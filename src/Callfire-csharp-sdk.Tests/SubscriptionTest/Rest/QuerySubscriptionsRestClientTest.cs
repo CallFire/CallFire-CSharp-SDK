@@ -15,13 +15,13 @@ namespace Callfire_csharp_sdk.Tests.SubscriptionTest.Rest
     [TestFixture]
     public class QuerySubscriptionsRestClientTest : QuerySubscriptionsClientTest
     {
-        protected JsonServiceClient JsonServiceClientMock;
+        protected XmlServiceClient XmlServiceClientMock;
 
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            JsonServiceClientMock = MockRepository.GenerateMock<JsonServiceClient>();
-            Client = new RestSubscriptionClient(JsonServiceClientMock);
+            XmlServiceClientMock = MockRepository.GenerateMock<XmlServiceClient>();
+            Client = new RestSubscriptionClient(XmlServiceClientMock);
 
             Query = new CfQuery(100, 0);
 
@@ -43,7 +43,7 @@ namespace Callfire_csharp_sdk.Tests.SubscriptionTest.Rest
 
         private void GenerateMock(CfSubscriptionQueryResult subscriptionQueryResult, CfQuery query)
         {
-            JsonServiceClientMock
+            XmlServiceClientMock
                 .Stub(j => j.Send<SubscriptionQueryResult>(Arg<string>.Is.Equal(HttpMethods.Get), Arg<string>.Is.Equal(String.Format("/subscription?MaxResults={0}&FirstResult={1}", query.MaxResults, query.FirstResult)),
                     Arg<object>.Is.Null))
                 .Return(SubscriptionQueryResultMapper.ToSoapSubscriptionQueryResult(subscriptionQueryResult));

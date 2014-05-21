@@ -12,16 +12,16 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
     [TestFixture]
     public class CreateBroadcastRestClientTests : CreateBroadcastClientTest
     {
-        protected JsonServiceClient JsonServiceClientMock;
+        protected XmlServiceClient XmlServiceClientMock;
 
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            JsonServiceClientMock = MockRepository.GenerateMock<JsonServiceClient>();
-            Client = new RestBroadcastClient(JsonServiceClientMock);
+            XmlServiceClientMock = MockRepository.GenerateMock<XmlServiceClient>();
+            Client = new RestBroadcastClient(XmlServiceClientMock);
             ExpectedBroadcast = new CfBroadcast(1, "broadcast", CfBroadcastStatus.Running, DateTime.Now, CfBroadcastType.Text, null);
-
-            JsonServiceClientMock
+            
+            XmlServiceClientMock
                 .Stub(j => j.Send<long>(Arg<string>.Is.Equal(HttpMethods.Post),
                     Arg<string>.Is.Equal("/broadcast"),
                     Arg<Broadcast>.Matches(x => x.id == ExpectedBroadcast.Id &&

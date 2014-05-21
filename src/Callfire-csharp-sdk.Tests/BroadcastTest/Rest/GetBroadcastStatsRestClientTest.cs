@@ -11,13 +11,13 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
     [TestFixture]
     class GetBroadcastStatsRestClientTest : GetBroadcastStatsClientTest
     {
-        protected JsonServiceClient JsonServiceClientMock;
+        protected XmlServiceClient XmlServiceClientMock;
 
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            JsonServiceClientMock = MockRepository.GenerateMock<JsonServiceClient>();
-            Client = new RestBroadcastClient(JsonServiceClientMock);
+            XmlServiceClientMock = MockRepository.GenerateMock<XmlServiceClient>();
+            Client = new RestBroadcastClient(XmlServiceClientMock);
 
             BroadcastId = 1;
 
@@ -30,8 +30,8 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
             ExpectedActionsStatistics = new BroadcastStatsActionStatistics(2, 0, 10);
 
             var expectedBroadcastStats = new BroadcastStats(ExpectedUsageStats, resultStat, ExpectedActionsStatistics);
-
-            JsonServiceClientMock
+            
+            XmlServiceClientMock
                 .Stub(j => j.Send<BroadcastStats>(Arg<string>.Is.Equal(HttpMethods.Get),
                     Arg<string>.Is.Equal(String.Format("/broadcast/{0}/stats", BroadcastId)),
                     Arg<object>.Is.Null))

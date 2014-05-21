@@ -30,7 +30,7 @@ namespace CallFire_csharp_sdk.API.Rest
         {
             if (running.HasValue)
             {
-                Add("Running", running.ToString());
+                Add("Running", running.ToString().ToLower());
             }
             return this;
         }

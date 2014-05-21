@@ -10,5 +10,9 @@ namespace CallFire_csharp_sdk.API.Soap
             BeginTime = beginTime;
             EndTime = endTime;
         }
+
+        public LocalTimeZoneRestriction()
+        {
+        }
     }
 }

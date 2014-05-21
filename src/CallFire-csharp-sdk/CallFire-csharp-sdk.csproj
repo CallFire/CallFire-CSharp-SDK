@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="RestSharp">
+      <HintPath>..\packages\RestSharp.104.4.0\lib\net35\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="ServiceStack.Common, Version=3.9.71.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\ServiceStack\ServiceStack.Common.dll</HintPath>
@@ -47,6 +50,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -57,14 +61,20 @@
     <Compile Include="API\ICallfireClient.cs" />
     <Compile Include="API\IClient.cs" />
     <Compile Include="API\ISubscriptionClient.cs" />
+    <Compile Include="API\ITextClient.cs" />
     <Compile Include="API\Rest\BaseRestClient.cs" />
     <Compile Include="API\Rest\BroadcastRestRouteObjects.cs" />
+    <Compile Include="API\Rest\ResourceList.cs" />
+    <Compile Include="API\Rest\ResourceReference.cs" />
     <Compile Include="API\Rest\RestRouteParameters.cs" />
     <Compile Include="API\Rest\RestBroadcastClient.cs" />
     <Compile Include="API\Rest\CallfireRestRoute.cs" />
     <Compile Include="API\Rest\RestSubscriptionClient.cs" />
     <Compile Include="API\Soap\BaseSoapClient.cs" />
     <Compile Include="API\Soap\BroadcastServicePortTypeClient.cs" />
+    <Compile Include="Common\Resource\CfQueryText.cs" />
+    <Compile Include="Common\Resource\CfRequest.cs" />
+    <Compile Include="Common\Resource\CfSendText.cs" />
     <Compile Include="Common\Resource\TwoWayMapper.cs" />
     <Compile Include="Common\Resource\Extended\BroadcastRequestExtended.cs" />
     <Compile Include="Common\Resource\Extended\ControlBroadcastExtended.cs" />
@@ -138,6 +148,7 @@
     <Compile Include="Common\Result\CfContactBatchQueryResult.cs" />
     <Compile Include="Common\Result\CfQueryResult.cs" />
     <Compile Include="Common\Result\CfSubscriptionQueryResult.cs" />
+    <Compile Include="Common\Result\CfTextQueryResult.cs" />
     <Compile Include="Common\Result\Extended\BroadcastQueryResultExtended.cs" />
     <Compile Include="Common\Result\Extended\BroadcastScheduleQueryResultExtended.cs" />
     <Compile Include="Common\Result\Extended\ContactBatchQueryResultExtended.cs" />
@@ -159,6 +170,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Service References\API.Soap\callfire-ann.xsd">
       <SubType>Designer</SubType>
     </None>

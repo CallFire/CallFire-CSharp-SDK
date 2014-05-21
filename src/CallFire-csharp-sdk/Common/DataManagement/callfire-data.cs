@@ -255,7 +255,7 @@ namespace CallFire_csharp_sdk.Common.DataManagement
             DncDigit = dncDigit;
             MaxActiveTransfers = maxActiveTransfers;
         }
-
+        
         public CfAnsweringMachineConfig AnsweringMachineConfig { get; set; }
 
         public object Item { get; set; }

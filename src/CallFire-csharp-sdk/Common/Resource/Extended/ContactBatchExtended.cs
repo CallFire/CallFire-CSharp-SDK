@@ -14,5 +14,9 @@ namespace CallFire_csharp_sdk.API.Soap
             Remaining = remaining;
             id = identifier;
         }
+
+        public ContactBatch()
+        {
+        }
     }
 }

@@ -15,13 +15,13 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
     [TestFixture]
     public class QueryBroadcastSchedulerRestClientTest : QueryBroadcastScheduleClientTest
     {
-        protected JsonServiceClient JsonServiceClientMock;
+        protected XmlServiceClient XmlServiceClientMock;
 
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            JsonServiceClientMock = MockRepository.GenerateMock<JsonServiceClient>();
-            Client = new RestBroadcastClient(JsonServiceClientMock);
+            XmlServiceClientMock = MockRepository.GenerateMock<XmlServiceClient>();
+            Client = new RestBroadcastClient(XmlServiceClientMock);
 
             BroadcastId = 1;
             QueryBroadcastSchedule = new CfQueryBroadcastSchedules(100, 1, BroadcastId);
@@ -45,7 +45,7 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
 
         private void GenerateMock(BroadcastScheduleQueryResult broadcastScheduleQueryResult)
         {
-            JsonServiceClientMock
+            XmlServiceClientMock
                 .Stub(j => j.Send<BroadcastScheduleQueryResult>(Arg<string>.Is.Equal(HttpMethods.Get),
                     Arg<string>.Is.Equal(String.Format("/broadcast/{0}/schedule?MaxResults={1}&FirstResult={2}",
                         BroadcastId, QueryBroadcastSchedule.MaxResults, QueryBroadcastSchedule.FirstResult)),

@@ -13,13 +13,13 @@ namespace Callfire_csharp_sdk.Tests.SubscriptionTest.Rest
     [TestFixture]
     public class CreateSubscriptionRestClientTest : CreateSubscriptionClientTest
     {
-        protected JsonServiceClient JsonServiceClientMock;
+        protected XmlServiceClient XmlServiceClientMock;
 
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            JsonServiceClientMock = MockRepository.GenerateMock<JsonServiceClient>();
-            Client = new RestSubscriptionClient(JsonServiceClientMock);
+            XmlServiceClientMock = MockRepository.GenerateMock<XmlServiceClient>();
+            Client = new RestSubscriptionClient(XmlServiceClientMock);
 
             SubscriptionId = 1;
             SubscriptionFilter = new CfSubscriptionSubscriptionFilter(1, 5, "fromNumber", "toNumber", true);
@@ -29,8 +29,8 @@ namespace Callfire_csharp_sdk.Tests.SubscriptionTest.Rest
 
             var notificationFormat = NotificationFormatMapper.ToSoapNotificationFormat(Subscription.NotificationFormat);
             var triggerEvent = SubscriptionTriggerEventMapper.ToSoapSubscriptionTriggerEvent(Subscription.TriggerEvent);
-
-            JsonServiceClientMock
+            
+            XmlServiceClientMock
                 .Stub(j => j.Send<long>(Arg<string>.Is.Equal(HttpMethods.Post), Arg<string>.Is.Equal("/subscription"),
                     Arg<SubscriptionRequest>.Matches(x => x.RequestId == SubscriptionRequest.RequestId &&
                                                           x.Subscription.id == Subscription.Id &&

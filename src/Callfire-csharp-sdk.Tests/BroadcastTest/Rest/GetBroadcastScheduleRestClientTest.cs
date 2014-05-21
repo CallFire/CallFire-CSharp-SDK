@@ -13,19 +13,19 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
     [TestFixture]
     public class GetBroadcastScheduleRestClientTest : GetBroadcastScheduleClientTest
     {
-        protected JsonServiceClient JsonServiceClientMock;
+        protected XmlServiceClient XmlServiceClientMock;
 
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            JsonServiceClientMock = MockRepository.GenerateMock<JsonServiceClient>();
-            Client = new RestBroadcastClient(JsonServiceClientMock);
+            XmlServiceClientMock = MockRepository.GenerateMock<XmlServiceClient>();
+            Client = new RestBroadcastClient(XmlServiceClientMock);
 
             BroadcastScheduleId = 1;
             BroadcastSchedule = new CfBroadcastSchedule(BroadcastScheduleId, DateTime.Now, DateTime.Now, "timeZone", DateTime.Now, DateTime.Now, "daysOfWeek");
-
+            
             var broadcastSchedule = BroadcastScheduleMapper.ToSoapBroadcastSchedule(BroadcastSchedule);
-            JsonServiceClientMock
+            XmlServiceClientMock
                 .Stub(j => j.Send<BroadcastSchedule>(Arg<string>.Is.Equal(HttpMethods.Get),
                     Arg<string>.Is.Equal(String.Format("/broadcast/schedule/{0}", BroadcastScheduleId)),
                     Arg<object>.Is.Null))

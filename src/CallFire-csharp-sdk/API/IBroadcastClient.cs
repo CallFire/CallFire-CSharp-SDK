@@ -9,7 +9,7 @@ namespace CallFire_csharp_sdk.API
         long CreateBroadcast(CfBroadcast broadcast);
 
         CfBroadcastQueryResult QueryBroadcasts(CfQueryBroadcasts queryBroadcasts);
-
+        
         CfBroadcast GetBroadcast(long id);
 
         void UpdateBroadcast(CfBroadcast broadcast);

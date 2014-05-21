@@ -11,17 +11,17 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
     [TestFixture]
     class ControlBroadcastRestClientTests : ControlBroadcastClientTest
     {
-        protected JsonServiceClient JsonServiceClientMock;
+        protected XmlServiceClient XmlServiceClientMock;
 
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            JsonServiceClientMock = MockRepository.GenerateMock<JsonServiceClient>();
-            Client = new RestBroadcastClient(JsonServiceClientMock);
+            XmlServiceClientMock = MockRepository.GenerateMock<XmlServiceClient>();
+            Client = new RestBroadcastClient(XmlServiceClientMock);
 
             ExpectedControlBroadcast = new CfControlBroadcast(1, "123", CfBroadcastCommand.Start, 5);
             
-            JsonServiceClientMock
+            XmlServiceClientMock
                 .Stub(j => j.Send<long>(Arg<string>.Is.Equal(HttpMethods.Put),
                     Arg<string>.Is.Equal("/broadcast"),
                     Arg<ControlBroadcast>.Matches(x => x.Id == ExpectedControlBroadcast.Id &&

@@ -13,13 +13,13 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
     [TestFixture]
     public class GetBroadcastRestClientTests : GetBroadcastClientTest
     {
-        protected JsonServiceClient JsonServiceClientMock;
+        protected XmlServiceClient XmlServiceClientMock;
 
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            JsonServiceClientMock = MockRepository.GenerateMock<JsonServiceClient>();
-            Client = new RestBroadcastClient(JsonServiceClientMock);
+            XmlServiceClientMock = MockRepository.GenerateMock<XmlServiceClient>();
+            Client = new RestBroadcastClient(XmlServiceClientMock);
 
             ExpectedBroadcast = new CfBroadcast(1, "broadcast", CfBroadcastStatus.Running, DateTime.Now, CfBroadcastType.Voice, null);
             
@@ -61,7 +61,7 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
                 BroadcastStatusMapper.ToSoapBroadcastStatus(ExpectedBroadcast.Status), ExpectedBroadcast.LastModified,
                 BroadcastTypeMapper.ToSoapBroadcastType(ExpectedBroadcast.Type),
                 BroadcastConfigMapper.ToBroadcastConfig(ExpectedBroadcast.Item, ExpectedBroadcast.Type));
-            JsonServiceClientMock
+            XmlServiceClientMock
                 .Stub(j => j.Send<Broadcast>(Arg<string>.Is.Equal(HttpMethods.Get), 
                     Arg<string>.Is.Equal(String.Format("/broadcast/{0}", broadcastId)),
                     Arg<object>.Is.Null))
