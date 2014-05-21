@@ -11,5 +11,9 @@ namespace CallFire_csharp_sdk.API.Soap
             Running = running;
             LabelName = labelName;
         }
+
+        public QueryBroadcasts()
+        {
+        }
     }
 }

@@ -4,5 +4,9 @@ namespace CallFire_csharp_sdk.API.Soap
     public partial class GetBroadcastStats
     {
         public GetBroadcastStats(long id) : base(id) {}
+
+        public GetBroadcastStats()
+        {
+        }
     }
 }

@@ -5,17 +5,17 @@ namespace CallFire_csharp_sdk.API.Soap
     internal abstract class BaseSoapClient<T>
         where T: IClient
     {
-        private const string SoapEndpointAddress = "https://www.callfire.com/api/1.1/wsdl/callfire-service.wsdl";
+        private const string SoapEndpointAddress = "http://callfire.com/api/1.1/wsdl/callfire-service-http-soap12.wsdl"; //"http://www.callfire.com/api/1.1/wsdl/callfire-service.wsdl";
         internal readonly IBroadcastServicePortTypeClient BroadcastService;
         internal readonly ISubscriptionServicePortTypeClient SubscriptionService;
 
         internal BaseSoapClient(string username, string password)
         {
-            if (typeof(T) == typeof(IBroadcastServicePortTypeClient))
+            if (typeof(T) == typeof(IBroadcastClient))
             {
                 BroadcastService = CreateBroadcastSoapServiceClient(username, password);
             }
-            if (typeof(T) == typeof(ISubscriptionServicePortTypeClient))
+            if (typeof(T) == typeof(ISubscriptionClient))
             {
                 SubscriptionService = CreateSubscriptionSoapServiceClient(username, password);
             }

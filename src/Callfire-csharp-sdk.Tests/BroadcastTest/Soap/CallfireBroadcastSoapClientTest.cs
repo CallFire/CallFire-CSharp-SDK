@@ -1,6 +1,7 @@
 ﻿using System;
 using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common.DataManagement;
+using CallFire_csharp_sdk.Common.Resource;
 using NUnit.Framework;
 
 namespace Callfire_csharp_sdk.Tests.BroadcastTest.Soap
@@ -19,7 +20,9 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Soap
             var localTimeZoneRestriction = new CfLocalTimeZoneRestriction(DateTime.Now, DateTime.Now);
             var broadcastConfigRestryConfig = new CfBroadcastConfigRetryConfig(1000, 2, "retryResult", "retryPhoneTypes");
             var expectedIvrBroadcastConfig = new CfIvrBroadcastConfig(1, DateTime.Now, "fromNumber", localTimeZoneRestriction, broadcastConfigRestryConfig, "dialplanXml");
-            ExpectedBroadcast = new CfBroadcast(1, "broadcast", CfBroadcastStatus.Running, DateTime.Now, CfBroadcastType.Ivr, expectedIvrBroadcastConfig);
+            ExpectedBroadcast = new CfBroadcast(189, "broadcast", CfBroadcastStatus.Running, DateTime.Now, CfBroadcastType.Ivr, expectedIvrBroadcastConfig);
+
+            CfQueryBroadcasts = new CfQueryBroadcasts(100, 0, CfBroadcastType.Text, null, null);
         }
     }
 }
