@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace CallFire_csharp_sdk.API.Rest
@@ -41,6 +42,18 @@ namespace CallFire_csharp_sdk.API.Rest
             {
                 Add("LabelName", labelName);
             }
+            return this;
+        }
+
+        public RestRouteParameters IntervalBegin(DateTime intervalBegin)
+        {
+            Add("IntervalBegin", intervalBegin.ToString(CultureInfo.InvariantCulture));
+            return this;
+        }
+
+        public RestRouteParameters IntervalEnd(DateTime intervalEnd)
+        {
+            Add("IntervalEnd", intervalEnd.ToString(CultureInfo.InvariantCulture));
             return this;
         }
     }

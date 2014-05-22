@@ -11,7 +11,7 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
     {
         protected IBroadcastClient Client;
 
-        protected CfQueryBroadcastSchedules QueryBroadcastSchedule;
+        protected CfQueryBroadcastData QueryBroadcastSchedule;
         protected CfBroadcastScheduleQueryResult BroadcastScheduleQueryResult;
         protected CfBroadcastSchedule BroadcastSchedule;
 
@@ -21,7 +21,7 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
         public void Test_QueryBroadcastSchedule()
         {
             BroadcastId = 1;
-            QueryBroadcastSchedule = new CfQueryBroadcastSchedules(100, 1, BroadcastId);
+            QueryBroadcastSchedule = new CfQueryBroadcastData(100, 1, BroadcastId);
 
             var cfBroadcastScheduleQueryResult = Client.QueryBroadcastSchedule(QueryBroadcastSchedule);
             Assert.IsNotNull(cfBroadcastScheduleQueryResult);
@@ -31,7 +31,7 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
         public void Test_QueryBroadcastSchedule_Properties()
         {
             BroadcastId = 1;
-            QueryBroadcastSchedule = new CfQueryBroadcastSchedules(100, 1, BroadcastId);
+            QueryBroadcastSchedule = new CfQueryBroadcastData(100, 1, BroadcastId);
 
             var cfBroadcastScheduleQueryResult = Client.QueryBroadcastSchedule(QueryBroadcastSchedule);
             Assert.IsNotNull(cfBroadcastScheduleQueryResult);
@@ -53,7 +53,7 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
         public void Test_QueryBroadcastSchedule_Whitout_BroadcastSchedule()
         {
             BroadcastId = 2;
-            QueryBroadcastSchedule = new CfQueryBroadcastSchedules(100, 1, BroadcastId);
+            QueryBroadcastSchedule = new CfQueryBroadcastData(100, 1, BroadcastId);
 
             var cfBroadcastScheduleQueryResult = Client.QueryBroadcastSchedule(QueryBroadcastSchedule);
             Assert.IsNotNull(cfBroadcastScheduleQueryResult);

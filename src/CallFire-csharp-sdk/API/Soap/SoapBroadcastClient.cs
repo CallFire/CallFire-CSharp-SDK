@@ -41,9 +41,10 @@ namespace CallFire_csharp_sdk.API.Soap
             BroadcastService.UpdateBroadcast(new BroadcastRequest(BroadcastMapper.ToSoapBroadcast(broadcast)));
         }
 
-        public CfBroadcastStats GetBroadcastStats(long id)
+        public CfBroadcastStats GetBroadcastStats(CfGetBroadcastStats getBroadcastStats)
         {
-            return BroadcastStatsMapper.FromSoapBroadcastStats(BroadcastService.GetBroadcastStats(new GetBroadcastStats(id)));
+            return BroadcastStatsMapper.FromSoapBroadcastStats(BroadcastService.GetBroadcastStats(new GetBroadcastStats(getBroadcastStats.Id,
+                        getBroadcastStats.IntervalBegin, getBroadcastStats.IntervalEnd)));
         }
 
         public void ControlBroadcast(CfControlBroadcast controlBroadcast)
@@ -60,11 +61,11 @@ namespace CallFire_csharp_sdk.API.Soap
                     createContactBatch.ScrubBroadcastDuplicates));
         }
 
-        public CfContactBatchQueryResult QueryContactBatches(CfQueryContactBatches queryContactBatches)
+        public CfContactBatchQueryResult QueryContactBatches(CfQueryBroadcastData queryBroadcastData)
         {
             return ContactBatchQueryResultMapper.FromSoapContactBatchQueryResult(
-                BroadcastService.QueryContactBatches(new QueryContactBatches(queryContactBatches.MaxResults,
-                    queryContactBatches.FirstResult, queryContactBatches.BroadcastId)));
+                BroadcastService.QueryContactBatches(new QueryContactBatches(queryBroadcastData.MaxResults,
+                    queryBroadcastData.FirstResult, queryBroadcastData.BroadcastId)));
         }
 
         public CfContactBatch GetContactBatch(long id)
@@ -86,7 +87,7 @@ namespace CallFire_csharp_sdk.API.Soap
                     BroadcastScheduleMapper.ToSoapBroadcastSchedule(createBroadcastSchedule.BroadcastSchedule)));
         }
 
-        public CfBroadcastScheduleQueryResult QueryBroadcastSchedule(CfQueryBroadcastSchedules queryBroadcastSchedule)
+        public CfBroadcastScheduleQueryResult QueryBroadcastSchedule(CfQueryBroadcastData queryBroadcastSchedule)
         {
             return
                 BroadcastScheduleQueryResultMapper.FromSoapBroadcastScheduleQueryResult(

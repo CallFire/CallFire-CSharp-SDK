@@ -6,21 +6,21 @@ namespace CallFire_csharp_sdk.API
 {
     public interface IBroadcastClient : IClient
     {
-        long CreateBroadcast(CfBroadcast broadcast);
+        long CreateBroadcast(CfBroadcast broadcast);//
 
         CfBroadcastQueryResult QueryBroadcasts(CfQueryBroadcasts queryBroadcasts);
         
         CfBroadcast GetBroadcast(long id);
 
-        void UpdateBroadcast(CfBroadcast broadcast);
+        void UpdateBroadcast(CfBroadcast broadcast);//
 
-        CfBroadcastStats GetBroadcastStats(long id);
+        CfBroadcastStats GetBroadcastStats(CfGetBroadcastStats getBroadcastStats);
 
         void ControlBroadcast(CfControlBroadcast controlBroadcast);
 
         long CreateContactBatch(CfCreateContactBatch createContactBatch);
 
-        CfContactBatchQueryResult QueryContactBatches(CfQueryContactBatches queryContactBatches);
+        CfContactBatchQueryResult QueryContactBatches(CfQueryBroadcastData queryBroadcastData);
 
         CfContactBatch GetContactBatch(long id);
 
@@ -28,7 +28,7 @@ namespace CallFire_csharp_sdk.API
 
         long CreateBroadcastSchedule(CfCreateBroadcastSchedule createBroadcastSchedule);
 
-        CfBroadcastScheduleQueryResult QueryBroadcastSchedule(CfQueryBroadcastSchedules queryBroadcastSchedule);
+        CfBroadcastScheduleQueryResult QueryBroadcastSchedule(CfQueryBroadcastData queryBroadcastSchedule);
 
         CfBroadcastSchedule GetBroadcastSchedule(long id);
 

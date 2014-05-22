@@ -11,21 +11,21 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
     {
         protected IBroadcastClient Client;
 
-        protected CfQueryContactBatches ExpectedQueryContactBatches;
+        protected CfQueryBroadcastData ExpectedQueryBroadcastData;
         protected CfContactBatchQueryResult ExpectedContactBatchQueryResult;
         protected CfContactBatch ExpectedContactBatch;
 
         [Test]
         public void Test_QueryContactBatch()
         {
-            var cfContactBatchQueryResult = Client.QueryContactBatches(ExpectedQueryContactBatches);
+            var cfContactBatchQueryResult = Client.QueryContactBatches(ExpectedQueryBroadcastData);
             Assert.IsNotNull(cfContactBatchQueryResult);
         }
 
         [Test]
         public void Test_QueryContactBatch_properties()
         {
-            var cfContactBatchQueryResult = Client.QueryContactBatches(ExpectedQueryContactBatches);
+            var cfContactBatchQueryResult = Client.QueryContactBatches(ExpectedQueryBroadcastData);
             Assert.IsNotNull(cfContactBatchQueryResult);
             Assert.AreEqual(ExpectedContactBatchQueryResult.TotalResults, cfContactBatchQueryResult.TotalResults);
 
@@ -36,7 +36,7 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
         [Test]
         public void Test_QueryContactBatch_ContactBatch_properties()
         {
-            var cfContactBatchQueryResult = Client.QueryContactBatches(ExpectedQueryContactBatches);
+            var cfContactBatchQueryResult = Client.QueryContactBatches(ExpectedQueryBroadcastData);
             Assert.IsNotNull(cfContactBatchQueryResult);
             
             var cfContactBatch = cfContactBatchQueryResult.ContactBatch[0];

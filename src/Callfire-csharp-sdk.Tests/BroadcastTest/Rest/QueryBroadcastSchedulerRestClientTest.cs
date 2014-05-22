@@ -23,7 +23,7 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
             Client = new RestBroadcastClient(HttpClientMock);
 
             BroadcastId = 1;
-            QueryBroadcastSchedule = new CfQueryBroadcastSchedules(100, 1, BroadcastId);
+            QueryBroadcastSchedule = new CfQueryBroadcastData(100, 1, BroadcastId);
 
             CfDaysOfWeek[] daysOfWeek = { CfDaysOfWeek.Monday };
             BroadcastSchedule = new CfBroadcastSchedule(1, DateTime.Now, DateTime.Now, "timeZone", DateTime.Now, DateTime.Now, daysOfWeek);

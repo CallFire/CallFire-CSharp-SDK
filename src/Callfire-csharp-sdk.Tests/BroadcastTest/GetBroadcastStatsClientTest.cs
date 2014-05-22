@@ -1,5 +1,6 @@
 ﻿using CallFire_csharp_sdk.API;
 using CallFire_csharp_sdk.API.Soap;
+using CallFire_csharp_sdk.Common.Resource;
 using NUnit.Framework;
 
 namespace Callfire_csharp_sdk.Tests.BroadcastTest
@@ -14,18 +15,19 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
         protected BroadcastStatsUsageStats ExpectedUsageStats;
         protected BroadcastStatsActionStatistics ExpectedActionsStatistics;
         protected BroadcastStatsResultStat ExpectedResultStat;
+        protected CfGetBroadcastStats GetBroadcastStats;
         
         [Test]
         public void Test_GetBroadcastStats()
         {
-            var broadcastStats = Client.GetBroadcastStats(BroadcastId);
+            var broadcastStats = Client.GetBroadcastStats(GetBroadcastStats);
             Assert.IsNotNull(broadcastStats);
         }
         
         [Test]
         public void Test_GetBroadcastStats_UsageStats()
         {
-            var broadcastStats = Client.GetBroadcastStats(BroadcastId);
+            var broadcastStats = Client.GetBroadcastStats(GetBroadcastStats);
             Assert.IsNotNull(broadcastStats);
 
             var usageStats = broadcastStats.UsageStats;
@@ -40,7 +42,7 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
         [Test]
         public void Test_GetBroadcastStats_ActionStatistics()
         {
-            var broadcastStats = Client.GetBroadcastStats(BroadcastId);
+            var broadcastStats = Client.GetBroadcastStats(GetBroadcastStats);
             Assert.IsNotNull(broadcastStats);
 
             var actionStatistics = broadcastStats.ActionStatistics;
@@ -53,7 +55,7 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
         [Test]
         public void Test_GetBroadcastStats_ResultStat()
         {
-            var broadcastStats = Client.GetBroadcastStats(BroadcastId);
+            var broadcastStats = Client.GetBroadcastStats(GetBroadcastStats);
             Assert.IsNotNull(broadcastStats);
 
             var resultStats = broadcastStats.ResultStat[0];

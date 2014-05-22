@@ -61,6 +61,7 @@
     <Compile Include="API\Soap\BroadcastServicePortTypeClient.cs" />
     <Compile Include="Common\HttpClient.cs" />
     <Compile Include="Common\HttpMethod.cs" />
+    <Compile Include="Common\Resource\CfGetBroadcastStats.cs" />
     <Compile Include="Common\Resource\CfQueryText.cs" />
     <Compile Include="Common\Resource\CfRequest.cs" />
     <Compile Include="Common\Resource\CfSendText.cs" />
@@ -92,8 +93,7 @@
     <Compile Include="Common\Resource\CfCreateContactBatch.cs" />
     <Compile Include="Common\Resource\CfQuery.cs" />
     <Compile Include="Common\Resource\CfQueryBroadcasts.cs" />
-    <Compile Include="Common\Resource\CfQueryBroadcastSchedule.cs" />
-    <Compile Include="Common\Resource\CfQueryContactBatches.cs" />
+    <Compile Include="Common\Resource\CfQueryBroadcastData.cs" />
     <Compile Include="Common\Resource\CfSubscriptionRequest.cs" />
     <Compile Include="Common\Resource\CfUniqueResource.cs" />
     <Compile Include="Common\Resource\Extended\BroadcastConfigExtended.cs" />

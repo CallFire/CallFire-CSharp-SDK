@@ -20,7 +20,7 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
             HttpClientMock = MockRepository.GenerateMock<IHttpClient>();
             Client = new RestBroadcastClient(HttpClientMock);
 
-            ExpectedQueryContactBatches = new CfQueryContactBatches(500, 0, 1);
+            ExpectedQueryBroadcastData = new CfQueryBroadcastData(500, 0, 1);
 
             ExpectedContactBatch = new CfContactBatch(1, "contactBatch", CfBatchStatus.Active, 2, DateTime.Now, 10, 15);
 
@@ -31,8 +31,8 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
 
             HttpClientMock
                 .Stub(j => j.Send(Arg<string>.Is.Equal(String.Format("/broadcast/{0}/batch?MaxResults={1}&FirstResult={2}",
-                            ExpectedQueryContactBatches.BroadcastId, ExpectedQueryContactBatches.MaxResults,
-                            ExpectedQueryContactBatches.FirstResult)),
+                            ExpectedQueryBroadcastData.BroadcastId, ExpectedQueryBroadcastData.MaxResults,
+                            ExpectedQueryBroadcastData.FirstResult)),
                             Arg<HttpMethod>.Is.Equal(HttpMethod.Get),
                             Arg<object>.Is.Null))
                 .Return("");//ContactBatchQueryResultMapper.ToSoapContactBatchQueryResult(ExpectedContactBatchQueryResult));

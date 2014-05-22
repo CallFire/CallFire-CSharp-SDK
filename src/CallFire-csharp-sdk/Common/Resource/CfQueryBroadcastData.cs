@@ -1,10 +1,10 @@
 ﻿namespace CallFire_csharp_sdk.Common.Resource
 {
-    public class CfQueryBroadcastSchedules : CfQuery
+    public class CfQueryBroadcastData : CfQuery
     {
-        public CfQueryBroadcastSchedules(long maxResult, long firstResult, long broadcastId)
+        public CfQueryBroadcastData(long maxResults, long firstResult, long broadcastId)
         {
-            MaxResults = maxResult;
+            MaxResults = maxResults;
             FirstResult = firstResult;
             BroadcastId = broadcastId;
         }
