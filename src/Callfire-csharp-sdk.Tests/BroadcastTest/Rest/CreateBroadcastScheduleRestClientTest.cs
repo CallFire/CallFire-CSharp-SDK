@@ -21,7 +21,8 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
             Client = new RestBroadcastClient(HttpClientMock);
 
             BroadcastScheduleId = 4889;
-            BroadcastSchedule = new CfBroadcastSchedule(BroadcastScheduleId, DateTime.Now, DateTime.Now, "timeZone", DateTime.Now, DateTime.Now, "daysOfWeek");
+            CfDaysOfWeek[] daysOfWeek = {CfDaysOfWeek.Monday};
+            BroadcastSchedule = new CfBroadcastSchedule(BroadcastScheduleId, DateTime.Now, DateTime.Now, "timeZone", DateTime.Now, DateTime.Now, daysOfWeek);
             CreateBroadcastSchedule = new CfCreateBroadcastSchedule("requestId", BroadcastScheduleId, BroadcastSchedule);
 
             var response = string.Format(
@@ -43,7 +44,7 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
                                                                   x.BroadcastSchedule.TimeZone == BroadcastSchedule.TimeZone &&
                                                                   x.BroadcastSchedule.StartTimeOfDay == BroadcastSchedule.StartTimeOfDay &&
                                                                   x.BroadcastSchedule.StopTimeOfDay == BroadcastSchedule.StopTimeOfDay &&
-                                                                  x.BroadcastSchedule.DaysOfWeek == BroadcastSchedule.DaysOfWeek)))
+                                                                  x.BroadcastSchedule.DaysOfWeek == BroadcastSchedule.DaysOfWeek.ToString().ToUpper())))
                 .Return(response);
         }
     }

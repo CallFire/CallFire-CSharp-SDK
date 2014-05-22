@@ -7,12 +7,24 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
     {
         internal static CfBroadcastConfigRetryConfig FromBroadcastConfigRetryConfig(BroadcastConfigRetryConfig source)
         {
-            return source == null ? null : new CfBroadcastConfigRetryConfig(source.MaxAttempts, source.MinutesBetweenAttempts, source.RetryResults, source.RetryPhoneTypes);
+            if (source == null)
+            {
+                return null;
+            }
+            var retry = RetryResultsMapper.FromRetryResults(source.RetryResults);
+            var retryPhoneType = RetryPhoneTypesMapper.FromRetryPhoneType(source.RetryPhoneTypes);
+            return new CfBroadcastConfigRetryConfig(source.MaxAttempts, source.MinutesBetweenAttempts, retry, retryPhoneType);
         }
 
         internal static BroadcastConfigRetryConfig ToBroadcastConfigRetryConfig(CfBroadcastConfigRetryConfig source)
         {
-            return source == null ? null : new BroadcastConfigRetryConfig(source.MaxAttempts, source.MinutesBetweenAttempts, source.RetryResults, source.RetryPhoneTypes);
+            if (source == null)
+            {
+                return null;
+            }
+            var retry = EnumeratedMapper.ToSoapEnumerated(source.RetryResults);
+            var retryPhoneType = EnumeratedMapper.ToSoapEnumerated(source.RetryPhoneTypes);
+            return new BroadcastConfigRetryConfig(source.MaxAttempts, source.MinutesBetweenAttempts, retry, retryPhoneType);
         }
     }
 }

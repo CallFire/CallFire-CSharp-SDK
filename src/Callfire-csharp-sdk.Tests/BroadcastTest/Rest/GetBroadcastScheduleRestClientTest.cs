@@ -20,7 +20,8 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
             Client = new RestBroadcastClient(HttpClientMock);
 
             BroadcastScheduleId = 1;
-            BroadcastSchedule = new CfBroadcastSchedule(BroadcastScheduleId, DateTime.Now, DateTime.Now, "timeZone", DateTime.Now, DateTime.Now, "daysOfWeek");
+            CfDaysOfWeek[] daysOfWeek = { CfDaysOfWeek.Monday };
+            BroadcastSchedule = new CfBroadcastSchedule(BroadcastScheduleId, DateTime.Now, DateTime.Now, "timeZone", DateTime.Now, DateTime.Now, daysOfWeek);
             
             var broadcastSchedule = BroadcastScheduleMapper.ToSoapBroadcastSchedule(BroadcastSchedule);
             HttpClientMock

@@ -25,8 +25,8 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
             BroadcastId = 1;
             QueryBroadcastSchedule = new CfQueryBroadcastSchedules(100, 1, BroadcastId);
 
-            BroadcastSchedule = new CfBroadcastSchedule(1, DateTime.Now, DateTime.Now, "timeZone", DateTime.Now,
-                DateTime.Now, "daysOfweek");
+            CfDaysOfWeek[] daysOfWeek = { CfDaysOfWeek.Monday };
+            BroadcastSchedule = new CfBroadcastSchedule(1, DateTime.Now, DateTime.Now, "timeZone", DateTime.Now, DateTime.Now, daysOfWeek);
             var broadcastSchedule = new CfBroadcastSchedule[1];
             broadcastSchedule[0] = BroadcastSchedule;
             BroadcastScheduleQueryResult = new CfBroadcastScheduleQueryResult(1, broadcastSchedule);

@@ -24,11 +24,11 @@ namespace CallFire_csharp_sdk.API.Soap
 
         public CfBroadcastQueryResult QueryBroadcasts(CfQueryBroadcasts queryBroadcasts)
         {
-            var type = BroadcastTypeMapper.ToSoapBroadcastType(queryBroadcasts.Type);
+            var type = EnumeratedMapper.ToSoapEnumerated(queryBroadcasts.Type);
             var running = queryBroadcasts.Running.HasValue && queryBroadcasts.Running.Value;
             return BroadcastQueryResultMapper.FromSoapBroadcastQueryResult(
                 BroadcastService.QueryBroadcasts(new QueryBroadcasts(queryBroadcasts.MaxResults,
-                    queryBroadcasts.FirstResult, type.ToString(), running, queryBroadcasts.LabelName)));
+                    queryBroadcasts.FirstResult, type, running, queryBroadcasts.LabelName)));
         }
 
         public CfBroadcast GetBroadcast(long id)

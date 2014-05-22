@@ -18,7 +18,8 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Soap
             BroadcastServiceMock = MockRepository.GenerateStub<IBroadcastServicePortTypeClient>();
             Client = new SoapBroadcastClient(BroadcastServiceMock);
 
-            BroadcastSchedule = new CfBroadcastSchedule(BroadcastScheduleId, DateTime.Now, DateTime.Now, "timeZone", DateTime.Now, DateTime.Now, "daysOfWeek");
+            CfDaysOfWeek[] daysOfWeek = {CfDaysOfWeek.Monday};
+            BroadcastSchedule = new CfBroadcastSchedule(BroadcastScheduleId, DateTime.Now, DateTime.Now, "timeZone", DateTime.Now, DateTime.Now, daysOfWeek);
             CreateBroadcastSchedule = new CfCreateBroadcastSchedule("requestId", BroadcastScheduleId, BroadcastSchedule);
 
             BroadcastServiceMock
@@ -34,7 +35,7 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Soap
                                      x.BroadcastSchedule.TimeZone == BroadcastSchedule.TimeZone &&
                                      x.BroadcastSchedule.StartTimeOfDay == BroadcastSchedule.StartTimeOfDay &&
                                      x.BroadcastSchedule.StopTimeOfDay == BroadcastSchedule.StopTimeOfDay &&
-                                     x.BroadcastSchedule.DaysOfWeek == BroadcastSchedule.DaysOfWeek)))
+                                     x.BroadcastSchedule.DaysOfWeek == BroadcastSchedule.DaysOfWeek.ToString().ToUpper())))
                 .Return(BroadcastScheduleId);
         }
     }

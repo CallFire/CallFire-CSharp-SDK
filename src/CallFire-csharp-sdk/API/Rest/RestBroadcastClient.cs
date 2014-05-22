@@ -29,12 +29,12 @@ namespace CallFire_csharp_sdk.API.Rest
 
         public CfBroadcastQueryResult QueryBroadcasts(CfQueryBroadcasts queryBroadcasts)
         {
-            var type = BroadcastTypeMapper.ToSoapBroadcastType(queryBroadcasts.Type);
+            var type = EnumeratedMapper.ToSoapEnumerated(queryBroadcasts.Type);
             var resource = BaseRequest<ResourceList>(HttpMethod.Get, null, 
                 new CallfireRestRoute<Broadcast>(null, null, null, new RestRouteParameters()
                         .MaxResults(queryBroadcasts.MaxResults)
                         .FirstResult(queryBroadcasts.FirstResult)
-                        .Type(type.ToString())
+                        .Type(type)
                         .Running(queryBroadcasts.Running)
                         .LabelName(queryBroadcasts.LabelName)));
             

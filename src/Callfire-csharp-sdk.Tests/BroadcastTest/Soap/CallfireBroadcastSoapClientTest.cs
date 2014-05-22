@@ -16,13 +16,16 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Soap
             //Password: bc16e515e85cd3e1
 
             Client = new SoapBroadcastClient("66cb7463de00", "bc16e515e85cd3e1");
-            
-            var localTimeZoneRestriction = new CfLocalTimeZoneRestriction(DateTime.Now, DateTime.Now);
-            var broadcastConfigRestryConfig = new CfBroadcastConfigRetryConfig(1000, 2, "retryResult", "retryPhoneTypes");
-            var expectedIvrBroadcastConfig = new CfIvrBroadcastConfig(1, DateTime.Now, "fromNumber", localTimeZoneRestriction, broadcastConfigRestryConfig, "dialplanXml");
-            ExpectedBroadcast = new CfBroadcast(189, "broadcast", CfBroadcastStatus.Running, DateTime.Now, CfBroadcastType.Ivr, expectedIvrBroadcastConfig);
 
-            CfQueryBroadcasts = new CfQueryBroadcasts(100, 0, CfBroadcastType.Text, null, null);
+            var localTimeZoneRestriction = new CfLocalTimeZoneRestriction(DateTime.Now, DateTime.Now);
+            CfResult[] result = { CfResult.Received };
+            CfRetryPhoneType[] phoneTypes = { CfRetryPhoneType.First_Number };
+            var broadcastConfigRestryConfig = new CfBroadcastConfigRetryConfig(1000, 2, result, phoneTypes);
+            var expectedTextBroadcastConfig = new CfTextBroadcastConfig(1, DateTime.Now, "fromNumber", localTimeZoneRestriction, broadcastConfigRestryConfig, "Test", CfBigMessageStrategy.DoNotSend);
+            ExpectedBroadcast = new CfBroadcast(1489878, "broadcast", CfBroadcastStatus.Running, DateTime.Now, CfBroadcastType.Text, expectedTextBroadcastConfig);
+
+            CfBroadcastType[] broadcastType = {CfBroadcastType.Text};
+            CfQueryBroadcasts = new CfQueryBroadcasts(100, 0, broadcastType, null, null);
         }
     }
 }

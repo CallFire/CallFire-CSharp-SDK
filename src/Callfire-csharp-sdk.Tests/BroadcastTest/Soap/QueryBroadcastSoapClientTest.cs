@@ -24,7 +24,8 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Soap
             BroadcastLastModified = DateTime.Now;
             queryBroadcast[0] = new Broadcast(BroadcastId, BroadcastName, BroadcastStatus.RUNNING, BroadcastLastModified, BroadcastType.IVR, null);
 
-            ExpectedQueryBroadcast = new CfQueryBroadcasts(5, 0, CfBroadcastType.Ivr, true, "labelName");
+            CfBroadcastType[] broadcastType = { CfBroadcastType.Ivr };
+            ExpectedQueryBroadcast = new CfQueryBroadcasts(5, 0, broadcastType, true, "labelName");
 
             var cfBroadcastQueryResult = new BroadcastQueryResult(1, queryBroadcast);
 
