@@ -16,7 +16,7 @@ namespace CallFire_csharp_sdk.API.Rest
         {
         }
 
-        internal RestSubscriptionClient(HttpClient xmlClient)
+        internal RestSubscriptionClient(IHttpClient xmlClient)
             : base(xmlClient)
         {
         }

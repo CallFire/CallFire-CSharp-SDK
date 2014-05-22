@@ -10,12 +10,12 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
     [TestFixture]
     class ControlBroadcastRestClientTests : ControlBroadcastClientTest
     {
-        internal HttpClient HttpClientMock;
+        internal IHttpClient HttpClientMock;
 
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            HttpClientMock = MockRepository.GenerateMock<HttpClient>();
+            HttpClientMock = MockRepository.GenerateMock<IHttpClient>();
             Client = new RestBroadcastClient(HttpClientMock);
 
             ExpectedControlBroadcast = new CfControlBroadcast(1, "123", CfBroadcastCommand.Start, 5);

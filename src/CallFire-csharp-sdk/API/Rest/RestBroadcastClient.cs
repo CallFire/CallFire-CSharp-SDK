@@ -16,7 +16,7 @@ namespace CallFire_csharp_sdk.API.Rest
         {
         }
 
-        internal RestBroadcastClient(HttpClient xmlClient)
+        internal RestBroadcastClient(IHttpClient xmlClient)
             : base(xmlClient)
         {
         }

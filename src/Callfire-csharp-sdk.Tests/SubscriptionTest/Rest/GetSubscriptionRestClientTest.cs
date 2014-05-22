@@ -10,12 +10,12 @@ namespace Callfire_csharp_sdk.Tests.SubscriptionTest.Rest
     [TestFixture]
     public class GetSubscriptionRestClientTest : GetSubscriptionClientTest
     {
-        internal HttpClient HttpClientMock;
+        internal IHttpClient HttpClientMock;
 
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            HttpClientMock = MockRepository.GenerateMock<HttpClient>();
+            HttpClientMock = MockRepository.GenerateMock<IHttpClient>();
             Client = new RestSubscriptionClient(HttpClientMock);
 
             SubscriptionId = 1;

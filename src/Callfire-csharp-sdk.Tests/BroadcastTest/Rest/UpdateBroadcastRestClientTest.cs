@@ -9,12 +9,12 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
     [TestFixture]
     class UpdateBroadcastRestClientTest : UpdateBroadcastClientTest
     {
-        internal HttpClient HttpClientMock;
+        internal IHttpClient HttpClientMock;
 
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            HttpClientMock = MockRepository.GenerateMock<HttpClient>();
+            HttpClientMock = MockRepository.GenerateMock<IHttpClient>();
             Client = new RestBroadcastClient(HttpClientMock);
 
             BroadcastId = 1;

@@ -8,7 +8,12 @@ using System.Web;
 
 namespace CallFire_csharp_sdk.Common
 {
-    internal class HttpClient
+    internal interface IHttpClient
+    {
+        string Send(string relativeUrl, HttpMethod method, object body);
+    }
+
+    internal class HttpClient : IHttpClient
     {
         private readonly Uri _baseUrl;
         private readonly CredentialCache _credentials;
@@ -23,7 +28,7 @@ namespace CallFire_csharp_sdk.Common
         {
         }
 
-        internal string Send(string relativeUrl, HttpMethod method, object body)
+        public string Send(string relativeUrl, HttpMethod method, object body)
         {
             var response = string.Empty;
 

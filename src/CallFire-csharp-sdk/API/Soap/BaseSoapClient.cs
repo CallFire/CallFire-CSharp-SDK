@@ -5,7 +5,7 @@ namespace CallFire_csharp_sdk.API.Soap
     internal abstract class BaseSoapClient<T>
         where T: IClient
     {
-        private const string SoapEndpointAddress = "http://callfire.com/api/1.1/wsdl/callfire-service-http-soap12.wsdl"; //"http://www.callfire.com/api/1.1/wsdl/callfire-service.wsdl";
+        private const string SoapEndpointAddress = "https://www.callfire.com/api/1.1/soap12/"; // "http://callfire.com/api/1.1/wsdl/callfire-service-http-soap12.wsdl"; //
         internal readonly IBroadcastServicePortTypeClient BroadcastService;
         internal readonly ISubscriptionServicePortTypeClient SubscriptionService;
 
@@ -24,7 +24,7 @@ namespace CallFire_csharp_sdk.API.Soap
         private static BroadcastServicePortTypeClient CreateBroadcastSoapServiceClient(string username, string password)
         {
             var service = new BroadcastServicePortTypeClient(
-                new BasicHttpBinding(new BasicHttpSecurityMode()), new EndpointAddress(SoapEndpointAddress))
+                new BasicHttpBinding(BasicHttpSecurityMode.TransportWithMessageCredential), new EndpointAddress(SoapEndpointAddress))
                 {
                     ClientCredentials = { UserName = { UserName = username, Password = password } }
                 };
