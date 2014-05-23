@@ -1,7 +1,8 @@
 ﻿using System.Xml.Serialization;
+using CallFire_csharp_sdk.API.Rest;
 
-[XmlTypeAttribute(AnonymousType = true, Namespace = "http://api.callfire.com/resource")]
-[XmlRoot("ResourceReference", Namespace = "http://api.callfire.com/resource", IsNullable = false)]
+[XmlTypeAttribute(AnonymousType = true, Namespace = Namespaces.NamespaceResource)]
+[XmlRoot("ResourceReference", Namespace = Namespaces.NamespaceResource, IsNullable = false)]
 // ReSharper disable once CheckNamespace
 public class ResourceReference
 {

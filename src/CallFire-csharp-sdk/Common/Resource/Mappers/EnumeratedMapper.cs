@@ -11,7 +11,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
             {
                 for (var i = 0; i < source.Count(); i++)
                 {
-                    result = (i == 0) ? source[i].ToString().ToUpper() : result + ' ' + source[i].ToString().ToUpper();
+                    result = (i == 0) ? source[i].ToString().ToUpper() : string.Format("{0} {1}", result, source[i].ToString().ToUpper());
                 }
             }
             return result;

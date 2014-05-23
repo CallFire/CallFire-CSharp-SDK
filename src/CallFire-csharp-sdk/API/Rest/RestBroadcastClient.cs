@@ -145,14 +145,14 @@ namespace CallFire_csharp_sdk.API.Rest
             return resource.Id;
         }
 
-        public CfBroadcastScheduleQueryResult QueryBroadcastSchedule(CfQueryBroadcastData cfQueryBroadcastSchedule)
+        public CfBroadcastScheduleQueryResult QueryBroadcastSchedule(CfQueryBroadcastData cfQueryBroadcastData)
         {
             var resource = BaseRequest<ResourceList>(HttpMethod.Get, null,
-                new CallfireRestRoute<Broadcast>(cfQueryBroadcastSchedule.BroadcastId, null,
+                new CallfireRestRoute<Broadcast>(cfQueryBroadcastData.BroadcastId, null,
                     BroadcastRestRouteObjects.Schedule,
                     new RestRouteParameters()
-                        .MaxResults(cfQueryBroadcastSchedule.MaxResults)
-                        .FirstResult(cfQueryBroadcastSchedule.FirstResult)));
+                        .MaxResults(cfQueryBroadcastData.MaxResults)
+                        .FirstResult(cfQueryBroadcastData.FirstResult)));
 
             BroadcastSchedule[] broadcastSchedule = null;
             if (resource.Resource.Any())

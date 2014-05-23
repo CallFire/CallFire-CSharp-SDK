@@ -8,11 +8,6 @@ using System.Web;
 
 namespace CallFire_csharp_sdk.Common
 {
-    internal interface IHttpClient
-    {
-        string Send(string relativeUrl, HttpMethod method, object body);
-    }
-
     internal class HttpClient : IHttpClient
     {
         private readonly Uri _baseUrl;
@@ -34,7 +29,7 @@ namespace CallFire_csharp_sdk.Common
 
             if (relativeUrl.StartsWith("/"))
             {
-                relativeUrl = "." + relativeUrl;
+                relativeUrl = string.Format(".{0}", relativeUrl); 
             }
 
             var address = new Uri(_baseUrl, relativeUrl);

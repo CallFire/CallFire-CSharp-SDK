@@ -1,16 +1,17 @@
 ﻿using System.Xml.Serialization;
+using CallFire_csharp_sdk.API.Rest;
 using CallFire_csharp_sdk.API.Soap;
 
-[XmlTypeAttribute(AnonymousType = true, Namespace = "http://api.callfire.com/resource")]
-[XmlRoot("Resource", Namespace = "http://api.callfire.com/resource", IsNullable = false)]
+[XmlTypeAttribute(AnonymousType = true, Namespace = Namespaces.NamespaceResource)]
+[XmlRoot("Resource", Namespace = Namespaces.NamespaceResource, IsNullable = false)]
 // ReSharper disable once CheckNamespace
 public class Resource
 {
-    [XmlElementAttribute("Broadcast", typeof(Broadcast), Namespace = "http://api.callfire.com/data", Order = 0)]
-    [XmlElementAttribute("BroadcastStats", typeof(BroadcastStats), Namespace = "http://api.callfire.com/data", Order = 0)]
-    [XmlElementAttribute("ContactBatch", typeof(ContactBatch), Namespace = "http://api.callfire.com/data", Order = 0)]
-    [XmlElementAttribute("BroadcastSchedule", typeof(BroadcastSchedule), Namespace = "http://api.callfire.com/data", Order = 0)]
-    [XmlElementAttribute("Subscription", typeof(Subscription), Namespace = "http://api.callfire.com/data", Order = 0)]
+    [XmlElement("Broadcast", typeof(Broadcast), Namespace = Namespaces.NamespaceData, Order = 0)]
+    [XmlElement("BroadcastStats", typeof(BroadcastStats), Namespace = Namespaces.NamespaceData, Order = 0)]
+    [XmlElement("ContactBatch", typeof(ContactBatch), Namespace = Namespaces.NamespaceData, Order = 0)]
+    [XmlElement("BroadcastSchedule", typeof(BroadcastSchedule), Namespace = Namespaces.NamespaceData, Order = 0)]
+    [XmlElement("Subscription", typeof(Subscription), Namespace = Namespaces.NamespaceData, Order = 0)]
     public object Resources { get; set; }
 }
 

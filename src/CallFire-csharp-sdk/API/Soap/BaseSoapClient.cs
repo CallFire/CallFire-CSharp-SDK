@@ -48,7 +48,7 @@ namespace CallFire_csharp_sdk.API.Soap
         private static CustomBinding CreateCustomBinding()
         {
             var transportElement = new HttpsTransportBindingElement();
-            (transportElement).AuthenticationScheme = AuthenticationSchemes.Basic;
+            transportElement.AuthenticationScheme = AuthenticationSchemes.Basic;
 
             var messegeElement = new TextMessageEncodingBindingElement
             {

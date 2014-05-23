@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Xml;
 
 namespace CallFire_csharp_sdk.API.Rest
 {
@@ -31,7 +32,7 @@ namespace CallFire_csharp_sdk.API.Rest
         {
             if (running.HasValue)
             {
-                Add("Running", running.ToString().ToLower());
+                Add("Running", XmlConvert.ToString(running.Value));
             }
             return this;
         }
