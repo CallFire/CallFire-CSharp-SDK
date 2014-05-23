@@ -51,6 +51,7 @@
     <Compile Include="API\Rest\BaseRestClient.cs" />
     <Compile Include="API\Rest\BroadcastRestRouteObjects.cs" />
     <Compile Include="API\Rest\Namespaces.cs" />
+    <Compile Include="API\Rest\ResourceException.cs" />
     <Compile Include="API\Rest\Resource.cs" />
     <Compile Include="API\Rest\ResourceList.cs" />
     <Compile Include="API\Rest\ResourceReference.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="API\Rest\RestSubscriptionClient.cs" />
     <Compile Include="API\Soap\BaseSoapClient.cs" />
     <Compile Include="API\Soap\BroadcastServicePortTypeClient.cs" />
+    <Compile Include="Common\CustomSerializer.cs" />
     <Compile Include="Common\HttpClient.cs" />
     <Compile Include="Common\HttpMethod.cs" />
     <Compile Include="Common\IHttpClient.cs" />
