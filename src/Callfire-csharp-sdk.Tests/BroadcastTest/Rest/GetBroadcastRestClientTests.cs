@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Xml.Serialization;
 using CallFire_csharp_sdk.API.Rest;
 using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common;
@@ -33,10 +35,9 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
             ExpectedBroadcast.Item = ExpectedTextBroadcastConfig;
 
             CreateExpectedBroadcast(2);
-
+            
             ExpectedTextBroadcastConfig.LocalTimeZoneRestriction = LocalTimeZoneRestriction;
             ExpectedTextBroadcastConfig.RetryConfig = null;
-            ExpectedBroadcast.Type = CfBroadcastType.Text;
             ExpectedBroadcast.Item = ExpectedTextBroadcastConfig;
 
             CreateExpectedBroadcast(3);
@@ -54,6 +55,9 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
             ExpectedBroadcast.Type = CfBroadcastType.Voice;
             ExpectedBroadcast.Item = ExpectedVoiceBroadcastConfig;
             CreateExpectedBroadcast(5);
+            
+            var resource = new Resource { Resources = null };
+            GetValue(10, resource);
         }
 
         private void CreateExpectedBroadcast(long broadcastId)
@@ -63,22 +67,21 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
                 BroadcastTypeMapper.ToSoapBroadcastType(ExpectedBroadcast.Type),
                 BroadcastConfigMapper.ToBroadcastConfig(ExpectedBroadcast.Item, ExpectedBroadcast.Type));
 
-            var resource = string.Format("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" + 
-                            "<r:Resource xmlns=\"http://api.callfire.com/data\" xmlns:r=\"http://api.callfire.com/resource\">" +
-                                    "<Broadcast id=\"{0}\">" + 
-                                        "<Name>{1}</Name>" + 
-                                        "<Status>{2}</Status>" +
-                                        "<LastModified>{3}</LastModified>" + 
-                                        "<Type>{4}</Type>" +
-                                    "</Broadcast>" +
-                            "</r:Resource>", broadcastId, ExpectedBroadcast.Name, BroadcastStatusMapper.ToSoapBroadcastStatus(ExpectedBroadcast.Status),
-                            ExpectedBroadcast.LastModified, BroadcastTypeMapper.ToSoapBroadcastType(ExpectedBroadcast.Type));
+            var resource = new Resource {Resources = expectedBroadcast};
+            GetValue(broadcastId, resource);
+        }
+
+        private void GetValue(long broadcastId, Resource resource)
+        {
+            var serializer = new XmlSerializer(typeof (Resource));
+            TextWriter writer = new StringWriter();
+            serializer.Serialize(writer, resource);
 
             HttpClientMock
                 .Stub(j => j.Send(Arg<string>.Is.Equal(String.Format("/broadcast/{0}", broadcastId)),
-                    Arg<HttpMethod>.Is.Equal(HttpMethod.Get), 
+                    Arg<HttpMethod>.Is.Equal(HttpMethod.Get),
                     Arg<object>.Is.Null))
-                .Return(resource);
+                .Return(writer.ToString());
         }
     }
 }

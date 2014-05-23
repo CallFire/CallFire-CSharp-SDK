@@ -22,7 +22,8 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
             HttpClientMock
                 .Stub(j => j.Send(Arg<string>.Is.Equal(String.Format("/broadcast/{0}", BroadcastId)),
                     Arg<HttpMethod>.Is.Equal(HttpMethod.Put),
-                    Arg<string>.Is.Anything));
+                    Arg<string>.Is.Anything))
+                .Return(string.Empty);
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Xml.Serialization;
 using CallFire_csharp_sdk.API.Rest;
 using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common;
@@ -31,11 +33,16 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
 
             var expectedBroadcastStats = new BroadcastStats(ExpectedUsageStats, resultStat, ExpectedActionsStatistics);
 
+            var resource = new Resource { Resources = expectedBroadcastStats };
+            var serializer = new XmlSerializer(typeof(Resource));
+            TextWriter writer = new StringWriter();
+            serializer.Serialize(writer, resource);
+
             HttpClientMock
                 .Stub(j => j.Send(Arg<string>.Is.Equal(String.Format("/broadcast/{0}/stats", BroadcastId)),
                     Arg<HttpMethod>.Is.Equal(HttpMethod.Get),
                     Arg<string>.Is.Anything))
-                .Return("");//expectedBroadcastStats);
+                .Return(writer.ToString());
         }
     }
 }

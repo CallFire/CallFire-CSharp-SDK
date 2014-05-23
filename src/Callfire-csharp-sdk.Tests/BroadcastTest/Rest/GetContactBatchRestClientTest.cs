@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Xml.Serialization;
 using CallFire_csharp_sdk.API.Rest;
 using CallFire_csharp_sdk.Common;
 using CallFire_csharp_sdk.Common.DataManagement;
@@ -24,11 +26,16 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
 
             var contactBatch = ContactBatchMapper.ToSoapContactBatch(ExpectedContactBatch);
 
+            var resource = new Resource { Resources = contactBatch };
+            var serializer = new XmlSerializer(typeof(Resource));
+            TextWriter writer = new StringWriter();
+            serializer.Serialize(writer, resource);
+
             HttpClientMock
                 .Stub(j => j.Send(Arg<string>.Is.Equal(String.Format("/broadcast/batch/{0}", ContactBatchId)),
                     Arg<HttpMethod>.Is.Equal(HttpMethod.Get),
                     Arg<object>.Is.Null))
-                .Return("");//contactBatch);
+                .Return(writer.ToString());
         }
     }
 }

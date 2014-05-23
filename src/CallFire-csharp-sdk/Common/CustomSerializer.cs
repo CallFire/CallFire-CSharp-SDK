@@ -6,11 +6,6 @@ using System.Web;
 
 namespace CallFire_csharp_sdk.Common
 {
-    internal interface ICustomSerializer
-    {
-        string SerializeToFormData(object o);
-    }
-
     internal class CustomSerializer : ICustomSerializer
     {
         private const string DateFormat = "yyyy-MM-ddThh:mm:ss";

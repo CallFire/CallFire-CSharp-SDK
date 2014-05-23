@@ -15,8 +15,9 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
         [Test]
         public void Test_CreateBroadcast()
         {
-            var broadcast = new CfBroadcast(ExpectedBroadcast.Id, ExpectedBroadcast.Name, CfBroadcastStatus.Running, ExpectedBroadcast.LastModified, CfBroadcastType.Text, null);
+            var broadcast = new CfBroadcast(ExpectedBroadcast.Id, ExpectedBroadcast.Name, ExpectedBroadcast.Status, ExpectedBroadcast.LastModified, ExpectedBroadcast.Type, ExpectedBroadcast.Item);
             var broadcastRequest = new CfBroadcastRequest("", broadcast);
+
             var id = Client.CreateBroadcast(broadcastRequest);
             Assert.AreEqual(ExpectedBroadcast.Id, id);
         }
