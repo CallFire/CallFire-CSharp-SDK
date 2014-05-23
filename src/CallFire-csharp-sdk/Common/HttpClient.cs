@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Web;
 
 namespace CallFire_csharp_sdk.Common
 {
@@ -17,11 +14,13 @@ namespace CallFire_csharp_sdk.Common
     {
         private readonly Uri _baseUrl;
         private readonly CredentialCache _credentials;
+        private readonly CustomSerializer _serializer;
 
         internal HttpClient(string baseUrl, string user, string password)
         {
             _baseUrl = new Uri(baseUrl);
             _credentials = new CredentialCache { { _baseUrl, "Basic", new NetworkCredential(user, password) } };
+            _serializer=new CustomSerializer();
         }
 
         internal HttpClient()
@@ -47,7 +46,7 @@ namespace CallFire_csharp_sdk.Common
 
             if (body!=null)
             {
-                byte[] byteData = Encoding.UTF8.GetBytes(string.Join("&", Values(body).Select(v => v.Key + "=" + v.Value).ToArray()));
+                byte[] byteData = Encoding.UTF8.GetBytes(_serializer.SerializeToFormData(body));
                 request.ContentLength = byteData.Length;
 
                 using (var postStream = request.GetRequestStream())
@@ -63,45 +62,6 @@ namespace CallFire_csharp_sdk.Common
             }
 
             return response;
-        }
-
-        private IEnumerable<KeyValuePair<string, string>> Values(object o)
-        {
-            var result = new List<KeyValuePair<string, string>>();
-
-            var type = o.GetType();
-            var props = type.GetProperties();
-            foreach (var propertyInfo in props)
-            {
-                if (propertyInfo.PropertyType.IsArray)
-                {
-                    var array = ((Array)o);
-                    var arrayValue = array.Cast<object>().Aggregate(string.Empty, (current, element) => current + string.Format("{0} ", HttpUtility.UrlEncode(element.ToString())));
-                    result.Add(new KeyValuePair<string, string>(propertyInfo.Name, HttpUtility.UrlEncode(arrayValue)));
-                }
-                else if (!propertyInfo.PropertyType.IsClass || propertyInfo.PropertyType.Namespace == "System")
-                {
-                    if (propertyInfo.PropertyType == typeof(DateTime))
-                    {
-                        result.Add(
-                            new KeyValuePair<string, string>(propertyInfo.Name,
-                                HttpUtility.UrlEncode(((DateTime)propertyInfo.GetValue(o, null)).ToString("yyyy-MM-ddThh:mm:ss"))));
-                    }
-                    else
-                    {
-                        result.Add(new KeyValuePair<string, string>(propertyInfo.Name, HttpUtility.UrlEncode(propertyInfo.GetValue(o, null).ToString())));
-                    }
-                }
-                else
-                {
-                    var value = propertyInfo.GetValue(o, null);
-                    if (value != null)
-                    {
-                        result.AddRange(Values(value));
-                    }
-                }
-            }
-            return result;
         }
     }
 }

@@ -59,6 +59,7 @@
     <Compile Include="API\Rest\RestSubscriptionClient.cs" />
     <Compile Include="API\Soap\BaseSoapClient.cs" />
     <Compile Include="API\Soap\BroadcastServicePortTypeClient.cs" />
+    <Compile Include="Common\CustomSerializer.cs" />
     <Compile Include="Common\HttpClient.cs" />
     <Compile Include="Common\HttpMethod.cs" />
     <Compile Include="Common\Resource\CfGetBroadcastStats.cs" />
