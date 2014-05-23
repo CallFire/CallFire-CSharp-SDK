@@ -70,10 +70,7 @@
     <Compile Include="Common\Resource\CfQueryText.cs" />
     <Compile Include="Common\Resource\CfRequest.cs" />
     <Compile Include="Common\Resource\CfSendText.cs" />
-    <Compile Include="Common\Resource\Mappers\DaysOfWeekMapper.cs" />
     <Compile Include="Common\Resource\Mappers\EnumeratedMapper.cs" />
-    <Compile Include="Common\Resource\Mappers\RetryPhoneTypesMapper.cs" />
-    <Compile Include="Common\Resource\Mappers\RetryResultsMapper.cs" />
     <Compile Include="Common\Resource\TwoWayMapper.cs" />
     <Compile Include="Common\Resource\Extended\BroadcastRequestExtended.cs" />
     <Compile Include="Common\Resource\Extended\ControlBroadcastExtended.cs" />

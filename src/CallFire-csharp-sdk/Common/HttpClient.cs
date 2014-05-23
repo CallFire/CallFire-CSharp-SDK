@@ -24,15 +24,29 @@ namespace CallFire_csharp_sdk.Common
 
         public string Send(string relativeUrl, HttpMethod method, object body)
         {
+            HttpWebRequest request;
+            var response = Response(relativeUrl, method, body, out request);
+
+            using (var httpResponse = (HttpWebResponse)request.GetResponse())
+            {
+                var responseStream = httpResponse.GetResponseStream();
+                if (responseStream != null) response = ((new StreamReader(responseStream)).ReadToEnd());
+            }
+
+            return response;
+        }
+
+        private string Response(string relativeUrl, HttpMethod method, object body, out HttpWebRequest request)
+        {
             var response = string.Empty;
 
             if (relativeUrl.StartsWith("/"))
             {
-                relativeUrl = string.Format(".{0}", relativeUrl); 
+                relativeUrl = string.Format(".{0}", relativeUrl);
             }
 
             var address = new Uri(_baseUrl, relativeUrl);
-            var request = (HttpWebRequest)WebRequest.Create(address);
+            request = (HttpWebRequest) WebRequest.Create(address);
 
             request.Method = method.ToString().ToUpper();
             request.Credentials = _credentials;
@@ -49,13 +63,6 @@ namespace CallFire_csharp_sdk.Common
                     postStream.Write(byteData, 0, byteData.Length);
                 }
             }
-
-            using (var httpResponse = (HttpWebResponse)request.GetResponse())
-            {
-                var responseStream = httpResponse.GetResponseStream();
-                if (responseStream != null) response = ((new StreamReader(responseStream)).ReadToEnd());
-            }
-
             return response;
         }
     }

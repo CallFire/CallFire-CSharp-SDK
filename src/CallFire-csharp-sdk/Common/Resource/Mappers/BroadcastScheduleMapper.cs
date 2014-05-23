@@ -11,7 +11,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
             {
                 return null;
             }
-            var daysOfWeek = DaysOfWeekMapper.FromDaysOfWeek(source.DaysOfWeek);
+            var daysOfWeek = EnumeratedMapper.FromSoapEnumerated<CfDaysOfWeek>(source.DaysOfWeek);
             return new CfBroadcastSchedule(source.id, source.StartTimeOfDay, source.StopTimeOfDay, source.TimeZone,
                 source.BeginDate, source.EndDate, daysOfWeek);
         }
