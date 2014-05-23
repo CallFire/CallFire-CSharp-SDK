@@ -16,7 +16,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
                 result = new CfDaysOfWeek[splitString.Count()];
                 for (var i = 0; i < splitString.Count(); i++)
                 {
-                    result[i] = (CfDaysOfWeek)Enum.Parse(typeof(CfDaysOfWeek), splitString[i]);
+                    result[i] = (CfDaysOfWeek)Enum.Parse(typeof(CfDaysOfWeek), splitString[i].Substring(0, 1) + splitString[i].Substring(1).ToLower());
                 }
             }
             return result;

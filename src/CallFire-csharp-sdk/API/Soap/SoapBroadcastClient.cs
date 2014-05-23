@@ -6,9 +6,9 @@ using CallFire_csharp_sdk.Common.Result.Mappers;
 
 namespace CallFire_csharp_sdk.API.Soap
 {
-    internal class SoapBroadcastClient : BaseSoapClient<IBroadcastClient>, IBroadcastClient
+    public class SoapBroadcastClient : BaseSoapClient<IBroadcastClient>, IBroadcastClient
     {
-        internal SoapBroadcastClient(string username, string password)
+        public SoapBroadcastClient(string username, string password)
             : base(username, password)
         {
         }
@@ -17,9 +17,9 @@ namespace CallFire_csharp_sdk.API.Soap
         {
         }
 
-        public long CreateBroadcast(CfBroadcast broadcast)
+        public long CreateBroadcast(CfBroadcastRequest createBroadcast)
         {
-            return BroadcastService.CreateBroadcast(new BroadcastRequest(BroadcastMapper.ToSoapBroadcast(broadcast)));
+            return BroadcastService.CreateBroadcast(new BroadcastRequest(createBroadcast.RequestId, BroadcastMapper.ToSoapBroadcast(createBroadcast.Broadcast)));
         }
 
         public CfBroadcastQueryResult QueryBroadcasts(CfQueryBroadcasts queryBroadcasts)
@@ -36,9 +36,9 @@ namespace CallFire_csharp_sdk.API.Soap
             return BroadcastMapper.FromSoapBroadCast(BroadcastService.GetBroadcast(new IdRequest(id)));
         }
 
-        public void UpdateBroadcast(CfBroadcast broadcast)
+        public void UpdateBroadcast(CfBroadcastRequest updateBroadcast)
         {
-            BroadcastService.UpdateBroadcast(new BroadcastRequest(BroadcastMapper.ToSoapBroadcast(broadcast)));
+            BroadcastService.UpdateBroadcast(new BroadcastRequest(updateBroadcast.RequestId, BroadcastMapper.ToSoapBroadcast(updateBroadcast.Broadcast)));
         }
 
         public CfBroadcastStats GetBroadcastStats(CfGetBroadcastStats getBroadcastStats)

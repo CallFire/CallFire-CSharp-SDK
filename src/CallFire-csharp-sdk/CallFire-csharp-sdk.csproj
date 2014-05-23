@@ -62,6 +62,7 @@
     <Compile Include="Common\CustomSerializer.cs" />
     <Compile Include="Common\HttpClient.cs" />
     <Compile Include="Common\HttpMethod.cs" />
+    <Compile Include="Common\Resource\CfBroadcastRequest.cs" />
     <Compile Include="Common\Resource\CfGetBroadcastStats.cs" />
     <Compile Include="Common\Resource\CfQueryText.cs" />
     <Compile Include="Common\Resource\CfRequest.cs" />

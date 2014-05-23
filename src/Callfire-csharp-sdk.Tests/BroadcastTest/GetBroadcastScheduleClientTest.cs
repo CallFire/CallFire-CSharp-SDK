@@ -31,7 +31,7 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
             Assert.AreEqual(BroadcastSchedule.TimeZone, broadcastSchedule.TimeZone);
             Assert.AreEqual(BroadcastSchedule.BeginDate, broadcastSchedule.BeginDate);
             Assert.AreEqual(BroadcastSchedule.EndDate, broadcastSchedule.EndDate);
-            Assert.AreEqual(BroadcastSchedule.DaysOfWeek, broadcastSchedule.DaysOfWeek);
+            Assert.AreEqual(BroadcastSchedule.DaysOfWeek[0], broadcastSchedule.DaysOfWeek[0]);
         }
     }
 }

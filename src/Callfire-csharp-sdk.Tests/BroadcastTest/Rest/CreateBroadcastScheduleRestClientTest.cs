@@ -43,8 +43,7 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
                                                                   x.BroadcastSchedule.EndDate == BroadcastSchedule.EndDate &&
                                                                   x.BroadcastSchedule.TimeZone == BroadcastSchedule.TimeZone &&
                                                                   x.BroadcastSchedule.StartTimeOfDay == BroadcastSchedule.StartTimeOfDay &&
-                                                                  x.BroadcastSchedule.StopTimeOfDay == BroadcastSchedule.StopTimeOfDay &&
-                                                                  x.BroadcastSchedule.DaysOfWeek == BroadcastSchedule.DaysOfWeek.ToString().ToUpper())))
+                                                                  x.BroadcastSchedule.StopTimeOfDay == BroadcastSchedule.StopTimeOfDay)))
                 .Return(response);
         }
     }

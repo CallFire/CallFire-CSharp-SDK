@@ -24,12 +24,6 @@ namespace CallFire_csharp_sdk.API.Rest
             XmlClient = xmlClient;
         }
         
-        public long Create(T objectToCreate)
-        {
-            var resourcerReference = BaseRequest<ResourceReference>(HttpMethod.Post, objectToCreate, new CallfireRestRoute<T>(null));
-            return resourcerReference.Id;
-        }
-
         internal TU BaseRequest<TU>(HttpMethod method, object request, CallfireRestRoute<T> route)
         {
             var response = XmlClient.Send(route.ToString(), method, request);

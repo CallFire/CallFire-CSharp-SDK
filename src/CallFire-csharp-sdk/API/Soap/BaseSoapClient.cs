@@ -4,7 +4,7 @@ using System.ServiceModel.Channels;
 
 namespace CallFire_csharp_sdk.API.Soap
 {
-    internal abstract class BaseSoapClient<T>
+    public abstract class BaseSoapClient<T>
         where T: IClient
     {
         private const string SoapEndpointAddress = "https://www.callfire.com/api/1.1/soap12"; 

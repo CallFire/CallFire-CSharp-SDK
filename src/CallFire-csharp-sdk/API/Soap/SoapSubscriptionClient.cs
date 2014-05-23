@@ -6,9 +6,9 @@ using CallFire_csharp_sdk.Common.Result.Mappers;
 
 namespace CallFire_csharp_sdk.API.Soap
 {
-    class SoapSubscriptionClient : BaseSoapClient<ISubscriptionClient>, ISubscriptionClient
+    public class SoapSubscriptionClient : BaseSoapClient<ISubscriptionClient>, ISubscriptionClient
     {
-        internal SoapSubscriptionClient(string username, string password)
+        public SoapSubscriptionClient(string username, string password)
             : base(username, password)
         {
         }
@@ -21,7 +21,7 @@ namespace CallFire_csharp_sdk.API.Soap
         public long CreateSubscription(CfSubscriptionRequest cfCreateSubscription)
         {
             return SubscriptionService.CreateSubscription(new SubscriptionRequest(cfCreateSubscription.RequestId,
-                    SubscriptionMapper.ToSoapSubscription(cfCreateSubscription.Subscription)));
+                SubscriptionMapper.ToSoapSubscription(cfCreateSubscription.Subscription)));
         }
 
         public CfSubscriptionQueryResult QuerySubscriptions(CfQuery cfQuerySubscriptions)

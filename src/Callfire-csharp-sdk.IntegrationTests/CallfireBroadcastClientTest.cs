@@ -3,7 +3,7 @@ using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
 using NUnit.Framework;
 
-namespace Callfire_csharp_sdk.Tests.BroadcastTest
+namespace Callfire_csharp_sdk.IntegrationTests
 {
     [TestFixture]
     public abstract class CallfireBroadcastClientTest
@@ -15,8 +15,9 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
         [Test]
         public void Test_CreateBroadcast()
         {
-            var id = Client.CreateBroadcast(ExpectedBroadcast);
-            Assert.AreEqual(ExpectedBroadcast.Id, id);
+            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcast);
+            var id = Client.CreateBroadcast(broadcastRequest);
+            Assert.IsNotNull(id);
         }
 
         [Test]
