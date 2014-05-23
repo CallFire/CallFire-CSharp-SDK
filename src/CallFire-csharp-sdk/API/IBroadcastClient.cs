@@ -6,13 +6,13 @@ namespace CallFire_csharp_sdk.API
 {
     public interface IBroadcastClient : IClient
     {
-        long CreateBroadcast(CfBroadcast broadcast);//
+        long CreateBroadcast(CfBroadcastRequest createBroadcast);
 
         CfBroadcastQueryResult QueryBroadcasts(CfQueryBroadcasts queryBroadcasts);
         
         CfBroadcast GetBroadcast(long id);
 
-        void UpdateBroadcast(CfBroadcast broadcast);//
+        void UpdateBroadcast(CfBroadcastRequest updateBroadcast);
 
         CfBroadcastStats GetBroadcastStats(CfGetBroadcastStats getBroadcastStats);
 

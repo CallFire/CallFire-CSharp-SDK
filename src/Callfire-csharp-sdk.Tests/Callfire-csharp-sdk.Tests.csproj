@@ -63,7 +63,6 @@
     <Compile Include="BiDictionaryTest.cs" />
     <Compile Include="BroadcastTest\ControlBroadcastClientTest.cs" />
     <Compile Include="BroadcastTest\ControlContactBatchClientTest.cs" />
-    <Compile Include="BroadcastTest\CallfireBroadcastClientTest.cs" />
     <Compile Include="BroadcastTest\CreateBroadcastClientTest.cs" />
     <Compile Include="BroadcastTest\CreateBroadcastScheduleClientTest.cs" />
     <Compile Include="BroadcastTest\CreateContactBatchClientTest.cs" />
@@ -74,7 +73,6 @@
     <Compile Include="BroadcastTest\QueryBroadcastClientTest.cs" />
     <Compile Include="BroadcastTest\QueryBroadcastScheduleClientTest.cs" />
     <Compile Include="BroadcastTest\QueryContactBatchClientTest.cs" />
-    <Compile Include="BroadcastTest\Rest\CallfireBroadcastRestClientTest.cs" />
     <Compile Include="BroadcastTest\Rest\ControlBroadcastRestClientTests.cs" />
     <Compile Include="BroadcastTest\Rest\ControlContactBatchRestClientTest.cs" />
     <Compile Include="BroadcastTest\Rest\CreateBroadcastRestClientTests.cs" />
@@ -88,7 +86,6 @@
     <Compile Include="BroadcastTest\Rest\QueryBroadcastSchedulerRestClientTest.cs" />
     <Compile Include="BroadcastTest\Rest\QueryContactBatchRestClientTest.cs" />
     <Compile Include="BroadcastTest\Rest\UpdateBroadcastRestClientTest.cs" />
-    <Compile Include="BroadcastTest\Soap\CallfireBroadcastSoapClientTest.cs" />
     <Compile Include="BroadcastTest\Soap\ControlBroadcastSoapClientTests.cs" />
     <Compile Include="BroadcastTest\Soap\ControlContactBatchSoapClientTest.cs" />
     <Compile Include="BroadcastTest\Soap\CreateBroadcastScheduleSoapClientTest.cs" />
@@ -111,18 +108,15 @@
     <Compile Include="BroadcastTest\GetBroadcastClientTest.cs" />
     <Compile Include="BroadcastTest\Soap\GetBroadcastSoapClientTests.cs" />
     <Compile Include="Soap\SoapClientCreationTests.cs" />
-    <Compile Include="SubscriptionTest\CallfireSubscriptionClientTest.cs" />
     <Compile Include="SubscriptionTest\CreateSubscriptionClientTest.cs" />
     <Compile Include="SubscriptionTest\DeleteSubscriptionClientTest.cs" />
     <Compile Include="SubscriptionTest\GetSubscriptionClientTest.cs" />
     <Compile Include="SubscriptionTest\QuerySubscriptionsClientTest.cs" />
-    <Compile Include="SubscriptionTest\Rest\CallfireSubscriptionRestClientTest.cs" />
     <Compile Include="SubscriptionTest\Rest\CreateSubscriptionRestClientTest.cs" />
     <Compile Include="SubscriptionTest\Rest\DeleteSubscriptionRestClientTest.cs" />
     <Compile Include="SubscriptionTest\Rest\GetSubscriptionRestClientTest.cs" />
     <Compile Include="SubscriptionTest\Rest\QuerySubscriptionsRestClientTest.cs" />
     <Compile Include="SubscriptionTest\Rest\UpdateSubscriptionRestClientTest.cs" />
-    <Compile Include="SubscriptionTest\Soap\CallfireSubscriptionSoapClientTest.cs" />
     <Compile Include="SubscriptionTest\Soap\CreateSubscriptionSoapClientTest.cs" />
     <Compile Include="SubscriptionTest\Soap\DeleteSubscriptionSoapClientTest.cs" />
     <Compile Include="SubscriptionTest\Soap\GetSubscriptionSoapClientTest.cs" />

@@ -63,7 +63,7 @@ namespace CallFire_csharp_sdk.API.Rest
                 return;
             }
             var subscriptionRequest = new SubscriptionRequest(cfUpdateSubscription.RequestId,
-                SubscriptionMapper.ToSoapSubscription(cfUpdateSubscription.Subscription));
+                SubscriptionMapper.ToSoapSubscription(subscription));
             BaseRequest<string>(HttpMethod.Put, subscriptionRequest, new CallfireRestRoute<Subscription>(subscription.Id));
         }
 

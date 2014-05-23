@@ -8,5 +8,9 @@ namespace CallFire_csharp_sdk.API.Soap
             RequestId = requestId;
             Subscription = subscription;
         }
+
+        public SubscriptionRequest()
+        {
+        }
     }
 }

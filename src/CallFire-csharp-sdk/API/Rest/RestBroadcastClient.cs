@@ -21,10 +21,11 @@ namespace CallFire_csharp_sdk.API.Rest
         {
         }
 
-        public long CreateBroadcast(CfBroadcast cfBroadcast)
+        public long CreateBroadcast(CfBroadcastRequest createBroadcast)
         {
-            var broadcast = BroadcastMapper.ToSoapBroadcast(cfBroadcast);
-            return Create(broadcast);
+            var broadcastRequest = new BroadcastRequest(createBroadcast.RequestId, BroadcastMapper.ToSoapBroadcast(createBroadcast.Broadcast));
+            var resourcerReference = BaseRequest<ResourceReference>(HttpMethod.Post, broadcastRequest, new CallfireRestRoute<Broadcast>(null));
+            return resourcerReference.Id;
         }
 
         public CfBroadcastQueryResult QueryBroadcasts(CfQueryBroadcasts queryBroadcasts)
@@ -58,10 +59,15 @@ namespace CallFire_csharp_sdk.API.Rest
             return BroadcastMapper.FromSoapBroadCast(resource.Resources as Broadcast);
         }
 
-        public void UpdateBroadcast(CfBroadcast cfBroadcast)
+        public void UpdateBroadcast(CfBroadcastRequest updateBroadcast)
         {
-            var broadcast = BroadcastMapper.ToSoapBroadcast(cfBroadcast);
-            BaseRequest<string>(HttpMethod.Put, broadcast, new CallfireRestRoute<Broadcast>(broadcast.id));
+            var broadcast = updateBroadcast.Broadcast;
+            if (broadcast == null)
+            {
+                return;
+            }
+            var broadcastRequest = new BroadcastRequest(updateBroadcast.RequestId, BroadcastMapper.ToSoapBroadcast(broadcast));
+            BaseRequest<string>(HttpMethod.Put, broadcastRequest, new CallfireRestRoute<Broadcast>(broadcast.Id));
         }
 
         public CfBroadcastStats GetBroadcastStats(CfGetBroadcastStats getBroadcastStats)

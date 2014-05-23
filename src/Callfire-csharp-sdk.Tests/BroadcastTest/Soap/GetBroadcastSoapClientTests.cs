@@ -22,7 +22,7 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Soap
             CreateExpectedBroadcast(1);
             
             LocalTimeZoneRestriction = new CfLocalTimeZoneRestriction(DateTime.Now, DateTime.Now);
-            CfResult[] result = { CfResult.Received };
+            CfResult[] result = { CfResult.Carrier_Temp_Error };
             CfRetryPhoneType[] phoneTypes = { CfRetryPhoneType.First_Number };
             BroadcastConfigRestryConfig = new CfBroadcastConfigRetryConfig(1000, 2, result, phoneTypes);
             ExpectedTextBroadcastConfig = new CfTextBroadcastConfig(1, DateTime.Now, "fromNumber", null, BroadcastConfigRestryConfig, "Message", CfBigMessageStrategy.SendMultiple);

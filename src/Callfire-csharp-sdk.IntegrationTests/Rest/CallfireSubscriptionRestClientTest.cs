@@ -3,7 +3,7 @@ using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
 using NUnit.Framework;
 
-namespace Callfire_csharp_sdk.Tests.SubscriptionTest.Rest
+namespace Callfire_csharp_sdk.IntegrationTests.Rest
 {
     [TestFixture]
     public class CallfireSubscriptionRestClientTest : CallfireSubscriptionClientTest
