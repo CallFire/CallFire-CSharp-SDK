@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Net;
 using System.Xml.Serialization;
 using CallFire_csharp_sdk.Common;
 
@@ -23,10 +24,25 @@ namespace CallFire_csharp_sdk.API.Rest
         {
             XmlClient = xmlClient;
         }
-        
+
         internal TU BaseRequest<TU>(HttpMethod method, object request, CallfireRestRoute<T> route)
         {
-            var response = XmlClient.Send(route.ToString(), method, request);
+            var response = string.Empty;
+            try
+            {
+                response = XmlClient.Send(route.ToString(), method, request);
+            }
+            catch (WebException ex)
+            {
+                if (ex.Status == WebExceptionStatus.ProtocolError &&
+                    HttpStatusCode.InternalServerError == ((HttpWebResponse)ex.Response).StatusCode)
+                {
+                    var exceptionDeserializer = new XmlSerializer(typeof(ResourceException));
+                    TextReader exceptionReader = new StringReader(response);
+                    ex.Data.Add("Exception", exceptionDeserializer.Deserialize(exceptionReader));
+                }
+                throw;
+            }
 
             if (string.IsNullOrEmpty(response))
             {

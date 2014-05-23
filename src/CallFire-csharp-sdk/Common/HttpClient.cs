@@ -20,7 +20,7 @@ namespace CallFire_csharp_sdk.Common
         {
             _baseUrl = new Uri(baseUrl);
             _credentials = new CredentialCache { { _baseUrl, "Basic", new NetworkCredential(user, password) } };
-            _serializer=new CustomSerializer();
+            _serializer = new CustomSerializer();
         }
 
         internal HttpClient()
@@ -44,7 +44,7 @@ namespace CallFire_csharp_sdk.Common
             request.ContentType = "application/x-www-form-urlencoded";
             request.Accept = "text/xml";
 
-            if (body!=null)
+            if (body != null)
             {
                 byte[] byteData = Encoding.UTF8.GetBytes(_serializer.SerializeToFormData(body));
                 request.ContentLength = byteData.Length;
