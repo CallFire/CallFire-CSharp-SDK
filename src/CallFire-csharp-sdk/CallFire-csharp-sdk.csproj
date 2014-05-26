@@ -54,6 +54,7 @@
     <Compile Include="API\Rest\ResourceException.cs" />
     <Compile Include="API\Rest\Resource.cs" />
     <Compile Include="API\Rest\ResourceList.cs" />
+    <Compile Include="API\Rest\ResourceListOperations.cs" />
     <Compile Include="API\Rest\ResourceReference.cs" />
     <Compile Include="API\Rest\RestRouteParameters.cs" />
     <Compile Include="API\Rest\RestBroadcastClient.cs" />

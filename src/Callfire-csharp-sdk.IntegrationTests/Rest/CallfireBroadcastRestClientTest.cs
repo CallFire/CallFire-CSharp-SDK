@@ -12,10 +12,7 @@ namespace Callfire_csharp_sdk.IntegrationTests.Rest
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            //App Login: 66cb7463de00
-            //Password: bc16e515e85cd3e1
-
-            Client = new RestBroadcastClient("66cb7463de00", "bc16e515e85cd3e1");
+            Client = new RestBroadcastClient(MockClient.User(), MockClient.Password());
             
             var localTimeZoneRestriction = new CfLocalTimeZoneRestriction(DateTime.Now, DateTime.Now);
             CfResult[] result = { CfResult.Received };

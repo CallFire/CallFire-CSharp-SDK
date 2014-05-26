@@ -1,8 +1,8 @@
 ﻿using System.Xml.Serialization;
 using CallFire_csharp_sdk.API.Rest;
 
-[XmlTypeAttribute(AnonymousType = true, Namespace = Namespaces.NamespaceResource)]
-[XmlRootAttribute("ResourceException", Namespace = Namespaces.NamespaceResource, IsNullable = false)]
+[XmlType(AnonymousType = true, Namespace = Namespaces.NamespaceResource)]
+[XmlRoot("ResourceException", Namespace = Namespaces.NamespaceResource, IsNullable = false)]
 // ReSharper disable once CheckNamespace
 public class ResourceException
 {
