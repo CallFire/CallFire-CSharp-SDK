@@ -35,11 +35,6 @@ namespace Callfire_csharp_sdk.Tests.SubscriptionTest.Rest
             SubscriptionQueryResult = new CfSubscriptionQueryResult(1, subscriptions);
 
             GenerateMock(SubscriptionQueryResult, Query);
-
-            subscriptions[0] = null;
-            var subscriptionQueryResult = new CfSubscriptionQueryResult(1, subscriptions);
-            var query = new CfQuery(100, 1);
-            GenerateMock(subscriptionQueryResult, query);
         }
 
         private void GenerateMock(CfSubscriptionQueryResult subscriptionQueryResult, CfQuery query)

@@ -35,59 +35,21 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
             var broadcast = Client.GetBroadcast(BroadcastId);
 
             Assert.IsNotNull(broadcast);
-            Assert.AreEqual(BroadcastId, broadcast.Id);
             Assert.AreEqual(ExpectedBroadcast.Name, broadcast.Name);
-            Assert.AreEqual(ExpectedBroadcast.Status, broadcast.Status);
-            Assert.AreEqual(ExpectedBroadcast.LastModified, broadcast.LastModified);
             Assert.AreEqual(ExpectedBroadcast.Type, broadcast.Type);
             Assert.IsNull(broadcast.Item);
         }
-
-        [Test]
-        public void Test_GetBroadcast_of_type_BroadcastText()
-        {
-            BroadcastId = 2;
-            var broadcast = Client.GetBroadcast(BroadcastId);
-
-            Assert.IsNotNull(broadcast);
-            var textBroadcastConfig = broadcast.Item as CfTextBroadcastConfig;
-
-            Assert.IsNotNull(textBroadcastConfig);
-            Assert.AreEqual(ExpectedTextBroadcastConfig.Id, textBroadcastConfig.Id);
-            Assert.AreEqual(ExpectedTextBroadcastConfig.Created, textBroadcastConfig.Created);
-            Assert.AreEqual(ExpectedTextBroadcastConfig.FromNumber, textBroadcastConfig.FromNumber);
-            Assert.AreEqual(ExpectedTextBroadcastConfig.Message, textBroadcastConfig.Message);
-            Assert.AreEqual(ExpectedTextBroadcastConfig.BigMessageStrategy, textBroadcastConfig.BigMessageStrategy);
-        }
         
-        [Test]
-        public void Test_GetBroadcast_of_type_BroadcastIvr()
-        {
-            BroadcastId = 4;
-            var broadcast = Client.GetBroadcast(BroadcastId);
-
-            Assert.IsNotNull(broadcast);
-            var ivrBroadcastConfig = broadcast.Item as CfIvrBroadcastConfig;
-
-            Assert.IsNotNull(ivrBroadcastConfig);
-            Assert.AreEqual(ExpectedIvrBroadcastConfig.Id, ivrBroadcastConfig.Id);
-            Assert.AreEqual(ExpectedIvrBroadcastConfig.Created, ivrBroadcastConfig.Created);
-            Assert.AreEqual(ExpectedIvrBroadcastConfig.FromNumber, ivrBroadcastConfig.FromNumber);
-            Assert.AreEqual(ExpectedIvrBroadcastConfig.DialplanXml, ivrBroadcastConfig.DialplanXml);
-        }
-
         [Test]
         public void Test_GetBroadcast_of_type_BroadcastVoice()
         {
-            BroadcastId = 5;
+            BroadcastId = 3;
             var broadcast = Client.GetBroadcast(BroadcastId);
 
             Assert.IsNotNull(broadcast);
             var voiceBroadcastConfig = broadcast.Item as CfVoiceBroadcastConfig;
 
             Assert.IsNotNull(voiceBroadcastConfig);
-            Assert.AreEqual(ExpectedVoiceBroadcastConfig.Id, voiceBroadcastConfig.Id);
-            Assert.AreEqual(ExpectedVoiceBroadcastConfig.Created, voiceBroadcastConfig.Created);
             Assert.AreEqual(ExpectedVoiceBroadcastConfig.FromNumber, voiceBroadcastConfig.FromNumber);
             Assert.AreEqual(ExpectedVoiceBroadcastConfig.Item, voiceBroadcastConfig.Item);
             Assert.AreEqual(ExpectedVoiceBroadcastConfig.LiveSoundTextVoice, voiceBroadcastConfig.LiveSoundTextVoice);
@@ -100,7 +62,6 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
             Assert.AreEqual(ExpectedVoiceBroadcastConfig.Item3, voiceBroadcastConfig.Item3);
             Assert.AreEqual(ExpectedVoiceBroadcastConfig.DncSoundTextVoice, voiceBroadcastConfig.DncSoundTextVoice);
             Assert.AreEqual(ExpectedVoiceBroadcastConfig.DncDigit, voiceBroadcastConfig.DncDigit);
-            Assert.AreEqual(ExpectedVoiceBroadcastConfig.MaxActiveTransfers, voiceBroadcastConfig.MaxActiveTransfers);
         }
 
         [Test]
@@ -110,7 +71,7 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
             var broadcast = Client.GetBroadcast(BroadcastId);
 
             Assert.IsNotNull(broadcast);
-            var textBroadcastConfig = broadcast.Item as CfTextBroadcastConfig;
+            var textBroadcastConfig = broadcast.Item as CfVoiceBroadcastConfig;
 
             Assert.IsNotNull(textBroadcastConfig);
             var localTimeZoneRestriction = textBroadcastConfig.LocalTimeZoneRestriction;
@@ -125,14 +86,12 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
             var broadcast = Client.GetBroadcast(BroadcastId);
 
             Assert.IsNotNull(broadcast);
-            var textBroadcastConfig = broadcast.Item as CfTextBroadcastConfig; 
+            var textBroadcastConfig = broadcast.Item as CfVoiceBroadcastConfig; 
             
             Assert.IsNotNull(textBroadcastConfig);
             var localTimeZoneRestriction = textBroadcastConfig.LocalTimeZoneRestriction;
 
             Assert.IsNotNull(localTimeZoneRestriction);
-            Assert.AreEqual(LocalTimeZoneRestriction.BeginTime, localTimeZoneRestriction.BeginTime);
-            Assert.AreEqual(LocalTimeZoneRestriction.EndTime, localTimeZoneRestriction.EndTime);
         }
 
         [Test]
@@ -142,7 +101,7 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
             var broadcast = Client.GetBroadcast(BroadcastId);
 
             Assert.IsNotNull(broadcast);
-            var textBroadcastConfig = broadcast.Item as CfTextBroadcastConfig;
+            var textBroadcastConfig = broadcast.Item as CfVoiceBroadcastConfig;
 
             Assert.IsNotNull(textBroadcastConfig);
             var retryConfig = textBroadcastConfig.RetryConfig;
@@ -157,7 +116,7 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
             var broadcast = Client.GetBroadcast(BroadcastId);
 
             Assert.IsNotNull(broadcast);
-            var textBroadcastConfig = broadcast.Item as CfTextBroadcastConfig;
+            var textBroadcastConfig = broadcast.Item as CfVoiceBroadcastConfig;
 
             Assert.IsNotNull(textBroadcastConfig);
             var retryConfig = textBroadcastConfig.RetryConfig;

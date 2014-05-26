@@ -36,12 +36,6 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
             var broadcastScheduleQueryResult = BroadcastScheduleQueryResultMapper.ToSoapBroadcastScheduleQueryResult(BroadcastScheduleQueryResult);
 
             GenerateMock(broadcastScheduleQueryResult);
-
-            BroadcastId = 2;
-            BroadcastScheduleQueryResult.BroadcastSchedule = null;
-            broadcastScheduleQueryResult = BroadcastScheduleQueryResultMapper.ToSoapBroadcastScheduleQueryResult(BroadcastScheduleQueryResult);
-
-            GenerateMock(broadcastScheduleQueryResult);
         }
 
         private void GenerateMock(BroadcastScheduleQueryResult broadcastScheduleQueryResult)

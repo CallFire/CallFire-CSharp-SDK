@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Xml.Serialization;
 using CallFire_csharp_sdk.API.Rest;
@@ -39,7 +40,7 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
             serializer.Serialize(writer, resource);
 
             HttpClientMock
-                .Stub(j => j.Send(Arg<string>.Is.Equal(String.Format("/broadcast/{0}/stats", BroadcastId)),
+                .Stub(j => j.Send(Arg<string>.Is.Equal(String.Format("/broadcast/{0}/stats?IntervalBegin={1}&IntervalEnd={2}", BroadcastId, GetBroadcastStats.IntervalBegin.ToString("MM/dd/yyyy HH:mm:ss"), GetBroadcastStats.IntervalEnd.ToString("MM/dd/yyyy HH:mm:ss"))),
                     Arg<HttpMethod>.Is.Equal(HttpMethod.Get),
                     Arg<string>.Is.Anything))
                 .Return(writer.ToString());

@@ -44,7 +44,8 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
             serializer.Serialize(writer, resource);
 
             HttpClientMock
-                .Stub(j => j.Send(Arg<string>.Is.Equal(String.Format("/broadcast?MaxResults={0}&FirstResult={1}&Type={2}&LabelName={3}", ExpectedQueryBroadcast.MaxResults, ExpectedQueryBroadcast.FirstResult, BroadcastType.IVR.ToString(), ExpectedQueryBroadcast.LabelName)),
+                .Stub(j => j.Send(Arg<string>.Is.Equal(String.Format("/broadcast?MaxResults={0}&FirstResult={1}&Type={2}&Running={3}&LabelName={4}", 
+                    ExpectedQueryBroadcast.MaxResults, ExpectedQueryBroadcast.FirstResult, BroadcastType.IVR.ToString(), ExpectedQueryBroadcast.Running.ToString().ToLower(), ExpectedQueryBroadcast.LabelName)),
                     Arg<HttpMethod>.Is.Equal(HttpMethod.Get),
                     Arg<string>.Is.Anything))
                 .Return(writer.ToString());
