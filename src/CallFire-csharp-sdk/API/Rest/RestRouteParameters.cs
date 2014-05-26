@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Xml;
 
 namespace CallFire_csharp_sdk.API.Rest
 {
@@ -30,7 +32,7 @@ namespace CallFire_csharp_sdk.API.Rest
         {
             if (running.HasValue)
             {
-                Add("Running", running.ToString());
+                Add("Running", XmlConvert.ToString(running.Value));
             }
             return this;
         }
@@ -41,6 +43,18 @@ namespace CallFire_csharp_sdk.API.Rest
             {
                 Add("LabelName", labelName);
             }
+            return this;
+        }
+
+        public RestRouteParameters IntervalBegin(DateTime intervalBegin)
+        {
+            Add("IntervalBegin", intervalBegin.ToString(CultureInfo.InvariantCulture));
+            return this;
+        }
+
+        public RestRouteParameters IntervalEnd(DateTime intervalEnd)
+        {
+            Add("IntervalEnd", intervalEnd.ToString(CultureInfo.InvariantCulture));
             return this;
         }
     }

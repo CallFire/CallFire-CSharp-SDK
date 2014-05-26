@@ -1,35 +1,48 @@
 ﻿using System;
 using CallFire_csharp_sdk.API.Rest;
 using CallFire_csharp_sdk.API.Soap;
+using CallFire_csharp_sdk.Common;
 using CallFire_csharp_sdk.Common.DataManagement;
 using NUnit.Framework;
 using Rhino.Mocks;
-using ServiceStack.Common.Web;
-using ServiceStack.ServiceClient.Web;
 
 namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
 {
     [TestFixture]
     public class CreateBroadcastRestClientTests : CreateBroadcastClientTest
     {
-        protected JsonServiceClient JsonServiceClientMock;
+        internal IHttpClient HttpClientMock;
 
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            JsonServiceClientMock = MockRepository.GenerateMock<JsonServiceClient>();
-            Client = new RestBroadcastClient(JsonServiceClientMock);
-            ExpectedBroadcast = new CfBroadcast(1, "broadcast", CfBroadcastStatus.Running, DateTime.Now, CfBroadcastType.Text, null);
+            HttpClientMock = MockRepository.GenerateMock<IHttpClient>();
+            Client = new RestBroadcastClient(HttpClientMock);
 
-            JsonServiceClientMock
-                .Stub(j => j.Send<long>(Arg<string>.Is.Equal(HttpMethods.Post),
-                    Arg<string>.Is.Equal("/broadcast"),
-                    Arg<Broadcast>.Matches(x => x.id == ExpectedBroadcast.Id &&
-                                                x.Name == ExpectedBroadcast.Name &&
-                                                x.LastModified == ExpectedBroadcast.LastModified &&
-                                                x.Status == BroadcastStatus.RUNNING &&
-                                                x.Type == BroadcastType.TEXT)))
-                .Return(ExpectedBroadcast.Id);
+            var localTimeZoneRestriction = new CfLocalTimeZoneRestriction(DateTime.Now, DateTime.Now);
+            CfResult[] result = { CfResult.Received };
+            CfRetryPhoneType[] phoneTypes = { CfRetryPhoneType.First_Number };
+            var broadcastConfigRestryConfig = new CfBroadcastConfigRetryConfig(1000, 2, result, phoneTypes);
+            var expectedTextBroadcastConfig = new CfTextBroadcastConfig(1, DateTime.Now, "fromNumber", localTimeZoneRestriction, broadcastConfigRestryConfig, "Test", CfBigMessageStrategy.DoNotSend);
+
+            ExpectedBroadcast = new CfBroadcast(1894, "broadcast", CfBroadcastStatus.Running, DateTime.Now, CfBroadcastType.Text, expectedTextBroadcastConfig);
+
+            var response = string.Format(
+                "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
+                "<r:ResourceReference xmlns=\"http://api.callfire.com/data\" xmlns:r=\"http://api.callfire.com/resource\">" +
+                "<r:Id>{0}</r:Id>" +
+                "<r:Location>https://www.callfire.com/api/1.1/rest/broadcast/{0}</r:Location>" +
+                "</r:ResourceReference>", ExpectedBroadcast.Id);
+            
+            HttpClientMock
+                .Stub(j => j.Send(Arg<string>.Is.Equal("/broadcast"),
+                    Arg<HttpMethod>.Is.Equal(HttpMethod.Post),
+                    Arg<BroadcastRequest>.Matches(x => x.Broadcast.id == ExpectedBroadcast.Id &&
+                                                x.Broadcast.Name == ExpectedBroadcast.Name &&
+                                                x.Broadcast.LastModified == ExpectedBroadcast.LastModified &&
+                                                x.Broadcast.Status == BroadcastStatus.RUNNING &&
+                                                x.Broadcast.Type == BroadcastType.TEXT)))
+                .Return(response);
         }
     }
 }

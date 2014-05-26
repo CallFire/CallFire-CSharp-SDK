@@ -22,36 +22,23 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Soap
             CreateExpectedBroadcast(1);
             
             LocalTimeZoneRestriction = new CfLocalTimeZoneRestriction(DateTime.Now, DateTime.Now);
-            BroadcastConfigRestryConfig = new CfBroadcastConfigRetryConfig(1000, 2, "retryResult", "retryPhoneTypes");
-            ExpectedTextBroadcastConfig = new CfTextBroadcastConfig(1, DateTime.Now, "fromNumber", null, BroadcastConfigRestryConfig, "Message", CfBigMessageStrategy.SendMultiple);
-            ExpectedBroadcast.Type = CfBroadcastType.Text; 
-            ExpectedBroadcast.Item = ExpectedTextBroadcastConfig;
-            
-            CreateExpectedBroadcast(2);
-            
-            ExpectedTextBroadcastConfig.LocalTimeZoneRestriction = LocalTimeZoneRestriction;
-            ExpectedTextBroadcastConfig.RetryConfig = null;
-            ExpectedBroadcast.Type = CfBroadcastType.Text; 
-            ExpectedBroadcast.Item = ExpectedTextBroadcastConfig;
+            CfResult[] result = { CfResult.Carrier_Temp_Error };
+            CfRetryPhoneType[] phoneTypes = { CfRetryPhoneType.First_Number };
+            BroadcastConfigRestryConfig = new CfBroadcastConfigRetryConfig(1000, 2, result, phoneTypes);
 
-            CreateExpectedBroadcast(3);
-
-            ExpectedIvrBroadcastConfig = new CfIvrBroadcastConfig(1, DateTime.Now, "fromNumber",
-                LocalTimeZoneRestriction, BroadcastConfigRestryConfig, "dialplanXml");
-            
-            ExpectedBroadcast.Type = CfBroadcastType.Ivr;
-            ExpectedBroadcast.Item = ExpectedIvrBroadcastConfig;
-            CreateExpectedBroadcast(4);
-            
             ExpectedVoiceBroadcastConfig = new CfVoiceBroadcastConfig(1, DateTime.Now, "fromNumber",
-                LocalTimeZoneRestriction, BroadcastConfigRestryConfig, CfAnsweringMachineConfig.AmAndLive, "item",
+                null, BroadcastConfigRestryConfig, CfAnsweringMachineConfig.AmAndLive, "item",
                 "liveSoundTextVoice", "item1", "machineSoundTextVoice", "item2", "tranferSoudnTextVoice", "1", "123456",
                 "item3", "DncSoundTextVoice", "1", 5);
+            ExpectedBroadcast.Item = ExpectedVoiceBroadcastConfig;
+ 
+            CreateExpectedBroadcast(2);
 
-            ExpectedBroadcast.Type = CfBroadcastType.Voice;
+            ExpectedVoiceBroadcastConfig.LocalTimeZoneRestriction = LocalTimeZoneRestriction;
+            ExpectedVoiceBroadcastConfig.RetryConfig = null;
             ExpectedBroadcast.Item = ExpectedVoiceBroadcastConfig;
 
-            CreateExpectedBroadcast(5);
+            CreateExpectedBroadcast(3);
         }
 
         private void CreateExpectedBroadcast(long broadcastId)

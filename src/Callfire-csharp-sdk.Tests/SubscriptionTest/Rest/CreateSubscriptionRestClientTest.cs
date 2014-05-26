@@ -1,27 +1,26 @@
 ﻿using CallFire_csharp_sdk.API.Rest;
 using CallFire_csharp_sdk.API.Soap;
+using CallFire_csharp_sdk.Common;
 using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
 using CallFire_csharp_sdk.Common.Resource.Mappers;
 using NUnit.Framework;
 using Rhino.Mocks;
-using ServiceStack.Common.Web;
-using ServiceStack.ServiceClient.Web;
 
 namespace Callfire_csharp_sdk.Tests.SubscriptionTest.Rest
 {
     [TestFixture]
     public class CreateSubscriptionRestClientTest : CreateSubscriptionClientTest
     {
-        protected JsonServiceClient JsonServiceClientMock;
+        internal IHttpClient HttpClientMock;
 
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            JsonServiceClientMock = MockRepository.GenerateMock<JsonServiceClient>();
-            Client = new RestSubscriptionClient(JsonServiceClientMock);
+            HttpClientMock = MockRepository.GenerateMock<IHttpClient>();
+            Client = new RestSubscriptionClient(HttpClientMock);
 
-            SubscriptionId = 1;
+            SubscriptionId = 14561;
             SubscriptionFilter = new CfSubscriptionSubscriptionFilter(1, 5, "fromNumber", "toNumber", true);
             Subscription = new CfSubscription(SubscriptionId, true, "endPoint", CfNotificationFormat.Soap,
                 CfSubscriptionTriggerEvent.CampaignStarted, SubscriptionFilter);
@@ -29,9 +28,15 @@ namespace Callfire_csharp_sdk.Tests.SubscriptionTest.Rest
 
             var notificationFormat = NotificationFormatMapper.ToSoapNotificationFormat(Subscription.NotificationFormat);
             var triggerEvent = SubscriptionTriggerEventMapper.ToSoapSubscriptionTriggerEvent(Subscription.TriggerEvent);
+            
+            var response = string.Format("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
+                        "<r:ResourceReference xmlns=\"http://api.callfire.com/data\" xmlns:r=\"http://api.callfire.com/resource\">" +
+                              "<r:Id>{0}</r:Id>" +
+                              "<r:Location>https://www.callfire.com/api/1.1/rest/subscription/{0}</r:Location>" +
+                        "</r:ResourceReference>", SubscriptionId);
 
-            JsonServiceClientMock
-                .Stub(j => j.Send<long>(Arg<string>.Is.Equal(HttpMethods.Post), Arg<string>.Is.Equal("/subscription"),
+            HttpClientMock
+                .Stub(j => j.Send(Arg<string>.Is.Equal("/subscription"), Arg<HttpMethod>.Is.Equal(HttpMethod.Post), 
                     Arg<SubscriptionRequest>.Matches(x => x.RequestId == SubscriptionRequest.RequestId &&
                                                           x.Subscription.id == Subscription.Id &&
                                                           x.Subscription.Enabled == Subscription.Enabled &&
@@ -43,7 +48,7 @@ namespace Callfire_csharp_sdk.Tests.SubscriptionTest.Rest
                                                           x.Subscription.SubscriptionFilter.FromNumber == SubscriptionFilter.FromNumber &&
                                                           x.Subscription.SubscriptionFilter.ToNumber == SubscriptionFilter.ToNumber &&
                                                           x.Subscription.SubscriptionFilter.Inbound == SubscriptionFilter.Inbound)))
-                            .Return(SubscriptionId);
+                            .Return(response);
         }
     }
 }

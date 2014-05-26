@@ -1,29 +1,30 @@
 ﻿using System;
+using System.IO;
+using System.Xml.Serialization;
 using CallFire_csharp_sdk.API.Rest;
 using CallFire_csharp_sdk.API.Soap;
+using CallFire_csharp_sdk.Common;
 using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
+using CallFire_csharp_sdk.Common.Resource.Mappers;
 using CallFire_csharp_sdk.Common.Result;
-using CallFire_csharp_sdk.Common.Result.Mappers;
 using NUnit.Framework;
 using Rhino.Mocks;
-using ServiceStack.Common.Web;
-using ServiceStack.ServiceClient.Web;
 
 namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
 {
     [TestFixture]
     public class QueryContactBatchRestClientTest : QueryContactBatchClientTest
     {
-        protected JsonServiceClient JsonServiceClientMock;
+        internal IHttpClient HttpClientMock;
 
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            JsonServiceClientMock = MockRepository.GenerateMock<JsonServiceClient>();
-            Client = new RestBroadcastClient(JsonServiceClientMock);
+            HttpClientMock = MockRepository.GenerateMock<IHttpClient>();
+            Client = new RestBroadcastClient(HttpClientMock);
 
-            ExpectedQueryContactBatches = new CfQueryContactBatches(500, 0, 1);
+            ExpectedQueryBroadcastData = new CfQueryBroadcastData(500, 0, 1);
 
             ExpectedContactBatch = new CfContactBatch(1, "contactBatch", CfBatchStatus.Active, 2, DateTime.Now, 10, 15);
 
@@ -32,12 +33,23 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
 
             ExpectedContactBatchQueryResult = new CfContactBatchQueryResult(10, contactBatchArray);
 
-            JsonServiceClientMock
-                .Stub(j => j.Send<ContactBatchQueryResult>(Arg<string>.Is.Equal(HttpMethods.Get),
-                    Arg<string>.Is.Equal(String.Format("/broadcast/{0}/batch?MaxResults={1}&FirstResult={2}",
-                                    ExpectedQueryContactBatches.BroadcastId, ExpectedQueryContactBatches.MaxResults, ExpectedQueryContactBatches.FirstResult)),
-                    Arg<object>.Is.Null))
-                .Return(ContactBatchQueryResultMapper.ToSoapContactBatchQueryResult(ExpectedContactBatchQueryResult));
+            var resource = new ResourceList();
+            var array = new ContactBatch[1];
+            array[0] = ContactBatchMapper.ToSoapContactBatch(ExpectedContactBatchQueryResult.ContactBatch[0]);
+            resource.Resource = array;
+            resource.TotalResults = 1;
+
+            var serializer = new XmlSerializer(typeof(ResourceList));
+            TextWriter writer = new StringWriter();
+            serializer.Serialize(writer, resource);
+
+            HttpClientMock
+                .Stub(j => j.Send(Arg<string>.Is.Equal(String.Format("/broadcast/{0}/batch?MaxResults={1}&FirstResult={2}",
+                            ExpectedQueryBroadcastData.BroadcastId, ExpectedQueryBroadcastData.MaxResults,
+                            ExpectedQueryBroadcastData.FirstResult)),
+                            Arg<HttpMethod>.Is.Equal(HttpMethod.Get),
+                            Arg<object>.Is.Null))
+                .Return(writer.ToString());
         }
     }
 }

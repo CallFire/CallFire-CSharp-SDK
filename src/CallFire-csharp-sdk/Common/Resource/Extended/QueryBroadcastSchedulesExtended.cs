@@ -9,5 +9,9 @@ namespace CallFire_csharp_sdk.API.Soap
             FirstResult = firstResult;
             BroadcastId = broadcastId;
         }
+
+        public QueryBroadcastSchedules()
+        {
+        }
     }
 }

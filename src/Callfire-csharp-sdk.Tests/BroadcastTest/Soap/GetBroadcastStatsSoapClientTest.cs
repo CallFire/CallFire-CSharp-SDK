@@ -1,4 +1,6 @@
-﻿using CallFire_csharp_sdk.API.Soap;
+﻿using System;
+using CallFire_csharp_sdk.API.Soap;
+using CallFire_csharp_sdk.Common.Resource;
 using NUnit.Framework;
 using Rhino.Mocks;
 
@@ -14,8 +16,9 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Soap
         {
             BroadcastServiceMock = MockRepository.GenerateStub<IBroadcastServicePortTypeClient>();
             Client = new SoapBroadcastClient(BroadcastServiceMock);
-            BroadcastId = 1;
 
+            BroadcastId = 1;
+            GetBroadcastStats = new CfGetBroadcastStats(BroadcastId, DateTime.Now, DateTime.Now);
             ExpectedUsageStats = new BroadcastStatsUsageStats(5, 5, 2, 10, 2);
 
             var resultStat = new BroadcastStatsResultStat[1];

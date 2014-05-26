@@ -1,0 +1,781 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://api.callfire.com/service/wsdl/http/soap12" xmlns:svc="http://api.callfire.com/service/wsdl" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://api.callfire.com/service/wsdl/http/soap12" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:import namespace="http://api.callfire.com/service/wsdl" location="callfire-service.wsdl" />
+  <wsdl:types />
+  <wsdl:binding name="BroadcastServiceBinding" type="svc:BroadcastServicePortType">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateBroadcast">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/BroadcastServicePortType/CreateBroadcast" style="document" />
+      <wsdl:input name="CreateBroadcast">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="BroadcastId">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="QueryBroadcasts">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/BroadcastServicePortType/QueryBroadcasts" style="document" />
+      <wsdl:input name="QueryBroadcasts">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="BroadcastQueryResult">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetBroadcast">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/BroadcastServicePortType/GetBroadcast" style="document" />
+      <wsdl:input name="GetBroadcast">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="Broadcast">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBroadcast">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/BroadcastServicePortType/UpdateBroadcast" style="document" />
+      <wsdl:input name="UpdateBroadcast">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="UpdateBroadcastResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetBroadcastStats">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/BroadcastServicePortType/GetBroadcastStats" style="document" />
+      <wsdl:input name="GetBroadcastStats">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="BroadcastStats">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ControlBroadcast">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/BroadcastServicePortType/ControlBroadcast" style="document" />
+      <wsdl:input name="ControlBroadcast">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ControlBroadcastResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CreateContactBatch">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/BroadcastServicePortType/CreateContactBatch" style="document" />
+      <wsdl:input name="CreateContactBatch">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ContactBatchId">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="QueryContactBatches">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/BroadcastServicePortType/QueryContactBatches" style="document" />
+      <wsdl:input name="QueryContactBatches">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ContactBatches">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetContactBatch">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/BroadcastServicePortType/GetContactBatch" style="document" />
+      <wsdl:input name="GetContactBatch">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ContactBatchResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ControlContactBatch">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/BroadcastServicePortType/ControlContactBatch" style="document" />
+      <wsdl:input name="ControlContactBatch">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ControlContactBatchResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CreateBroadcastSchedule">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/BroadcastServicePortType/CreateBroadcastSchedule" style="document" />
+      <wsdl:input name="CreateBroadcastSchedule">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="BroadcastScheduleId">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="QueryBroadcastSchedule">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/BroadcastServicePortType/QueryBroadcastSchedule" style="document" />
+      <wsdl:input name="QueryBroadcastSchedule">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="BroadcastSchedules">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetBroadcastSchedule">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/BroadcastServicePortType/GetBroadcastSchedule" style="document" />
+      <wsdl:input name="GetBroadcastSchedule">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="BroadcastScheduleResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBroadcastSchedule">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/BroadcastServicePortType/DeleteBroadcastSchedule" style="document" />
+      <wsdl:input name="DeleteBroadcastSchedule">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="DeleteBroadcastServiceResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SubscriptionServiceBinding" type="svc:SubscriptionServicePortType">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateSubscription">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/SubscriptionServicePortType/CreateSubscription" style="document" />
+      <wsdl:input name="Create">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SubscriptionId">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="QuerySubscriptions">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/SubscriptionServicePortType/QuerySubscriptions" style="document" />
+      <wsdl:input name="QuerySubscriptions">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SubscriptionQueryResult">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubscription">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/SubscriptionServicePortType/GetSubscription" style="document" />
+      <wsdl:input name="GetSubscription">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="Response">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSubscription">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/SubscriptionServicePortType/UpdateSubscription" style="document" />
+      <wsdl:input name="UpdateSubscription">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="UpdateSubscriptionResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteSubscription">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/SubscriptionServicePortType/DeleteSubscription" style="document" />
+      <wsdl:input name="DeleteSubscription">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="DeleteSubscriptionResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="TextServiceBinding" type="svc:TextServicePortType">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SendText">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/TextServicePortType/SendText" style="document" />
+      <wsdl:input name="SendText">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="BroadcastId">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="QueryTexts">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/TextServicePortType/QueryTexts" style="document" />
+      <wsdl:input name="QueryTexts">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="TextQueryResult">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetText">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/TextServicePortType/GetText" style="document" />
+      <wsdl:input name="GetText">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="Text">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CreateAutoReply">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/TextServicePortType/CreateAutoReply" style="document" />
+      <wsdl:input name="CreateAutoReply">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="AutoReplyId">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="QueryAutoReplies">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/TextServicePortType/QueryAutoReplies" style="document" />
+      <wsdl:input name="QueryAutoReplies">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="AutoReplyQueryResult">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAutoReply">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/TextServicePortType/GetAutoReply" style="document" />
+      <wsdl:input name="GetAutoReply">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="AutoReply">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAutoReply">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/TextServicePortType/DeleteAutoReply" style="document" />
+      <wsdl:input name="Request">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="Empty">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CallServiceBinding" type="svc:CallServicePortType">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SendCall">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/CallServicePortType/SendCall" style="document" />
+      <wsdl:input name="SendCall">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="BroadcastId">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="QueryCalls">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/CallServicePortType/QueryCalls" style="document" />
+      <wsdl:input name="QueryCalls">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="CallQueryResult">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetCall">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/CallServicePortType/GetCall" style="document" />
+      <wsdl:input name="GetCall">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="Call">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CreateSound">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/CallServicePortType/CreateSound" style="document" />
+      <wsdl:input name="CreateSound">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SoundMetaId">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="QuerySoundMeta">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/CallServicePortType/QuerySoundMeta" style="document" />
+      <wsdl:input name="QuerySoundMeta">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SoundMetaQueryResult">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetSoundMeta">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/CallServicePortType/GetSoundMeta" style="document" />
+      <wsdl:input name="GetSoundMeta">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SoundMeta">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetSoundData">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/CallServicePortType/GetSoundData" style="document" />
+      <wsdl:input name="GetSoundData">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SoundData">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetRecordingData">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/CallServicePortType/GetRecordingData" style="document" />
+      <wsdl:input name="GetRecordingData">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="RecordingData">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ContactServiceBinding" type="svc:ContactServicePortType">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="QueryContacts">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/ContactServicePortType/QueryContacts" style="document" />
+      <wsdl:input name="QueryContacts">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ContactQueryResult">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateContacts">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/ContactServicePortType/UpdateContacts" style="document" />
+      <wsdl:input name="UpdateContacts">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="UpdateContactsResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveContacts">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/ContactServicePortType/RemoveContacts" style="document" />
+      <wsdl:input name="RemoveContacts">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="RemoveContactsResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetContact">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/ContactServicePortType/GetContact" style="document" />
+      <wsdl:input name="GetContact">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="Contact">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetContactHistory">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/ContactServicePortType/GetContactHistory" style="document" />
+      <wsdl:input name="GetContactHistory">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ContactHistory">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CreateContactList">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/ContactServicePortType/CreateContactList" style="document" />
+      <wsdl:input name="CreateContactList">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ContactListId">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="QueryContactLists">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/ContactServicePortType/QueryContactLists" style="document" />
+      <wsdl:input name="QueryContactLists">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ContactListQueryResult">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteContactList">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/ContactServicePortType/DeleteContactList" style="document" />
+      <wsdl:input name="DeleteContactList">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="DeleteContactListResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AddContactsToList">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/ContactServicePortType/AddContactsToList" style="document" />
+      <wsdl:input name="AddContactsToList">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="AddContactsToListResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetContactList">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/ContactServicePortType/GetContactList" style="document" />
+      <wsdl:input name="GetContactList">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ContactList">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveContactsFromList">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/ContactServicePortType/RemoveContactsFromList" style="document" />
+      <wsdl:input name="RemoveContactsFromList">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="RemoveContactsFromListResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NumberServiceBinding" type="svc:NumberServicePortType">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="QueryRegions">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/NumberServicePortType/QueryRegions" style="document" />
+      <wsdl:input name="Request">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="Response">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="QueryNumbers">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/NumberServicePortType/QueryNumbers" style="document" />
+      <wsdl:input name="QueryNumbers">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="NumberQueryResult">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetNumber">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/NumberServicePortType/GetNumber" style="document" />
+      <wsdl:input name="GetNumber">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="Number">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ConfigureNumber">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/NumberServicePortType/ConfigureNumber" style="document" />
+      <wsdl:input name="ConfigureNumber">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ConfigureNumberResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SearchAvailableNumbers">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/NumberServicePortType/SearchAvailableNumbers" style="document" />
+      <wsdl:input name="SearchAvailableNumbers">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="AvailableNumbers">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="QueryKeywords">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/NumberServicePortType/QueryKeywords" style="document" />
+      <wsdl:input name="QueryKeywords">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="KeywordQueryResult">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SearchAvailableKeywords">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/NumberServicePortType/SearchAvailableKeywords" style="document" />
+      <wsdl:input name="SearchAvailableKeywords">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="AvailableKeywordList">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CreateNumberOrder">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/NumberServicePortType/CreateNumberOrder" style="document" />
+      <wsdl:input name="CreateNumberOrder">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="NumberOrderId">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetNumberOrder">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/NumberServicePortType/GetNumberOrder" style="document" />
+      <wsdl:input name="GetNumberOrder">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="NumberOrder">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Release">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/NumberServicePortType/Release" style="document" />
+      <wsdl:input name="Release">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ReleaseResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="LabelServiceBinding" type="svc:LabelServicePortType">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="DeleteLabel">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/LabelServicePortType/DeleteLabel" style="document" />
+      <wsdl:input name="Delete">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="DeleteResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="QueryLabels">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/LabelServicePortType/QueryLabels" style="document" />
+      <wsdl:input name="Query">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="QueryResult">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="LabelBroadcast">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/LabelServicePortType/LabelBroadcast" style="document" />
+      <wsdl:input name="LabelBroadcast">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="Result">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UnlabelBroadcast">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/LabelServicePortType/UnlabelBroadcast" style="document" />
+      <wsdl:input name="UnlabelBroadcast">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="Result">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="LabelNumber">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/LabelServicePortType/LabelNumber" style="document" />
+      <wsdl:input name="LabelNumber">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="Result">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UnlabelNumber">
+      <soap12:operation soapAction="http://api.callfire.com/service/wsdl/LabelServicePortType/UnlabelNumber" style="document" />
+      <wsdl:input name="UnlabelNumber">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="Result">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Fault">
+        <soap12:body use="literal" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CallFireApi">
+    <wsdl:port name="BroadcastServicePort" binding="tns:BroadcastServiceBinding">
+      <soap12:address location="https://www.callfire.com/api/1.1/soap12/broadcast" />
+    </wsdl:port>
+    <wsdl:port name="SubscriptionServicePort" binding="tns:SubscriptionServiceBinding">
+      <soap12:address location="https://www.callfire.com/api/1.1/soap12/subscription" />
+    </wsdl:port>
+    <wsdl:port name="TextServicePort" binding="tns:TextServiceBinding">
+      <soap12:address location="https://www.callfire.com/api/1.1/soap12/text" />
+    </wsdl:port>
+    <wsdl:port name="CallServicePort" binding="tns:CallServiceBinding">
+      <soap12:address location="https://www.callfire.com/api/1.1/soap12/call" />
+    </wsdl:port>
+    <wsdl:port name="ContactServicePort" binding="tns:ContactServiceBinding">
+      <soap12:address location="https://www.callfire.com/api/1.1/soap12/contact" />
+    </wsdl:port>
+    <wsdl:port name="NumberServicePort" binding="tns:NumberServiceBinding">
+      <soap12:address location="https://www.callfire.com/api/1.1/soap12/number" />
+    </wsdl:port>
+    <wsdl:port name="LabelServicePort" binding="tns:LabelServiceBinding">
+      <soap12:address location="https://www.callfire.com/api/1.1/soap12/label" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -15,5 +15,9 @@ namespace CallFire_csharp_sdk.API.Soap
             EndDate = endDate;
             DaysOfWeek = daysOfWeek;
         }
+
+        public BroadcastSchedule()
+        {
+        }
     }
 }

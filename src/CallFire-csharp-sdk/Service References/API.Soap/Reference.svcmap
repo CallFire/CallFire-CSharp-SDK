@@ -18,13 +18,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="https://www.callfire.com/api/1.1/wsdl/callfire-service.wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://callfire.com/api/1.1/wsdl/callfire-service-http-soap12.wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="callfire-data.xsd" MetadataType="Schema" ID="43e2ef99-d0a5-4b2e-b523-0576dbad4c23" SourceId="1" SourceUrl="https://www.callfire.com/api/1.1/wsdl/callfire-data.xsd" />
+    <MetadataFile FileName="callfire-ann.xsd" MetadataType="Schema" ID="7e64c2ef-e7af-43e7-93e7-8563eaed6d8c" SourceId="1" SourceUrl="https://www.callfire.com/api/1.1/wsdl/callfire-ann.xsd" />
     <MetadataFile FileName="callfire-service.xsd" MetadataType="Schema" ID="3b4343b4-8913-450e-ab3a-028f9cfbb6d7" SourceId="1" SourceUrl="https://www.callfire.com/api/1.1/wsdl/callfire-service.xsd" />
     <MetadataFile FileName="callfire-service.wsdl" MetadataType="Wsdl" ID="6d04c8d6-797e-45be-b8e7-6f84a5155572" SourceId="1" SourceUrl="https://www.callfire.com/api/1.1/wsdl/callfire-service.wsdl" />
-    <MetadataFile FileName="callfire-ann.xsd" MetadataType="Schema" ID="7e64c2ef-e7af-43e7-93e7-8563eaed6d8c" SourceId="1" SourceUrl="https://www.callfire.com/api/1.1/wsdl/callfire-ann.xsd" />
+    <MetadataFile FileName="callfire-data.xsd" MetadataType="Schema" ID="43e2ef99-d0a5-4b2e-b523-0576dbad4c23" SourceId="1" SourceUrl="https://www.callfire.com/api/1.1/wsdl/callfire-data.xsd" />
+    <MetadataFile FileName="callfire-service-http-soap12.wsdl" MetadataType="Wsdl" ID="5a20cd19-f39b-42dc-b1ba-6221d3f7002b" SourceId="1" SourceUrl="https://www.callfire.com/api/1.1/wsdl/callfire-service-http-soap12.wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

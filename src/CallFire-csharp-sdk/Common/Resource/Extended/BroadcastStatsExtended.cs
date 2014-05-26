@@ -9,5 +9,9 @@ namespace CallFire_csharp_sdk.API.Soap
             ResultStat = resultStat;
             ActionStatistics = actionStatistics;
         }
+
+        public BroadcastStats()
+        {
+        }
     }
 }

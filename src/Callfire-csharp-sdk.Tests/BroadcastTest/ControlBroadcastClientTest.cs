@@ -1,5 +1,4 @@
-﻿
-using CallFire_csharp_sdk.API;
+﻿using CallFire_csharp_sdk.API;
 using CallFire_csharp_sdk.Common.Resource;
 using NUnit.Framework;
 

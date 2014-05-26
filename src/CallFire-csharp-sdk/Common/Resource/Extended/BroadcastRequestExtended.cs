@@ -3,9 +3,14 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class BroadcastRequest
     {
-        public BroadcastRequest(Broadcast broadcast)
+        public BroadcastRequest(string requestId, Broadcast broadcast)
         {
+            RequestId = requestId;
             Broadcast = broadcast;
+        }
+
+        public BroadcastRequest()
+        {
         }
     }
 }

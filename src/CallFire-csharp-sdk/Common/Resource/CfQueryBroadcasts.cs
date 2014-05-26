@@ -4,7 +4,7 @@ namespace CallFire_csharp_sdk.Common.Resource
 {
     public class CfQueryBroadcasts : CfQuery
     {
-        public CfQueryBroadcasts(long maxResult, long firstResult, CfBroadcastType type, bool? running, string labelName)
+        public CfQueryBroadcasts(long maxResult, long firstResult, CfBroadcastType[] type, bool? running, string labelName)
         {
             MaxResults = maxResult;
             FirstResult = firstResult;
@@ -13,7 +13,7 @@ namespace CallFire_csharp_sdk.Common.Resource
             LabelName = labelName;
         }
 
-        public CfBroadcastType Type { get; set; }
+        public CfBroadcastType[] Type { get; set; }
 
         public bool? Running;
 

@@ -8,5 +8,9 @@ namespace CallFire_csharp_sdk.API.Soap
             Name = name;
             Enabled = enabled;
         }
+
+        public ControlContactBatch()
+        {
+        }
     }
 }

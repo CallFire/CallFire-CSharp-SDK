@@ -1,25 +1,25 @@
 ﻿using System;
+using System.IO;
+using System.Xml.Serialization;
 using CallFire_csharp_sdk.API.Rest;
-using CallFire_csharp_sdk.API.Soap;
+using CallFire_csharp_sdk.Common;
 using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource.Mappers;
 using NUnit.Framework;
 using Rhino.Mocks;
-using ServiceStack.Common.Web;
-using ServiceStack.ServiceClient.Web;
 
 namespace Callfire_csharp_sdk.Tests.SubscriptionTest.Rest
 {
     [TestFixture]
     public class GetSubscriptionRestClientTest : GetSubscriptionClientTest
     {
-        protected JsonServiceClient JsonServiceClientMock;
+        internal IHttpClient HttpClientMock;
 
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            JsonServiceClientMock = MockRepository.GenerateMock<JsonServiceClient>();
-            Client = new RestSubscriptionClient(JsonServiceClientMock);
+            HttpClientMock = MockRepository.GenerateMock<IHttpClient>();
+            Client = new RestSubscriptionClient(HttpClientMock);
 
             SubscriptionId = 1;
             SubscriptionFilter = new CfSubscriptionSubscriptionFilter(1, 5, "fromNumber", "toNumber", true);
@@ -35,10 +35,16 @@ namespace Callfire_csharp_sdk.Tests.SubscriptionTest.Rest
 
         private void GenerateMock(CfSubscription subscription)
         {
-            JsonServiceClientMock
-                .Stub(j => j.Send<Subscription>(Arg<string>.Is.Equal(HttpMethods.Get), Arg<string>.Is.Equal(String.Format("/subscription/{0}", SubscriptionId)),
+            var resource = new Resource { Resources = SubscriptionMapper.ToSoapSubscription(subscription) };
+            var serializer = new XmlSerializer(typeof(Resource));
+            TextWriter writer = new StringWriter();
+            serializer.Serialize(writer, resource);
+
+            HttpClientMock
+                .Stub(j => j.Send(Arg<string>.Is.Equal(String.Format("/subscription/{0}", SubscriptionId)),
+                    Arg<HttpMethod>.Is.Equal(HttpMethod.Get),
                     Arg<object>.Is.Null))
-                .Return(SubscriptionMapper.ToSoapSubscription(subscription));
+                .Return(writer.ToString());
         }
     }
 }

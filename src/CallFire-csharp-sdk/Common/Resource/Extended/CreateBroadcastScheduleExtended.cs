@@ -9,5 +9,9 @@ namespace CallFire_csharp_sdk.API.Soap
             BroadcastId = broadcastId;
             BroadcastSchedule = broadcastSchedule;
         }
+
+        public CreateBroadcastSchedule()
+        {
+        }
     }
 }

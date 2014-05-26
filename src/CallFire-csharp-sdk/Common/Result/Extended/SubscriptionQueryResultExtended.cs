@@ -9,5 +9,9 @@ namespace CallFire_csharp_sdk.API.Soap
             TotalResults = totalResults;
             Subscription = subscription;
         }
+
+        public SubscriptionQueryResult()
+        {
+        }
     }
 }

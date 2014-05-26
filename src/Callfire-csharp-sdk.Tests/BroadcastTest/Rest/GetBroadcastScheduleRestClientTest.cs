@@ -1,35 +1,42 @@
 ﻿using System;
+using System.IO;
+using System.Xml.Serialization;
 using CallFire_csharp_sdk.API.Rest;
-using CallFire_csharp_sdk.API.Soap;
+using CallFire_csharp_sdk.Common;
 using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource.Mappers;
 using NUnit.Framework;
 using Rhino.Mocks;
-using ServiceStack.Common.Web;
-using ServiceStack.ServiceClient.Web;
 
 namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
 {
     [TestFixture]
     public class GetBroadcastScheduleRestClientTest : GetBroadcastScheduleClientTest
     {
-        protected JsonServiceClient JsonServiceClientMock;
+        internal IHttpClient HttpClientMock;
 
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            JsonServiceClientMock = MockRepository.GenerateMock<JsonServiceClient>();
-            Client = new RestBroadcastClient(JsonServiceClientMock);
+            HttpClientMock = MockRepository.GenerateMock<IHttpClient>();
+            Client = new RestBroadcastClient(HttpClientMock);
 
             BroadcastScheduleId = 1;
-            BroadcastSchedule = new CfBroadcastSchedule(BroadcastScheduleId, DateTime.Now, DateTime.Now, "timeZone", DateTime.Now, DateTime.Now, "daysOfWeek");
-
+            CfDaysOfWeek[] daysOfWeek = { CfDaysOfWeek.Monday };
+            BroadcastSchedule = new CfBroadcastSchedule(BroadcastScheduleId, DateTime.Now, DateTime.Now, "timeZone", DateTime.Now, DateTime.Now, daysOfWeek);
+            
             var broadcastSchedule = BroadcastScheduleMapper.ToSoapBroadcastSchedule(BroadcastSchedule);
-            JsonServiceClientMock
-                .Stub(j => j.Send<BroadcastSchedule>(Arg<string>.Is.Equal(HttpMethods.Get),
-                    Arg<string>.Is.Equal(String.Format("/broadcast/schedule/{0}", BroadcastScheduleId)),
+
+            var resource = new Resource { Resources = broadcastSchedule };
+            var serializer = new XmlSerializer(typeof(Resource));
+            TextWriter writer = new StringWriter();
+            serializer.Serialize(writer, resource);
+
+            HttpClientMock
+                .Stub(j => j.Send(Arg<string>.Is.Equal(String.Format("/broadcast/schedule/{0}", BroadcastScheduleId)),
+                    Arg<HttpMethod>.Is.Equal(HttpMethod.Get),
                     Arg<object>.Is.Null))
-                .Return(broadcastSchedule);
+                .Return(writer.ToString());
         }
     }
 }

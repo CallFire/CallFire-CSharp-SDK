@@ -10,5 +10,9 @@ namespace CallFire_csharp_sdk.API.Soap
         {
             DialplanXml = dialplanXml;
         }
+
+        public IvrBroadcastConfig()
+        {
+        }
     }
 }

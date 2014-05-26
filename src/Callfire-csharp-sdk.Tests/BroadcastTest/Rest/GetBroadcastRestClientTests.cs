@@ -1,58 +1,52 @@
 ﻿using System;
+using System.IO;
+using System.Xml.Serialization;
 using CallFire_csharp_sdk.API.Rest;
 using CallFire_csharp_sdk.API.Soap;
+using CallFire_csharp_sdk.Common;
 using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource.Mappers;
 using NUnit.Framework;
 using Rhino.Mocks;
-using ServiceStack.Common.Web;
-using ServiceStack.ServiceClient.Web;
 
 namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
 {
     [TestFixture]
     public class GetBroadcastRestClientTests : GetBroadcastClientTest
     {
-        protected JsonServiceClient JsonServiceClientMock;
+        internal IHttpClient HttpClientMock;
 
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            JsonServiceClientMock = MockRepository.GenerateMock<JsonServiceClient>();
-            Client = new RestBroadcastClient(JsonServiceClientMock);
+            HttpClientMock = MockRepository.GenerateMock<IHttpClient>();
+            Client = new RestBroadcastClient(HttpClientMock);
 
             ExpectedBroadcast = new CfBroadcast(1, "broadcast", CfBroadcastStatus.Running, DateTime.Now, CfBroadcastType.Voice, null);
             
             CreateExpectedBroadcast(1);
 
             LocalTimeZoneRestriction = new CfLocalTimeZoneRestriction(DateTime.Now, DateTime.Now);
-            BroadcastConfigRestryConfig = new CfBroadcastConfigRetryConfig(1000, 2, "retryResult", "retryPhoneTypes");
-            ExpectedTextBroadcastConfig = new CfTextBroadcastConfig(1, DateTime.Now, "fromNumber", null, BroadcastConfigRestryConfig, "Message", CfBigMessageStrategy.SendMultiple);
-            ExpectedBroadcast.Type = CfBroadcastType.Text;
-            ExpectedBroadcast.Item = ExpectedTextBroadcastConfig;
-
-            CreateExpectedBroadcast(2);
-
-            ExpectedTextBroadcastConfig.LocalTimeZoneRestriction = LocalTimeZoneRestriction;
-            ExpectedTextBroadcastConfig.RetryConfig = null;
-            ExpectedBroadcast.Type = CfBroadcastType.Text;
-            ExpectedBroadcast.Item = ExpectedTextBroadcastConfig;
-
-            CreateExpectedBroadcast(3);
-
-            ExpectedIvrBroadcastConfig = new CfIvrBroadcastConfig(1, DateTime.Now, "fromNumber", LocalTimeZoneRestriction, BroadcastConfigRestryConfig, "dialplanXml");
-            ExpectedBroadcast.Type = CfBroadcastType.Ivr;
-            ExpectedBroadcast.Item = ExpectedIvrBroadcastConfig;
-            CreateExpectedBroadcast(4);
+            CfResult[] result = { CfResult.Received };
+            CfRetryPhoneType[] phoneTypes = { CfRetryPhoneType.First_Number };
+            BroadcastConfigRestryConfig = new CfBroadcastConfigRetryConfig(1000, 2, result, phoneTypes);
 
             ExpectedVoiceBroadcastConfig = new CfVoiceBroadcastConfig(1, DateTime.Now, "fromNumber",
-                LocalTimeZoneRestriction, BroadcastConfigRestryConfig, CfAnsweringMachineConfig.AmAndLive, "item",
+                null, BroadcastConfigRestryConfig, CfAnsweringMachineConfig.AmAndLive, "item",
                 "liveSoundTextVoice", "item1", "machineSoundTextVoice", "item2", "tranferSoudnTextVoice", "1", "123456",
                 "item3", "DncSoundTextVoice", "1", 5);
-
-            ExpectedBroadcast.Type = CfBroadcastType.Voice;
             ExpectedBroadcast.Item = ExpectedVoiceBroadcastConfig;
-            CreateExpectedBroadcast(5);
+            
+            CreateExpectedBroadcast(2);
+
+            ExpectedVoiceBroadcastConfig.LocalTimeZoneRestriction = LocalTimeZoneRestriction;
+            ExpectedVoiceBroadcastConfig.RetryConfig = null;
+            ExpectedBroadcast.Item = ExpectedVoiceBroadcastConfig;
+            
+            CreateExpectedBroadcast(3);
+            
+            var resource = new Resource { Resources = null };
+            GetValue(10, resource);
         }
 
         private void CreateExpectedBroadcast(long broadcastId)
@@ -61,11 +55,22 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
                 BroadcastStatusMapper.ToSoapBroadcastStatus(ExpectedBroadcast.Status), ExpectedBroadcast.LastModified,
                 BroadcastTypeMapper.ToSoapBroadcastType(ExpectedBroadcast.Type),
                 BroadcastConfigMapper.ToBroadcastConfig(ExpectedBroadcast.Item, ExpectedBroadcast.Type));
-            JsonServiceClientMock
-                .Stub(j => j.Send<Broadcast>(Arg<string>.Is.Equal(HttpMethods.Get), 
-                    Arg<string>.Is.Equal(String.Format("/broadcast/{0}", broadcastId)),
+
+            var resource = new Resource {Resources = expectedBroadcast};
+            GetValue(broadcastId, resource);
+        }
+
+        private void GetValue(long broadcastId, Resource resource)
+        {
+            var serializer = new XmlSerializer(typeof (Resource));
+            TextWriter writer = new StringWriter();
+            serializer.Serialize(writer, resource);
+
+            HttpClientMock
+                .Stub(j => j.Send(Arg<string>.Is.Equal(String.Format("/broadcast/{0}", broadcastId)),
+                    Arg<HttpMethod>.Is.Equal(HttpMethod.Get),
                     Arg<object>.Is.Null))
-                .Return(expectedBroadcast);
+                .Return(writer.ToString());
         }
     }
 }

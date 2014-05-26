@@ -6,9 +6,9 @@ using CallFire_csharp_sdk.Common.Result.Mappers;
 
 namespace CallFire_csharp_sdk.API.Soap
 {
-    internal class SoapBroadcastClient : BaseSoapClient<IBroadcastClient>, IBroadcastClient
+    public class SoapBroadcastClient : BaseSoapClient<IBroadcastClient>, IBroadcastClient
     {
-        internal SoapBroadcastClient(string username, string password)
+        public SoapBroadcastClient(string username, string password)
             : base(username, password)
         {
         }
@@ -17,18 +17,18 @@ namespace CallFire_csharp_sdk.API.Soap
         {
         }
 
-        public long CreateBroadcast(CfBroadcast broadcast)
+        public long CreateBroadcast(CfBroadcastRequest createBroadcast)
         {
-            return BroadcastService.CreateBroadcast(new BroadcastRequest(BroadcastMapper.ToSoapBroadcast(broadcast)));
+            return BroadcastService.CreateBroadcast(new BroadcastRequest(createBroadcast.RequestId, BroadcastMapper.ToSoapBroadcast(createBroadcast.Broadcast)));
         }
 
         public CfBroadcastQueryResult QueryBroadcasts(CfQueryBroadcasts queryBroadcasts)
         {
-            var type = BroadcastTypeMapper.ToSoapBroadcastType(queryBroadcasts.Type);
+            var type = EnumeratedMapper.ToSoapEnumerated(queryBroadcasts.Type);
+            var running = queryBroadcasts.Running.HasValue && queryBroadcasts.Running.Value;
             return BroadcastQueryResultMapper.FromSoapBroadcastQueryResult(
                 BroadcastService.QueryBroadcasts(new QueryBroadcasts(queryBroadcasts.MaxResults,
-                    queryBroadcasts.FirstResult, type.ToString(), queryBroadcasts.Running.HasValue && queryBroadcasts.Running.Value,
-                    queryBroadcasts.LabelName)));
+                    queryBroadcasts.FirstResult, type, running, queryBroadcasts.LabelName)));
         }
 
         public CfBroadcast GetBroadcast(long id)
@@ -36,14 +36,15 @@ namespace CallFire_csharp_sdk.API.Soap
             return BroadcastMapper.FromSoapBroadCast(BroadcastService.GetBroadcast(new IdRequest(id)));
         }
 
-        public void UpdateBroadcast(CfBroadcast broadcast)
+        public void UpdateBroadcast(CfBroadcastRequest updateBroadcast)
         {
-            BroadcastService.UpdateBroadcast(new BroadcastRequest(BroadcastMapper.ToSoapBroadcast(broadcast)));
+            BroadcastService.UpdateBroadcast(new BroadcastRequest(updateBroadcast.RequestId, BroadcastMapper.ToSoapBroadcast(updateBroadcast.Broadcast)));
         }
 
-        public CfBroadcastStats GetBroadcastStats(long id)
+        public CfBroadcastStats GetBroadcastStats(CfGetBroadcastStats getBroadcastStats)
         {
-            return BroadcastStatsMapper.FromSoapBroadcastStats(BroadcastService.GetBroadcastStats(new GetBroadcastStats(id)));
+            return BroadcastStatsMapper.FromSoapBroadcastStats(BroadcastService.GetBroadcastStats(new GetBroadcastStats(getBroadcastStats.Id,
+                        getBroadcastStats.IntervalBegin, getBroadcastStats.IntervalEnd)));
         }
 
         public void ControlBroadcast(CfControlBroadcast controlBroadcast)
@@ -60,11 +61,11 @@ namespace CallFire_csharp_sdk.API.Soap
                     createContactBatch.ScrubBroadcastDuplicates));
         }
 
-        public CfContactBatchQueryResult QueryContactBatches(CfQueryContactBatches queryContactBatches)
+        public CfContactBatchQueryResult QueryContactBatches(CfQueryBroadcastData queryBroadcastData)
         {
             return ContactBatchQueryResultMapper.FromSoapContactBatchQueryResult(
-                BroadcastService.QueryContactBatches(new QueryContactBatches(queryContactBatches.MaxResults,
-                    queryContactBatches.FirstResult, queryContactBatches.BroadcastId)));
+                BroadcastService.QueryContactBatches(new QueryContactBatches(queryBroadcastData.MaxResults,
+                    queryBroadcastData.FirstResult, queryBroadcastData.BroadcastId)));
         }
 
         public CfContactBatch GetContactBatch(long id)
@@ -86,13 +87,13 @@ namespace CallFire_csharp_sdk.API.Soap
                     BroadcastScheduleMapper.ToSoapBroadcastSchedule(createBroadcastSchedule.BroadcastSchedule)));
         }
 
-        public CfBroadcastScheduleQueryResult QueryBroadcastSchedule(CfQueryBroadcastSchedules queryBroadcastSchedule)
+        public CfBroadcastScheduleQueryResult QueryBroadcastSchedule(CfQueryBroadcastData queryBroadcastData)
         {
             return
                 BroadcastScheduleQueryResultMapper.FromSoapBroadcastScheduleQueryResult(
                     BroadcastService.QueryBroadcastSchedule(
-                        new QueryBroadcastSchedules(queryBroadcastSchedule.MaxResults,
-                            queryBroadcastSchedule.FirstResult, queryBroadcastSchedule.BroadcastId)));
+                        new QueryBroadcastSchedules(queryBroadcastData.MaxResults,
+                            queryBroadcastData.FirstResult, queryBroadcastData.BroadcastId)));
         }
 
         public CfBroadcastSchedule GetBroadcastSchedule(long id)

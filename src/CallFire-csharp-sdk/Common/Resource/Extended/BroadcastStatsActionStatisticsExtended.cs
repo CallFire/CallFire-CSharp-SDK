@@ -9,5 +9,9 @@ namespace CallFire_csharp_sdk.API.Soap
             RetryWait = retryWait;
             Finished = finished;
         }
+
+        public BroadcastStatsActionStatistics()
+        {
+        }
     }
 }

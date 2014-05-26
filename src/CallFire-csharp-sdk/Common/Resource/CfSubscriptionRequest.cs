@@ -2,15 +2,13 @@
 
 namespace CallFire_csharp_sdk.Common.Resource
 {
-    public class CfSubscriptionRequest
+    public class CfSubscriptionRequest : CfRequest
     {
         public CfSubscriptionRequest(string requestId, CfSubscription suscription)
         {
             RequestId = requestId;
             Subscription = suscription;
         }
-
-        public string RequestId { get; set; }
 
         public CfSubscription Subscription { get; set; }
     }

@@ -189,7 +189,7 @@ namespace CallFire_csharp_sdk.Common.DataManagement
             MinutesBetweenAttempts = 60;
         }
 
-        public CfBroadcastConfigRetryConfig(int maxAttempts, int minutesBetweenAttempts, string retryResults, string retryPhoneTypes)
+        public CfBroadcastConfigRetryConfig(int maxAttempts, int minutesBetweenAttempts, CfResult[] retryResults, CfRetryPhoneType[] retryPhoneTypes)
         {
             MaxAttempts = maxAttempts;
             MinutesBetweenAttempts = minutesBetweenAttempts;
@@ -201,9 +201,9 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
         public int MinutesBetweenAttempts { get; set; }
 
-        public string RetryResults { get; set; }
+        public CfResult[] RetryResults { get; set; }
 
-        public string RetryPhoneTypes { get; set; }
+        public CfRetryPhoneType[] RetryPhoneTypes { get; set; }
     }
 
     public class CfTextBroadcastConfig : CfBroadcastConfig
@@ -223,6 +223,32 @@ namespace CallFire_csharp_sdk.Common.DataManagement
         public string Message { get; set; }
 
         public CfBigMessageStrategy BigMessageStrategy { get; set; }
+    }
+
+    public enum CfResult
+    {
+        La,
+        Am,
+        Busy,
+        Dnc,
+        Xfer,
+        Xfer_Leg,
+        No_Ans,
+        Undialed,
+        Sent,
+        Received,
+        Dnt,
+        Too_Big,
+        Internal_Error,
+        Carrier_Error,
+        Carrier_Temp_Error
+    }
+
+    public enum CfRetryPhoneType{
+        First_Number,
+        Home_Phone,
+        Work_Phone,
+        Mobile_Phone
     }
 
     public enum CfBigMessageStrategy
@@ -255,7 +281,7 @@ namespace CallFire_csharp_sdk.Common.DataManagement
             DncDigit = dncDigit;
             MaxActiveTransfers = maxActiveTransfers;
         }
-
+        
         public CfAnsweringMachineConfig AnsweringMachineConfig { get; set; }
 
         public object Item { get; set; }
@@ -364,11 +390,11 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
         public DateTime EndDate { get; set; }
 
-        public string DaysOfWeek { get; set; }
+        public CfDaysOfWeek[] DaysOfWeek { get; set; }
 
         public long Id { get; set; }
 
-        public CfBroadcastSchedule(long identifier,  DateTime startTimeOfDay, DateTime stopTimeOfDay, string timeZone, DateTime beginDate, DateTime endDate, string daysOfWeek)
+        public CfBroadcastSchedule(long identifier, DateTime startTimeOfDay, DateTime stopTimeOfDay, string timeZone, DateTime beginDate, DateTime endDate, CfDaysOfWeek[] daysOfWeek)
         {
             Id = identifier;
             StartTimeOfDay = startTimeOfDay;
@@ -378,6 +404,17 @@ namespace CallFire_csharp_sdk.Common.DataManagement
             EndDate = endDate;
             DaysOfWeek = daysOfWeek;
         }
+    }
+
+    public enum CfDaysOfWeek
+    {
+        Sunday,
+        Monday,
+        Tuesday,
+        Wednesday,
+        Thursday,
+        Friday,
+        Saturday
     }
 
     public class CfBroadcastStats

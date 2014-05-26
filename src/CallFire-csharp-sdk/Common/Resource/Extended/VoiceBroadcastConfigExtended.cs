@@ -26,5 +26,9 @@ namespace CallFire_csharp_sdk.API.Soap
             DncDigit = dncDigit;
             MaxActiveTransfers = maxActiveTransfers;
         }
+
+        public VoiceBroadcastConfig()
+        {
+        }
     }
 }

@@ -1,50 +1,58 @@
-﻿using ServiceStack.Common.Web;
-using ServiceStack.ServiceClient.Web;
+﻿using System.IO;
+using System.Linq;
+using System.Net;
+using System.Xml.Serialization;
+using CallFire_csharp_sdk.Common;
 
 namespace CallFire_csharp_sdk.API.Rest
 {
-    public abstract class BaseRestClient<T>  
+    public abstract class BaseRestClient<T>
     {
         private const string RestApiUrl = "https://www.callfire.com/api/1.1/rest/";
-        internal readonly JsonServiceClient JsonClient;
+        internal readonly IHttpClient XmlClient;
 
-        internal BaseRestClient(string username, string password)
-            : this(CreateJsonServiceClient(username, password))
+        protected BaseRestClient(string username, string password)
+            : this(CreateXmlServiceClient(username, password))
         {
         }
 
-        private static JsonServiceClient CreateJsonServiceClient(string username, string password)
+        private static IHttpClient CreateXmlServiceClient(string username, string password)
         {
-            var client = new JsonServiceClient(RestApiUrl);
-            client.SetCredentials(username, password);
-            client.AlwaysSendBasicAuthHeader = true;
-
-            return client;
+            return new HttpClient(RestApiUrl, username, password);
         }
 
-        internal BaseRestClient(JsonServiceClient jsonClient)
+        internal BaseRestClient(IHttpClient xmlClient)
         {
-            JsonClient = jsonClient;
+            XmlClient = xmlClient;
         }
 
-        public T GetById(long id)
+        internal TU BaseRequest<TU>(HttpMethod method, object request, CallfireRestRoute<T> route)
         {
-            return BaseRequest<T>(HttpMethods.Get, null, new CallfireRestRoute<T>(id));
-        }
+            var response = string.Empty;
+            try
+            {
+                response = XmlClient.Send(route.ToString(), method, request);
+            }
+            catch (WebException ex)
+            {
+                if (ex.Status == WebExceptionStatus.ProtocolError &&
+                    HttpStatusCode.InternalServerError == ((HttpWebResponse)ex.Response).StatusCode)
+                {
+                    var exceptionDeserializer = new XmlSerializer(typeof(ResourceException));
+                    TextReader exceptionReader = new StringReader(response);
+                    ex.Data.Add("Exception", exceptionDeserializer.Deserialize(exceptionReader));
+                }
+                throw;
+            }
 
-        public long Create(T objectToCreate)
-        {
-            return BaseRequest<long>(HttpMethods.Post, objectToCreate, new CallfireRestRoute<T>(null));
-        }
+            if (string.IsNullOrEmpty(response))
+            {
+                return default(TU);
+            }
 
-        public void Delete(long id)
-        {
-            BaseRequest<string>(HttpMethods.Delete, null, new CallfireRestRoute<T>(id));
-        }
-
-        public TU BaseRequest<TU>(string method, object request, CallfireRestRoute<T> route)
-        {
-            return JsonClient.Send<TU>(method, route.ToString(), request);
+            var deserializer = new XmlSerializer(typeof(TU));
+            TextReader reader = new StringReader(response);
+            return (TU)deserializer.Deserialize(reader);
         }
     }
 }

@@ -33,8 +33,6 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
             Assert.AreEqual(ExpectedContactBatch.Status, contactBatch.Status);
             Assert.AreEqual(ExpectedContactBatch.BroadcastId, contactBatch.BroadcastId);
             Assert.AreEqual(ExpectedContactBatch.Created, contactBatch.Created);
-            Assert.AreEqual(ExpectedContactBatch.Size, contactBatch.Size);
-            Assert.AreEqual(ExpectedContactBatch.Remaining, contactBatch.Remaining);
         }
     }
 }

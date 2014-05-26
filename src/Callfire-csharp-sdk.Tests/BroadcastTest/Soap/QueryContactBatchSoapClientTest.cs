@@ -20,7 +20,7 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Soap
             BroadcastServiceMock = MockRepository.GenerateStub<IBroadcastServicePortTypeClient>();
             Client = new SoapBroadcastClient(BroadcastServiceMock);
 
-            ExpectedQueryContactBatches = new CfQueryContactBatches(500, 0, 1);
+            ExpectedQueryBroadcastData = new CfQueryBroadcastData(500, 0, 1);
 
             ExpectedContactBatch = new CfContactBatch(1, "contactBatch", CfBatchStatus.Active, 2, DateTime.Now, 10, 15);
 
@@ -30,9 +30,9 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Soap
             ExpectedContactBatchQueryResult = new CfContactBatchQueryResult(10, contactBatchArray);
 
             BroadcastServiceMock
-                .Stub(b => b.QueryContactBatches( Arg<QueryContactBatches>.Matches(x => x.MaxResults == ExpectedQueryContactBatches.MaxResults &&
-                                                                                        x.FirstResult == ExpectedQueryContactBatches.FirstResult &&
-                                                                                        x.BroadcastId == ExpectedQueryContactBatches.BroadcastId)))
+                .Stub(b => b.QueryContactBatches( Arg<QueryContactBatches>.Matches(x => x.MaxResults == ExpectedQueryBroadcastData.MaxResults &&
+                                                                                        x.FirstResult == ExpectedQueryBroadcastData.FirstResult &&
+                                                                                        x.BroadcastId == ExpectedQueryBroadcastData.BroadcastId)))
                 .Return(ContactBatchQueryResultMapper.ToSoapContactBatchQueryResult(ExpectedContactBatchQueryResult));
         }
     }

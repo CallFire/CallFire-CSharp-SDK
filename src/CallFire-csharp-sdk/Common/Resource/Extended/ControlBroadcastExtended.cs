@@ -9,5 +9,9 @@ namespace CallFire_csharp_sdk.API.Soap
             Command = command;
             MaxActive = maxActive;
         }
+
+        public ControlBroadcast()
+        {
+        }
     }
 }
