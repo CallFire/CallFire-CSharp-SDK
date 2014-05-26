@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
+using System.Web;
 using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common;
 using NUnit.Framework;
-using RestSharp.Contrib;
 
 namespace Callfire_csharp_sdk.Tests
 {
