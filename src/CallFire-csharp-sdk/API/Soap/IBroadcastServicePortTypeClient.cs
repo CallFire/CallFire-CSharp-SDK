@@ -1,6 +1,6 @@
 ﻿namespace CallFire_csharp_sdk.API.Soap
 {
-    public interface IBroadcastServicePortTypeClient
+    public interface IBroadcastServicePortTypeClient : IServicePortClient
     {
         long CreateBroadcast(BroadcastRequest createBroadcast1);
         BroadcastQueryResult QueryBroadcasts(QueryBroadcasts queryBroadcasts1);

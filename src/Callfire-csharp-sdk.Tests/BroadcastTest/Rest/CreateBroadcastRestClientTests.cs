@@ -1,5 +1,6 @@
 ﻿using System;
 using CallFire_csharp_sdk.API.Rest;
+using CallFire_csharp_sdk.API.Rest.Clients;
 using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common;
 using CallFire_csharp_sdk.Common.DataManagement;
@@ -21,7 +22,7 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
 
             var localTimeZoneRestriction = new CfLocalTimeZoneRestriction(DateTime.Now, DateTime.Now);
             CfResult[] result = { CfResult.Received };
-            CfRetryPhoneType[] phoneTypes = { CfRetryPhoneType.First_Number };
+            CfRetryPhoneType[] phoneTypes = { CfRetryPhoneType.FirstNumber };
             var broadcastConfigRestryConfig = new CfBroadcastConfigRetryConfig(1000, 2, result, phoneTypes);
             var expectedTextBroadcastConfig = new CfTextBroadcastConfig(1, DateTime.Now, "fromNumber", localTimeZoneRestriction, broadcastConfigRestryConfig, "Test", CfBigMessageStrategy.DoNotSend);
 

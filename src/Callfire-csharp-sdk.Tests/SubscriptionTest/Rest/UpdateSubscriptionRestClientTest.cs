@@ -1,5 +1,6 @@
 ﻿using System;
 using CallFire_csharp_sdk.API.Rest;
+using CallFire_csharp_sdk.API.Rest.Clients;
 using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common;
 using CallFire_csharp_sdk.Common.DataManagement;
@@ -27,8 +28,8 @@ namespace Callfire_csharp_sdk.Tests.SubscriptionTest.Rest
                 CfSubscriptionTriggerEvent.CampaignStarted, SubscriptionFilter);
             SubscriptionRequest = new CfSubscriptionRequest("requestId", Subscription);
 
-            var notificationFormat = NotificationFormatMapper.ToSoapNotificationFormat(Subscription.NotificationFormat);
-            var triggerEvent = SubscriptionTriggerEventMapper.ToSoapSubscriptionTriggerEvent(Subscription.TriggerEvent);
+            var notificationFormat = EnumeratedMapper.ToSoapEnumerated<NotificationFormat>(Subscription.NotificationFormat.ToString());
+            var triggerEvent = EnumeratedMapper.ToSoapEnumerated<SubscriptionTriggerEvent>(Subscription.TriggerEvent.ToString());
             
             HttpClientMock
                 .Stub(j => j.Send(Arg<string>.Is.Equal(String.Format("/subscription/{0}", SubscriptionId)),
