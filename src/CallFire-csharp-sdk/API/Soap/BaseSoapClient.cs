@@ -10,6 +10,7 @@ namespace CallFire_csharp_sdk.API.Soap
         private const string SoapEndpointAddress = "https://www.callfire.com/api/1.1/soap12"; 
         internal readonly IBroadcastServicePortTypeClient BroadcastService;
         internal readonly ISubscriptionServicePortTypeClient SubscriptionService;
+        internal readonly ITextServicePortTypeClient TextService;
 
         public BaseSoapClient(string username, string password)
         {
@@ -21,6 +22,21 @@ namespace CallFire_csharp_sdk.API.Soap
             {
                 SubscriptionService = CreateSubscriptionSoapServiceClient(username, password);
             }
+            if (typeof(T) == typeof(ITextClient))
+            {
+                TextService = CreateTextSoapServiceClient(username, password);
+            }
+        }
+
+        private static TextServicePortTypeClient CreateTextSoapServiceClient(string username, string password)
+        {
+            var binding = CreateCustomBinding();
+            var service = new TextServicePortTypeClient(
+                binding, new EndpointAddress(string.Format("{0}/text", SoapEndpointAddress)))
+            {
+                ClientCredentials = { UserName = { UserName = username, Password = password } }
+            };
+            return service;
         }
 
         private static BroadcastServicePortTypeClient CreateBroadcastSoapServiceClient(string username, string password)
@@ -57,7 +73,7 @@ namespace CallFire_csharp_sdk.API.Soap
             var binding = new CustomBinding(messegeElement, transportElement);
             return binding;
         }
-
+        
         internal BaseSoapClient(IBroadcastServicePortTypeClient broadcastService)
         {
             BroadcastService = broadcastService;
@@ -66,6 +82,11 @@ namespace CallFire_csharp_sdk.API.Soap
         internal BaseSoapClient(ISubscriptionServicePortTypeClient subscriptionService)
         {
             SubscriptionService = subscriptionService;
+        }
+
+        internal BaseSoapClient(ITextServicePortTypeClient textService)
+        {
+            TextService = textService;
         }
     }
 }

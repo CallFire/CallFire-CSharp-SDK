@@ -1,15 +1,15 @@
 ﻿// ReSharper disable once CheckNamespace - This is an extension from API.Soap
 namespace CallFire_csharp_sdk.API.Soap
 {
-    partial class SubscriptionQueryResult
+    partial class TextQueryResult
     {
-        public SubscriptionQueryResult(long totalResults, Subscription[] subscription)
+        public TextQueryResult(long totalResults, Text[] text)
         {
             TotalResults = totalResults;
-            Subscription = subscription;
+            Text = text;
         }
 
-        public SubscriptionQueryResult()
+        public TextQueryResult()
         {
         }
     }

@@ -106,6 +106,13 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfToNumber
     {
+        public CfToNumber(string clientData, System.Xml.XmlAttribute[] anyAttr, string value)
+        {
+            ClientData = clientData;
+            AnyAttr = anyAttr;
+            Value = value;
+        }
+
         public string ClientData { get; set; }
 
         public System.Xml.XmlAttribute[] AnyAttr { get; set; }
@@ -115,6 +122,27 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfAction
     {
+        public CfAction(string fromNumber, CfToNumber toNumber, CfActionState state, long batchId, long broadcastId, long contactId,
+            bool inbound, DateTime created, DateTime modified, CfResult finalResult, CfLabel[] label, long id)
+        {
+            FromNumber = fromNumber;
+            ToNumber = toNumber;
+            State = state;
+            BatchId = batchId;
+            BroadcastId = broadcastId;
+            ContactId = contactId;
+            Inbound = inbound;
+            Created = created;
+            Modified = modified;
+            FinalResult = finalResult;
+            Label = label;
+            Id = id;
+        }
+
+        public CfAction()
+        {
+        }
+
         public string FromNumber { get; set; }
 
         public CfToNumber ToNumber { get; set; }
@@ -133,7 +161,7 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
         public DateTime Modified { get; set; }
 
-        public string FinalResult { get; set; }
+        public CfResult FinalResult { get; set; }
 
         public CfLabel[] Label { get; set; }
 
@@ -158,7 +186,7 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public abstract class CfActionRecord
     {
-        public string Result { get; set; }
+        public CfResult Result { get; set; }
 
         public DateTime FinishTime { get; set; }
 
@@ -545,6 +573,14 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfText : CfAction
     {
+        public CfText(string fromNumber, CfToNumber toNumber, CfActionState state, long batchId, long broadcastId, long contactId,
+            bool inbound, DateTime created, DateTime modified, CfResult finalResult, CfLabel[] label, long id, string message, CfTextRecord[] textRecord) 
+            : base(fromNumber, toNumber, state, batchId, broadcastId, contactId, inbound, created, modified, finalResult, label, id)
+        {
+            Message = message;
+            TextRecord = textRecord;
+        }
+
         public string Message { get; set; }
 
         public CfTextRecord[] TextRecord { get; set; }
