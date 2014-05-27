@@ -27,8 +27,8 @@ namespace Callfire_csharp_sdk.Tests.SubscriptionTest.Rest
                 CfSubscriptionTriggerEvent.CampaignStarted, SubscriptionFilter);
             SubscriptionRequest = new CfSubscriptionRequest("requestId", Subscription);
 
-            var notificationFormat = NotificationFormatMapper.ToSoapNotificationFormat(Subscription.NotificationFormat);
-            var triggerEvent = SubscriptionTriggerEventMapper.ToSoapSubscriptionTriggerEvent(Subscription.TriggerEvent);
+            var notificationFormat = EnumeratedMapper.ToSoapEnumerated<NotificationFormat>(Subscription.NotificationFormat.ToString());
+            var triggerEvent = EnumeratedMapper.ToSoapEnumerated<SubscriptionTriggerEvent>(Subscription.TriggerEvent.ToString());
             
             var response = string.Format("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
                         "<r:ResourceReference xmlns=\"http://api.callfire.com/data\" xmlns:r=\"http://api.callfire.com/resource\">" +

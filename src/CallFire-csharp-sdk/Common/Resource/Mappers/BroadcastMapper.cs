@@ -12,8 +12,8 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
                 return null;
             }
             var broadcastConfig = BroadcastConfigMapper.FromBroadcastConfig(source.Item, source.Type);
-            return new CfBroadcast(source.id, source.Name, BroadcastStatusMapper.FromSoapBroadcastStatus(source.Status),
-                source.LastModified, BroadcastTypeMapper.FromSoapBroadcastType(source.Type), broadcastConfig);
+            return new CfBroadcast(source.id, source.Name, EnumeratedMapper.EnumFromSoapEnumerated<CfBroadcastStatus>(source.Status.ToString()),
+                source.LastModified, EnumeratedMapper.EnumFromSoapEnumerated<CfBroadcastType>(source.Type.ToString()), broadcastConfig);
         }
 
         internal static Broadcast ToSoapBroadcast(CfBroadcast source)
@@ -24,8 +24,8 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
             }
             var broadcastConfig = BroadcastConfigMapper.ToBroadcastConfig(source.Item, source.Type);
             return new Broadcast(source.Id, source.Name,
-                BroadcastStatusMapper.ToSoapBroadcastStatus(source.Status), source.LastModified,
-                BroadcastTypeMapper.ToSoapBroadcastType(source.Type), broadcastConfig);
+                EnumeratedMapper.ToSoapEnumerated<BroadcastStatus>(source.Status.ToString()), source.LastModified,
+                EnumeratedMapper.ToSoapEnumerated<BroadcastType>(source.Type.ToString()), broadcastConfig);
         }
     }
 }

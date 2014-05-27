@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Xml.Serialization;
-using CallFire_csharp_sdk.API.Rest;
 using CallFire_csharp_sdk.API.Rest.Clients;
 using CallFire_csharp_sdk.API.Rest.Data;
 using CallFire_csharp_sdk.API.Soap;
@@ -54,8 +53,8 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
         private void CreateExpectedBroadcast(long broadcastId)
         {
             var expectedBroadcast = new Broadcast(broadcastId, ExpectedBroadcast.Name,
-                BroadcastStatusMapper.ToSoapBroadcastStatus(ExpectedBroadcast.Status), ExpectedBroadcast.LastModified,
-                BroadcastTypeMapper.ToSoapBroadcastType(ExpectedBroadcast.Type),
+                EnumeratedMapper.ToSoapEnumerated<BroadcastStatus>(ExpectedBroadcast.Status.ToString()), ExpectedBroadcast.LastModified,
+                EnumeratedMapper.ToSoapEnumerated<BroadcastType>(ExpectedBroadcast.Type.ToString()),
                 BroadcastConfigMapper.ToBroadcastConfig(ExpectedBroadcast.Item, ExpectedBroadcast.Type));
 
             var resource = new Resource {Resources = expectedBroadcast};

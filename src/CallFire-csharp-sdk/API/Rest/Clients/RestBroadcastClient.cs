@@ -75,7 +75,7 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
         public void ControlBroadcast(CfControlBroadcast cfControlBroadcast)
         {
             var controlBroadcast = new ControlBroadcast(cfControlBroadcast.Id, cfControlBroadcast.RequestId,
-                BroadcastCommandMapper.ToSoapContactBatch(cfControlBroadcast.Command), cfControlBroadcast.MaxActive);
+                EnumeratedMapper.ToSoapEnumerated<BroadcastCommand>(cfControlBroadcast.Command.ToString()), cfControlBroadcast.MaxActive);
             BaseRequest<string>(HttpMethod.Put, controlBroadcast,
                 new CallfireRestRoute<Broadcast>(controlBroadcast.Id, null, BroadcastRestRouteObjects.Control, null));
         }

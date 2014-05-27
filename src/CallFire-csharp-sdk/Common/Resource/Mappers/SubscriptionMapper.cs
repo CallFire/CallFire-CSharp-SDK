@@ -13,8 +13,8 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
             }
             var subscriptionFilter = SubscriptionSubscriptionFilterMapper.FromSoapSubscriptionSubscriptionFilter(source.SubscriptionFilter);
             return new CfSubscription(source.id, source.Enabled, source.Endpoint,
-                NotificationFormatMapper.FromSoapNotificationFormat(source.NotificationFormat),
-                SubscriptionTriggerEventMapper.FromSoapSubscriptionTriggerEvent(source.TriggerEvent), subscriptionFilter);
+                EnumeratedMapper.EnumFromSoapEnumerated<CfNotificationFormat>(source.NotificationFormat.ToString()),
+                EnumeratedMapper.EnumFromSoapEnumerated<CfSubscriptionTriggerEvent>(source.TriggerEvent.ToString()), subscriptionFilter);
         }
 
         internal static Subscription ToSoapSubscription(CfSubscription source)
@@ -25,8 +25,8 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
             }
             var subscriptionFilter = SubscriptionSubscriptionFilterMapper.ToSoapSubscriptionSubscriptionFilter(source.SubscriptionFilter);
             return new Subscription(source.Id, source.Enabled, source.Endpoint,
-                NotificationFormatMapper.ToSoapNotificationFormat(source.NotificationFormat),
-                SubscriptionTriggerEventMapper.ToSoapSubscriptionTriggerEvent(source.TriggerEvent), subscriptionFilter);
+                EnumeratedMapper.ToSoapEnumerated<NotificationFormat>(source.NotificationFormat.ToString()),
+                EnumeratedMapper.ToSoapEnumerated<SubscriptionTriggerEvent>(source.TriggerEvent.ToString()), subscriptionFilter);
         }
     }
 }
