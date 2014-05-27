@@ -1,4 +1,5 @@
 ﻿using CallFire_csharp_sdk.API.Rest;
+using CallFire_csharp_sdk.API.Rest.Clients;
 using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common;
 using CallFire_csharp_sdk.Common.DataManagement;

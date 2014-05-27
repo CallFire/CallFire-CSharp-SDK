@@ -2,6 +2,8 @@
 using System.IO;
 using System.Xml.Serialization;
 using CallFire_csharp_sdk.API.Rest;
+using CallFire_csharp_sdk.API.Rest.Clients;
+using CallFire_csharp_sdk.API.Rest.Data;
 using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common;
 using CallFire_csharp_sdk.Common.DataManagement;
@@ -28,7 +30,7 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
 
             LocalTimeZoneRestriction = new CfLocalTimeZoneRestriction(DateTime.Now, DateTime.Now);
             CfResult[] result = { CfResult.Received };
-            CfRetryPhoneType[] phoneTypes = { CfRetryPhoneType.First_Number };
+            CfRetryPhoneType[] phoneTypes = { CfRetryPhoneType.FirstNumber };
             BroadcastConfigRestryConfig = new CfBroadcastConfigRetryConfig(1000, 2, result, phoneTypes);
 
             ExpectedVoiceBroadcastConfig = new CfVoiceBroadcastConfig(1, DateTime.Now, "fromNumber",

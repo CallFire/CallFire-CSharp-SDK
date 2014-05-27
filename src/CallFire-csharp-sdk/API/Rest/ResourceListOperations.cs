@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using CallFire_csharp_sdk.API.Rest.Data;
 
 namespace CallFire_csharp_sdk.API.Rest
 {

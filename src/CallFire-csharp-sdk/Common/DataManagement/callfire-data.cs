@@ -232,23 +232,23 @@ namespace CallFire_csharp_sdk.Common.DataManagement
         Busy,
         Dnc,
         Xfer,
-        Xfer_Leg,
-        No_Ans,
+        XferLeg,
+        NoAns,
         Undialed,
         Sent,
         Received,
         Dnt,
-        Too_Big,
-        Internal_Error,
-        Carrier_Error,
-        Carrier_Temp_Error
+        TooBig,
+        InternalError,
+        CarrierError,
+        CarrierTempError
     }
 
     public enum CfRetryPhoneType{
-        First_Number,
-        Home_Phone,
-        Work_Phone,
-        Mobile_Phone
+        FirstNumber,
+        HomePhone,
+        WorkPhone,
+        MobilePhone
     }
 
     public enum CfBigMessageStrategy

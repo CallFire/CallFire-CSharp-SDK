@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -41,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\BindingAdress.cs" />
     <Compile Include="API\CallfireClient.cs" />
     <Compile Include="API\CallfireClients.cs" />
     <Compile Include="API\IBroadcastClient.cs" />
@@ -48,20 +50,21 @@
     <Compile Include="API\IClient.cs" />
     <Compile Include="API\ISubscriptionClient.cs" />
     <Compile Include="API\ITextClient.cs" />
-    <Compile Include="API\Rest\BaseRestClient.cs" />
+    <Compile Include="API\Rest\Clients\BaseRestClient.cs" />
     <Compile Include="API\Rest\BroadcastRestRouteObjects.cs" />
-    <Compile Include="API\Rest\Namespaces.cs" />
-    <Compile Include="API\Rest\ResourceException.cs" />
-    <Compile Include="API\Rest\Resource.cs" />
-    <Compile Include="API\Rest\ResourceList.cs" />
+    <Compile Include="API\Rest\CallFireNamespace.cs" />
+    <Compile Include="API\Rest\Data\ResourceException.cs" />
+    <Compile Include="API\Rest\Data\Resource.cs" />
+    <Compile Include="API\Rest\Data\ResourceList.cs" />
     <Compile Include="API\Rest\ResourceListOperations.cs" />
-    <Compile Include="API\Rest\ResourceReference.cs" />
+    <Compile Include="API\Rest\Data\ResourceReference.cs" />
     <Compile Include="API\Rest\RestRouteParameters.cs" />
-    <Compile Include="API\Rest\RestBroadcastClient.cs" />
+    <Compile Include="API\Rest\Clients\RestBroadcastClient.cs" />
     <Compile Include="API\Rest\CallfireRestRoute.cs" />
-    <Compile Include="API\Rest\RestSubscriptionClient.cs" />
+    <Compile Include="API\Rest\Clients\RestSubscriptionClient.cs" />
     <Compile Include="API\Soap\BaseSoapClient.cs" />
     <Compile Include="API\Soap\BroadcastServicePortTypeClient.cs" />
+    <Compile Include="API\Soap\IServicePortClient.cs" />
     <Compile Include="Common\CustomSerializer.cs" />
     <Compile Include="Common\HttpClient.cs" />
     <Compile Include="Common\HttpMethod.cs" />

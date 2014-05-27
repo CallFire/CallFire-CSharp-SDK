@@ -22,8 +22,8 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Soap
             CreateExpectedBroadcast(1);
             
             LocalTimeZoneRestriction = new CfLocalTimeZoneRestriction(DateTime.Now, DateTime.Now);
-            CfResult[] result = { CfResult.Carrier_Temp_Error };
-            CfRetryPhoneType[] phoneTypes = { CfRetryPhoneType.First_Number };
+            CfResult[] result = { CfResult.CarrierTempError };
+            CfRetryPhoneType[] phoneTypes = { CfRetryPhoneType.FirstNumber };
             BroadcastConfigRestryConfig = new CfBroadcastConfigRetryConfig(1000, 2, result, phoneTypes);
 
             ExpectedVoiceBroadcastConfig = new CfVoiceBroadcastConfig(1, DateTime.Now, "fromNumber",

@@ -6,15 +6,21 @@ using CallFire_csharp_sdk.Common.Result.Mappers;
 
 namespace CallFire_csharp_sdk.API.Soap
 {
-    public class SoapBroadcastClient : BaseSoapClient<IBroadcastClient>, IBroadcastClient
+    public class SoapBroadcastClient : BaseSoapClient, IBroadcastClient
     {
+        internal IBroadcastServicePortTypeClient BroadcastService;
+
         public SoapBroadcastClient(string username, string password)
-            : base(username, password)
         {
+            BroadcastService = new BroadcastServicePortTypeClient(GetCustomBinding(), GetEndpointAddress<Broadcast>())
+            {
+                ClientCredentials = { UserName = { UserName = username, Password = password } }
+            };
         }
 
-        internal SoapBroadcastClient(IBroadcastServicePortTypeClient client) : base(client)
+        internal SoapBroadcastClient(IBroadcastServicePortTypeClient client)
         {
+            BroadcastService = client;
         }
 
         public long CreateBroadcast(CfBroadcastRequest createBroadcast)
