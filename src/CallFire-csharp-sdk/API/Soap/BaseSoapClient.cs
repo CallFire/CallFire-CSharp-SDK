@@ -10,6 +10,7 @@ namespace CallFire_csharp_sdk.API.Soap
         private const string SoapEndpointAddress = "https://www.callfire.com/api/1.1/soap12"; 
         internal readonly IBroadcastServicePortTypeClient BroadcastService;
         internal readonly ISubscriptionServicePortTypeClient SubscriptionService;
+        internal readonly ILabelServicePortTypeClient LabelService;
 
         internal BaseSoapClient(string username, string password)
         {
@@ -20,6 +21,10 @@ namespace CallFire_csharp_sdk.API.Soap
             if (typeof(T) == typeof(ISubscriptionClient))
             {
                 SubscriptionService = CreateSubscriptionSoapServiceClient(username, password);
+            }
+            if (typeof(T) == typeof(ILabelClient))
+            {
+                LabelService = CreateLabelSoapServiceClient(username, password);
             }
         }
 
@@ -39,6 +44,17 @@ namespace CallFire_csharp_sdk.API.Soap
             var binding = CreateCustomBinding();
             var service = new SubscriptionServicePortTypeClient(
                 binding, new EndpointAddress((string.Format("{0}/subscription", SoapEndpointAddress))))
+            {
+                ClientCredentials = { UserName = { UserName = username, Password = password } }
+            };
+            return service;
+        }
+
+        private static LabelServicePortTypeClient CreateLabelSoapServiceClient(string username, string password)
+        {
+            var binding = CreateCustomBinding();
+            var service = new LabelServicePortTypeClient(
+                binding, new EndpointAddress((string.Format("{0}/label", SoapEndpointAddress))))
             {
                 ClientCredentials = { UserName = { UserName = username, Password = password } }
             };
@@ -66,6 +82,11 @@ namespace CallFire_csharp_sdk.API.Soap
         internal BaseSoapClient(ISubscriptionServicePortTypeClient subscriptionService)
         {
             SubscriptionService = subscriptionService;
+        }
+
+        internal BaseSoapClient(ILabelServicePortTypeClient labelService)
+        {
+            LabelService = labelService;
         }
     }
 }

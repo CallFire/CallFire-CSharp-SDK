@@ -1,0 +1,50 @@
+﻿using CallFire_csharp_sdk.Common.Resource;
+using CallFire_csharp_sdk.Common.Result;
+using CallFire_csharp_sdk.Common.Result.Mappers;
+
+namespace CallFire_csharp_sdk.API.Soap
+{
+    public class SoapLabelClient : BaseSoapClient<ILabelClient>, ILabelClient
+    {
+        public SoapLabelClient(string username, string password)
+            : base(username, password)
+        {
+        }
+
+        internal SoapLabelClient(ILabelServicePortTypeClient client)
+            : base(client)
+        {
+        }
+
+        public void DeleteLabel(string labelName)
+        {
+            LabelService.DeleteLabel(new DeleteLabel { LabelName = labelName });
+        }
+
+        public CfLabelQueryResult QueryLabels(CfQuery queryLabels)
+        {
+            return LabelQueryResultMapper.FromSoapLabelQueryResult(
+                LabelService.QueryLabels(new Query(queryLabels.MaxResults, queryLabels.FirstResult)));
+        }
+
+        public void LabelBroadcast(long id, string labelName)
+        {
+            LabelService.LabelBroadcast(new IdLabelRequest { Id = id, LabelName = labelName });
+        }
+
+        public void UnlabelBroadcast(long id, string labelName)
+        {
+            LabelService.UnlabelBroadcast(new IdLabelRequest { Id = id, LabelName = labelName });
+        }
+
+        public void LabelNumber(string number, string labelName)
+        {
+            LabelService.LabelNumber(new NumberLabelRequest { Number = number, LabelName = labelName });
+        }
+
+        public void UnlabelNumber(string number, string labelName)
+        {
+            LabelService.UnlabelNumber(new NumberLabelRequest { Number = number, LabelName = labelName });
+        }
+    }
+}

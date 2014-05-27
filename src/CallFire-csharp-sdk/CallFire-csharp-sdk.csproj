@@ -46,10 +46,13 @@
     <Compile Include="API\IBroadcastClient.cs" />
     <Compile Include="API\ICallfireClient.cs" />
     <Compile Include="API\IClient.cs" />
+    <Compile Include="API\ILabelClient.cs" />
     <Compile Include="API\ISubscriptionClient.cs" />
     <Compile Include="API\ITextClient.cs" />
     <Compile Include="API\Rest\BaseRestClient.cs" />
     <Compile Include="API\Rest\BroadcastRestRouteObjects.cs" />
+    <Compile Include="API\Rest\LabelRestRouteObjects.cs" />
+    <Compile Include="API\Rest\RestLabelClient.cs" />
     <Compile Include="API\Rest\Namespaces.cs" />
     <Compile Include="API\Rest\ResourceException.cs" />
     <Compile Include="API\Rest\Resource.cs" />
@@ -61,6 +64,7 @@
     <Compile Include="API\Rest\RestSubscriptionClient.cs" />
     <Compile Include="API\Soap\BaseSoapClient.cs" />
     <Compile Include="API\Soap\BroadcastServicePortTypeClient.cs" />
+    <Compile Include="API\Soap\SoapLabelClient.cs" />
     <Compile Include="Common\CustomSerializer.cs" />
     <Compile Include="Common\HttpClient.cs" />
     <Compile Include="Common\HttpMethod.cs" />
@@ -70,6 +74,7 @@
     <Compile Include="Common\Resource\CfQueryText.cs" />
     <Compile Include="Common\Resource\CfRequest.cs" />
     <Compile Include="Common\Resource\CfSendText.cs" />
+    <Compile Include="Common\Resource\Mappers\LabelMapper.cs" />
     <Compile Include="Common\Resource\Mappers\EnumeratedMapper.cs" />
     <Compile Include="Common\Resource\TwoWayMapper.cs" />
     <Compile Include="Common\Resource\Extended\BroadcastRequestExtended.cs" />
@@ -138,12 +143,13 @@
     <Compile Include="Common\Resource\Mappers\TextBroadcastConfigMapper.cs" />
     <Compile Include="Common\Resource\Mappers\UsageStatsMapper.cs" />
     <Compile Include="Common\Resource\Mappers\VoiceBroadcastConfigMapper.cs" />
-    <Compile Include="Common\Result\CfBroadcastQueryResult.cs" />
+    <Compile Include="Common\Result\CfLabelQueryResult.cs" />
     <Compile Include="Common\Result\CfBroadcastScheduleQueryResult.cs" />
     <Compile Include="Common\Result\CfContactBatchQueryResult.cs" />
     <Compile Include="Common\Result\CfQueryResult.cs" />
     <Compile Include="Common\Result\CfSubscriptionQueryResult.cs" />
     <Compile Include="Common\Result\CfTextQueryResult.cs" />
+    <Compile Include="Common\Result\CfBroadcastQueryResult.cs" />
     <Compile Include="Common\Result\Extended\BroadcastQueryResultExtended.cs" />
     <Compile Include="Common\Result\Extended\BroadcastScheduleQueryResultExtended.cs" />
     <Compile Include="Common\Result\Extended\ContactBatchQueryResultExtended.cs" />
@@ -151,8 +157,10 @@
     <Compile Include="Common\Result\Mappers\BroadcastQueryResultMapper.cs" />
     <Compile Include="Common\Result\Mappers\BroadcastScheduleQueryResultMapper.cs" />
     <Compile Include="Common\Result\Mappers\ContactBatchQueryResultMapper.cs" />
+    <Compile Include="Common\Result\Mappers\LabelQueryResultMapper.cs" />
     <Compile Include="Common\Result\Mappers\SubscriptionQueryResultMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\API.Soap\ILabelServicePortTypeClient.cs" />
     <Compile Include="Service References\API.Soap\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
