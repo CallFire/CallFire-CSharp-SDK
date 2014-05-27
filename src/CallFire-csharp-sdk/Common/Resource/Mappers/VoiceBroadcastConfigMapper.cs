@@ -14,8 +14,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
             var localTimeZoneRestriction =
                 LocalTimeZoneRestrictionMapper.FromSoapLocalTimeZoneRestriction(source.LocalTimeZoneRestriction);
             var retryConfig = BroadcastConfigRetryConfigMapper.FromBroadcastConfigRetryConfig(source.RetryConfig);
-            var answeringMachineConfig =
-                AnsweringMachineConfigMapper.FromSoapAnsweringMachineConfig(source.AnsweringMachineConfig);
+            var answeringMachineConfig = EnumeratedMapper.EnumFromSoapEnumerated<CfAnsweringMachineConfig>(source.AnsweringMachineConfig.ToString());
             return new CfVoiceBroadcastConfig(source.id, source.Created, source.FromNumber, localTimeZoneRestriction,
                 retryConfig, answeringMachineConfig, source.Item, source.LiveSoundTextVoice, source.Item1,
                 source.MachineSoundTextVoice, source.Item2, source.TransferSoundTextVoice, source.TransferDigit,
@@ -31,8 +30,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
             var localTimeZoneRestriction =
                 LocalTimeZoneRestrictionMapper.ToSoapLocalTimeZoneRestriction(source.LocalTimeZoneRestriction);
             var retryConfig = BroadcastConfigRetryConfigMapper.ToBroadcastConfigRetryConfig(source.RetryConfig);
-            var answeringMachineConfig =
-                AnsweringMachineConfigMapper.ToSoapAnsweringMachineConfig(source.AnsweringMachineConfig);
+            var answeringMachineConfig = EnumeratedMapper.ToSoapEnumerated<AnsweringMachineConfig>(source.AnsweringMachineConfig.ToString());
             return new VoiceBroadcastConfig(source.Id, source.Created, source.FromNumber, localTimeZoneRestriction,
                 retryConfig, answeringMachineConfig, source.Item, source.LiveSoundTextVoice, source.Item1,
                 source.MachineSoundTextVoice, source.Item2, source.TransferSoundTextVoice, source.TransferDigit,

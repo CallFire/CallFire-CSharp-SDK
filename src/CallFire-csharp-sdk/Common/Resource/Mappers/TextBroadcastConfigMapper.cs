@@ -1,4 +1,5 @@
-﻿using CallFire_csharp_sdk.API.Soap;
+﻿using System;
+using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common.DataManagement;
 
 namespace CallFire_csharp_sdk.Common.Resource.Mappers
@@ -14,7 +15,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
             var localTimeZoneRestriction =
                 LocalTimeZoneRestrictionMapper.FromSoapLocalTimeZoneRestriction(source.LocalTimeZoneRestriction);
             var retryConfig = BroadcastConfigRetryConfigMapper.FromBroadcastConfigRetryConfig(source.RetryConfig);
-            var bigMessageStrategy = BigMessageStrategyMapper.FromBigMessageStrategy(source.BigMessageStrategy);
+            var bigMessageStrategy = EnumeratedMapper.EnumFromSoapEnumerated<CfBigMessageStrategy>(source.BigMessageStrategy.ToString());
             return new CfTextBroadcastConfig(source.id, source.Created, source.FromNumber, localTimeZoneRestriction, retryConfig, source.Message, bigMessageStrategy);
         }
 
@@ -27,7 +28,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
             var localTimeZoneRestriction =
                 LocalTimeZoneRestrictionMapper.ToSoapLocalTimeZoneRestriction(source.LocalTimeZoneRestriction);
             var retryConfig = BroadcastConfigRetryConfigMapper.ToBroadcastConfigRetryConfig(source.RetryConfig);
-            var bigMessageStrategy = BigMessageStrategyMapper.ToBigMessageStrategy(source.BigMessageStrategy);
+            var bigMessageStrategy = EnumeratedMapper.ToSoapEnumerated<BigMessageStrategy>(source.BigMessageStrategy.ToString());
             return new TextBroadcastConfig(source.Id, source.Created, source.FromNumber,
                 localTimeZoneRestriction, retryConfig, source.Message, bigMessageStrategy);
         }

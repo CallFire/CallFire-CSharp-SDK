@@ -23,8 +23,8 @@ namespace Callfire_csharp_sdk.Tests.SubscriptionTest.Soap
             Subscription = new CfSubscription(SubscriptionId, true, "endPoint", CfNotificationFormat.Soap, CfSubscriptionTriggerEvent.CampaignStarted, SubscriptionFilter);
             SubscriptionRequest = new CfSubscriptionRequest("requestId", Subscription);
 
-            var notificationFormat = NotificationFormatMapper.ToSoapNotificationFormat(Subscription.NotificationFormat);
-            var triggerEvent = SubscriptionTriggerEventMapper.ToSoapSubscriptionTriggerEvent(Subscription.TriggerEvent);
+            var notificationFormat = EnumeratedMapper.ToSoapEnumerated<NotificationFormat>(Subscription.NotificationFormat.ToString());
+            var triggerEvent = EnumeratedMapper.ToSoapEnumerated<SubscriptionTriggerEvent>(Subscription.TriggerEvent.ToString());
             SubscriptionServiceMock.Stub(b => b.UpdateSubscription(
                         Arg<SubscriptionRequest>.Matches(x => x.RequestId == SubscriptionRequest.RequestId &&
                                                               x.Subscription.id == Subscription.Id &&

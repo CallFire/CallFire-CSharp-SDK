@@ -57,5 +57,62 @@ namespace CallFire_csharp_sdk.API.Rest
             Add("IntervalEnd", intervalEnd.ToString(CultureInfo.InvariantCulture));
             return this;
         }
+
+        public RestRouteParameters BroadcastId(long broadcastId)
+        {
+            Add("BroadcastId", broadcastId.ToString(CultureInfo.InvariantCulture));
+            return this;
+        }
+
+        public RestRouteParameters BatchId(long batchId)
+        {
+            Add("BatchId", batchId.ToString(CultureInfo.InvariantCulture));
+            return this;
+        }
+
+        public RestRouteParameters State(string state)
+        {
+            if (state != null)
+            {
+                Add("State", state);
+            }
+            return this;
+        }
+
+        public RestRouteParameters Result(string result)
+        {
+            if (result != null)
+            {
+                Add("Result", result);
+            }
+            return this;
+        }
+
+        public RestRouteParameters Inbound(bool? inbound)
+        {
+            if (inbound.HasValue)
+            {
+                Add("Inbound", XmlConvert.ToString(inbound.Value));
+            }
+            return this;
+        }
+
+        public RestRouteParameters FromNumber(string fromNumber)
+        {
+            if (fromNumber != null)
+            {
+                Add("FromNumber", fromNumber);
+            }
+            return this;
+        }
+
+        public RestRouteParameters ToNumber(string toNumber)
+        {
+            if (toNumber != null)   
+            {
+                Add("ToNumber", toNumber);
+            }
+            return this;
+        }
     }
 }

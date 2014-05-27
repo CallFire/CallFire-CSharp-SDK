@@ -22,8 +22,8 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Soap
             CreateExpectedBroadcast(1);
             
             LocalTimeZoneRestriction = new CfLocalTimeZoneRestriction(DateTime.Now, DateTime.Now);
-            CfResult[] result = { CfResult.Carrier_Temp_Error };
-            CfRetryPhoneType[] phoneTypes = { CfRetryPhoneType.First_Number };
+            CfResult[] result = { CfResult.CarrierTempError };
+            CfRetryPhoneType[] phoneTypes = { CfRetryPhoneType.FirstNumber };
             BroadcastConfigRestryConfig = new CfBroadcastConfigRetryConfig(1000, 2, result, phoneTypes);
 
             ExpectedVoiceBroadcastConfig = new CfVoiceBroadcastConfig(1, DateTime.Now, "fromNumber",
@@ -44,8 +44,8 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Soap
         private void CreateExpectedBroadcast(long broadcastId)
         {
             var expectedBroadcast = new Broadcast(broadcastId, ExpectedBroadcast.Name,
-                BroadcastStatusMapper.ToSoapBroadcastStatus(ExpectedBroadcast.Status), ExpectedBroadcast.LastModified,
-                BroadcastTypeMapper.ToSoapBroadcastType(ExpectedBroadcast.Type),
+                EnumeratedMapper.ToSoapEnumerated<BroadcastStatus>(ExpectedBroadcast.Status.ToString()), ExpectedBroadcast.LastModified,
+                EnumeratedMapper.ToSoapEnumerated<BroadcastType>(ExpectedBroadcast.Type.ToString()),
                 BroadcastConfigMapper.ToBroadcastConfig(ExpectedBroadcast.Item, ExpectedBroadcast.Type));
             BroadcastServiceMock
                 .Stub(b => b.GetBroadcast(Arg<IdRequest>.Matches(x => x.Id == broadcastId)))

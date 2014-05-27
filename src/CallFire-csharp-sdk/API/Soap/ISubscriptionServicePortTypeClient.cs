@@ -1,7 +1,7 @@
 ﻿
 namespace CallFire_csharp_sdk.API.Soap
 {
-    public interface ISubscriptionServicePortTypeClient
+    public interface ISubscriptionServicePortTypeClient : IServicePortClient
     {
         long CreateSubscription(SubscriptionRequest createSubscription1);
         SubscriptionQueryResult QuerySubscriptions(Query querySubscriptions1);

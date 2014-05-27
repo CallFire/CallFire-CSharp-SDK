@@ -1,25 +1,32 @@
-﻿using CallFire_csharp_sdk.Common.DataManagement;
+﻿using System;
+using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
 using CallFire_csharp_sdk.Common.Resource.Mappers;
 using CallFire_csharp_sdk.Common.Result;
+using CallFire_csharp_sdk.Common.Result.Mappers;
 
 namespace CallFire_csharp_sdk.API.Soap
 {
-    public class SoapTextClient : BaseSoapClient<ITextClient>, ITextClient
+    public class SoapTextClient : BaseSoapClient, ITextClient
     {
+        internal ITextServicePortTypeClient TextService;
+
         public SoapTextClient(string username, string password)
-            : base(username, password)
         {
+            TextService = new TextServicePortTypeClient(GetCustomBinding(), GetEndpointAddress<Subscription>())
+            {
+                ClientCredentials = { UserName = { UserName = username, Password = password } }
+            };
         }
 
         internal SoapTextClient(ITextServicePortTypeClient client)
-            : base(client)
         {
+            TextService = client;
         }
 
         public long SendText(CfSendText cfSendText)
         {
-            var type = BroadcastTypeMapper.ToSoapBroadcastType(cfSendText.Type);
+            var type = EnumeratedMapper.ToSoapEnumerated<CfBroadcastType>(cfSendText.Type.ToString());
             var textBroadcastConfig = TextBroadcastConfigMapper.ToSoapTextBroadcastConfig(cfSendText.TextBroadcastConfig);
             var toNumber = ToNumberMapper.ToToNumber(cfSendText.ToNumber);
             return TextService.SendText(new SendText(cfSendText.RequestId, type.ToString(), cfSendText.BroadcastName, toNumber,
@@ -28,16 +35,18 @@ namespace CallFire_csharp_sdk.API.Soap
 
         public CfTextQueryResult QueryTexts(CfQueryText cfQueryText)
         {
-            var state = cfQueryText.State.ToString().ToUpper();
+            var state = EnumeratedMapper.ScreamingSnakeCase(cfQueryText.State.ToString());
+            var result = EnumeratedMapper.ToSoapEnumerated(cfQueryText.Result);
             var textQueryResult = TextService.QueryTexts(new ActionQuery(cfQueryText.MaxResults, cfQueryText.FirstResult, cfQueryText.BroadcastId,
-                cfQueryText.BatchId, state, cfQueryText.Result, cfQueryText.Inbound, cfQueryText.IntervalBegin,
+                cfQueryText.BatchId, state, result, cfQueryText.Inbound, cfQueryText.IntervalBegin,
                 cfQueryText.IntervalEnd, cfQueryText.FromNumber, cfQueryText.ToNumber, cfQueryText.LabelName));
-            return null;//TextQueryResultMapper
+            return TextQueryResultMapper.FromSoapContactBatchQueryResult(textQueryResult);
         }
 
         public CfText GetText(long id)
         {
-            return null;
+            var text = TextService.GetText(new IdRequest(id));
+            return TextMapper.FromText(text);
         }
     }
 }

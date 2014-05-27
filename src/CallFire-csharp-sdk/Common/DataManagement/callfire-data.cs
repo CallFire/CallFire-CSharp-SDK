@@ -181,11 +181,29 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfLabel
     {
+        public CfLabel(string name)
+        {
+            Name = name;
+        }
+
         public string Name { get; set; }
     }
 
     public abstract class CfActionRecord
     {
+        protected CfActionRecord(CfResult result, DateTime finishTime, float billedAmount, CfActionRecordQuestionResponse[] questionResponse, long id)
+        {
+            Result = result;
+            FinishTime = finishTime;
+            BilledAmount = billedAmount;
+            QuestionResponse = questionResponse;
+            Id = id;
+        }
+
+        protected CfActionRecord()
+        {
+        }
+
         public CfResult Result { get; set; }
 
         public DateTime FinishTime { get; set; }
@@ -199,6 +217,12 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfActionRecordQuestionResponse
     {
+        public CfActionRecordQuestionResponse(string question, string response)
+        {
+            Question = question;
+            Response = response;
+        }
+
         public string Question { get; set; }
 
         public string Response { get; set; }
@@ -260,23 +284,23 @@ namespace CallFire_csharp_sdk.Common.DataManagement
         Busy,
         Dnc,
         Xfer,
-        Xfer_Leg,
-        No_Ans,
+        XferLeg,
+        NoAns,
         Undialed,
         Sent,
         Received,
         Dnt,
-        Too_Big,
-        Internal_Error,
-        Carrier_Error,
-        Carrier_Temp_Error
+        TooBig,
+        InternalError,
+        CarrierError,
+        CarrierTempError
     }
 
     public enum CfRetryPhoneType{
-        First_Number,
-        Home_Phone,
-        Work_Phone,
-        Mobile_Phone
+        FirstNumber,
+        HomePhone,
+        WorkPhone,
+        MobilePhone
     }
 
     public enum CfBigMessageStrategy
@@ -568,6 +592,12 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfTextRecord : CfActionRecord
     {
+        public CfTextRecord(CfResult result, DateTime finishTime, float billedAmount, CfActionRecordQuestionResponse[] questionResponse, long id, string message)
+            : base(result, finishTime, billedAmount, questionResponse, id)
+        {
+            Message = message;
+        }
+
         public string Message { get; set; }
     }
 

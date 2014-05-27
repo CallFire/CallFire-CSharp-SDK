@@ -9,9 +9,9 @@ namespace CallFire_csharp_sdk.Common.Resource
 
         public long BatchId { get; set; }
 
-        public CfActionState State { get; set; }
+        public CfActionState[] State { get; set; }
 
-        public string Result { get; set; }
+        public CfResult[] Result { get; set; }
 
         public bool Inbound { get; set; }
 

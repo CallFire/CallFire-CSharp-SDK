@@ -11,7 +11,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
             {
                 return null;
             }
-            return new CfContactBatch(source.id, source.Name, BatchStatusMapper.FromSoapBatchStatus(source.Status),
+            return new CfContactBatch(source.id, source.Name, EnumeratedMapper.EnumFromSoapEnumerated<CfBatchStatus>(source.Status.ToString()),
                 source.BroadcastId, source.Created, source.Size, source.Remaining);
         }
 
@@ -21,9 +21,8 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
             {
                 return null;
             }
-            return new ContactBatch(source.Id, source.Name,
-                BatchStatusMapper.ToSoapBatchStatus(source.Status), source.BroadcastId, source.Created, source.Size,
-                source.Remaining);
+            return new ContactBatch(source.Id, source.Name, EnumeratedMapper.ToSoapEnumerated<BatchStatus>(source.Status.ToString()), 
+                source.BroadcastId, source.Created, source.Size, source.Remaining);
         }
     }
 }
