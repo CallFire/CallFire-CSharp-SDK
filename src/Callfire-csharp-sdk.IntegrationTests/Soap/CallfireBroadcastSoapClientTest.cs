@@ -12,10 +12,7 @@ namespace Callfire_csharp_sdk.IntegrationTests.Soap
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            //App Login: 66cb7463de00
-            //Password: bc16e515e85cd3e1
-
-            Client = new SoapBroadcastClient("66cb7463de00", "bc16e515e85cd3e1");
+            Client = new SoapBroadcastClient(MockClient.User(), MockClient.Password());
 
             var localTimeZoneRestriction = new CfLocalTimeZoneRestriction(DateTime.Now, DateTime.Now);
             CfResult[] result = { CfResult.Received };

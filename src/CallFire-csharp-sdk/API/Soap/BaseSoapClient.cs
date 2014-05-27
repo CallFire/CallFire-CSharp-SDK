@@ -4,7 +4,7 @@ using System.ServiceModel.Channels;
 
 namespace CallFire_csharp_sdk.API.Soap
 {
-    public abstract class BaseSoapClient<T>
+    public class BaseSoapClient<T>
         where T: IClient
     {
         private const string SoapEndpointAddress = "https://www.callfire.com/api/1.1/soap12"; 
@@ -12,7 +12,7 @@ namespace CallFire_csharp_sdk.API.Soap
         internal readonly ISubscriptionServicePortTypeClient SubscriptionService;
         internal readonly ILabelServicePortTypeClient LabelService;
 
-        internal BaseSoapClient(string username, string password)
+        public BaseSoapClient(string username, string password)
         {
             if (typeof(T) == typeof(IBroadcastClient))
             {

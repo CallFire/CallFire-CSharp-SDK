@@ -38,11 +38,7 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
 
             var broadcast = cfBroadcastQueryResult.Broadcast[0];
             Assert.IsNotNull(broadcast);
-            Assert.AreEqual(BroadcastId, broadcast.Id);
             Assert.AreEqual(BroadcastName, broadcast.Name);
-            Assert.AreEqual(CfBroadcastStatus.Running, broadcast.Status);
-            Assert.AreEqual(BroadcastLastModified, broadcast.LastModified);
-            Assert.AreEqual(CfBroadcastType.Ivr, broadcast.Type);
             Assert.IsNull(broadcast.Item);
         }
     }

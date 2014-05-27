@@ -6,20 +6,20 @@ using System.Web;
 
 namespace CallFire_csharp_sdk.Common
 {
-    internal interface ICustomSerializer
-    {
-        string SerializeToFormData(object o);
-    }
-
     internal class CustomSerializer : ICustomSerializer
     {
         private const string DateFormat = "yyyy-MM-ddThh:mm:ss";
 
         public string SerializeToFormData(object o)
         {
-            return string.Join("&", GetProperties(o).Select(v => v.Key + "=" + v.Value).ToArray());
+            return string.Join("&", ToCustomFormatArray(GetProperties(o)));
         }
-
+        
+        internal string[] ToCustomFormatArray(IEnumerable<KeyValuePair<string, string>> properties)
+        {
+            return properties.Select(v => string.Format("{0}={1}", v.Key, v.Value)).ToArray();
+        }
+        
         internal IEnumerable<KeyValuePair<string, string>> GetProperties(object o)
         {
             var result = new List<KeyValuePair<string, string>>();

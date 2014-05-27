@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using CallFire_csharp_sdk.API.Soap;
+﻿using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common;
 using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
@@ -38,17 +37,9 @@ namespace CallFire_csharp_sdk.API.Rest
                         .Type(type)
                         .Running(queryBroadcasts.Running)
                         .LabelName(queryBroadcasts.LabelName)));
-            
-            Broadcast[] broadcasts = null;
-            if (resource.Resource.Any())
-            {
-                broadcasts = new Broadcast[resource.Resource.Count()];
-                for (var i = 0; i < resource.Resource.Count(); i++)
-                {
-                    broadcasts[i] = resource.Resource[i] as Broadcast;
-                }
-            }
 
+
+            var broadcasts = ResourceListOperations.CastResourceList<Broadcast>(resource);
             var broadcastQueryResult = new BroadcastQueryResult(resource.TotalResults, broadcasts);
             return BroadcastQueryResultMapper.FromSoapBroadcastQueryResult(broadcastQueryResult);
         }
@@ -107,16 +98,7 @@ namespace CallFire_csharp_sdk.API.Rest
                         .MaxResults(cfQueryBroadcastData.MaxResults)
                         .FirstResult(cfQueryBroadcastData.FirstResult)));
 
-            ContactBatch[] contactBatch = null;
-            if (resource.Resource.Any())
-            {
-                contactBatch = new ContactBatch[resource.Resource.Count()];
-                for (var i = 0; i < resource.Resource.Count(); i++)
-                {
-                    contactBatch[i] = resource.Resource[i] as ContactBatch;
-                }
-            }
-
+            var contactBatch = ResourceListOperations.CastResourceList<ContactBatch>(resource);
             var contactBatchQueryResult = new ContactBatchQueryResult(resource.TotalResults, contactBatch);
             return ContactBatchQueryResultMapper.FromSoapContactBatchQueryResult(contactBatchQueryResult);
         }
@@ -154,16 +136,7 @@ namespace CallFire_csharp_sdk.API.Rest
                         .MaxResults(cfQueryBroadcastData.MaxResults)
                         .FirstResult(cfQueryBroadcastData.FirstResult)));
 
-            BroadcastSchedule[] broadcastSchedule = null;
-            if (resource.Resource.Any())
-            {
-                broadcastSchedule = new BroadcastSchedule[resource.Resource.Count()];
-                for (var i = 0; i < resource.Resource.Count(); i++)
-                {
-                    broadcastSchedule[i] = resource.Resource[i] as BroadcastSchedule;
-                }
-            }
-
+            var broadcastSchedule = ResourceListOperations.CastResourceList<BroadcastSchedule>(resource);
             var broadcastScheduleQueryResult = new BroadcastScheduleQueryResult(resource.TotalResults, broadcastSchedule);
             return BroadcastScheduleQueryResultMapper.FromSoapBroadcastScheduleQueryResult(broadcastScheduleQueryResult);
         }

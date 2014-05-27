@@ -11,6 +11,7 @@ namespace CallFire_csharp_sdk.API.Soap
             Endpoint = endpoint;
             NotificationFormat = notificationFormat;
             TriggerEvent = triggerEvent;
+            TriggerEventSpecified = true;
             SubscriptionFilter = subscriptionFilter;
         }
     }

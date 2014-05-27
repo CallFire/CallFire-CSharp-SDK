@@ -1,7 +1,10 @@
 ﻿using System;
+using System.IO;
+using System.Xml.Serialization;
 using CallFire_csharp_sdk.API.Rest;
 using CallFire_csharp_sdk.Common;
 using CallFire_csharp_sdk.Common.DataManagement;
+using CallFire_csharp_sdk.Common.Resource.Mappers;
 using NUnit.Framework;
 using Rhino.Mocks;
 
@@ -32,11 +35,16 @@ namespace Callfire_csharp_sdk.Tests.SubscriptionTest.Rest
 
         private void GenerateMock(CfSubscription subscription)
         {
+            var resource = new Resource { Resources = SubscriptionMapper.ToSoapSubscription(subscription) };
+            var serializer = new XmlSerializer(typeof(Resource));
+            TextWriter writer = new StringWriter();
+            serializer.Serialize(writer, resource);
+
             HttpClientMock
                 .Stub(j => j.Send(Arg<string>.Is.Equal(String.Format("/subscription/{0}", SubscriptionId)),
                     Arg<HttpMethod>.Is.Equal(HttpMethod.Get),
                     Arg<object>.Is.Null))
-                .Return("");//SubscriptionMapper.ToSoapSubscription(subscription));
+                .Return(writer.ToString());
         }
     }
 }

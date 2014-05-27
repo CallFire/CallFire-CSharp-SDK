@@ -2,8 +2,8 @@
 using CallFire_csharp_sdk.API.Rest;
 using CallFire_csharp_sdk.API.Soap;
 
-[XmlTypeAttribute(AnonymousType = true, Namespace = Namespaces.NamespaceResource)]
-[XmlRootAttribute("ResourceList", Namespace = Namespaces.NamespaceResource, IsNullable = false)]
+[XmlType(AnonymousType = true, Namespace = Namespaces.NamespaceResource)]
+[XmlRoot("ResourceList", Namespace = Namespaces.NamespaceResource, IsNullable = false)]
 // ReSharper disable once CheckNamespace
 public class ResourceList
 {

@@ -11,10 +11,7 @@ namespace Callfire_csharp_sdk.IntegrationTests.Rest
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            //App Login: 66cb7463de00
-            //Password: bc16e515e85cd3e1
-
-            Client = new RestSubscriptionClient("66cb7463de00", "bc16e515e85cd3e1");
+            Client = new RestSubscriptionClient(MockClient.User(), MockClient.Password());
 
             var subscriptionFilter = new CfSubscriptionSubscriptionFilter(1, 5, "fromNumber", "toNumber", true);
             CfSubscription = new CfSubscription(1, true, "endPoint", CfNotificationFormat.Soap,

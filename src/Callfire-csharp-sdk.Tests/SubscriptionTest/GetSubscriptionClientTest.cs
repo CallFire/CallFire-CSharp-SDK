@@ -27,8 +27,6 @@ namespace Callfire_csharp_sdk.Tests.SubscriptionTest
             var subscription = Client.GetSubscription(SubscriptionId);
             Assert.IsNotNull(subscription);
 
-            Assert.AreEqual(Subscription.Id, subscription.Id);
-            Assert.AreEqual(Subscription.Enabled, subscription.Enabled);
             Assert.AreEqual(Subscription.Endpoint, subscription.Endpoint);
             Assert.AreEqual(Subscription.NotificationFormat, subscription.NotificationFormat);
             Assert.AreEqual(Subscription.TriggerEvent, subscription.TriggerEvent);
@@ -55,11 +53,8 @@ namespace Callfire_csharp_sdk.Tests.SubscriptionTest
 
             var subscriptionFilter = subscription.SubscriptionFilter;
             Assert.IsNotNull(subscriptionFilter);
-            Assert.AreEqual(SubscriptionFilter.BroadcastId, subscriptionFilter.BroadcastId);
-            Assert.AreEqual(SubscriptionFilter.BatchId, subscriptionFilter.BatchId);
             Assert.AreEqual(SubscriptionFilter.FromNumber, subscriptionFilter.FromNumber);
             Assert.AreEqual(SubscriptionFilter.ToNumber, subscriptionFilter.ToNumber);
-            Assert.AreEqual(SubscriptionFilter.Inbound, subscriptionFilter.Inbound);
         }
     }
 }

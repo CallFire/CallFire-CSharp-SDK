@@ -27,7 +27,6 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
         {
             var cfContactBatchQueryResult = Client.QueryContactBatches(ExpectedQueryBroadcastData);
             Assert.IsNotNull(cfContactBatchQueryResult);
-            Assert.AreEqual(ExpectedContactBatchQueryResult.TotalResults, cfContactBatchQueryResult.TotalResults);
 
             var cfContactBatch = cfContactBatchQueryResult.ContactBatch[0];
             Assert.IsNotNull(cfContactBatch);
@@ -47,8 +46,6 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest
             Assert.AreEqual(ExpectedContactBatch.Status, cfContactBatch.Status);
             Assert.AreEqual(ExpectedContactBatch.BroadcastId, cfContactBatch.BroadcastId);
             Assert.AreEqual(ExpectedContactBatch.Created, cfContactBatch.Created);
-            Assert.AreEqual(ExpectedContactBatch.Size, cfContactBatch.Size);
-            Assert.AreEqual(ExpectedContactBatch.Remaining, cfContactBatch.Remaining);
         }
     }
 }

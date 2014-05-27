@@ -21,32 +21,32 @@ namespace CallFire_csharp_sdk.Common
         internal HttpClient()
         {
         }
-
+        
         public string Send(string relativeUrl, HttpMethod method, object body)
         {
-            HttpWebRequest request;
-            var response = Response(relativeUrl, method, body, out request);
+            var request = GetRequest(relativeUrl, method, body);
 
             using (var httpResponse = (HttpWebResponse)request.GetResponse())
             {
                 var responseStream = httpResponse.GetResponseStream();
-                if (responseStream != null) response = ((new StreamReader(responseStream)).ReadToEnd());
+                if (responseStream != null)
+                {
+                    return ((new StreamReader(responseStream)).ReadToEnd());
+                }
             }
 
-            return response;
+            return string.Empty;
         }
 
-        private string Response(string relativeUrl, HttpMethod method, object body, out HttpWebRequest request)
+        private HttpWebRequest GetRequest(string relativeUrl, HttpMethod method, object body)
         {
-            var response = string.Empty;
-
             if (relativeUrl.StartsWith("/"))
             {
                 relativeUrl = string.Format(".{0}", relativeUrl);
             }
 
             var address = new Uri(_baseUrl, relativeUrl);
-            request = (HttpWebRequest) WebRequest.Create(address);
+            var request = (HttpWebRequest)WebRequest.Create(address);
 
             request.Method = method.ToString().ToUpper();
             request.Credentials = _credentials;
@@ -55,15 +55,15 @@ namespace CallFire_csharp_sdk.Common
 
             if (body != null)
             {
-                byte[] byteData = Encoding.UTF8.GetBytes(_serializer.SerializeToFormData(body));
-                request.ContentLength = byteData.Length;
+                var utf8ByteData = Encoding.UTF8.GetBytes(_serializer.SerializeToFormData(body));
+                request.ContentLength = utf8ByteData.Length;
 
                 using (var postStream = request.GetRequestStream())
                 {
-                    postStream.Write(byteData, 0, byteData.Length);
+                    postStream.Write(utf8ByteData, 0, utf8ByteData.Length);
                 }
             }
-            return response;
+            return request;
         }
     }
 }

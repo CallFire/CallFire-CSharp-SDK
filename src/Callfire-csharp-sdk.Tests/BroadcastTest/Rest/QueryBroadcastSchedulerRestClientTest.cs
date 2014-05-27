@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Xml.Serialization;
 using CallFire_csharp_sdk.API.Rest;
 using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common;
@@ -34,22 +36,26 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
             var broadcastScheduleQueryResult = BroadcastScheduleQueryResultMapper.ToSoapBroadcastScheduleQueryResult(BroadcastScheduleQueryResult);
 
             GenerateMock(broadcastScheduleQueryResult);
-
-            BroadcastId = 2;
-            BroadcastScheduleQueryResult.BroadcastSchedule = null;
-            broadcastScheduleQueryResult = BroadcastScheduleQueryResultMapper.ToSoapBroadcastScheduleQueryResult(BroadcastScheduleQueryResult);
-
-            GenerateMock(broadcastScheduleQueryResult);
         }
 
         private void GenerateMock(BroadcastScheduleQueryResult broadcastScheduleQueryResult)
         {
+            var resource = new ResourceList();
+            var array = new BroadcastSchedule[1];
+            array[0] = broadcastScheduleQueryResult.BroadcastSchedule[0];
+            resource.Resource = array;
+            resource.TotalResults = 1;
+
+            var serializer = new XmlSerializer(typeof(ResourceList));
+            TextWriter writer = new StringWriter();
+            serializer.Serialize(writer, resource);
+
             HttpClientMock
                 .Stub(j => j.Send(Arg<string>.Is.Equal(String.Format("/broadcast/{0}/schedule?MaxResults={1}&FirstResult={2}",
                         BroadcastId, QueryBroadcastSchedule.MaxResults, QueryBroadcastSchedule.FirstResult)),
                     Arg<HttpMethod>.Is.Equal(HttpMethod.Get),
                     Arg<object>.Is.Null))
-                .Return("");//broadcastScheduleQueryResult);
+                .Return(writer.ToString());
         }
     }
 }

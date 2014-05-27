@@ -44,26 +44,10 @@ namespace Callfire_csharp_sdk.Tests.SubscriptionTest
             Assert.IsNotNull(subscriptions);
 
             var subscription = subscriptions[0];
-            Assert.AreEqual(Subscription.Id, subscription.Id);
-            Assert.AreEqual(Subscription.Enabled, subscription.Enabled);
             Assert.AreEqual(Subscription.Endpoint, subscription.Endpoint);
             Assert.AreEqual(Subscription.NotificationFormat, subscription.NotificationFormat);
             Assert.AreEqual(Subscription.TriggerEvent, subscription.TriggerEvent);
             Assert.IsNotNull(subscription.SubscriptionFilter);
-        }
-
-        [Test]
-        public void QuerySubscriptions_SubscriptionItem_Null()
-        {
-            Query = new CfQuery(100, 1);
-            var subscriptionQueryResult = Client.QuerySubscriptions(Query);
-            Assert.IsNotNull(subscriptionQueryResult);
-
-            var subscriptions = subscriptionQueryResult.Subscription;
-            Assert.IsNotNull(subscriptions);
-
-            var subscription = subscriptions[0];
-            Assert.IsNull(subscription);
         }
     }
 }

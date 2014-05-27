@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using System.Net;
 using System.Xml.Serialization;
 using CallFire_csharp_sdk.Common;
@@ -10,7 +11,7 @@ namespace CallFire_csharp_sdk.API.Rest
         private const string RestApiUrl = "https://www.callfire.com/api/1.1/rest/";
         internal readonly IHttpClient XmlClient;
 
-        internal BaseRestClient(string username, string password)
+        protected BaseRestClient(string username, string password)
             : this(CreateXmlServiceClient(username, password))
         {
         }

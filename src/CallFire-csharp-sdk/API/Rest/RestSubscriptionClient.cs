@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using CallFire_csharp_sdk.API.Soap;
+﻿using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common;
 using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
@@ -36,15 +35,7 @@ namespace CallFire_csharp_sdk.API.Rest
                     .MaxResults(cfQuerySubscriptions.MaxResults)
                     .FirstResult(cfQuerySubscriptions.FirstResult)));
 
-            Subscription[] subscription = null;
-            if (resource.Resource.Any())
-            {
-                subscription = new Subscription[resource.Resource.Count()];
-                for (var i = 0; i < resource.Resource.Count(); i++)
-                {
-                    subscription[i] = resource.Resource[i] as Subscription;
-                }
-            }
+            var subscription = ResourceListOperations.CastResourceList<Subscription>(resource);
             var subscriptionQueryResult = new SubscriptionQueryResult(resource.TotalResults, subscription);
             return SubscriptionQueryResultMapper.FromSoapSubscriptionQueryResult(subscriptionQueryResult);
         }
