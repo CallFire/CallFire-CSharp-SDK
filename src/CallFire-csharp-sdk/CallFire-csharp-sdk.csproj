@@ -86,10 +86,13 @@
     <Compile Include="Common\Resource\CfSendText.cs" />
     <Compile Include="Common\Resource\Extended\ActionQueryExtended.cs" />
     <Compile Include="Common\Resource\Extended\CallExtended.cs" />
+    <Compile Include="Common\Resource\Extended\CreateSoundExtended.cs" />
     <Compile Include="Common\Resource\Extended\SendCallExtended.cs" />
+    <Compile Include="Common\Resource\Extended\SoundMetaExtended.cs" />
     <Compile Include="Common\Resource\Mappers\CallMapper.cs" />
     <Compile Include="Common\Resource\Mappers\CallRecordMapper.cs" />
     <Compile Include="Common\Resource\Mappers\EnumeratedMapper.cs" />
+    <Compile Include="Common\Resource\Mappers\SoundMetaMapper.cs" />
     <Compile Include="Common\Resource\TwoWayMapper.cs" />
     <Compile Include="Common\Resource\Extended\BroadcastRequestExtended.cs" />
     <Compile Include="Common\Resource\Extended\ControlBroadcastExtended.cs" />
@@ -161,11 +164,13 @@
     <Compile Include="Common\Result\Extended\BroadcastScheduleQueryResultExtended.cs" />
     <Compile Include="Common\Result\Extended\CallQueryResultExtended.cs" />
     <Compile Include="Common\Result\Extended\ContactBatchQueryResultExtended.cs" />
+    <Compile Include="Common\Result\Extended\SoundMetaQueryResultExtended.cs" />
     <Compile Include="Common\Result\Extended\SubscriptionQueryResultExtended.cs" />
     <Compile Include="Common\Result\Mappers\BroadcastQueryResultMapper.cs" />
     <Compile Include="Common\Result\Mappers\BroadcastScheduleQueryResultMapper.cs" />
     <Compile Include="Common\Result\Mappers\CallQueryResultMapper.cs" />
     <Compile Include="Common\Result\Mappers\ContactBatchQueryResultMapper.cs" />
+    <Compile Include="Common\Result\Mappers\SoundMetaQueryResultMapper.cs" />
     <Compile Include="Common\Result\Mappers\SubscriptionQueryResultMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\API.Soap\Reference.cs">

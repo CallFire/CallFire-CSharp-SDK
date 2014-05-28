@@ -5,7 +5,6 @@ using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
 using CallFire_csharp_sdk.Common.Resource.Mappers;
 using CallFire_csharp_sdk.Common.Result;
-using CallFire_csharp_sdk.Common.Result.Mappers;
 
 namespace CallFire_csharp_sdk.API.Rest.Clients
 {
@@ -58,6 +57,30 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
         {
             var resource = BaseRequest<Resource>(HttpMethod.Get, null, new CallfireRestRoute<Call>(id));
             return CallMapper.FromCall(resource.Resources as Call);
+        }
+
+        public long CreateSound(CfCreateSound cfCreateSound)
+        {
+            var createSound = new CreateSound(cfCreateSound.Name, cfCreateSound.Item, cfCreateSound.SoundTextVoice);
+            var resource = BaseRequest<ResourceReference>(HttpMethod.Post, createSound, new CallfireRestRoute<Call>(null));
+            return resource.Id;
+        }
+
+        public CfSoundMetaQueryResult QuerySoundMeta(CfQuery cfQuerySoundMeta)
+        {
+            var resourceList = BaseRequest<ResourceList>(HttpMethod.Get, null,
+                new CallfireRestRoute<Call>(null, null, null, new RestRouteParameters()
+                    .MaxResults(cfQuerySoundMeta.MaxResults)
+                    .FirstResult(cfQuerySoundMeta.FirstResult)));
+
+            var soundMeta = SoundMetaMapper.FromSoundMeta(ResourceListOperations.CastResourceList<SoundMeta>(resourceList));
+            return new CfSoundMetaQueryResult(resourceList.TotalResults, soundMeta);
+        }
+
+        public CfSoundMeta GetSoundMeta(long id)
+        {
+            var resource = BaseRequest<Resource>(HttpMethod.Get, null, new CallfireRestRoute<Call>(id));
+            return SoundMetaMapper.FromSoundMeta(resource.Resources as SoundMeta);
         }
     }
 }

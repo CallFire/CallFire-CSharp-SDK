@@ -525,6 +525,15 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfSoundMeta
     {
+        public CfSoundMeta(CfSoundStatus status, string name, DateTime created, int lengthInSeconds, long id)
+        {
+            Status = status;
+            Name = name;
+            Created = created;
+            LengthInSeconds = lengthInSeconds;
+            Id = id;
+        }
+
         public CfSoundStatus Status { get; set; }
 
         public string Name { get; set; }

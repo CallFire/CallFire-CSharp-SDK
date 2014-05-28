@@ -49,5 +49,22 @@ namespace CallFire_csharp_sdk.API.Soap
             var call = CallService.GetCall(new IdRequest(id));
             return CallMapper.FromCall(call);
         }
+
+        public long CreateSound(CfCreateSound cfCreateSound)
+        {
+            return CallService.CreateSound(new CreateSound(cfCreateSound.Name, cfCreateSound.Item, cfCreateSound.SoundTextVoice));
+        }
+
+        public CfSoundMetaQueryResult QuerySoundMeta(CfQuery cfQuerySoundMeta)
+        {
+            var soundMetaQueryResult = CallService.QuerySoundMeta(new Query(cfQuerySoundMeta.MaxResults, cfQuerySoundMeta.FirstResult));
+            return SoundMetaQueryResultMapper.FromSoundMetaQueryResult(soundMetaQueryResult);
+        }
+
+        public CfSoundMeta GetSoundMeta(long id)
+        {
+            var soundMeta = CallService.GetSoundMeta(new IdRequest(id));
+            return SoundMetaMapper.FromSoundMeta(soundMeta);
+        }
     }
 }

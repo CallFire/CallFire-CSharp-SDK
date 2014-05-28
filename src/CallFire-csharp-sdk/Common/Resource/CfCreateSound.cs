@@ -4,12 +4,8 @@
     {
         public string Name { get; set; }
 
-        public byte Data { get; set; }
+        public object Item { get; set; }
 
-        public string ToNumber { get; set; }
-
-        public string SoundText { get; set; }
-
-        public byte SoundTextVoice { get; set; }
+        public string SoundTextVoice { get; set; }
     }
 }
