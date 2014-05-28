@@ -9,7 +9,7 @@ namespace CallFire_csharp_sdk.Common.Resource
 
         public string BroadcastName { get; set; }
 
-        public string ToNumber { get; set; }
+        public CfToNumber[] ToNumber { get; set; }
 
         public bool ScrubBroadcastDuplicates { get; set; }
 

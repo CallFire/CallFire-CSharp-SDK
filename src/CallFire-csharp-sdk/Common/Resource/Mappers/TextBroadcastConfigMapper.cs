@@ -1,5 +1,4 @@
-﻿using System;
-using CallFire_csharp_sdk.API.Soap;
+﻿using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common.DataManagement;
 
 namespace CallFire_csharp_sdk.Common.Resource.Mappers
