@@ -30,11 +30,8 @@ namespace CallFire_csharp_sdk.API.Soap
 
         public CfBroadcastQueryResult QueryBroadcasts(CfQueryBroadcasts queryBroadcasts)
         {
-            var type = EnumeratedMapper.ToSoapEnumerated(queryBroadcasts.Type);
-            var running = queryBroadcasts.Running.HasValue && queryBroadcasts.Running.Value;
             return BroadcastQueryResultMapper.FromSoapBroadcastQueryResult(
-                BroadcastService.QueryBroadcasts(new QueryBroadcasts(queryBroadcasts.MaxResults,
-                    queryBroadcasts.FirstResult, type, running, queryBroadcasts.LabelName)));
+                BroadcastService.QueryBroadcasts(new QueryBroadcasts(queryBroadcasts)));
         }
 
         public CfBroadcast GetBroadcast(long id)
@@ -49,8 +46,8 @@ namespace CallFire_csharp_sdk.API.Soap
 
         public CfBroadcastStats GetBroadcastStats(CfGetBroadcastStats getBroadcastStats)
         {
-            return BroadcastStatsMapper.FromSoapBroadcastStats(BroadcastService.GetBroadcastStats(new GetBroadcastStats(getBroadcastStats.Id,
-                        getBroadcastStats.IntervalBegin, getBroadcastStats.IntervalEnd)));
+            return BroadcastStatsMapper.FromSoapBroadcastStats(
+                BroadcastService.GetBroadcastStats(new GetBroadcastStats(getBroadcastStats)));
         }
 
         public void ControlBroadcast(CfControlBroadcast controlBroadcast)
@@ -70,8 +67,7 @@ namespace CallFire_csharp_sdk.API.Soap
         public CfContactBatchQueryResult QueryContactBatches(CfQueryBroadcastData queryBroadcastData)
         {
             return ContactBatchQueryResultMapper.FromSoapContactBatchQueryResult(
-                BroadcastService.QueryContactBatches(new QueryContactBatches(queryBroadcastData.MaxResults,
-                    queryBroadcastData.FirstResult, queryBroadcastData.BroadcastId)));
+                BroadcastService.QueryContactBatches(new QueryContactBatches(queryBroadcastData)));
         }
 
         public CfContactBatch GetContactBatch(long id)
@@ -98,8 +94,7 @@ namespace CallFire_csharp_sdk.API.Soap
             return
                 BroadcastScheduleQueryResultMapper.FromSoapBroadcastScheduleQueryResult(
                     BroadcastService.QueryBroadcastSchedule(
-                        new QueryBroadcastSchedules(queryBroadcastData.MaxResults,
-                            queryBroadcastData.FirstResult, queryBroadcastData.BroadcastId)));
+                        new QueryBroadcastSchedules(queryBroadcastData)));
         }
 
         public CfBroadcastSchedule GetBroadcastSchedule(long id)

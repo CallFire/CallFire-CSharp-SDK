@@ -24,16 +24,13 @@ namespace Callfire_csharp_sdk.Tests.Rest
                     .SetName("Should create default route");
                 yield return new TestCaseData(new CallfireRestRoute<Broadcast>(1), "/broadcast/1")
                     .SetName("Should create route with id");
-                yield return new TestCaseData(new CallfireRestRoute<Broadcast>(1, null, "test", null), "/broadcast/1/test")
+                yield return new TestCaseData(new CallfireRestRoute<Broadcast>(1, null, "test"), "/broadcast/1/test")
                     .SetName("Should create route with id and action");
-                yield return new TestCaseData(new CallfireRestRoute<Broadcast>(1, "test", null, null), "/broadcast/test/1")
+                yield return new TestCaseData(new CallfireRestRoute<Broadcast>(1, "test", null), "/broadcast/test/1")
                     .SetName("Should create route with object and id");
-                yield return new TestCaseData(new CallfireRestRoute<Broadcast>(1, "testobject", "testaction", null),
+                yield return new TestCaseData(new CallfireRestRoute<Broadcast>(1, "testobject", "testaction"),
                 "/broadcast/testobject/1/testaction")
                     .SetName("Should create route with object, id and action");
-                yield return new TestCaseData(new CallfireRestRoute<Broadcast>(1, null, null, new Dictionary<string, string> { { "key1", "value1" }, { "key2", "value2" } })
-                , "/broadcast/1?key1=value1&key2=value2")
-                    .SetName("Should create route with parameters");
             }
         }
     }

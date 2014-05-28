@@ -33,20 +33,8 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
 
         public CfTextQueryResult QueryTexts(CfQueryText cfQueryText)
         {
-            var resourceList = BaseRequest<ResourceList>(HttpMethod.Get, null, 
-                new CallfireRestRoute<Text>(null, null, null, new RestRouteParameters()
-                    .MaxResults(cfQueryText.MaxResults)
-                    .FirstResult(cfQueryText.FirstResult)
-                    .BroadcastId(cfQueryText.BroadcastId)
-                    .BatchId(cfQueryText.BatchId)
-                    .State(EnumeratedMapper.ToSoapEnumerated(cfQueryText.State))
-                    .Result(EnumeratedMapper.ToSoapEnumerated(cfQueryText.Result))
-                    .Inbound(cfQueryText.Inbound)
-                    .IntervalBegin(cfQueryText.IntervalBegin)
-                    .IntervalEnd(cfQueryText.IntervalEnd)
-                    .FromNumber(cfQueryText.FromNumber)
-                    .ToNumber(cfQueryText.ToNumber)
-                    .LabelName(cfQueryText.LabelName)));
+            var resourceList = BaseRequest<ResourceList>(HttpMethod.Get, new ActionQuery(cfQueryText),
+                new CallfireRestRoute<Text>(null, null, null));
 
             var text = TextMapper.FromText(ResourceListOperations.CastResourceList<Text>(resourceList));
             return new CfTextQueryResult(resourceList.TotalResults, text);
@@ -68,11 +56,8 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
 
         public CfAutoReplyQueryResult QueryAutoReplies(CfQueryAutoReplies cfQueryAutoReplies)
         {
-            var resourceList = BaseRequest<ResourceList>(HttpMethod.Get, null,
-                new CallfireRestRoute<Text>(null, null, null, new RestRouteParameters()
-                    .MaxResults(cfQueryAutoReplies.MaxResults)
-                    .FirstResult(cfQueryAutoReplies.FirstResult)
-                    .Number(cfQueryAutoReplies.Number)));
+            var resourceList = BaseRequest<ResourceList>(HttpMethod.Get, new QueryAutoReplies(cfQueryAutoReplies),
+                new CallfireRestRoute<Text>(null, null, null));
 
             var autoReply = AutoReplyMapper.FromAutoReplay(ResourceListOperations.CastResourceList<AutoReply>(resourceList));
             return new CfAutoReplyQueryResult(resourceList.TotalResults, autoReply);
@@ -80,13 +65,13 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
 
         public CfAutoReply GetAutoReply(long id)
         {
-            var resource = BaseRequest<Resource>(HttpMethod.Get, null, new CallfireRestRoute<Text>(id, BroadcastRestRouteObjects.AutoReply, null, null));
+            var resource = BaseRequest<Resource>(HttpMethod.Get, null, new CallfireRestRoute<Text>(id, BroadcastRestRouteObjects.AutoReply, null));
             return AutoReplyMapper.FromAutoReplay(resource.Resources as AutoReply);
         }
 
         public void DeleteAutoReply(long id)
         {
-            BaseRequest<string>(HttpMethod.Delete, null, new CallfireRestRoute<Text>(id, BroadcastRestRouteObjects.AutoReply, null, null));
+            BaseRequest<string>(HttpMethod.Delete, null, new CallfireRestRoute<Text>(id, BroadcastRestRouteObjects.AutoReply, null));
         }
     }
 }

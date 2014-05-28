@@ -44,7 +44,12 @@ namespace CallFire_csharp_sdk.Common
                     }
                     else
                     {
-                        result.Add(new KeyValuePair<string, string>(propertyInfo.Name, HttpUtility.UrlEncode(propertyInfo.GetValue(o, null).ToString())));
+                        object value;
+                        if ((value=propertyInfo.GetValue(o, null)) != null)
+                        {
+                            result.Add(new KeyValuePair<string, string>(propertyInfo.Name,
+                                HttpUtility.UrlEncode(value.ToString())));
+                        }
                     }
                 }
                 else

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 
 namespace CallFire_csharp_sdk.API.Rest
 {
@@ -9,19 +7,17 @@ namespace CallFire_csharp_sdk.API.Rest
         public long? Id { get; set; }
         public string Object { get; set; }
         public string Action { get; set; }
-        public Dictionary<string, string> Parameters { get; set; }
 
         public CallfireRestRoute(long? id)
         {
             Id = id;   
         }
 
-        public CallfireRestRoute(long? id, string obj, string action, Dictionary<string, string> param)
+        public CallfireRestRoute(long? id, string obj, string action)
             :this(id)
         {
             Object = obj;
             Action = action;
-            Parameters = param;
         }
 
         public override string ToString()
@@ -38,11 +34,6 @@ namespace CallFire_csharp_sdk.API.Rest
             if (!string.IsNullOrEmpty(Action))
             {
                 result.Append(string.Format("/{0}", Action));
-            }
-            if (Parameters != null && Parameters.Count > 0)
-            {
-                result.Append(string.Format("?{0}",
-                    string.Join("&",Parameters.Select(p=>string.Format("{0}={1}",p.Key,p.Value)).ToArray())));
             }
 
             return result.ToString();

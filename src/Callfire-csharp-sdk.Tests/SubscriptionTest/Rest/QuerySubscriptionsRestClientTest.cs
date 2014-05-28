@@ -51,10 +51,9 @@ namespace Callfire_csharp_sdk.Tests.SubscriptionTest.Rest
             serializer.Serialize(writer, resource);
 
             HttpClientMock.Stub(j => j.Send(
-                            Arg<string>.Is.Equal(String.Format("/subscription?MaxResults={0}&FirstResult={1}",
-                                query.MaxResults, query.FirstResult)),
+                            Arg<string>.Is.Equal(String.Format("/subscription")),
                             Arg<HttpMethod>.Is.Equal(HttpMethod.Get),
-                            Arg<object>.Is.Null))
+                            Arg<object>.Is.Anything))
                 .Return(writer.ToString());
         }
     }

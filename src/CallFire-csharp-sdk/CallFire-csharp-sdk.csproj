@@ -59,7 +59,6 @@
     <Compile Include="API\Rest\Data\ResourceList.cs" />
     <Compile Include="API\Rest\ResourceListOperations.cs" />
     <Compile Include="API\Rest\Data\ResourceReference.cs" />
-    <Compile Include="API\Rest\RestRouteParameters.cs" />
     <Compile Include="API\Rest\Clients\RestBroadcastClient.cs" />
     <Compile Include="API\Rest\CallfireRestRoute.cs" />
     <Compile Include="API\Rest\Clients\RestSubscriptionClient.cs" />

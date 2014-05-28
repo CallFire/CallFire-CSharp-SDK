@@ -34,11 +34,7 @@ namespace CallFire_csharp_sdk.API.Soap
 
         public CfTextQueryResult QueryTexts(CfQueryText cfQueryText)
         {
-            var state = EnumeratedMapper.ScreamingSnakeCase(cfQueryText.State.ToString());
-            var result = EnumeratedMapper.ToSoapEnumerated(cfQueryText.Result);
-            var textQueryResult = TextService.QueryTexts(new ActionQuery(cfQueryText.MaxResults, cfQueryText.FirstResult, cfQueryText.BroadcastId,
-                cfQueryText.BatchId, state, result, cfQueryText.Inbound, cfQueryText.IntervalBegin,
-                cfQueryText.IntervalEnd, cfQueryText.FromNumber, cfQueryText.ToNumber, cfQueryText.LabelName));
+            var textQueryResult = TextService.QueryTexts(new ActionQuery(cfQueryText));
             return TextQueryResultMapper.FromSoapContactBatchQueryResult(textQueryResult);
         }
 
@@ -56,7 +52,7 @@ namespace CallFire_csharp_sdk.API.Soap
 
         public CfAutoReplyQueryResult QueryAutoReplies(CfQueryAutoReplies cfQueryAutoReplies)
         {
-            var autoReplyQueryResult = TextService.QueryAutoReplies(new QueryAutoReplies(cfQueryAutoReplies.MaxResults, cfQueryAutoReplies.FirstResult, cfQueryAutoReplies.Number));
+            var autoReplyQueryResult = TextService.QueryAutoReplies(new QueryAutoReplies(cfQueryAutoReplies));
             return AutoReplyQueryResultMapper.FromAutoReplyQueryResult(autoReplyQueryResult);
         }
 
