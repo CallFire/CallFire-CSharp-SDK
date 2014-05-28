@@ -6,5 +6,6 @@
         public const string Batch = "batch";
         public const string Control = "control";
         public const string Schedule = "schedule";
+        public const string AutoReply = "auto-reply";
     }
 }

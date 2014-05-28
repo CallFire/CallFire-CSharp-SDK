@@ -618,6 +618,15 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfAutoReply
     {
+        public CfAutoReply(string number, string keyword, string match, string message, long id)
+        {
+            Number = number;
+            Keyword = keyword;
+            Match = match;
+            Message = message;
+            Id = id;
+        }
+
         public string Number { get; set; }
 
         public string Keyword { get; set; }

@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Globalization;
 using System.IO;
 using System.Xml.Serialization;
-using CallFire_csharp_sdk.API.Rest;
 using CallFire_csharp_sdk.API.Rest.Clients;
 using CallFire_csharp_sdk.API.Rest.Data;
 using CallFire_csharp_sdk.API.Soap;

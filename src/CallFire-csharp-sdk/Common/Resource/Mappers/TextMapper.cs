@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common.DataManagement;
 
@@ -8,6 +6,16 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
 {
     internal class TextMapper
     {
+        internal static CfText[] FromText(Text[] source)
+        {
+            return source == null ? null : source.Select(FromText).ToArray();
+        }
+
+        internal static Text[] ToText(CfText[] source)
+        {
+            return source == null ? null : source.Select(ToText).ToArray();
+        }
+
         internal static CfText FromText(Text source)
         {
             if (source == null)

@@ -11,5 +11,13 @@ namespace CallFire_csharp_sdk.API
         CfTextQueryResult QueryTexts(CfQueryText cfQueryText);
 
         CfText GetText(long id);
+
+        long CreateAutoReply(CfCreateAutoReply cfCreateAutoReply);
+
+        CfAutoReplyQueryResult QueryAutoReplies(CfQueryAutoReplies cfQueryAutoReplies);
+
+        CfAutoReply GetAutoReply(long id);
+
+        void DeleteAutoReply(long id);
     }
 }

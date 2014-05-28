@@ -1,5 +1,4 @@
-﻿using CallFire_csharp_sdk.API.Rest;
-using CallFire_csharp_sdk.API.Rest.Clients;
+﻿using CallFire_csharp_sdk.API.Rest.Clients;
 using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
 using NUnit.Framework;

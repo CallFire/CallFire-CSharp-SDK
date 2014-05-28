@@ -84,14 +84,8 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
             {
                 for (var i = 0; i < source.Count(); i++)
                 {
-                    if (i == 0)
-                    {
-                        result = ScreamingSnakeCase(source[i].ToString());
-                    }
-                    else
-                    {
-                        result = string.Format("{0}{1}{2}", result, Space, ScreamingSnakeCase(source[i].ToString()));
-                    }
+                    result = i == 0 ? ScreamingSnakeCase(source[i].ToString()) 
+                        : string.Format("{0}{1}{2}", result, Space, ScreamingSnakeCase(source[i].ToString()));
                 }
             }
             return result;

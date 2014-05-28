@@ -1,5 +1,4 @@
-﻿using System;
-using CallFire_csharp_sdk.Common.DataManagement;
+﻿using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
 using CallFire_csharp_sdk.Common.Resource.Mappers;
 using CallFire_csharp_sdk.Common.Result;
@@ -47,6 +46,28 @@ namespace CallFire_csharp_sdk.API.Soap
         {
             var text = TextService.GetText(new IdRequest(id));
             return TextMapper.FromText(text);
+        }
+
+        public long CreateAutoReply(CfCreateAutoReply cfCreateAutoReply)
+        {
+            var autoReply = AutoReplyMapper.ToAutoReplay(cfCreateAutoReply.CfAutoReply);
+            return TextService.CreateAutoReply(new CreateAutoReply(cfCreateAutoReply.RequestId, autoReply));
+        }
+
+        public CfAutoReplyQueryResult QueryAutoReplies(CfQueryAutoReplies cfQueryAutoReplies)
+        {
+            var autoReplyQueryResult = TextService.QueryAutoReplies(new QueryAutoReplies(cfQueryAutoReplies.MaxResults, cfQueryAutoReplies.FirstResult, cfQueryAutoReplies.Number));
+            return AutoReplyQueryResultMapper.FromAutoReplyQueryResult(autoReplyQueryResult);
+        }
+
+        public CfAutoReply GetAutoReply(long id) 
+        { 
+            return AutoReplyMapper.FromAutoReplay(TextService.GetAutoReply(new IdRequest(id)));
+        }
+
+        public void DeleteAutoReply(long id) 
+        { 
+            TextService.DeleteAutoReply(new IdRequest(id));
         }
     }
 }

@@ -114,5 +114,14 @@ namespace CallFire_csharp_sdk.API.Rest
             }
             return this;
         }
+
+        public RestRouteParameters Number(string number)
+        {
+            if (number != null)
+            {
+                Add("Number", number);
+            }
+            return this;
+        }
     }
 }
