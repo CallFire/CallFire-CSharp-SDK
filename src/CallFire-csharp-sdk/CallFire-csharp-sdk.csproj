@@ -48,6 +48,7 @@
     <Compile Include="API\IBroadcastClient.cs" />
     <Compile Include="API\ICallfireClient.cs" />
     <Compile Include="API\IClient.cs" />
+    <Compile Include="API\ILabelClient.cs" />
     <Compile Include="API\ISubscriptionClient.cs" />
     <Compile Include="API\ITextClient.cs" />
     <Compile Include="API\Rest\Clients\BaseRestClient.cs" />
@@ -57,14 +58,19 @@
     <Compile Include="API\Rest\Data\ResourceException.cs" />
     <Compile Include="API\Rest\Data\Resource.cs" />
     <Compile Include="API\Rest\Data\ResourceList.cs" />
+    <Compile Include="API\Rest\LabelRestRouteObjects.cs" />
     <Compile Include="API\Rest\ResourceListOperations.cs" />
     <Compile Include="API\Rest\Data\ResourceReference.cs" />
     <Compile Include="API\Rest\Clients\RestBroadcastClient.cs" />
     <Compile Include="API\Rest\CallfireRestRoute.cs" />
     <Compile Include="API\Rest\Clients\RestSubscriptionClient.cs" />
+    <Compile Include="API\Rest\RestLabelClient.cs" />
     <Compile Include="API\Soap\BaseSoapClient.cs" />
     <Compile Include="API\Soap\BroadcastServicePortTypeClient.cs" />
+    <Compile Include="API\Soap\ILabelServicePortTypeClient.cs" />
+    <Compile Include="API\Soap\LabelServicePortTypeClient.cs" />
     <Compile Include="API\Soap\ITextServicePortTypeClient.cs" />
+    <Compile Include="API\Soap\SoapLabelClient.cs" />
     <Compile Include="API\Soap\SoapTextClient.cs" />
     <Compile Include="API\Soap\TextServicePortTypeClient.cs" />
     <Compile Include="API\Soap\IServicePortClient.cs" />
@@ -161,6 +167,7 @@
     <Compile Include="Common\Result\CfBroadcastQueryResult.cs" />
     <Compile Include="Common\Result\CfBroadcastScheduleQueryResult.cs" />
     <Compile Include="Common\Result\CfContactBatchQueryResult.cs" />
+    <Compile Include="Common\Result\CfLabelQueryResult.cs" />
     <Compile Include="Common\Result\CfQueryResult.cs" />
     <Compile Include="Common\Result\CfSubscriptionQueryResult.cs" />
     <Compile Include="Common\Result\CfTextQueryResult.cs" />
@@ -174,6 +181,7 @@
     <Compile Include="Common\Result\Mappers\BroadcastQueryResultMapper.cs" />
     <Compile Include="Common\Result\Mappers\BroadcastScheduleQueryResultMapper.cs" />
     <Compile Include="Common\Result\Mappers\ContactBatchQueryResultMapper.cs" />
+    <Compile Include="Common\Result\Mappers\LabelQueryResultMapper.cs" />
     <Compile Include="Common\Result\Mappers\SubscriptionQueryResultMapper.cs" />
     <Compile Include="Common\Result\Mappers\TextQueryResultMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

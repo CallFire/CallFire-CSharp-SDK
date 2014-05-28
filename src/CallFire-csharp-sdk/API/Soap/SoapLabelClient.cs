@@ -4,16 +4,21 @@ using CallFire_csharp_sdk.Common.Result.Mappers;
 
 namespace CallFire_csharp_sdk.API.Soap
 {
-    public class SoapLabelClient : BaseSoapClient<ILabelClient>, ILabelClient
+    public class SoapLabelClient : BaseSoapClient, ILabelClient
     {
+        internal ILabelServicePortTypeClient LabelService;
+
         public SoapLabelClient(string username, string password)
-            : base(username, password)
         {
+            LabelService = new LabelServicePortTypeClient(GetCustomBinding(), GetEndpointAddress<Subscription>())
+            {
+                ClientCredentials = { UserName = { UserName = username, Password = password } }
+            };
         }
 
         internal SoapLabelClient(ILabelServicePortTypeClient client)
-            : base(client)
         {
+            LabelService = client;
         }
 
         public void DeleteLabel(string labelName)

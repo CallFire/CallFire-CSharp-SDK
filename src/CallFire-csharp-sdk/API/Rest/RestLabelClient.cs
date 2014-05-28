@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using CallFire_csharp_sdk.API.Rest.Clients;
+using CallFire_csharp_sdk.API.Rest.Data;
 using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common;
 using CallFire_csharp_sdk.Common.Resource;
@@ -26,10 +28,8 @@ namespace CallFire_csharp_sdk.API.Rest
 
         public CfLabelQueryResult QueryLabels(CfQuery queryLabels)
         {
-            var resource = BaseRequest<ResourceList>(HttpMethod.Get, null,
-                new CallfireRestRoute<Label>(null, null, null, new RestRouteParameters()
-                        .MaxResults(queryLabels.MaxResults)
-                        .FirstResult(queryLabels.FirstResult)));
+            var resource = BaseRequest<ResourceList>(HttpMethod.Get, new Query(queryLabels),
+                new CallfireRestRoute<Label>());
 
             return LabelQueryResultMapper.FromSoapLabelQueryResult(
                 new LabelQueryResult
@@ -42,25 +42,25 @@ namespace CallFire_csharp_sdk.API.Rest
         public void LabelBroadcast(long id, string labelName)
         {
             BaseRequest<string>(HttpMethod.Post, new { LabelName = labelName },
-                new CallfireRestRoute<Label>(id, LabelRestRouteObjects.Broadcast, null, null));
+                new CallfireRestRoute<Label>(id, LabelRestRouteObjects.Broadcast, null));
         }
 
         public void UnlabelBroadcast(long id, string labelName)
         {
             BaseRequest<string>(HttpMethod.Delete, new { LabelName = labelName },
-                new CallfireRestRoute<Label>(id, LabelRestRouteObjects.Broadcast, null, null));
+                new CallfireRestRoute<Label>(id, LabelRestRouteObjects.Broadcast, null));
         }
 
         public void LabelNumber(string number, string labelName)
         {
             BaseRequest<string>(HttpMethod.Post, new { LabelName = labelName },
-                new CallfireRestRoute<Label>(null, LabelRestRouteObjects.Number, number, null));
+                new CallfireRestRoute<Label>(null, LabelRestRouteObjects.Number, number));
         }
 
         public void UnlabelNumber(string number, string labelName)
         {
             BaseRequest<string>(HttpMethod.Delete, new { LabelName = labelName },
-                new CallfireRestRoute<Label>(null, LabelRestRouteObjects.Number, number, null));
+                new CallfireRestRoute<Label>(null, LabelRestRouteObjects.Number, number));
         }
     }
 }

@@ -9632,7 +9632,7 @@ namespace CallFire_csharp_sdk.API.Soap {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    internal partial class LabelServicePortTypeClient : System.ServiceModel.ClientBase<CallFire_csharp_sdk.API.Soap.LabelServicePortType>, CallFire_csharp_sdk.API.Soap.LabelServicePortType, ILabelServicePortTypeClient
+    internal partial class LabelServicePortTypeClient : System.ServiceModel.ClientBase<CallFire_csharp_sdk.API.Soap.LabelServicePortType>, CallFire_csharp_sdk.API.Soap.LabelServicePortType
     {
         
         public LabelServicePortTypeClient() {
