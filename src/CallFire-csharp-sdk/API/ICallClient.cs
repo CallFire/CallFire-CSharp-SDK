@@ -11,5 +11,9 @@ namespace CallFire_csharp_sdk.API
         CfCallQueryResult QueryCalls(CfActionQuery cfActionQuery);
 
         CfCall GetCall(long id);
+
+        //long CreateSound(CfCreateSound cfCreateSound);
+
+        //CfSoundMetaQueryResult QuerySoundMeta(CfQuery cfQuerySoundMeta);
     }
 }

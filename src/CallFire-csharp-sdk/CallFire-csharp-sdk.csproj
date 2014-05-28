@@ -76,6 +76,7 @@
     <Compile Include="Common\ICustomSerializer.cs" />
     <Compile Include="Common\IHttpClient.cs" />
     <Compile Include="Common\Resource\CfBroadcastRequest.cs" />
+    <Compile Include="Common\Resource\CfCreateSound.cs" />
     <Compile Include="Common\Resource\CfGetBroadcastStats.cs" />
     <Compile Include="Common\Resource\CfActionQuery.cs" />
     <Compile Include="Common\Resource\CfQueryText.cs" />
@@ -153,6 +154,7 @@
     <Compile Include="Common\Result\CfCallQueryResult.cs" />
     <Compile Include="Common\Result\CfContactBatchQueryResult.cs" />
     <Compile Include="Common\Result\CfQueryResult.cs" />
+    <Compile Include="Common\Result\CfSoundMetaQueryResult.cs" />
     <Compile Include="Common\Result\CfSubscriptionQueryResult.cs" />
     <Compile Include="Common\Result\CfTextQueryResult.cs" />
     <Compile Include="Common\Result\Extended\BroadcastQueryResultExtended.cs" />
