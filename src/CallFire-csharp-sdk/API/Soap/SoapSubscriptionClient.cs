@@ -6,16 +6,21 @@ using CallFire_csharp_sdk.Common.Result.Mappers;
 
 namespace CallFire_csharp_sdk.API.Soap
 {
-    public class SoapSubscriptionClient : BaseSoapClient<ISubscriptionClient>, ISubscriptionClient
+    public class SoapSubscriptionClient : BaseSoapClient, ISubscriptionClient
     {
+        internal ISubscriptionServicePortTypeClient SubscriptionService;
+
         public SoapSubscriptionClient(string username, string password)
-            : base(username, password)
         {
+            SubscriptionService = new SubscriptionServicePortTypeClient(GetCustomBinding(), GetEndpointAddress<Subscription>())
+            {
+                ClientCredentials = { UserName = { UserName = username, Password = password } }
+            };
         }
 
         internal SoapSubscriptionClient(ISubscriptionServicePortTypeClient client)
-            : base(client)
         {
+            SubscriptionService = client;
         }
 
         public long CreateSubscription(CfSubscriptionRequest cfCreateSubscription)

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Xml.Serialization;
-using CallFire_csharp_sdk.API.Rest;
+using CallFire_csharp_sdk.API.Rest.Clients;
+using CallFire_csharp_sdk.API.Rest.Data;
 using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common;
 using CallFire_csharp_sdk.Common.DataManagement;
@@ -44,11 +45,10 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
             serializer.Serialize(writer, resource);
 
             HttpClientMock
-                .Stub(j => j.Send(Arg<string>.Is.Equal(String.Format("/broadcast/{0}/batch?MaxResults={1}&FirstResult={2}",
-                            ExpectedQueryBroadcastData.BroadcastId, ExpectedQueryBroadcastData.MaxResults,
-                            ExpectedQueryBroadcastData.FirstResult)),
+                .Stub(j => j.Send(Arg<string>.Is.Equal(String.Format("/broadcast/{0}/batch",
+                            ExpectedQueryBroadcastData.BroadcastId)),
                             Arg<HttpMethod>.Is.Equal(HttpMethod.Get),
-                            Arg<object>.Is.Null))
+                            Arg<object>.Is.Anything))
                 .Return(writer.ToString());
         }
     }

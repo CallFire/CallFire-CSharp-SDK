@@ -1,4 +1,5 @@
-﻿using CallFire_csharp_sdk.API.Soap;
+﻿using CallFire_csharp_sdk.API.Rest.Data;
+using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common;
 using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
@@ -6,7 +7,7 @@ using CallFire_csharp_sdk.Common.Resource.Mappers;
 using CallFire_csharp_sdk.Common.Result;
 using CallFire_csharp_sdk.Common.Result.Mappers;
 
-namespace CallFire_csharp_sdk.API.Rest
+namespace CallFire_csharp_sdk.API.Rest.Clients
 {
     public class RestSubscriptionClient : BaseRestClient<Subscription>, ISubscriptionClient
     {
@@ -30,10 +31,8 @@ namespace CallFire_csharp_sdk.API.Rest
 
         public CfSubscriptionQueryResult QuerySubscriptions(CfQuery cfQuerySubscriptions)
         {
-            var resource = BaseRequest<ResourceList>(HttpMethod.Get, null,
-                new CallfireRestRoute<Subscription>(null, null, null, new RestRouteParameters()
-                    .MaxResults(cfQuerySubscriptions.MaxResults)
-                    .FirstResult(cfQuerySubscriptions.FirstResult)));
+            var resource = BaseRequest<ResourceList>(HttpMethod.Get, new Query(cfQuerySubscriptions),
+                new CallfireRestRoute<Subscription>());
 
             var subscription = ResourceListOperations.CastResourceList<Subscription>(resource);
             var subscriptionQueryResult = new SubscriptionQueryResult(resource.TotalResults, subscription);

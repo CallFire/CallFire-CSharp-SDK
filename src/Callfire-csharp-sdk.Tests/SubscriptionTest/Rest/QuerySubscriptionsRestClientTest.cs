@@ -1,7 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Xml.Serialization;
-using CallFire_csharp_sdk.API.Rest;
+using CallFire_csharp_sdk.API.Rest.Clients;
+using CallFire_csharp_sdk.API.Rest.Data;
 using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common;
 using CallFire_csharp_sdk.Common.DataManagement;
@@ -50,10 +51,9 @@ namespace Callfire_csharp_sdk.Tests.SubscriptionTest.Rest
             serializer.Serialize(writer, resource);
 
             HttpClientMock.Stub(j => j.Send(
-                            Arg<string>.Is.Equal(String.Format("/subscription?MaxResults={0}&FirstResult={1}",
-                                query.MaxResults, query.FirstResult)),
+                            Arg<string>.Is.Equal(String.Format("/subscription")),
                             Arg<HttpMethod>.Is.Equal(HttpMethod.Get),
-                            Arg<object>.Is.Null))
+                            Arg<object>.Is.Anything))
                 .Return(writer.ToString());
         }
     }

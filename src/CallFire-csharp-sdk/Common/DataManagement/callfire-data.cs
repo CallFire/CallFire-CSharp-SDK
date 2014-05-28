@@ -106,6 +106,13 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfToNumber
     {
+        public CfToNumber(string clientData, System.Xml.XmlAttribute[] anyAttr, string value)
+        {
+            ClientData = clientData;
+            AnyAttr = anyAttr;
+            Value = value;
+        }
+
         public string ClientData { get; set; }
 
         public System.Xml.XmlAttribute[] AnyAttr { get; set; }
@@ -115,6 +122,27 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfAction
     {
+        public CfAction(string fromNumber, CfToNumber toNumber, CfActionState state, long batchId, long broadcastId, long contactId,
+            bool inbound, DateTime created, DateTime modified, CfResult finalResult, CfLabel[] label, long id)
+        {
+            FromNumber = fromNumber;
+            ToNumber = toNumber;
+            State = state;
+            BatchId = batchId;
+            BroadcastId = broadcastId;
+            ContactId = contactId;
+            Inbound = inbound;
+            Created = created;
+            Modified = modified;
+            FinalResult = finalResult;
+            Label = label;
+            Id = id;
+        }
+
+        public CfAction()
+        {
+        }
+
         public string FromNumber { get; set; }
 
         public CfToNumber ToNumber { get; set; }
@@ -133,7 +161,7 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
         public DateTime Modified { get; set; }
 
-        public string FinalResult { get; set; }
+        public CfResult FinalResult { get; set; }
 
         public CfLabel[] Label { get; set; }
 
@@ -153,12 +181,30 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfLabel
     {
+        public CfLabel(string name)
+        {
+            Name = name;
+        }
+
         public string Name { get; set; }
     }
 
     public abstract class CfActionRecord
     {
-        public string Result { get; set; }
+        protected CfActionRecord(CfResult result, DateTime finishTime, float billedAmount, CfActionRecordQuestionResponse[] questionResponse, long id)
+        {
+            Result = result;
+            FinishTime = finishTime;
+            BilledAmount = billedAmount;
+            QuestionResponse = questionResponse;
+            Id = id;
+        }
+
+        protected CfActionRecord()
+        {
+        }
+
+        public CfResult Result { get; set; }
 
         public DateTime FinishTime { get; set; }
 
@@ -171,6 +217,12 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfActionRecordQuestionResponse
     {
+        public CfActionRecordQuestionResponse(string question, string response)
+        {
+            Question = question;
+            Response = response;
+        }
+
         public string Question { get; set; }
 
         public string Response { get; set; }
@@ -232,23 +284,23 @@ namespace CallFire_csharp_sdk.Common.DataManagement
         Busy,
         Dnc,
         Xfer,
-        Xfer_Leg,
-        No_Ans,
+        XferLeg,
+        NoAns,
         Undialed,
         Sent,
         Received,
         Dnt,
-        Too_Big,
-        Internal_Error,
-        Carrier_Error,
-        Carrier_Temp_Error
+        TooBig,
+        InternalError,
+        CarrierError,
+        CarrierTempError
     }
 
     public enum CfRetryPhoneType{
-        First_Number,
-        Home_Phone,
-        Work_Phone,
-        Mobile_Phone
+        FirstNumber,
+        HomePhone,
+        WorkPhone,
+        MobilePhone
     }
 
     public enum CfBigMessageStrategy
@@ -540,11 +592,25 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfTextRecord : CfActionRecord
     {
+        public CfTextRecord(CfResult result, DateTime finishTime, float billedAmount, CfActionRecordQuestionResponse[] questionResponse, long id, string message)
+            : base(result, finishTime, billedAmount, questionResponse, id)
+        {
+            Message = message;
+        }
+
         public string Message { get; set; }
     }
 
     public class CfText : CfAction
     {
+        public CfText(string fromNumber, CfToNumber toNumber, CfActionState state, long batchId, long broadcastId, long contactId,
+            bool inbound, DateTime created, DateTime modified, CfResult finalResult, CfLabel[] label, long id, string message, CfTextRecord[] textRecord) 
+            : base(fromNumber, toNumber, state, batchId, broadcastId, contactId, inbound, created, modified, finalResult, label, id)
+        {
+            Message = message;
+            TextRecord = textRecord;
+        }
+
         public string Message { get; set; }
 
         public CfTextRecord[] TextRecord { get; set; }
@@ -552,6 +618,15 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfAutoReply
     {
+        public CfAutoReply(string number, string keyword, string match, string message, long id)
+        {
+            Number = number;
+            Keyword = keyword;
+            Match = match;
+            Message = message;
+            Id = id;
+        }
+
         public string Number { get; set; }
 
         public string Keyword { get; set; }

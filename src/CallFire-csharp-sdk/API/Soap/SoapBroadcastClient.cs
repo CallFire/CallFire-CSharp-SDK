@@ -6,15 +6,21 @@ using CallFire_csharp_sdk.Common.Result.Mappers;
 
 namespace CallFire_csharp_sdk.API.Soap
 {
-    public class SoapBroadcastClient : BaseSoapClient<IBroadcastClient>, IBroadcastClient
+    public class SoapBroadcastClient : BaseSoapClient, IBroadcastClient
     {
+        internal IBroadcastServicePortTypeClient BroadcastService;
+
         public SoapBroadcastClient(string username, string password)
-            : base(username, password)
         {
+            BroadcastService = new BroadcastServicePortTypeClient(GetCustomBinding(), GetEndpointAddress<Broadcast>())
+            {
+                ClientCredentials = { UserName = { UserName = username, Password = password } }
+            };
         }
 
-        internal SoapBroadcastClient(IBroadcastServicePortTypeClient client) : base(client)
+        internal SoapBroadcastClient(IBroadcastServicePortTypeClient client)
         {
+            BroadcastService = client;
         }
 
         public long CreateBroadcast(CfBroadcastRequest createBroadcast)
@@ -24,11 +30,8 @@ namespace CallFire_csharp_sdk.API.Soap
 
         public CfBroadcastQueryResult QueryBroadcasts(CfQueryBroadcasts queryBroadcasts)
         {
-            var type = EnumeratedMapper.ToSoapEnumerated(queryBroadcasts.Type);
-            var running = queryBroadcasts.Running.HasValue && queryBroadcasts.Running.Value;
             return BroadcastQueryResultMapper.FromSoapBroadcastQueryResult(
-                BroadcastService.QueryBroadcasts(new QueryBroadcasts(queryBroadcasts.MaxResults,
-                    queryBroadcasts.FirstResult, type, running, queryBroadcasts.LabelName)));
+                BroadcastService.QueryBroadcasts(new QueryBroadcasts(queryBroadcasts)));
         }
 
         public CfBroadcast GetBroadcast(long id)
@@ -43,14 +46,14 @@ namespace CallFire_csharp_sdk.API.Soap
 
         public CfBroadcastStats GetBroadcastStats(CfGetBroadcastStats getBroadcastStats)
         {
-            return BroadcastStatsMapper.FromSoapBroadcastStats(BroadcastService.GetBroadcastStats(new GetBroadcastStats(getBroadcastStats.Id,
-                        getBroadcastStats.IntervalBegin, getBroadcastStats.IntervalEnd)));
+            return BroadcastStatsMapper.FromSoapBroadcastStats(
+                BroadcastService.GetBroadcastStats(new GetBroadcastStats(getBroadcastStats)));
         }
 
         public void ControlBroadcast(CfControlBroadcast controlBroadcast)
         {
             BroadcastService.ControlBroadcast(new ControlBroadcast(controlBroadcast.Id, controlBroadcast.RequestId,
-                BroadcastCommandMapper.ToSoapContactBatch(controlBroadcast.Command), controlBroadcast.MaxActive));
+                EnumeratedMapper.ToSoapEnumerated<BroadcastCommand>(controlBroadcast.Command.ToString()), controlBroadcast.MaxActive));
         }
 
         public long CreateContactBatch(CfCreateContactBatch createContactBatch)
@@ -64,8 +67,7 @@ namespace CallFire_csharp_sdk.API.Soap
         public CfContactBatchQueryResult QueryContactBatches(CfQueryBroadcastData queryBroadcastData)
         {
             return ContactBatchQueryResultMapper.FromSoapContactBatchQueryResult(
-                BroadcastService.QueryContactBatches(new QueryContactBatches(queryBroadcastData.MaxResults,
-                    queryBroadcastData.FirstResult, queryBroadcastData.BroadcastId)));
+                BroadcastService.QueryContactBatches(new QueryContactBatches(queryBroadcastData)));
         }
 
         public CfContactBatch GetContactBatch(long id)
@@ -92,8 +94,7 @@ namespace CallFire_csharp_sdk.API.Soap
             return
                 BroadcastScheduleQueryResultMapper.FromSoapBroadcastScheduleQueryResult(
                     BroadcastService.QueryBroadcastSchedule(
-                        new QueryBroadcastSchedules(queryBroadcastData.MaxResults,
-                            queryBroadcastData.FirstResult, queryBroadcastData.BroadcastId)));
+                        new QueryBroadcastSchedules(queryBroadcastData)));
         }
 
         public CfBroadcastSchedule GetBroadcastSchedule(long id)

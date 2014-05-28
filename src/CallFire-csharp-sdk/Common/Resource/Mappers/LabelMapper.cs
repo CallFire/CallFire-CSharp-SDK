@@ -1,32 +1,30 @@
-﻿using CallFire_csharp_sdk.API.Soap;
+﻿using System.Linq;
+using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common.DataManagement;
 
 namespace CallFire_csharp_sdk.Common.Resource.Mappers
 {
-    internal class LabelMapper
+    internal static class LabelMapper
     {
-        internal static CfLabel FromSoapLabel(Label source)
+
+        internal static CfLabel[] FromLabel(Label[] source)
         {
-            if (source == null)
-            {
-                return null;
-            }
-            return new CfLabel
-            {
-                Name = source.Name
-            };
+            return source == null ? null : source.Select(FromLabel).ToArray();
         }
 
-        internal static Label ToSoapLabel(CfLabel source)
+        internal static Label[] ToLabel(CfLabel[] source)
         {
-            if (source == null)
-            {
-                return null;
-            }
-            return new Label
-            {
-                Name = source.Name
-            };
+            return source == null ? null : source.Select(ToLabel).ToArray();
+        }
+
+        internal static CfLabel FromLabel(Label source)
+        {
+            return source == null ? null : new CfLabel(source.Name);
+        }
+
+        internal static Label ToLabel(CfLabel source)
+        {
+            return source == null ? null : new Label(source.Name);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Xml.Serialization;
+using CallFire_csharp_sdk.API.Rest.Data;
 using NUnit.Framework;
 
 namespace Callfire_csharp_sdk.Tests
