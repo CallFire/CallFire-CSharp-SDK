@@ -7,8 +7,8 @@ namespace CallFire_csharp_sdk.Common.Result
         public CfBroadcast[] Broadcast { get; set; }
 
         public CfBroadcastQueryResult(long totalResults, CfBroadcast[] broadcast)
+            : base(totalResults)
         {
-            TotalResults = totalResults;
             Broadcast = broadcast;
         }
     }

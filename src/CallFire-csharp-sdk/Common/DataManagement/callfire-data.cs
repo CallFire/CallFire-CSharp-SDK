@@ -514,6 +514,12 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfCall : CfAction
     {
+        public CfCall(string fromNumber, CfToNumber toNumber, CfActionState state, long batchId, long broadcastId, long contactId, bool inbound,
+            DateTime created, DateTime modified, string finalResult, CfLabel[] label, long Id, CfCallRecord[] callRecord)
+        {
+            CallRecord = callRecord;
+        }
+
         public CfCallRecord[] CallRecord { get; set; }
     }
 
