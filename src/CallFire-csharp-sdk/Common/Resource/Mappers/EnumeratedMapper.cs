@@ -79,15 +79,18 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
 
         internal static string ToSoapEnumerated<T>(T[] source)
         {
-            var result = string.Empty;
-            if (source != null)
+            if (source == null || source.Count() == 0)
             {
-                for (var i = 0; i < source.Count(); i++)
-                {
-                    result = i == 0 ? ScreamingSnakeCase(source[i].ToString()) 
-                        : string.Format("{0}{1}{2}", result, Space, ScreamingSnakeCase(source[i].ToString()));
-                }
+                return string.Empty;
             }
+
+            var result = ScreamingSnakeCase(source.First().ToString());
+
+            for (var i = 1; i < source.Count(); i++)
+            {
+                result = string.Format("{0}{1}{2}", result, Space, ScreamingSnakeCase(source[i].ToString()));
+            }
+
             return result;
         }
 
