@@ -34,7 +34,7 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
         public CfTextQueryResult QueryTexts(CfQueryText cfQueryText)
         {
             var resourceList = BaseRequest<ResourceList>(HttpMethod.Get, new ActionQuery(cfQueryText),
-                new CallfireRestRoute<Text>(null, null, null));
+                new CallfireRestRoute<Text>());
 
             var text = TextMapper.FromText(ResourceListOperations.CastResourceList<Text>(resourceList));
             return new CfTextQueryResult(resourceList.TotalResults, text);
@@ -57,7 +57,7 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
         public CfAutoReplyQueryResult QueryAutoReplies(CfQueryAutoReplies cfQueryAutoReplies)
         {
             var resourceList = BaseRequest<ResourceList>(HttpMethod.Get, new QueryAutoReplies(cfQueryAutoReplies),
-                new CallfireRestRoute<Text>(null, null, null));
+                new CallfireRestRoute<Text>());
 
             var autoReply = AutoReplyMapper.FromAutoReplay(ResourceListOperations.CastResourceList<AutoReply>(resourceList));
             return new CfAutoReplyQueryResult(resourceList.TotalResults, autoReply);

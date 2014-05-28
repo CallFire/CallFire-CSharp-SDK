@@ -12,9 +12,9 @@ namespace CallFire_csharp_sdk.Common
 
         public string SerializeToFormData(object o)
         {
-            return string.Join("&", ToCustomFormatArray(GetProperties(o)));
+            return o == null ? string.Empty : string.Join("&", ToCustomFormatArray(GetProperties(o)));
         }
-        
+
         internal string[] ToCustomFormatArray(IEnumerable<KeyValuePair<string, string>> properties)
         {
             return properties.Select(v => string.Format("{0}={1}", v.Key, v.Value)).ToArray();
@@ -55,10 +55,11 @@ namespace CallFire_csharp_sdk.Common
                 else
                 {
                     var value = propertyInfo.GetValue(o, null);
-                    if (value != null)
+                    if (value == null)
                     {
-                        result.AddRange(GetProperties(value));
+                        continue;
                     }
+                    result.AddRange(GetProperties(value));
                 }
             }
             return result;

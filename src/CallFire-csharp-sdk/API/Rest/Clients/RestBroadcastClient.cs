@@ -31,7 +31,7 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
         public CfBroadcastQueryResult QueryBroadcasts(CfQueryBroadcasts queryBroadcasts)
         {
             var resource = BaseRequest<ResourceList>(HttpMethod.Get, new QueryBroadcasts(queryBroadcasts),
-                new CallfireRestRoute<Broadcast>(null, null, null));
+                new CallfireRestRoute<Broadcast>());
 
             var broadcasts = ResourceListOperations.CastResourceList<Broadcast>(resource);
             var broadcastQueryResult = new BroadcastQueryResult(resource.TotalResults, broadcasts);

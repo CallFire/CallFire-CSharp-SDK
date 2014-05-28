@@ -10,7 +10,11 @@ namespace CallFire_csharp_sdk.API.Rest
 
         public CallfireRestRoute(long? id)
         {
-            Id = id;   
+            Id = id;
+        }
+
+        public CallfireRestRoute()
+        {
         }
 
         public CallfireRestRoute(long? id, string obj, string action)
@@ -22,18 +26,21 @@ namespace CallFire_csharp_sdk.API.Rest
 
         public override string ToString()
         {
-            var result = new StringBuilder(string.Format("/{0}", GetTypeNameForRoute()));
+            const string slashFormat = "/{0}";
+
+            var result = new StringBuilder(string.Format(slashFormat, GetTypeNameForRoute()));
+
             if (!string.IsNullOrEmpty(Object))
             {
-                result.Append(string.Format("/{0}", Object));
+                result.AppendFormat(slashFormat, Object);
             }
             if (Id.HasValue)
             {
-                result.Append(string.Format("/{0}", Id.Value));
+                result.AppendFormat(slashFormat, Id.Value);
             }
             if (!string.IsNullOrEmpty(Action))
             {
-                result.Append(string.Format("/{0}", Action));
+                result.AppendFormat(slashFormat, Action);
             }
 
             return result.ToString();
