@@ -22,12 +22,7 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
 
         public long SendText(CfSendText cfSendText)
         {
-            var type = EnumeratedMapper.EnumFromSoapEnumerated<BroadcastType>(cfSendText.Type.ToString());
-            var toNumber = ToNumberMapper.ToToNumber(cfSendText.ToNumber);
-            var textBroadcastConfig = TextBroadcastConfigMapper.ToSoapTextBroadcastConfig(cfSendText.TextBroadcastConfig);
-            var sendText = new SendText(cfSendText.RequestId, type.ToString(), cfSendText.BroadcastName, toNumber,
-                cfSendText.ScrubBroadcastDuplicates, textBroadcastConfig, cfSendText.BroadcastId, cfSendText.UseDefaultBroadcast);
-            var resource = BaseRequest<ResourceReference>(HttpMethod.Post, sendText, new CallfireRestRoute<Text>(null));
+            var resource = BaseRequest<ResourceReference>(HttpMethod.Post, new SendText(cfSendText), new CallfireRestRoute<Text>(null));
             return resource.Id;
         }
 
@@ -48,9 +43,7 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
 
         public long CreateAutoReply(CfCreateAutoReply cfCreateAutoReply)
         {
-            var autoReply = AutoReplyMapper.ToAutoReplay(cfCreateAutoReply.CfAutoReply);
-            var createAutoReply = new CreateAutoReply(cfCreateAutoReply.RequestId, autoReply);
-            var resource = BaseRequest<ResourceReference>(HttpMethod.Post, createAutoReply, new CallfireRestRoute<Text>(null));
+            var resource = BaseRequest<ResourceReference>(HttpMethod.Post, new CreateAutoReply(cfCreateAutoReply), new CallfireRestRoute<Text>(null));
             return resource.Id;
         }
 

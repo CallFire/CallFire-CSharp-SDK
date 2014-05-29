@@ -1,13 +1,18 @@
-﻿// ReSharper disable once CheckNamespace - This is an extension from API.Soap
+﻿using CallFire_csharp_sdk.Common.DataManagement;
+using CallFire_csharp_sdk.Common.Resource;
+using CallFire_csharp_sdk.Common.Resource.Mappers;
+// ReSharper disable once CheckNamespace - This is an extension from API.Soap
+
+
 namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class GetRecordingData
     {
-        public GetRecordingData(object[] items, ItemsChoiceType[] itemsElementName, SoundFormat format)
+        public GetRecordingData(CfGetRecordingData cfGetRecordingData)
         {
-            Items = items;
-            ItemsElementName = itemsElementName;
-            Format = format;
+            Items = cfGetRecordingData.Items;
+            ItemsElementName = EnumeratedMapper.ToArraySoapEnumerated<CfItemsChoiceType, ItemsChoiceType>(cfGetRecordingData.ItemsElementNameField);
+            Format = EnumeratedMapper.ToSoapEnumerated<SoundFormat>(cfGetRecordingData.Format.ToString());
         }
     }
 }

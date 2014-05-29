@@ -25,17 +25,12 @@ namespace CallFire_csharp_sdk.API.Soap
 
         public long SendCall(CfSendCall cfSendCall)
         {
-            var type = EnumeratedMapper.ScreamingSnakeCase(cfSendCall.Type.ToString());
-            var toNumber = ToNumberMapper.ToToNumber(cfSendCall.ToNumber);
-            var broadcastConfig = BroadcastConfigMapper.ToBroadcastConfig(cfSendCall.Item, cfSendCall.Type);
-            var sendCall = new SendCall(cfSendCall.RequestId, type, cfSendCall.BroadcastName, toNumber, cfSendCall.ScrubBroadcastDuplicates, broadcastConfig);
-            return CallService.SendCall(sendCall);
+            return CallService.SendCall(new SendCall(cfSendCall));
         }
 
         public CfCallQueryResult QueryCalls(CfActionQuery cfActionQuery)
         {
-            var callQueryResult = CallService.QueryCalls(new ActionQuery(cfActionQuery));
-            return CallQueryResultMapper.FromCallQueryResult(callQueryResult);
+            return CallQueryResultMapper.FromCallQueryResult(CallService.QueryCalls(new ActionQuery(cfActionQuery)));
         }
 
         public CfCall GetCall(long id)
@@ -45,13 +40,12 @@ namespace CallFire_csharp_sdk.API.Soap
 
         public long CreateSound(CfCreateSound cfCreateSound)
         {
-            return CallService.CreateSound(new CreateSound(cfCreateSound.Name, cfCreateSound.Item, cfCreateSound.SoundTextVoice));
+            return CallService.CreateSound(new CreateSound(cfCreateSound));
         }
 
         public CfSoundMetaQueryResult QuerySoundMeta(CfQuery cfQuerySoundMeta)
         {
-            var soundMetaQueryResult = CallService.QuerySoundMeta(new Query(cfQuerySoundMeta.MaxResults, cfQuerySoundMeta.FirstResult));
-            return SoundMetaQueryResultMapper.FromSoundMetaQueryResult(soundMetaQueryResult);
+            return SoundMetaQueryResultMapper.FromSoundMetaQueryResult(CallService.QuerySoundMeta(new Query(cfQuerySoundMeta)));
         }
 
         public CfSoundMeta GetSoundMeta(long id)
@@ -61,15 +55,12 @@ namespace CallFire_csharp_sdk.API.Soap
 
         public byte[] GetSoundData(CfGetSoundData cfGetSoundData)
         {
-            var format = EnumeratedMapper.ToSoapEnumerated<SoundFormat>(cfGetSoundData.Format.ToString());
-            return CallService.GetSoundData(new GetSoundData(cfGetSoundData.Id, format));
+            return CallService.GetSoundData(new GetSoundData(cfGetSoundData));
         }
 
         public byte[] GetRecordingData(CfGetRecordingData cfGetRecordingData)
         {
-            var itemsElementNameField = EnumeratedMapper.ToArraySoapEnumerated<CfItemsChoiceType, ItemsChoiceType>(cfGetRecordingData.ItemsElementNameField);
-            var format = EnumeratedMapper.ToSoapEnumerated<SoundFormat>(cfGetRecordingData.Format.ToString());
-            return CallService.GetRecordingData(new GetRecordingData(cfGetRecordingData.Items, itemsElementNameField, format));
+            return CallService.GetRecordingData(new GetRecordingData(cfGetRecordingData));
         }
     }
 }

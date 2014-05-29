@@ -23,12 +23,7 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
 
         public long SendCall(CfSendCall cfSendCall)
         {
-            var type = EnumeratedMapper.ScreamingSnakeCase(cfSendCall.Type.ToString());
-            var toNumber = ToNumberMapper.ToToNumber(cfSendCall.ToNumber);
-            var broadcastConfig = BroadcastConfigMapper.ToBroadcastConfig(cfSendCall.Item, cfSendCall.Type);
-            var sendCall = new SendCall(cfSendCall.RequestId, type, cfSendCall.BroadcastName,
-                toNumber, cfSendCall.ScrubBroadcastDuplicates, broadcastConfig);
-            var resource = BaseRequest<ResourceReference>(HttpMethod.Post, sendCall, new CallfireRestRoute<Call>(null));
+            var resource = BaseRequest<ResourceReference>(HttpMethod.Post, new SendCall(cfSendCall), new CallfireRestRoute<Call>(null));
             return resource.Id;
         }
 
@@ -49,8 +44,7 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
 
         public long CreateSound(CfCreateSound cfCreateSound)
         {
-            var createSound = new CreateSound(cfCreateSound.Name, cfCreateSound.Item, cfCreateSound.SoundTextVoice);
-            var resource = BaseRequest<ResourceReference>(HttpMethod.Post, createSound, new CallfireRestRoute<Call>(null));
+            var resource = BaseRequest<ResourceReference>(HttpMethod.Post, new CreateSound(cfCreateSound), new CallfireRestRoute<Call>(null));
             return resource.Id;
         }
 

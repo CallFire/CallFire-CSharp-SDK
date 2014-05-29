@@ -25,11 +25,7 @@ namespace CallFire_csharp_sdk.API.Soap
 
         public long SendText(CfSendText cfSendText)
         {
-            var type = EnumeratedMapper.ToSoapEnumerated<CfBroadcastType>(cfSendText.Type.ToString());
-            var textBroadcastConfig = TextBroadcastConfigMapper.ToSoapTextBroadcastConfig(cfSendText.TextBroadcastConfig);
-            var toNumber = ToNumberMapper.ToToNumber(cfSendText.ToNumber);
-            return TextService.SendText(new SendText(cfSendText.RequestId, type.ToString(), cfSendText.BroadcastName, toNumber,
-                cfSendText.ScrubBroadcastDuplicates, textBroadcastConfig, cfSendText.BroadcastId, cfSendText.UseDefaultBroadcast));
+            return TextService.SendText(new SendText(cfSendText));
         }
 
         public CfTextQueryResult QueryTexts(CfActionQuery cfQueryText)
@@ -46,8 +42,7 @@ namespace CallFire_csharp_sdk.API.Soap
 
         public long CreateAutoReply(CfCreateAutoReply cfCreateAutoReply)
         {
-            var autoReply = AutoReplyMapper.ToAutoReplay(cfCreateAutoReply.CfAutoReply);
-            return TextService.CreateAutoReply(new CreateAutoReply(cfCreateAutoReply.RequestId, autoReply));
+            return TextService.CreateAutoReply(new CreateAutoReply(cfCreateAutoReply));
         }
 
         public CfAutoReplyQueryResult QueryAutoReplies(CfQueryAutoReplies cfQueryAutoReplies)
