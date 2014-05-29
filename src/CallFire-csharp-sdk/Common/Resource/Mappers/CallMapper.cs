@@ -22,13 +22,13 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
             {
                 return null;
             }
-            // TODO 
-            //var toNumber = ToNumberMapper.FromToNumber(source.ToNumber);
+            var toNumber = ToNumberMapper.FromToNumber(source.ToNumber);
             var state = EnumeratedMapper.EnumFromSoapEnumerated<CfActionState>(source.State);
-            //var label = LabelMapper.FromLabel(source.Label);
+            var label = LabelMapper.FromLabel(source.Label);
             var callRecord = CallRecordMapper.FromCallRecord(source.CallRecord);
-            return new CfCall(source.FromNumber, null, state, source.BatchId, source.BroadcastId,
-                source.ContactId, source.Inbound, source.Created, source.Modified, source.FinalResult, null, source.id, callRecord);
+            var result = EnumeratedMapper.EnumFromSoapEnumerated<CfResult>(source.FinalResult);
+            return new CfCall(source.FromNumber, toNumber, state, source.BatchId, source.BroadcastId,
+                source.ContactId, source.Inbound, source.Created, source.Modified, result, label, source.id, callRecord);
         }
 
         internal static Call ToCall(CfCall source)
@@ -37,13 +37,13 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
             {
                 return null;
             }
-            // TODO 
-            //var toNumber = ToNumberMapper.FromToNumber(source.ToNumber);
+            var toNumber = ToNumberMapper.ToToNumber(source.ToNumber);
             var state = EnumeratedMapper.ScreamingSnakeCase(source.State.ToString());
-            //var label = LabelMapper.FromLabel(source.Label);
+            var label = LabelMapper.ToLabel(source.Label);
             var callRecord = CallRecordMapper.ToCallRecord(source.CallRecord);
-            return new Call(source.FromNumber, null, state, source.BatchId, source.BroadcastId,
-                source.ContactId, source.Inbound, source.Created, source.Modified, source.FinalResult, null, source.Id, callRecord);
+            var result = EnumeratedMapper.ScreamingSnakeCase(source.FinalResult.ToString());
+            return new Call(source.FromNumber, toNumber, state, source.BatchId, source.BroadcastId,
+                source.ContactId, source.Inbound, source.Created, source.Modified, result, label, source.Id, callRecord);
         }
     }
 }

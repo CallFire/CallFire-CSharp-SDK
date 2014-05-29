@@ -35,10 +35,10 @@ namespace Callfire_csharp_sdk.Tests.SubscriptionTest.Rest
             subscriptions[0] = Subscription;
             SubscriptionQueryResult = new CfSubscriptionQueryResult(1, subscriptions);
 
-            GenerateMock(SubscriptionQueryResult, Query);
+            GenerateMock(SubscriptionQueryResult);
         }
 
-        private void GenerateMock(CfSubscriptionQueryResult subscriptionQueryResult, CfQuery query)
+        private void GenerateMock(CfSubscriptionQueryResult subscriptionQueryResult)
         {
             var resource = new ResourceList();
             var array = new Subscription[1];
@@ -51,10 +51,9 @@ namespace Callfire_csharp_sdk.Tests.SubscriptionTest.Rest
             serializer.Serialize(writer, resource);
 
             HttpClientMock.Stub(j => j.Send(
-                            Arg<string>.Is.Equal(String.Format("/subscription?MaxResults={0}&FirstResult={1}",
-                                query.MaxResults, query.FirstResult)),
+                            Arg<string>.Is.Equal(String.Format("/subscription")),
                             Arg<HttpMethod>.Is.Equal(HttpMethod.Get),
-                            Arg<object>.Is.Null))
+                            Arg<object>.Is.Anything))
                 .Return(writer.ToString());
         }
     }

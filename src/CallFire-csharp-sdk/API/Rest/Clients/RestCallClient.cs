@@ -23,31 +23,18 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
         public long SendCall(CfSendCall cfSendCall)
         {
             var type = EnumeratedMapper.ScreamingSnakeCase(cfSendCall.Type.ToString());
-            // TODO
-            //var toNumber = ToNumberMapper
+            var toNumber = ToNumberMapper.ToToNumber(cfSendCall.ToNumber);
             var broadcastConfig = BroadcastConfigMapper.ToBroadcastConfig(cfSendCall.Item, cfSendCall.Type);
             var sendCall = new SendCall(cfSendCall.RequestId, type, cfSendCall.BroadcastName,
-                null, cfSendCall.ScrubBroadcastDuplicates, broadcastConfig);
+                toNumber, cfSendCall.ScrubBroadcastDuplicates, broadcastConfig);
             var resource = BaseRequest<ResourceReference>(HttpMethod.Post, sendCall, new CallfireRestRoute<Call>(null));
             return resource.Id;
         }
 
-        public CfCallQueryResult QueryCalls(CfActionQuery cfActionQuery)
+        public CfCallQueryResult QueryCalls(CfActionQuery cfQueryCalls)
         {
-            var resourceList = BaseRequest<ResourceList>(HttpMethod.Get, null,
-                new CallfireRestRoute<Call>(null, null, null, new RestRouteParameters()
-                    .MaxResults(cfActionQuery.MaxResults)
-                    .FirstResult(cfActionQuery.FirstResult)
-                    //.BroadcastId(cfActionQuery.BroadcastId)
-                    //.BatchId(cfActionQuery.BatchId)
-                    //.State(EnumeratedMapper.ToSoapEnumerated(cfActionQuery.State))
-                    //.Result(EnumeratedMapper.ToSoapEnumerated(cfActionQuery.Result))
-                    //.Inbound(cfActionQuery.Inbound)
-                    .IntervalBegin(cfActionQuery.IntervalBegin)
-                    .IntervalEnd(cfActionQuery.IntervalEnd)
-                    //.FromNumber(cfActionQuery.FromNumber)
-                    //.ToNumber(cfActionQuery.ToNumber)
-                    .LabelName(cfActionQuery.LabelName)));
+            var resourceList = BaseRequest<ResourceList>(HttpMethod.Get, new ActionQuery(cfQueryCalls),
+                new CallfireRestRoute<Call>());
 
             var call = CallMapper.FromCall(ResourceListOperations.CastResourceList<Call>(resourceList));
             return new CfCallQueryResult(resourceList.TotalResults, call);
@@ -68,11 +55,9 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
 
         public CfSoundMetaQueryResult QuerySoundMeta(CfQuery cfQuerySoundMeta)
         {
-            var resourceList = BaseRequest<ResourceList>(HttpMethod.Get, null,
-                new CallfireRestRoute<Call>(null, null, null, new RestRouteParameters()
-                    .MaxResults(cfQuerySoundMeta.MaxResults)
-                    .FirstResult(cfQuerySoundMeta.FirstResult)));
-
+            var resourceList = BaseRequest<ResourceList>(HttpMethod.Get, new Query(cfQuerySoundMeta),
+                new CallfireRestRoute<Call>());
+           
             var soundMeta = SoundMetaMapper.FromSoundMeta(ResourceListOperations.CastResourceList<SoundMeta>(resourceList));
             return new CfSoundMetaQueryResult(resourceList.TotalResults, soundMeta);
         }

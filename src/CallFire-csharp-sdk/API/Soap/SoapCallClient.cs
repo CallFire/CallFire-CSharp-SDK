@@ -26,21 +26,15 @@ namespace CallFire_csharp_sdk.API.Soap
         public long SendCall(CfSendCall cfSendCall)
         {
             var type = EnumeratedMapper.ScreamingSnakeCase(cfSendCall.Type.ToString());
-            // TODO
-            //var toNumber = ToNumberMapper.ToToNumber(cfSendCall.ToNumber);
+            var toNumber = ToNumberMapper.ToToNumber(cfSendCall.ToNumber);
             var broadcastConfig = BroadcastConfigMapper.ToBroadcastConfig(cfSendCall.Item, cfSendCall.Type);
-            var sendCall = new SendCall(cfSendCall.RequestId, type, cfSendCall.BroadcastName, null, cfSendCall.ScrubBroadcastDuplicates, broadcastConfig);
+            var sendCall = new SendCall(cfSendCall.RequestId, type, cfSendCall.BroadcastName, toNumber, cfSendCall.ScrubBroadcastDuplicates, broadcastConfig);
             return CallService.SendCall(sendCall);
         }
 
         public CfCallQueryResult QueryCalls(CfActionQuery cfActionQuery)
         {
-            var state = EnumeratedMapper.ToSoapEnumerated(cfActionQuery.State);
-            var result = EnumeratedMapper.ToSoapEnumerated(cfActionQuery.Result);
-            var actionQuery = new ActionQuery(cfActionQuery.MaxResults, cfActionQuery.FirstResult, cfActionQuery.BroadcastId, cfActionQuery.BatchId,
-                state, result, cfActionQuery.Inbound, cfActionQuery.IntervalBegin, cfActionQuery.IntervalEnd, 
-                cfActionQuery.FromNumber, cfActionQuery.ToNumber, cfActionQuery.LabelName);
-            var callQueryResult = CallService.QueryCalls(actionQuery);
+            var callQueryResult = CallService.QueryCalls(new ActionQuery(cfActionQuery));
             return CallQueryResultMapper.FromCallQueryResult(callQueryResult);
         }
 
