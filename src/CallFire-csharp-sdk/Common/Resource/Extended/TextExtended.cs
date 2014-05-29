@@ -22,5 +22,9 @@ namespace CallFire_csharp_sdk.API.Soap
             Message = message;
             TextRecord = textRecord;
         }
+
+        public Text()
+        {
+        }
     }
 }

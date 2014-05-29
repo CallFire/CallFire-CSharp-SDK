@@ -10,7 +10,7 @@ namespace CallFire_csharp_sdk.API.Soap
         public SendText(CfSendText cfSendText)
         {
             RequestId = cfSendText.RequestId;
-            Type = EnumeratedMapper.EnumFromSoapEnumerated<BroadcastType>(cfSendText.Type.ToString()).ToString();
+            Type = EnumeratedMapper.ToSoapEnumerated<BroadcastType>(cfSendText.Type.ToString()).ToString();
             BroadcastName = cfSendText.BroadcastName;
             ToNumber = ToNumberMapper.ToToNumber(cfSendText.ToNumber);
             ScrubBroadcastDuplicates = cfSendText.ScrubBroadcastDuplicates;

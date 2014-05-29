@@ -12,7 +12,7 @@ namespace CallFire_csharp_sdk.API.Soap
 
         public SoapTextClient(string username, string password)
         {
-            TextService = new TextServicePortTypeClient(GetCustomBinding(), GetEndpointAddress<Subscription>())
+            TextService = new TextServicePortTypeClient(GetCustomBinding(), GetEndpointAddress<Text>())
             {
                 ClientCredentials = { UserName = { UserName = username, Password = password } }
             };

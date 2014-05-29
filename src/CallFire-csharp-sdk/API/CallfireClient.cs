@@ -52,7 +52,7 @@ namespace CallFire_csharp_sdk.API
         {
             get
             {
-                if (_subscriptionClient != null)
+                if (_textClient != null)
                 {
                     return _textClient;
                 }
@@ -66,7 +66,7 @@ namespace CallFire_csharp_sdk.API
         {
             get
             {
-                if (_subscriptionClient != null)
+                if (_callClient != null)
                 {
                     return _callClient;
                 }

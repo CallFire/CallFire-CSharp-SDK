@@ -8,5 +8,9 @@ namespace CallFire_csharp_sdk.API.Soap
             TotalResults = totalResults;
             SoundMeta = soundMeta;
         }
+
+        public SoundMetaQueryResult()
+        {
+        }
     }
 }
