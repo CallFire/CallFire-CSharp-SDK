@@ -310,6 +310,19 @@ namespace CallFire_csharp_sdk.Common.DataManagement
         Trim,
     }
 
+    public enum CfSoundFormat
+    {
+        Wav,
+        Mp3
+    }
+
+    public enum CfItemsChoiceType
+    {
+        CallId,
+        Name,
+        RecordingId
+    }
+
     public class CfVoiceBroadcastConfig : CfBroadcastConfig
     {
         public CfVoiceBroadcastConfig(long identifier, DateTime created, string fromNumber,

@@ -17,5 +17,9 @@ namespace CallFire_csharp_sdk.API
         CfSoundMetaQueryResult QuerySoundMeta(CfQuery cfQuerySoundMeta);
 
         CfSoundMeta GetSoundMeta(long id);
+
+        byte[] GetSoundData(CfGetSoundData cfGetSoundData);
+
+        byte[] GetRecordingData(CfGetRecordingData cfGetRecordingData);
     }
 }

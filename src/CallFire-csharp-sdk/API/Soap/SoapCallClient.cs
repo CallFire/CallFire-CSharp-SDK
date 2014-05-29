@@ -40,8 +40,7 @@ namespace CallFire_csharp_sdk.API.Soap
 
         public CfCall GetCall(long id)
         {
-            var call = CallService.GetCall(new IdRequest(id));
-            return CallMapper.FromCall(call);
+            return CallMapper.FromCall(CallService.GetCall(new IdRequest(id)));
         }
 
         public long CreateSound(CfCreateSound cfCreateSound)
@@ -57,8 +56,20 @@ namespace CallFire_csharp_sdk.API.Soap
 
         public CfSoundMeta GetSoundMeta(long id)
         {
-            var soundMeta = CallService.GetSoundMeta(new IdRequest(id));
-            return SoundMetaMapper.FromSoundMeta(soundMeta);
+            return SoundMetaMapper.FromSoundMeta(CallService.GetSoundMeta(new IdRequest(id)));
+        }
+
+        public byte[] GetSoundData(CfGetSoundData cfGetSoundData)
+        {
+            var format = EnumeratedMapper.ToSoapEnumerated<SoundFormat>(cfGetSoundData.Format.ToString());
+            return CallService.GetSoundData(new GetSoundData(cfGetSoundData.Id, format));
+        }
+
+        public byte[] GetRecordingData(CfGetRecordingData cfGetRecordingData)
+        {
+            var itemsElementNameField = EnumeratedMapper.ToArraySoapEnumerated<CfItemsChoiceType, ItemsChoiceType>(cfGetRecordingData.ItemsElementNameField);
+            var format = EnumeratedMapper.ToSoapEnumerated<SoundFormat>(cfGetRecordingData.Format.ToString());
+            return CallService.GetRecordingData(new GetRecordingData(cfGetRecordingData.Items, itemsElementNameField, format));
         }
     }
 }

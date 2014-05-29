@@ -83,6 +83,8 @@
     <Compile Include="Common\Resource\CfCreateSound.cs" />
     <Compile Include="Common\Resource\CfActionQuery.cs" />
     <Compile Include="Common\Resource\CfCreateAutoReplay.cs" />
+    <Compile Include="Common\Resource\CfGetRecordingData.cs" />
+    <Compile Include="Common\Resource\CfGetSoundData.cs" />
     <Compile Include="Common\Resource\CfQueryAutoReplies.cs" />
     <Compile Include="Common\Resource\CfRequest.cs" />
     <Compile Include="Common\Resource\CfSendCall.cs" />
@@ -92,6 +94,8 @@
     <Compile Include="Common\Resource\Extended\CallExtended.cs" />
     <Compile Include="Common\Resource\Extended\CallRecordExtended.cs" />
     <Compile Include="Common\Resource\Extended\CreateSoundExtended.cs" />
+    <Compile Include="Common\Resource\Extended\GetRecordingDataExtended.cs" />
+    <Compile Include="Common\Resource\Extended\GetSoundDataExtended.cs" />
     <Compile Include="Common\Resource\Extended\RecordingMetaExtended.cs" />
     <Compile Include="Common\Resource\Extended\SendCallExtended.cs" />
     <Compile Include="Common\Resource\Extended\SoundMetaExtended.cs" />

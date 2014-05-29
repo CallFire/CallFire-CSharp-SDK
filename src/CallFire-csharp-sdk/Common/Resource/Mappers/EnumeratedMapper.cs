@@ -8,7 +8,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
         private const char Space = ' ';
         private const char Underscore = '_';
 
-        internal static T[] FromSoapEnumerated<T>(string source)
+        internal static T[] ArrayFromSoapEnumerated<T>(string source)
         {
             if (source == null)
             {
@@ -97,6 +97,20 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
         internal static T ToSoapEnumerated<T>(string source)
         {
             return (T) Enum.Parse(typeof(T), ScreamingSnakeCase(source)); 
+        }
+
+        internal static T2[] ToArraySoapEnumerated<T1, T2>(T1[] source)
+        {
+            if (source == null)
+            {
+                return null;
+            }
+            var result = new T2[source.Count()];
+            for (var i = 0; i < source.Count(); i++)
+            {
+                result[i] = ToSoapEnumerated<T2>(source[i].ToString());
+            }
+            return result;
         }
     }
 }

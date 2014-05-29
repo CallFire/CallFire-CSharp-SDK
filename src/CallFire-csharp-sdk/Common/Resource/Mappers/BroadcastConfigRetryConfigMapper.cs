@@ -11,8 +11,8 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
             {
                 return null;
             }
-            var retry = EnumeratedMapper.FromSoapEnumerated<CfResult>(source.RetryResults);
-            var retryPhoneType = EnumeratedMapper.FromSoapEnumerated<CfRetryPhoneType>(source.RetryPhoneTypes);
+            var retry = EnumeratedMapper.ArrayFromSoapEnumerated<CfResult>(source.RetryResults);
+            var retryPhoneType = EnumeratedMapper.ArrayFromSoapEnumerated<CfRetryPhoneType>(source.RetryPhoneTypes);
             return new CfBroadcastConfigRetryConfig(source.MaxAttempts, source.MinutesBetweenAttempts, retry, retryPhoneType);
         }
 

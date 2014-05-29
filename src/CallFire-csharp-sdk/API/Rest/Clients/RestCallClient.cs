@@ -1,4 +1,5 @@
-﻿using CallFire_csharp_sdk.API.Rest.Data;
+﻿using System;
+using CallFire_csharp_sdk.API.Rest.Data;
 using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common;
 using CallFire_csharp_sdk.Common.DataManagement;
@@ -66,6 +67,16 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
         {
             var resource = BaseRequest<Resource>(HttpMethod.Get, null, new CallfireRestRoute<Call>(id));
             return SoundMetaMapper.FromSoundMeta(resource.Resources as SoundMeta);
+        }
+
+        public byte[] GetSoundData(CfGetSoundData cfGetSoundData)
+        {
+            throw new NotImplementedException();
+        }
+
+        public byte[] GetRecordingData(CfGetRecordingData cfGetRecordingData)
+        {
+            throw new NotImplementedException();
         }
     }
 }
