@@ -10,7 +10,7 @@ namespace CallFire_csharp_sdk.API.Soap
 
         public SoapLabelClient(string username, string password)
         {
-            LabelService = new LabelServicePortTypeClient(GetCustomBinding(), GetEndpointAddress<Subscription>())
+            LabelService = new LabelServicePortTypeClient(GetCustomBinding(), GetEndpointAddress<Label>())
             {
                 ClientCredentials = { UserName = { UserName = username, Password = password } }
             };
