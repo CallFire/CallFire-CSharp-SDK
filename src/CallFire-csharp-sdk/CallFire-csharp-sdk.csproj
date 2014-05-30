@@ -207,7 +207,7 @@
     <Compile Include="Common\Result\Mappers\BroadcastQueryResultMapper.cs" />
     <Compile Include="Common\Result\Mappers\BroadcastScheduleQueryResultMapper.cs" />
     <Compile Include="Common\Result\Mappers\CallQueryResultMapper.cs" />
-    <Compile Include="Common\Result\Mappers\ContactBatchQueryResultMapper.cs" />f
+    <Compile Include="Common\Result\Mappers\ContactBatchQueryResultMapper.cs" />
     <Compile Include="Common\Result\Mappers\SoundMetaQueryResultMapper.cs" />
     <Compile Include="Common\Result\Mappers\LabelQueryResultMapper.cs" />
     <Compile Include="Common\Result\Mappers\SubscriptionQueryResultMapper.cs" />
