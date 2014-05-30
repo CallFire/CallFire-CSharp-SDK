@@ -8,9 +8,9 @@ namespace CallFire_csharp_sdk.Common.Result.Mappers
     {
         internal static CfLabelQueryResult FromSoapLabelQueryResult(LabelQueryResult source)
         {
-            return source == null ? null :
-                new CfLabelQueryResult(source.TotalResults,
-                    source.Label.Select(LabelMapper.FromLabel).ToArray());
+            return source == null
+                ? null
+                : new CfLabelQueryResult(source.TotalResults, source.Label.Select(LabelMapper.FromLabel).ToArray());
         }
 
         internal static LabelQueryResult ToSoapLabelQueryResult(CfLabelQueryResult source)
