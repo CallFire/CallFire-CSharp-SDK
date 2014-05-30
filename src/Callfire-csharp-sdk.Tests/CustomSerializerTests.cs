@@ -46,5 +46,22 @@ namespace Callfire_csharp_sdk.Tests
         {
             Assert.IsTrue(_serializer.GetProperties(_broadcast).Any(p => p.Key == "Message" && p.Value == "message"));
         }
+
+        [Test]
+        public void Serializer_should_serialize_array()
+        {
+            var test = new TestObject(new []{"val1","val2"});
+            Assert.IsTrue(_serializer.GetProperties(test).Any(p => p.Key == "Values" && p.Value == HttpUtility.UrlEncode("val1 val2")));
+        }
+
+        private class TestObject
+        {
+            public string[] Values { get; set; }
+
+            public TestObject(string[] values)
+            {
+                Values = values;
+            }
+        }
     }
 }
