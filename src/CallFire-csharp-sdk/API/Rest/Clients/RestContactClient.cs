@@ -40,7 +40,8 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
         {
             var contacts = removeContacts.ContactId == null ? null
                             : removeContacts.ContactId.ToList().ConvertAll(i => i.ToString(CultureInfo.InvariantCulture)).ToArray();
-            BaseRequest<string>(HttpMethod.Delete, new RemoveContacts(contacts == null ? string.Empty : string.Join(" ", contacts)), new CallfireRestRoute<Contact>());
+            BaseRequest<string>(HttpMethod.Delete, new RemoveContacts(contacts == null ? string.Empty : string.Join(" ", contacts)),
+                            new CallfireRestRoute<Contact>());
         }
 
         public CfContact GetContact(long id)
@@ -51,36 +52,60 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
 
         public CfAction[] GetContactHistory(CfGetContactHistory getContactHistory)
         {
-            var resource = BaseRequest<Resource>(HttpMethod.Get, new GetContactHistory(getContactHistory), new CallfireRestRoute<Contact>(null, null, RestRouteObjects.History));
+            if (getContactHistory == null)
+            {
+                return null;
+            }
+            var resource = BaseRequest<Resource>(HttpMethod.Get, new GetContactHistory(getContactHistory),
+                new CallfireRestRoute<Contact>(getContactHistory.ContactId, null, RestRouteObjects.History));
             var contactHistory = resource.Resources as ContactHistory;
             return contactHistory == null ? null : contactHistory.ContactHistory1.Select(ActionMapper.FromAction).ToArray();
         }
 
         public long CreateContactList(CfCreateContactList createContactList)
         {
-            return 0; //TODO
+            var resource = BaseRequest<ResourceReference>(HttpMethod.Post, new CreateContactList(createContactList),
+                new CallfireRestRoute<Contact>(null, RestRouteObjects.List, null));
+            return resource.Id;
         }
 
         public CfContactListQueryResult QueryContactLists(CfQuery queryContactLists)
         {
-            return null; //TODO
+            var resourceList = BaseRequest<ResourceList>(HttpMethod.Get, new Query(queryContactLists),
+                new CallfireRestRoute<Contact>(null, RestRouteObjects.List, null));
+            var contactList = ResourceListOperations.CastResourceList<CfContactList>(resourceList);
+            return new CfContactListQueryResult(resourceList.TotalResults, contactList);
         }
 
         public void DeleteContactList(long id)
         {
+            BaseRequest<string>(HttpMethod.Delete, null, new CallfireRestRoute<Contact>(id, RestRouteObjects.List, null));
         }
 
         public void AddContactsToList(CfContactListRequest addContactsToList)
         {
+            if (addContactsToList == null)
+            {
+                return;
+            }
+            BaseRequest<string>(HttpMethod.Post, new ContactListRequest(addContactsToList),
+                        new CallfireRestRoute<Contact>(addContactsToList.ContactListId, RestRouteObjects.List, RestRouteObjects.Add));
         }
 
         public CfContactList GetContactList(long id)
         {
-            return null; //TODO
+            var resource = BaseRequest<Resource>(HttpMethod.Get, null, new CallfireRestRoute<Contact>(id, RestRouteObjects.List, null));
+            return ContactListMapper.FromContactList(resource.Resources as ContactList);
         }
 
         public void RemoveContactsFromList(CfRemoveContactsFromList removeContactsFromList)
         {
+            if (removeContactsFromList == null)
+            {
+                return;
+            }
+            BaseRequest<string>(HttpMethod.Post, new RemoveContactsFromList(removeContactsFromList),
+                new CallfireRestRoute<Contact>(removeContactsFromList.ContactListId, RestRouteObjects.List, RestRouteObjects.Remove));
         }
     }
 }

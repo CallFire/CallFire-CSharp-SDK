@@ -8,5 +8,8 @@
         public const string Schedule = "schedule";
         public const string AutoReply = "auto-reply";
         public const string History = "history";
+        public const string List = "list";
+        public const string Add = "add";
+        public const string Remove = "remove";
     }
 }

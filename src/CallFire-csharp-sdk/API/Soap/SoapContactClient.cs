@@ -59,8 +59,7 @@ namespace CallFire_csharp_sdk.API.Soap
 
         public CfContactListQueryResult QueryContactLists(CfQuery queryContactLists)
         {
-            var contactListQueryResult = ContactService.QueryContactLists(new Query(queryContactLists));
-            return null; //TODO
+            return ContactListQueryResultMapper.FromContactListQueryResult(ContactService.QueryContactLists(new Query(queryContactLists)));
         }
 
         public void DeleteContactList(long id)
@@ -75,11 +74,12 @@ namespace CallFire_csharp_sdk.API.Soap
 
         public CfContactList GetContactList(long id)
         {
-            return null; //TODO
+            return ContactListMapper.FromContactList(ContactService.GetContactList(new IdRequest(id)));
         }
 
         public void RemoveContactsFromList(CfRemoveContactsFromList removeContactsFromList)
         {
+            ContactService.RemoveContactsFromList(new RemoveContactsFromList(removeContactsFromList));
         }
     }
 }

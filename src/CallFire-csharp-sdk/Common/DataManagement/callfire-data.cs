@@ -825,6 +825,15 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfContactList
     {
+        public CfContactList(ContactList source)
+        {
+            Name = source.Name;
+            Size = source.Size;
+            Created = source.Created;
+            Status = EnumeratedMapper.EnumFromSoapEnumerated<CfContactListStatus>(source.Status.ToString());
+            Id = source.id;
+        }
+
         public string Name { get; set; }
 
         public string Size { get; set; }

@@ -112,6 +112,7 @@
     <Compile Include="Common\Resource\Extended\ActionQueryExtended.cs" />
     <Compile Include="Common\Resource\Extended\CallExtended.cs" />
     <Compile Include="Common\Resource\Extended\CallRecordExtended.cs" />
+    <Compile Include="Common\Resource\Extended\ContactListExtended.cs" />
     <Compile Include="Common\Resource\Extended\ContactListRequestExtended.cs" />
     <Compile Include="Common\Resource\Extended\ContactSourceExtended.cs" />
     <Compile Include="Common\Resource\Extended\CreateContactListExtended.cs" />
@@ -119,10 +120,12 @@
     <Compile Include="Common\Resource\Extended\GetRecordingDataExtended.cs" />
     <Compile Include="Common\Resource\Extended\GetSoundDataExtended.cs" />
     <Compile Include="Common\Resource\Extended\RecordingMetaExtended.cs" />
+    <Compile Include="Common\Resource\Extended\RemoveContactsFromListExtended.cs" />
     <Compile Include="Common\Resource\Extended\SendCallExtended.cs" />
     <Compile Include="Common\Resource\Extended\SoundMetaExtended.cs" />
     <Compile Include="Common\Resource\Mappers\CallMapper.cs" />
     <Compile Include="Common\Resource\Mappers\CallRecordMapper.cs" />
+    <Compile Include="Common\Resource\Mappers\ContactListMapper.cs" />
     <Compile Include="Common\Resource\Mappers\ContactSourceMapper.cs" />
     <Compile Include="Common\Resource\Mappers\EnumeratedMapper.cs" />
     <Compile Include="Common\Resource\Mappers\RecordingMetaMapper.cs" />
@@ -225,6 +228,7 @@
     <Compile Include="Common\Result\Extended\BroadcastScheduleQueryResultExtended.cs" />
     <Compile Include="Common\Result\Extended\CallQueryResultExtended.cs" />
     <Compile Include="Common\Result\Extended\ContactBatchQueryResultExtended.cs" />
+    <Compile Include="Common\Result\Extended\ContactListQueryResultExtended.cs" />
     <Compile Include="Common\Result\Extended\ContactQueryResultExtended.cs" />
     <Compile Include="Common\Result\Extended\LabelQueryResultExtended.cs" />
     <Compile Include="Common\Result\Extended\SoundMetaQueryResultExtended.cs" />

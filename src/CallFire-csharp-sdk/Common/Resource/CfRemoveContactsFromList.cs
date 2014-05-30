@@ -2,17 +2,14 @@
 {
     public class CfRemoveContactsFromList
     {
-        public CfRemoveContactsFromList(long contactListId, long[] contactId, string[] numbers)
+        public CfRemoveContactsFromList(long contactListId, object item)
         {
             ContactListId = contactListId;
-            ContactId = contactId;
-            Numbers = numbers;
+            Item = item;
         }
 
         public long ContactListId { get; set; }
 
-        public long[] ContactId { get; set; }
-
-        public string[] Numbers { get; set; }
+        public object Item { get; set; }
     }
 }
