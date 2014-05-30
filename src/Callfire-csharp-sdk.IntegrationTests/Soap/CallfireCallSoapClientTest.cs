@@ -26,8 +26,8 @@ namespace Callfire_csharp_sdk.IntegrationTests.Soap
 
             SendCall = new CfSendCall(String.Empty, CfBroadcastType.Ivr, "broadcastSoap", toNumber, false, ivrBroadcastConfig);
 
-            ActionQuery = new CfActionQuery(100, 0, 1838228001, 1092170001, null, null, false, DateTime.Parse("01/01/2014"),
-                DateTime.Parse("31/12/2014"), "+14252163710", "+14252163710", string.Empty);
+            ActionQuery = new CfActionQuery(100, 0, 1838228001, 1092170001, null, null, false, new DateTime(2014,1,1),
+                new DateTime(2014, 1, 1), "+14252163710", "+14252163710", string.Empty);
         }
     }
 }
