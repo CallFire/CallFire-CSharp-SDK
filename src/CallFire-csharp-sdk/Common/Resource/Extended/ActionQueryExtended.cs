@@ -6,6 +6,10 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class ActionQuery
     {
+        public ActionQuery()
+        {
+        }
+
         public ActionQuery(CfActionQuery source)
             : base(source.MaxResults, source.FirstResult)
         {
@@ -19,10 +23,6 @@ namespace CallFire_csharp_sdk.API.Soap
             FromNumber = source.FromNumber;
             ToNumber = source.ToNumber;
             LabelName = source.LabelName;
-        }
-
-        public ActionQuery()
-        {
         }
     }
 }

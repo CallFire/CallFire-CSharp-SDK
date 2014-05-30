@@ -6,6 +6,10 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class RecordingMeta
     {
+        public RecordingMeta()
+        {
+        }
+        
         public RecordingMeta(string name, DateTime created, int lengthInSeconds, string link, long identifier)
         {
             Name = name;
@@ -13,10 +17,6 @@ namespace CallFire_csharp_sdk.API.Soap
             LengthInSeconds = lengthInSeconds;
             Link = link;
             id = identifier;
-        }
-
-        public RecordingMeta()
-        {
         }
     }
 }

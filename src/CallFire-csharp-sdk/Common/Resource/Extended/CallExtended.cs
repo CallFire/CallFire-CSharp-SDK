@@ -4,6 +4,10 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class Call
     {
+        public Call()
+        {
+        }
+        
         public Call(string fromNumber, ToNumber toNumber, string state, long batchId, long broadcastId, long contactId, bool inbound,
             DateTime created, DateTime modified, string finalResult, Label[] label, long identifier, CallRecord[] callRecord)
         {
@@ -20,10 +24,6 @@ namespace CallFire_csharp_sdk.API.Soap
             Label = label;
             id = identifier;
             CallRecord = callRecord;
-        }
-
-        public Call()
-        {
         }
     }
 }

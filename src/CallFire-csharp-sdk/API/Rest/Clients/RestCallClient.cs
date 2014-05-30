@@ -23,7 +23,7 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
 
         public long SendCall(CfSendCall cfSendCall)
         {
-            var resource = BaseRequest<ResourceReference>(HttpMethod.Post, new SendCall(cfSendCall), new CallfireRestRoute<Call>(null));
+            var resource = BaseRequest<ResourceReference>(HttpMethod.Post, new SendCall(cfSendCall), new CallfireRestRoute<Call>());
             return resource.Id;
         }
 
@@ -44,7 +44,7 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
 
         public long CreateSound(CfCreateSound cfCreateSound)
         {
-            var resource = BaseRequest<ResourceReference>(HttpMethod.Post, new CreateSound(cfCreateSound), new CallfireRestRoute<Call>(null));
+            var resource = BaseRequest<ResourceReference>(HttpMethod.Post, new CreateSound(cfCreateSound), new CallfireRestRoute<Call>());
             return resource.Id;
         }
 

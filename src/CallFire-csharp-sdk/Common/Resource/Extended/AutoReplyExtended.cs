@@ -3,6 +3,10 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class AutoReply
     {
+        public AutoReply()
+        {
+        }
+        
         public AutoReply(string number, string keyword, string match, string message, long identifier)
         {
             Number = number;
@@ -10,10 +14,6 @@ namespace CallFire_csharp_sdk.API.Soap
             Match = match;
             Message = message;
             id = identifier;
-        }
-
-        public AutoReply()
-        {
         }
     }
 }

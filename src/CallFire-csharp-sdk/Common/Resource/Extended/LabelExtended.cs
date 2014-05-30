@@ -3,13 +3,13 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class Label
     {
+        public Label()
+        {
+        }
+        
         public Label(string name)
         {
             Name = name;
-        }
-
-        public Label()
-        {   
         }
     }
 }

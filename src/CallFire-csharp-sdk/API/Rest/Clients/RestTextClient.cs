@@ -22,7 +22,7 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
 
         public long SendText(CfSendText cfSendText)
         {
-            var resource = BaseRequest<ResourceReference>(HttpMethod.Post, new SendText(cfSendText), new CallfireRestRoute<Text>(null));
+            var resource = BaseRequest<ResourceReference>(HttpMethod.Post, new SendText(cfSendText), new CallfireRestRoute<Text>());
             return resource.Id;
         }
 
@@ -43,7 +43,7 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
 
         public long CreateAutoReply(CfCreateAutoReply cfCreateAutoReply)
         {
-            var resource = BaseRequest<ResourceReference>(HttpMethod.Post, new CreateAutoReply(cfCreateAutoReply), new CallfireRestRoute<Text>(null));
+            var resource = BaseRequest<ResourceReference>(HttpMethod.Post, new CreateAutoReply(cfCreateAutoReply), new CallfireRestRoute<Text>());
             return resource.Id;
         }
 

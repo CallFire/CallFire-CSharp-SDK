@@ -8,16 +8,26 @@ namespace CallFire_csharp_sdk.Common.Result.Mappers
     {
         internal static CfSoundMetaQueryResult FromSoundMetaQueryResult(SoundMetaQueryResult source)
         {
-            return source == null ? null : new CfSoundMetaQueryResult(
-                source.TotalResults,
-                source.SoundMeta == null ? null : source.SoundMeta.Select(SoundMetaMapper.FromSoundMeta).ToArray());
+            if (source == null)
+            {
+                return null;
+            }
+
+            var soundMeta = source.SoundMeta == null ? null
+                            : source.SoundMeta.Select(SoundMetaMapper.FromSoundMeta).ToArray();
+            return new CfSoundMetaQueryResult(source.TotalResults, soundMeta);
         }
 
         internal static SoundMetaQueryResult ToSoundMetaQueryResult(CfSoundMetaQueryResult source)
         {
-            return source == null ? null : new SoundMetaQueryResult(
-                source.TotalResults,
-                source.SoundMeta == null ? null : source.SoundMeta.Select(SoundMetaMapper.ToSoundMeta).ToArray());
+            if (source == null)
+            {
+                return null;
+            }
+
+            var soundMeta = source.SoundMeta == null ? null
+                            : source.SoundMeta.Select(SoundMetaMapper.ToSoundMeta).ToArray();
+            return new SoundMetaQueryResult(source.TotalResults, soundMeta);
         }
     }
 }

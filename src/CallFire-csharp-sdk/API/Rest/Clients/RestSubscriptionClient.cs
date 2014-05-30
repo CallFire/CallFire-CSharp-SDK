@@ -25,7 +25,7 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
         {
             var subscriptionRequest = new SubscriptionRequest(cfCreateSubscription.RequestId, 
                 SubscriptionMapper.ToSoapSubscription(cfCreateSubscription.Subscription));
-            var resource = BaseRequest<ResourceReference>(HttpMethod.Post, subscriptionRequest, new CallfireRestRoute<Subscription>(null));
+            var resource = BaseRequest<ResourceReference>(HttpMethod.Post, subscriptionRequest, new CallfireRestRoute<Subscription>());
             return resource.Id;
         }
 

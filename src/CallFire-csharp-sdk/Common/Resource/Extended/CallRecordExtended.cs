@@ -5,6 +5,10 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class CallRecord
     {
+        public CallRecord()
+        {
+        }
+        
         public CallRecord(string result, DateTime finishTime, float billedAmount, ActionRecordQuestionResponse[] questionResponse, long identifier,
             DateTime originateTime, DateTime answerTime, int duration, RecordingMeta[] recordingMeta)
         {
@@ -17,10 +21,6 @@ namespace CallFire_csharp_sdk.API.Soap
             AnswerTime = answerTime;
             Duration = duration;
             RecordingMeta = recordingMeta;
-        }
-
-        public CallRecord()
-        {
         }
     }
 }

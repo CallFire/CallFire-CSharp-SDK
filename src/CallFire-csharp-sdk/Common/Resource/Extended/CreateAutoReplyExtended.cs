@@ -7,14 +7,14 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class CreateAutoReply
     {
+        public CreateAutoReply()
+        {
+        }
+        
         public CreateAutoReply(CfCreateAutoReply cfCreateAutoReply)
         {
             RequestId = cfCreateAutoReply.RequestId;
             AutoReply = AutoReplyMapper.ToAutoReplay(cfCreateAutoReply.CfAutoReply);
-        }
-
-        public CreateAutoReply()
-        {
         }
     }
 }

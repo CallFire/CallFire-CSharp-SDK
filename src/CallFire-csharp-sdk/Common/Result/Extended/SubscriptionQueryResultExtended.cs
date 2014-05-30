@@ -3,14 +3,14 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     partial class SubscriptionQueryResult
     {
+        public SubscriptionQueryResult()
+        {
+        }
+        
         public SubscriptionQueryResult(long totalResults, Subscription[] subscription)
         {
             TotalResults = totalResults;
             Subscription = subscription;
-        }
-
-        public SubscriptionQueryResult()
-        {
         }
     }
 }

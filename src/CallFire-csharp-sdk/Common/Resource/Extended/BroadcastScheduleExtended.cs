@@ -5,6 +5,10 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class BroadcastSchedule 
     {
+        public BroadcastSchedule()
+        {
+        }
+        
         public BroadcastSchedule(long identifier, DateTime startTimeOfDay, DateTime stopTimeOfDay, string timeZone, DateTime beginDate, DateTime endDate, string daysOfWeek)
         {
             id = identifier;
@@ -14,10 +18,6 @@ namespace CallFire_csharp_sdk.API.Soap
             BeginDate = beginDate;
             EndDate = endDate;
             DaysOfWeek = daysOfWeek;
-        }
-
-        public BroadcastSchedule()
-        {
         }
     }
 }

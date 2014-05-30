@@ -5,14 +5,14 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class LocalTimeZoneRestriction
     {
+        public LocalTimeZoneRestriction()
+        {
+        }
+        
         public LocalTimeZoneRestriction(DateTime beginTime, DateTime endTime)
         {
             BeginTime = beginTime;
             EndTime = endTime;
-        }
-
-        public LocalTimeZoneRestriction()
-        {
         }
     }
 }

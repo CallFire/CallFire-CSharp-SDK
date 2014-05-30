@@ -3,14 +3,14 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class BroadcastScheduleQueryResult
     {
+        public BroadcastScheduleQueryResult()
+        {
+        }
+        
         public BroadcastScheduleQueryResult(long totalResults, BroadcastSchedule[] broadcastSchedule)
         {
             TotalResults = totalResults;
             BroadcastSchedule = broadcastSchedule;
-        }
-
-        public BroadcastScheduleQueryResult()
-        {
         }
     }
 }

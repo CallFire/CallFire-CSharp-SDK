@@ -5,6 +5,10 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class VoiceBroadcastConfig
     {
+        public VoiceBroadcastConfig()
+        {
+        }
+        
         public VoiceBroadcastConfig(long identifier, DateTime created, string fromNumber,
         LocalTimeZoneRestriction localTimeZoneRestriction, BroadcastConfigRetryConfig retryConfig,
         AnsweringMachineConfig answeringMachineConfig, object item, string liveSoundTextVoice, object item1,
@@ -25,10 +29,6 @@ namespace CallFire_csharp_sdk.API.Soap
             DncSoundTextVoice = dncSoundTextVoice;
             DncDigit = dncDigit;
             MaxActiveTransfers = maxActiveTransfers;
-        }
-
-        public VoiceBroadcastConfig()
-        {
         }
     }
 }

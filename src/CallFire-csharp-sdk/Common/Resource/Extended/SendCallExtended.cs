@@ -7,6 +7,10 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class SendCall
     {
+        public SendCall()
+        {
+        }
+        
         public SendCall(CfSendCall cfSendCall)
         {
             RequestId = cfSendCall.RequestId;
@@ -15,10 +19,6 @@ namespace CallFire_csharp_sdk.API.Soap
             ToNumber = ToNumberMapper.ToToNumber(cfSendCall.ToNumber);
             ScrubBroadcastDuplicates = cfSendCall.ScrubBroadcastDuplicates;
             Item = BroadcastConfigMapper.ToBroadcastConfig(cfSendCall.Item, cfSendCall.Type);
-        }
-
-        public SendCall()
-        {
         }
     }
 }

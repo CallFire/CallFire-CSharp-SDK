@@ -3,14 +3,14 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     partial class SubscriptionRequest
     {
+        public SubscriptionRequest()
+        {
+        }
+        
         public SubscriptionRequest(string requestId, Subscription subscription)
         {
             RequestId = requestId;
             Subscription = subscription;
-        }
-
-        public SubscriptionRequest()
-        {
         }
     }
 }

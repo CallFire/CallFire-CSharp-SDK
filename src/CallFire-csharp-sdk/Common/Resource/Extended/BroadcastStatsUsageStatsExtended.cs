@@ -3,6 +3,10 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class BroadcastStatsUsageStats
     {
+        public BroadcastStatsUsageStats()
+        {
+        }
+        
         public BroadcastStatsUsageStats(int duration, int billedDuration, float billedAmount,
         int attempts, int actions)
         {
@@ -11,10 +15,6 @@ namespace CallFire_csharp_sdk.API.Soap
             BilledAmount = billedAmount;
             Attempts = attempts;
             Actions = actions;
-        }
-
-        public BroadcastStatsUsageStats()
-        {
         }
     }
 }

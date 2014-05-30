@@ -5,15 +5,15 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class GetBroadcastStats
     {
+        public GetBroadcastStats()
+        {
+        }
+        
         public GetBroadcastStats(CfGetBroadcastStats source)
             : base(source.Id)
         {
             IntervalBegin = source.IntervalBegin;
             IntervalEnd = source.IntervalEnd;
-        }
-
-        public GetBroadcastStats()
-        {
         }
     }
 }

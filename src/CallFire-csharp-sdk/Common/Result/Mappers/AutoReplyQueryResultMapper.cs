@@ -8,16 +8,27 @@ namespace CallFire_csharp_sdk.Common.Result.Mappers
     {
         internal static CfAutoReplyQueryResult FromAutoReplyQueryResult(AutoReplyQueryResult source)
         {
-            return source == null ? null : new CfAutoReplyQueryResult(
-                source.TotalResults,
-                source.AutoReply == null ? null : source.AutoReply.Select(AutoReplyMapper.FromAutoReplay).ToArray());
+            if (source == null)
+            {
+                return null;
+            }
+
+            var autoReply = source.AutoReply == null ? null
+                            : source.AutoReply.Select(AutoReplyMapper.FromAutoReplay).ToArray();
+
+            return new CfAutoReplyQueryResult(source.TotalResults, autoReply);
         }
 
         internal static AutoReplyQueryResult ToAutoReplyQueryResult(CfAutoReplyQueryResult source)
         {
-            return source == null ? null : new AutoReplyQueryResult(
-                source.TotalResults,
-                source.CfAutoReply == null ? null : source.CfAutoReply.Select(AutoReplyMapper.ToAutoReplay).ToArray());
+            if (source == null)
+            {
+                return null;
+            }
+
+            var autoReply = source.CfAutoReply == null ? null
+                            : source.CfAutoReply.Select(AutoReplyMapper.ToAutoReplay).ToArray();
+            return new AutoReplyQueryResult(source.TotalResults, autoReply);
         }
     }
 }

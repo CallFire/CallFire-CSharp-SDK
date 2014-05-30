@@ -8,16 +8,24 @@ namespace CallFire_csharp_sdk.Common.Result.Mappers
     {
         internal static CfCallQueryResult FromCallQueryResult(CallQueryResult source)
         {
-            return source == null ? null : new CfCallQueryResult(
-                source.TotalResults,
-                source.Call == null ? null : source.Call.Select(CallMapper.FromCall).ToArray());
+            if (source == null)
+            {
+                return null;
+            }
+
+            var call = source.Call == null ? null : source.Call.Select(CallMapper.FromCall).ToArray();
+            return new CfCallQueryResult(source.TotalResults, call);
         }
 
         internal static CallQueryResult ToCallQueryResult(CfCallQueryResult source)
         {
-            return source == null ? null : new CallQueryResult(
-                source.TotalResults,
-                source.Calls == null ? null : source.Calls.Select(CallMapper.ToCall).ToArray());
+            if (source == null)
+            {
+                return null;
+            }
+
+            var call = source.Calls == null ? null : source.Calls.Select(CallMapper.ToCall).ToArray();
+            return new CallQueryResult(source.TotalResults, call);
         }
     }
 }

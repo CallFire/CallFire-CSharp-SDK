@@ -3,15 +3,15 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class BroadcastStats
     {
+        public BroadcastStats()
+        {
+        }
+        
         public BroadcastStats(BroadcastStatsUsageStats usageStats, BroadcastStatsResultStat[] resultStat, BroadcastStatsActionStatistics actionStatistics)
         {
             UsageStats = usageStats;
             ResultStat = resultStat;
             ActionStatistics = actionStatistics;
-        }
-
-        public BroadcastStats()
-        {
         }
     }
 }

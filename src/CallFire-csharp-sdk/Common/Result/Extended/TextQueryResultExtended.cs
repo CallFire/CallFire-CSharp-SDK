@@ -3,14 +3,14 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     partial class TextQueryResult
     {
+        public TextQueryResult()
+        {
+        }
+        
         public TextQueryResult(long totalResults, Text[] text)
         {
             TotalResults = totalResults;
             Text = text;
-        }
-
-        public TextQueryResult()
-        {
         }
     }
 }

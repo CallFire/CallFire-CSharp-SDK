@@ -3,6 +3,10 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     partial class SubscriptionSubscriptionFilter
     {
+        public SubscriptionSubscriptionFilter()
+        {
+        }
+        
         public SubscriptionSubscriptionFilter(long broadcastId, long batchId, string fromNumber, string toNumber, bool inbound)
         {
             BroadcastId = broadcastId;
@@ -10,10 +14,6 @@ namespace CallFire_csharp_sdk.API.Soap
             FromNumber = fromNumber;
             ToNumber = toNumber;
             Inbound = inbound;
-        }
-
-        public SubscriptionSubscriptionFilter()
-        {
         }
     }
 }

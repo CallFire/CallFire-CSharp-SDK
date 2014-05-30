@@ -3,14 +3,14 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class AutoReplyQueryResult
     {
+        public AutoReplyQueryResult()
+        {
+        }
+        
         public AutoReplyQueryResult(long totalResult, AutoReply[] cfAutoReply)
         {
             TotalResults = totalResult;
             AutoReply = cfAutoReply;
-        }
-
-        public AutoReplyQueryResult()
-        {
         }
     }
 }

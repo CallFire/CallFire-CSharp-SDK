@@ -6,14 +6,14 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class QueryAutoReplies
     {
+        public QueryAutoReplies()
+        {
+        }
+        
         public QueryAutoReplies(CfQueryAutoReplies source)
             : base(source.MaxResults, source.FirstResult)
         {
             Number = source.Number;
-        }
-
-        public QueryAutoReplies()
-        {
         }
     }
 }

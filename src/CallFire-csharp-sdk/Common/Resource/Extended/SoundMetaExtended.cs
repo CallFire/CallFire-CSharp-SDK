@@ -4,6 +4,10 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class SoundMeta
     {
+        public SoundMeta()
+        {
+        }
+        
         public SoundMeta(SoundStatus status, string name, DateTime created, int lengthInSeconds, long identifier)
         {
             Status = status;
@@ -11,10 +15,6 @@ namespace CallFire_csharp_sdk.API.Soap
             Created = created;
             LengthInSeconds = lengthInSeconds;
             id = identifier;
-        }
-
-        public SoundMeta()
-        {
         }
     }
 }
