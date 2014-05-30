@@ -1,4 +1,5 @@
-﻿using CallFire_csharp_sdk.API.Rest.Clients;
+﻿using CallFire_csharp_sdk.API.Rest;
+using CallFire_csharp_sdk.API.Rest.Clients;
 using CallFire_csharp_sdk.API.Soap;
 
 namespace CallFire_csharp_sdk.API
@@ -12,6 +13,7 @@ namespace CallFire_csharp_sdk.API
         private ISubscriptionClient _subscriptionClient;
         private ITextClient _textClient;
         private ICallClient _callClient;
+        private ILabelClient _labelClient;
 
         public CallfireClient(string username, string password, CallfireClients client)
         {
@@ -73,6 +75,20 @@ namespace CallFire_csharp_sdk.API
                 return _client == CallfireClients.Rest ?
                     (_callClient = new RestCallClient(_username, _password)) :
                     (_callClient = new SoapCallClient(_username, _password));
+            }
+        }
+
+        public ILabelClient Label
+        {
+            get
+            {
+                if (_labelClient != null)
+                {
+                    return _labelClient;
+                }
+                return _client == CallfireClients.Rest ?
+                    (_labelClient = new RestLabelClient(_username, _password)) :
+                    (_labelClient = new SoapLabelClient(_username, _password));
             }
         }
     }
