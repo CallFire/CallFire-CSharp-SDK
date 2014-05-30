@@ -10,6 +10,7 @@ namespace CallFire_csharp_sdk.API
         private readonly CallfireClients _client;
         private IBroadcastClient _broadcastClient;
         private ISubscriptionClient _subscriptionClient;
+        private IContactClient _contactClient;
 
         public CallfireClient(string username, string password, CallfireClients client)
         {
@@ -43,6 +44,20 @@ namespace CallFire_csharp_sdk.API
                 return _client == CallfireClients.Rest ?
                     (_subscriptionClient = new RestSubscriptionClient(_username, _password)) :
                     (_subscriptionClient = new SoapSubscriptionClient(_username, _password));
+            }
+        }
+
+        public IContactClient Contact
+        {
+            get
+            {
+                if (_contactClient != null)
+                {
+                    return _contactClient;
+                }
+                return _client == CallfireClients.Rest ?
+                    null : //(_contactClient = new RestContactClient(_username, _password)) : // TODO
+                    (_contactClient = new SoapContactClient(_username, _password));
             }
         }
     }

@@ -65,13 +65,13 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
 
         public CfAutoReply GetAutoReply(long id)
         {
-            var resource = BaseRequest<Resource>(HttpMethod.Get, null, new CallfireRestRoute<Text>(id, BroadcastRestRouteObjects.AutoReply, null));
+            var resource = BaseRequest<Resource>(HttpMethod.Get, null, new CallfireRestRoute<Text>(id, RestRouteObjects.AutoReply, null));
             return AutoReplyMapper.FromAutoReplay(resource.Resources as AutoReply);
         }
 
         public void DeleteAutoReply(long id)
         {
-            BaseRequest<string>(HttpMethod.Delete, null, new CallfireRestRoute<Text>(id, BroadcastRestRouteObjects.AutoReply, null));
+            BaseRequest<string>(HttpMethod.Delete, null, new CallfireRestRoute<Text>(id, RestRouteObjects.AutoReply, null));
         }
     }
 }

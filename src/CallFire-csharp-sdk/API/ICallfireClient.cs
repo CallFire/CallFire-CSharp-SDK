@@ -5,5 +5,7 @@
         IBroadcastClient Broadcasts { get; }
 
         ISubscriptionClient Subscription { get; }
+
+        IContactClient Contact { get; }
     }
 }

@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Linq;
+using CallFire_csharp_sdk.API.Soap;
+using CallFire_csharp_sdk.Common.Resource.Mappers;
+using Action = CallFire_csharp_sdk.API.Soap.Action;
 
 namespace CallFire_csharp_sdk.Common.DataManagement
 {
@@ -137,6 +141,22 @@ namespace CallFire_csharp_sdk.Common.DataManagement
             FinalResult = finalResult;
             Label = label;
             Id = id;
+        }
+
+        public CfAction(Action source)
+        {
+            FromNumber = source.FromNumber;
+            ToNumber = ToNumberMapper.FromToNumber(source.ToNumber);
+            State = EnumeratedMapper.EnumFromSoapEnumerated<CfActionState>(source.State);
+            BatchId = source.BatchId;
+            BroadcastId = source.BroadcastId;
+            ContactId = source.ContactId;
+            Inbound = source.Inbound;
+            Created = source.Created;
+            Modified = source.Modified;
+            FinalResult = EnumeratedMapper.EnumFromSoapEnumerated<CfResult>(source.FinalResult);
+            Label = source.Label.Select(LabelMapper.FromLabel).ToArray();
+            Id = source.id;
         }
 
         public CfAction()
@@ -714,6 +734,21 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfContact
     {
+        public CfContact(long id, string firstName, string lastName, string zipcode, string homePhone, string workPhone, string mobilePhone,
+            string externalId, string externalSystem, System.Xml.XmlAttribute[] anyAttr)
+        {
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+            Zipcode = zipcode;
+            HomePhone = homePhone;
+            WorkPhone = workPhone;
+            MobilePhone = mobilePhone;
+            ExternalId = externalId;
+            ExternalSystem = externalSystem;
+            AnyAttr = anyAttr;
+        }
+
         public long Id { get; set; }
 
         public string FirstName { get; set; }
@@ -737,7 +772,7 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfContactHistory
     {
-        public Action[] Items { get; set; }
+        public CfAction[] Items { get; set; }
     }
 
     public class CfContactList
