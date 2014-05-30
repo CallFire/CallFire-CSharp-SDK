@@ -4,6 +4,10 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class ContactBatch
     {
+        public ContactBatch()
+        {
+        }
+        
         public ContactBatch(long identifier, string name, BatchStatus status, long broadcastId, DateTime created, int size, int remaining)
         {
             Name = name;
@@ -13,10 +17,6 @@ namespace CallFire_csharp_sdk.API.Soap
             Size = size;
             Remaining = remaining;
             id = identifier;
-        }
-
-        public ContactBatch()
-        {
         }
     }
 }

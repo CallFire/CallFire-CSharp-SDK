@@ -12,6 +12,7 @@ namespace CallFire_csharp_sdk.API
         private IBroadcastClient _broadcastClient;
         private ISubscriptionClient _subscriptionClient;
         private ITextClient _textClient;
+        private ICallClient _callClient;
         private ILabelClient _labelClient;
 
         public CallfireClient(string username, string password, CallfireClients client)
@@ -60,6 +61,20 @@ namespace CallFire_csharp_sdk.API
                 return _client == CallfireClients.Rest ?
                     (_textClient = new RestTextClient(_username, _password)) :
                     (_textClient = new SoapTextClient(_username, _password));
+            }
+        }
+
+        public ICallClient Call
+        {
+            get
+            {
+                if (_callClient != null)
+                {
+                    return _callClient;
+                }
+                return _client == CallfireClients.Rest ?
+                    (_callClient = new RestCallClient(_username, _password)) :
+                    (_callClient = new SoapCallClient(_username, _password));
             }
         }
 

@@ -1,15 +1,22 @@
-﻿// ReSharper disable once CheckNamespace - This is an extension from API.Soap
+﻿using CallFire_csharp_sdk.Common.Resource;
+using CallFire_csharp_sdk.Common.Resource.Mappers;
+// ReSharper disable once CheckNamespace - This is an extension from API.Soap
+
+
 namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class SendText
     {
-        public SendText(string requestId, string type, string broadcastName, ToNumber[] toNumber, bool scrubBroadcastDuplicates, 
-            TextBroadcastConfig textBroadcastConfig, long broadcastId, bool useDefaultBroadcast) 
-            : base(requestId, type, broadcastName, toNumber, scrubBroadcastDuplicates)
+        public SendText(CfSendText cfSendText)
         {
-            TextBroadcastConfig = textBroadcastConfig;
-            BroadcastId = broadcastId;
-            UseDefaultBroadcast = useDefaultBroadcast;
+            RequestId = cfSendText.RequestId;
+            Type = EnumeratedMapper.ToSoapEnumerated<BroadcastType>(cfSendText.Type.ToString()).ToString();
+            BroadcastName = cfSendText.BroadcastName;
+            ToNumber = ToNumberMapper.ToToNumber(cfSendText.ToNumber);
+            ScrubBroadcastDuplicates = cfSendText.ScrubBroadcastDuplicates;
+            TextBroadcastConfig = TextBroadcastConfigMapper.ToSoapTextBroadcastConfig(cfSendText.TextBroadcastConfig);
+            BroadcastId = cfSendText.BroadcastId;
+            UseDefaultBroadcast = cfSendText.UseDefaultBroadcast;
         }
     }
 }

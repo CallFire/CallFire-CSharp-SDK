@@ -1,4 +1,5 @@
-﻿using CallFire_csharp_sdk.API.Soap;
+﻿using System.Linq;
+using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common.Resource.Mappers;
 
 namespace CallFire_csharp_sdk.Common.Result.Mappers
@@ -7,13 +8,26 @@ namespace CallFire_csharp_sdk.Common.Result.Mappers
     {
         internal static CfAutoReplyQueryResult FromAutoReplyQueryResult(AutoReplyQueryResult source)
         {
-            var autoReply = AutoReplyMapper.FromAutoReplay(source.AutoReply);
+            if (source == null)
+            {
+                return null;
+            }
+
+            var autoReply = source.AutoReply == null ? null
+                            : source.AutoReply.Select(AutoReplyMapper.FromAutoReplay).ToArray();
+
             return new CfAutoReplyQueryResult(source.TotalResults, autoReply);
         }
 
         internal static AutoReplyQueryResult ToAutoReplyQueryResult(CfAutoReplyQueryResult source)
         {
-            var autoReply = AutoReplyMapper.ToAutoReplay(source.CfAutoReply);
+            if (source == null)
+            {
+                return null;
+            }
+
+            var autoReply = source.CfAutoReply == null ? null
+                            : source.CfAutoReply.Select(AutoReplyMapper.ToAutoReplay).ToArray();
             return new AutoReplyQueryResult(source.TotalResults, autoReply);
         }
     }

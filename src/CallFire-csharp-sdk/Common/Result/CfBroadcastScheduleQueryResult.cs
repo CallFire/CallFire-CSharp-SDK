@@ -7,8 +7,8 @@ namespace CallFire_csharp_sdk.Common.Result
         public CfBroadcastSchedule[] BroadcastSchedule { get; set; }
 
         public CfBroadcastScheduleQueryResult(long totalResults, CfBroadcastSchedule[] broadcastSchedule)
+            : base(totalResults)
         {
-            TotalResults = totalResults;
             BroadcastSchedule = broadcastSchedule;
         }
     }

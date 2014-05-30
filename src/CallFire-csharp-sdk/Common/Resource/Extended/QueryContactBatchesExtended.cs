@@ -6,22 +6,15 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class QueryContactBatches
     {
-        public QueryContactBatches(long maxResults, long firstResult, long broadcastId)
+        public QueryContactBatches()
         {
-            MaxResults = maxResults;
-            FirstResult = firstResult;
-            BroadcastId = broadcastId;
         }
-
+        
         public QueryContactBatches(CfQueryBroadcastData source)
         {
             MaxResults = source.MaxResults;
             FirstResult = source.FirstResult;
             BroadcastId = source.BroadcastId;
-        }
-
-        public QueryContactBatches()
-        {
         }
     }
 }

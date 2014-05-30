@@ -8,7 +8,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
         private const char Space = ' ';
         private const char Underscore = '_';
 
-        internal static T[] FromSoapEnumerated<T>(string source)
+        internal static T[] ArrayFromSoapEnumerated<T>(string source)
         {
             if (source == null)
             {

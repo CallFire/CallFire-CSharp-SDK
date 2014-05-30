@@ -310,6 +310,19 @@ namespace CallFire_csharp_sdk.Common.DataManagement
         Trim,
     }
 
+    public enum CfSoundFormat
+    {
+        Wav,
+        Mp3
+    }
+
+    public enum CfItemsChoiceType
+    {
+        CallId,
+        Name,
+        RecordingId
+    }
+
     public class CfVoiceBroadcastConfig : CfBroadcastConfig
     {
         public CfVoiceBroadcastConfig(long identifier, DateTime created, string fromNumber,
@@ -542,6 +555,16 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfCallRecord : CfActionRecord
     {
+        public CfCallRecord(CfResult result, DateTime finishTime, float billedAmount, CfActionRecordQuestionResponse[] questionResponse, long id,
+            DateTime originateTime, DateTime answerTime, int duration, CfRecordingMeta[] recordingMeta)
+            : base(result, finishTime, billedAmount, questionResponse, id)
+        {
+            OriginateTime = originateTime;
+            AnswerTime = answerTime;
+            Duration = duration;
+            RecordingMeta = recordingMeta;
+        }
+
         public DateTime OriginateTime { get; set; }
 
         public DateTime AnswerTime { get; set; }
@@ -553,6 +576,15 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfRecordingMeta
     {
+        public CfRecordingMeta(string name, DateTime created, int lengthInSeconds, string link, long id)
+        {
+            Name = name;
+            Created = created;
+            LengthInSeconds = lengthInSeconds;
+            Link = link;
+            Id = id;
+        }
+
         public string Name { get; set; }
 
         public DateTime Created { get; set; }
@@ -566,11 +598,27 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfCall : CfAction
     {
+        public CfCall(string fromNumber, CfToNumber toNumber, CfActionState state, long batchId, long broadcastId, long contactId, bool inbound,
+            DateTime created, DateTime modified, CfResult finalResult, CfLabel[] label, long id, CfCallRecord[] callRecord)
+            : base(fromNumber, toNumber, state, batchId, broadcastId, contactId, inbound, created, modified, finalResult, label, id)
+        {
+            CallRecord = callRecord;
+        }
+
         public CfCallRecord[] CallRecord { get; set; }
     }
 
     public class CfSoundMeta
     {
+        public CfSoundMeta(CfSoundStatus status, string name, DateTime created, int lengthInSeconds, long id)
+        {
+            Status = status;
+            Name = name;
+            Created = created;
+            LengthInSeconds = lengthInSeconds;
+            Id = id;
+        }
+
         public CfSoundStatus Status { get; set; }
 
         public string Name { get; set; }

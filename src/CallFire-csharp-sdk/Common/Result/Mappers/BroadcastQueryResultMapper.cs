@@ -9,18 +9,26 @@ namespace CallFire_csharp_sdk.Common.Result.Mappers
 
         internal static CfBroadcastQueryResult FromSoapBroadcastQueryResult(BroadcastQueryResult source)
         {
-            return source == null ? null :
-                new CfBroadcastQueryResult(
-                    source.TotalResults,
-                    source.Broadcast == null ? null : source.Broadcast.Select(BroadcastMapper.FromSoapBroadCast).ToArray());
+            if (source == null)
+            {
+                return null;
+            }
+
+            var broadcast = source.Broadcast == null ? null
+                            : source.Broadcast.Select(BroadcastMapper.FromSoapBroadCast).ToArray();
+            return new CfBroadcastQueryResult(source.TotalResults, broadcast);
         }
 
         internal static BroadcastQueryResult ToSoapBroadcastQueryResult(CfBroadcastQueryResult source)
         {
-            return source == null ? null :
-                new BroadcastQueryResult(
-                    source.TotalResults, 
-                    source.Broadcast == null ? null : source.Broadcast.Select(BroadcastMapper.ToSoapBroadcast).ToArray());
+            if (source == null)
+            {
+                return null;
+            }
+
+            var broadcast = source.Broadcast == null ? null
+                            : source.Broadcast.Select(BroadcastMapper.ToSoapBroadcast).ToArray();
+            return new BroadcastQueryResult(source.TotalResults, broadcast);
         }
     }
 }

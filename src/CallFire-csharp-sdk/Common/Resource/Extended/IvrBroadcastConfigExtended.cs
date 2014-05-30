@@ -5,14 +5,14 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class IvrBroadcastConfig
     {
+        public IvrBroadcastConfig()
+        {
+        }
+        
         public IvrBroadcastConfig(long identifier, DateTime created, string fromNumber, LocalTimeZoneRestriction localTimeZoneRestriction, BroadcastConfigRetryConfig retryConfig, string dialplanXml)
             : base(identifier, created, fromNumber, localTimeZoneRestriction, retryConfig)
         {
             DialplanXml = dialplanXml;
-        }
-
-        public IvrBroadcastConfig()
-        {
         }
     }
 }

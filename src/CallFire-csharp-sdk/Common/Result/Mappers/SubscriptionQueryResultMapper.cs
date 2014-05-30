@@ -8,18 +8,26 @@ namespace CallFire_csharp_sdk.Common.Result.Mappers
     {
         internal static CfSubscriptionQueryResult FromSoapSubscriptionQueryResult(SubscriptionQueryResult source)
         {
-            return source == null ? null :
-                new CfSubscriptionQueryResult(
-                    source.TotalResults,
-                    source.Subscription == null ? null : source.Subscription.Select(SubscriptionMapper.FromSoapSubscription).ToArray());
+            if (source == null)
+            {
+                return null;
+            }
+
+            var subscription = source.Subscription == null ? null
+                                : source.Subscription.Select(SubscriptionMapper.FromSoapSubscription).ToArray();
+            return new CfSubscriptionQueryResult(source.TotalResults, subscription);
         }
 
         internal static SubscriptionQueryResult ToSoapSubscriptionQueryResult(CfSubscriptionQueryResult source)
         {
-            return source == null ? null :
-                new SubscriptionQueryResult(
-                    source.TotalResults,
-                    source.Subscription == null ? null : source.Subscription.Select(SubscriptionMapper.ToSoapSubscription).ToArray());
+            if (source == null)
+            {
+                return null;
+            }
+
+            var subscription = source.Subscription == null ? null
+                                : source.Subscription.Select(SubscriptionMapper.ToSoapSubscription).ToArray();
+            return new SubscriptionQueryResult(source.TotalResults, subscription);
         }
     }
 }

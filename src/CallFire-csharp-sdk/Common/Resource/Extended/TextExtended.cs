@@ -4,6 +4,10 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class Text
     {
+        public Text()
+        {
+        }
+        
         public Text(string fromNumber, ToNumber toNumber, string state, long batchId, long broadcastId, long contactId,
             bool inbound, DateTime created, DateTime modified, string finalResult, Label[] label, long identifier, string message, TextRecord[] textRecord) 
         {

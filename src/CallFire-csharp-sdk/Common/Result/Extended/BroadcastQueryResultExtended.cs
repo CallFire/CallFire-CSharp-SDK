@@ -3,14 +3,14 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class BroadcastQueryResult
     {
+        public BroadcastQueryResult()
+        {
+        }
+        
         public BroadcastQueryResult(long totalResults, Broadcast[] broadcasts)
         {
             TotalResults = totalResults;
             Broadcast = broadcasts;
-        }
-
-        public BroadcastQueryResult()
-        {
         }
     }
 }

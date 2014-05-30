@@ -3,14 +3,15 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class ControlContactBatch
     {
-        public ControlContactBatch(long id, string name, bool enabled) : base(id)
+        public ControlContactBatch()
+        {
+        }
+        
+        public ControlContactBatch(long id, string name, bool enabled)
+            : base(id)
         {
             Name = name;
             Enabled = enabled;
-        }
-
-        public ControlContactBatch()
-        {
         }
     }
 }
