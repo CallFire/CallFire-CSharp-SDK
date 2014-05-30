@@ -8,7 +8,7 @@ namespace CallFire_csharp_sdk.API
     {
         long SendText(CfSendText cfSendText);
 
-        CfTextQueryResult QueryTexts(CfQueryText cfQueryText);
+        CfTextQueryResult QueryTexts(CfActionQuery cfActionQuery);
 
         CfText GetText(long id);
 

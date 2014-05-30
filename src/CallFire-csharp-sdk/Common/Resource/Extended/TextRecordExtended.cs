@@ -4,6 +4,10 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class TextRecord
     {
+        public TextRecord()
+        {
+        }
+        
         public TextRecord(string result, DateTime finishTime, float billedAmount, ActionRecordQuestionResponse[] questionResponse, long identifier, string message)
         {
             Result = result;
@@ -12,10 +16,6 @@ namespace CallFire_csharp_sdk.API.Soap
             QuestionResponse = questionResponse;
             id = identifier;
             Message = message;
-        }
-
-        public TextRecord()
-        {
         }
     }
 }

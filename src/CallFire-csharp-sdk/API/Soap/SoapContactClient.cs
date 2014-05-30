@@ -51,5 +51,35 @@ namespace CallFire_csharp_sdk.API.Soap
             var action = ContactService.GetContactHistory(new GetContactHistory(getContactHistory));
             return action.Select(ActionMapper.FromAction).ToArray();
         }
+
+        public long CreateContactList(CfCreateContactList createContactList)
+        {
+            return ContactService.CreateContactList(new CreateContactList(createContactList));
+        }
+
+        public CfContactListQueryResult QueryContactLists(CfQuery queryContactLists)
+        {
+            var contactListQueryResult = ContactService.QueryContactLists(new Query(queryContactLists));
+            return null; //TODO
+        }
+
+        public void DeleteContactList(long id)
+        {
+            ContactService.DeleteContactList(new IdRequest(id));
+        }
+
+        public void AddContactsToList(CfContactListRequest addContactsToList)
+        {
+            ContactService.AddContactsToList(new ContactListRequest(addContactsToList));
+        }
+
+        public CfContactList GetContactList(long id)
+        {
+            return null; //TODO
+        }
+
+        public void RemoveContactsFromList(CfRemoveContactsFromList removeContactsFromList)
+        {
+        }
     }
 }

@@ -3,15 +3,15 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class BroadcastStatsActionStatistics
     {
+        public BroadcastStatsActionStatistics()
+        {
+        }
+        
         public BroadcastStatsActionStatistics(int unattempted, int retryWait, int finished)
         {
             Unattempted = unattempted;
             RetryWait = retryWait;
             Finished = finished;
-        }
-
-        public BroadcastStatsActionStatistics()
-        {
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using CallFire_csharp_sdk.API.Rest.Clients;
+﻿using CallFire_csharp_sdk.API.Rest;
+using CallFire_csharp_sdk.API.Rest.Clients;
 using CallFire_csharp_sdk.API.Soap;
 
 namespace CallFire_csharp_sdk.API
@@ -10,7 +11,10 @@ namespace CallFire_csharp_sdk.API
         private readonly CallfireClients _client;
         private IBroadcastClient _broadcastClient;
         private ISubscriptionClient _subscriptionClient;
+        private ITextClient _textClient;
+        private ICallClient _callClient;
         private IContactClient _contactClient;
+        private ILabelClient _labelClient;
 
         public CallfireClient(string username, string password, CallfireClients client)
         {
@@ -47,6 +51,34 @@ namespace CallFire_csharp_sdk.API
             }
         }
 
+        public ITextClient Text
+        {
+            get
+            {
+                if (_textClient != null)
+                {
+                    return _textClient;
+                }
+                return _client == CallfireClients.Rest ?
+                    (_textClient = new RestTextClient(_username, _password)) :
+                    (_textClient = new SoapTextClient(_username, _password));
+            }
+        }
+
+        public ICallClient Call
+        {
+            get
+            {
+                if (_callClient != null)
+                {
+                    return _callClient;
+                }
+                return _client == CallfireClients.Rest ?
+                    (_callClient = new RestCallClient(_username, _password)) :
+                    (_callClient = new SoapCallClient(_username, _password));
+            }
+        }
+
         public IContactClient Contact
         {
             get
@@ -55,9 +87,23 @@ namespace CallFire_csharp_sdk.API
                 {
                     return _contactClient;
                 }
-                return _client == CallfireClients.Rest ?
-                    null : //(_contactClient = new RestContactClient(_username, _password)) : // TODO
+                return _client == CallfireClients.Rest ? 
+                    (_contactClient = new RestContactClient(_username, _password)) : 
                     (_contactClient = new SoapContactClient(_username, _password));
+            }
+        }
+
+        public ILabelClient Label
+        {
+            get
+            {
+                if (_labelClient != null)
+                {
+                    return _labelClient;
+                }
+                return _client == CallfireClients.Rest ?
+                    (_labelClient = new RestLabelClient(_username, _password)) :
+                    (_labelClient = new SoapLabelClient(_username, _password));
             }
         }
     }

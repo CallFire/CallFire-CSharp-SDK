@@ -8,16 +8,24 @@ namespace CallFire_csharp_sdk.Common.Result.Mappers
     {
         internal static CfTextQueryResult FromSoapContactBatchQueryResult(TextQueryResult source)
         {
-            return source == null ? null :
-                new CfTextQueryResult(source.TotalResults,
-                    source.Text == null ? null : source.Text.Select(TextMapper.FromText).ToArray());
+            if (source == null)
+            {
+                return null;
+            }
+
+            var text = source.Text == null ? null : source.Text.Select(TextMapper.FromText).ToArray();
+            return new CfTextQueryResult(source.TotalResults, text);
         }
 
         internal static TextQueryResult ToSoapContactBatchQueryResult(CfTextQueryResult source)
         {
-            return source == null ? null :
-                new TextQueryResult(source.TotalResults,
-                    source.Text == null ? null : source.Text.Select(TextMapper.ToText).ToArray());
+            if (source == null)
+            {
+                return null;
+            }
+
+            var text = source.Text == null ? null : source.Text.Select(TextMapper.ToText).ToArray();
+            return new TextQueryResult(source.TotalResults, text);
         }
     }
 }

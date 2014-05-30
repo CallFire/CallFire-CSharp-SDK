@@ -15,5 +15,17 @@ namespace CallFire_csharp_sdk.API
         CfContact GetContact(long id);
 
         CfAction[] GetContactHistory(CfGetContactHistory getContactHistory);
+
+        long CreateContactList(CfCreateContactList createContactList);
+
+        CfContactListQueryResult QueryContactLists(CfQuery queryContactLists);
+
+        void DeleteContactList(long id);
+        
+        void AddContactsToList(CfContactListRequest addContactsToList);
+        
+        CfContactList GetContactList(long id);
+        
+        void RemoveContactsFromList(CfRemoveContactsFromList removeContactsFromList);
     }
 }

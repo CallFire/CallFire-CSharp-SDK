@@ -3,6 +3,10 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class Contact
     {
+        public Contact()
+        {
+        }
+        
         public Contact(long identifier, string firstName1, string lastName1, string zipcode1, string homePhone1, string workPhone1, string mobilePhone1,
             string externalId1, string externalSystem1, System.Xml.XmlAttribute[] anyAttr)
         {
@@ -16,10 +20,6 @@ namespace CallFire_csharp_sdk.API.Soap
             externalId = externalId1;
             externalSystem = externalSystem1;
             AnyAttr = anyAttr;
-        }
-
-        public Contact()
-        {
         }
     }
 }

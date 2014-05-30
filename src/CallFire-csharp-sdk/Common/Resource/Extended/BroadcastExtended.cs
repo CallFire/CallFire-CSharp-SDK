@@ -6,6 +6,10 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class Broadcast
     {
+        public Broadcast()
+        {
+        }
+        
         public Broadcast(long identifier, string name, BroadcastStatus status, DateTime lastModified, BroadcastType type, BroadcastConfig item)
         {
             id = identifier;
@@ -14,10 +18,6 @@ namespace CallFire_csharp_sdk.API.Soap
             LastModified = lastModified;
             Type = type;
             Item = item;
-        }
-
-        public Broadcast()
-        {
         }
     }
 }

@@ -6,22 +6,15 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class QueryBroadcastSchedules
     {
-        public QueryBroadcastSchedules(long maxResults, long firstResult, long broadcastId)
+        public QueryBroadcastSchedules()
         {
-            MaxResults = maxResults;
-            FirstResult = firstResult;
-            BroadcastId = broadcastId;
         }
-
+        
         public QueryBroadcastSchedules(CfQueryBroadcastData source)
         {
             MaxResults = source.MaxResults;
             FirstResult = source.FirstResult;
             BroadcastId = source.BroadcastId;
-        }
-
-        public QueryBroadcastSchedules()
-        {
         }
     }
 }

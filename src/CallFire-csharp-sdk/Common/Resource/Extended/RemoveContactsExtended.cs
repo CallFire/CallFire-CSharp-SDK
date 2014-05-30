@@ -3,13 +3,13 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class RemoveContacts
     {
+        public RemoveContacts()
+        {
+        }
+        
         public RemoveContacts(string contactId)
         {
             ContactId = contactId;
-        }
-        
-        public RemoveContacts()
-        {
         }
     }
 }

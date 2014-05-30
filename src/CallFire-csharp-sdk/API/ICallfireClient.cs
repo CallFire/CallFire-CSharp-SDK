@@ -6,6 +6,12 @@
 
         ISubscriptionClient Subscription { get; }
 
+        ITextClient Text { get; }
+
+        ICallClient Call { get; }
+
         IContactClient Contact { get; }
+
+        ILabelClient Label { get; }
     }
 }

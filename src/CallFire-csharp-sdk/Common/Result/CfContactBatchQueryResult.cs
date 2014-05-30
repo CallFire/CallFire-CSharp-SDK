@@ -8,8 +8,8 @@ namespace CallFire_csharp_sdk.Common.Result
         public CfContactBatch[] ContactBatch { get; set; }
 
         public CfContactBatchQueryResult(long totalResults, CfContactBatch[] contactBatch)
+            : base(totalResults)
         {
-            TotalResults = totalResults;
             ContactBatch = contactBatch;
         }
     }

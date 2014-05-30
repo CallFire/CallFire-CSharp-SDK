@@ -8,6 +8,10 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class Action
     {
+        public Action()
+        {
+        }
+        
         public Action(CfAction source)
         {
             FromNumber = source.FromNumber;
@@ -22,10 +26,6 @@ namespace CallFire_csharp_sdk.API.Soap
             FinalResult = EnumeratedMapper.ScreamingSnakeCase(source.FinalResult.ToString());
             Label = source.Label.Select(LabelMapper.ToLabel).ToArray();
             id = source.Id;
-        }
-
-        public Action()
-        {
         }
     }
 }

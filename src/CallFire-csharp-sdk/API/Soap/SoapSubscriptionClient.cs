@@ -32,8 +32,7 @@ namespace CallFire_csharp_sdk.API.Soap
         public CfSubscriptionQueryResult QuerySubscriptions(CfQuery cfQuerySubscriptions)
         {
             return SubscriptionQueryResultMapper.FromSoapSubscriptionQueryResult(
-                    SubscriptionService.QuerySubscriptions(new Query(cfQuerySubscriptions.MaxResults,
-                        cfQuerySubscriptions.FirstResult)));
+                    SubscriptionService.QuerySubscriptions(new Query(cfQuerySubscriptions)));
         }
 
         public CfSubscription GetSubscription(long id)

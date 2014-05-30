@@ -24,7 +24,7 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
         public long CreateBroadcast(CfBroadcastRequest createBroadcast)
         {
             var broadcastRequest = new BroadcastRequest(createBroadcast.RequestId, BroadcastMapper.ToSoapBroadcast(createBroadcast.Broadcast));
-            var resourcerReference = BaseRequest<ResourceReference>(HttpMethod.Post, broadcastRequest, new CallfireRestRoute<Broadcast>(null));
+            var resourcerReference = BaseRequest<ResourceReference>(HttpMethod.Post, broadcastRequest, new CallfireRestRoute<Broadcast>());
             return resourcerReference.Id;
         }
 

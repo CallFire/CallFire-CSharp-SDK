@@ -6,16 +6,16 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class QueryContacts
     {
+        public QueryContacts()
+        {
+        }
+        
         public QueryContacts(CfQueryContacts source)
             : base(source.MaxResults, source.FirstResult)
         {
             Field = source.Field;
             ContactListId = source.ContactListId;
             String = source.String;
-        }
-        
-        public QueryContacts()
-        {
         }
     }
 }

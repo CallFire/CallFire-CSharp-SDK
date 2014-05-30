@@ -45,13 +45,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CallfireBroadcastClientTest.cs" />
+    <Compile Include="CallfireCallClientTest.cs" />
     <Compile Include="CallfireSubscriptionClientTest.cs" />
+    <Compile Include="CallfireTextClientTest.cs" />
+    <Compile Include="CallfireLabelClientTest.cs" />
     <Compile Include="MockClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rest\CallfireBroadcastRestClientTest.cs" />
     <Compile Include="Rest\CallfireSubscriptionRestClientTest.cs" />
+    <Compile Include="Rest\CallfireLabelRestClientTest.cs" />
     <Compile Include="Soap\CallfireBroadcastSoapClientTest.cs" />
+    <Compile Include="Soap\CallfireCallSoapClientTest.cs" />
     <Compile Include="Soap\CallfireSubscriptionSoapClientTest.cs" />
+    <Compile Include="Soap\CallfireTextSoapClientTest.cs" />
+    <Compile Include="Soap\CallfireLabelSoapClientTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CallFire-csharp-sdk\CallFire-csharp-sdk.csproj">

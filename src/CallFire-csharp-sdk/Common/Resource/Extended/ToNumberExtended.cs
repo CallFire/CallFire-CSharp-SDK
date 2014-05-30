@@ -4,15 +4,15 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class ToNumber
     {
+        public ToNumber()
+        {
+        }
+        
         public ToNumber(string clientData, XmlAttribute[] anyAttr, string value)
         {
             ClientData = clientData;
             AnyAttr = anyAttr;
             Value = value;
-        }
-
-        public ToNumber()
-        {
         }
     }
 }

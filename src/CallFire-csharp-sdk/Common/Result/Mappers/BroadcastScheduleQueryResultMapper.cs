@@ -8,18 +8,26 @@ namespace CallFire_csharp_sdk.Common.Result.Mappers
     {
         internal static CfBroadcastScheduleQueryResult FromSoapBroadcastScheduleQueryResult(BroadcastScheduleQueryResult source)
         {
-            return source == null ? null :
-                new CfBroadcastScheduleQueryResult(
-                    source.TotalResults,
-                    source.BroadcastSchedule == null ? null : source.BroadcastSchedule.Select(BroadcastScheduleMapper.FromSoapBroadcastSchedule).ToArray());
+            if (source == null)
+            {
+                return null;
+            }
+
+            var broadcastSchedule = source.BroadcastSchedule == null ? null
+                                    : source.BroadcastSchedule.Select(BroadcastScheduleMapper.FromSoapBroadcastSchedule).ToArray();
+            return new CfBroadcastScheduleQueryResult(source.TotalResults, broadcastSchedule);
         }
 
         internal static BroadcastScheduleQueryResult ToSoapBroadcastScheduleQueryResult(CfBroadcastScheduleQueryResult source)
         {
-            return source == null ? null :
-                new BroadcastScheduleQueryResult(
-                    source.TotalResults,
-                    source.BroadcastSchedule == null ? null : source.BroadcastSchedule.Select(BroadcastScheduleMapper.ToSoapBroadcastSchedule).ToArray());
+            if (source == null)
+            {
+                return null;
+            }
+
+            var broadcastSchedule = source.BroadcastSchedule == null ? null
+                                    : source.BroadcastSchedule.Select(BroadcastScheduleMapper.ToSoapBroadcastSchedule).ToArray();
+            return new BroadcastScheduleQueryResult(source.TotalResults, broadcastSchedule);
         }
     }
 }
