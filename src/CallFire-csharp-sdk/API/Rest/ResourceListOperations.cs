@@ -8,7 +8,7 @@ namespace CallFire_csharp_sdk.API.Rest
         internal static T[] CastResourceList<T>(ResourceList resource)
         {
             T[] array = null;
-            if (resource.Resource.Any())
+            if (resource.Resource != null && resource.Resource.Any())
             {
                 array = new T[resource.Resource.Count()];
                 for (var i = 0; i < resource.Resource.Count(); i++)

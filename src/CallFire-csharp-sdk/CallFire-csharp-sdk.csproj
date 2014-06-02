@@ -55,7 +55,7 @@
     <Compile Include="API\ITextClient.cs" />
     <Compile Include="API\Rest\Clients\BaseRestClient.cs" />
     <Compile Include="API\Rest\RestRouteObjects.cs" />
-    <Compile Include="API\Rest\CallFireNamespace.cs" />
+    <Compile Include="API\Rest\CallfireNamespace.cs" />
     <Compile Include="API\Rest\Clients\RestContactClient.cs" />
     <Compile Include="API\Rest\Clients\RestCallClient.cs" />
     <Compile Include="API\Rest\Clients\RestTextClient.cs" />

@@ -2,6 +2,10 @@
 {
     public class CfQueryContacts : CfQuery
     {
+        public CfQueryContacts()
+        {
+        }
+
         public CfQueryContacts(long maxResult, long firstResult, string field, long contactListId, string str)
             : base(maxResult, firstResult)
         {

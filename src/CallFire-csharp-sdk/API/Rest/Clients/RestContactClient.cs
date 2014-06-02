@@ -27,13 +27,15 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
             var resourceList = BaseRequest<ResourceList>(HttpMethod.Get, new QueryContacts(queryContacts),
                 new CallfireRestRoute<Contact>());
 
-            var contact = ResourceListOperations.CastResourceList<Contact>(resourceList).Select(ContactMapper.FromContact).ToArray();
+            var contactResourceList = ResourceListOperations.CastResourceList<Contact>(resourceList);
+            var contact = contactResourceList == null ? null : contactResourceList.Select(ContactMapper.FromContact).ToArray();
             return new CfContactQueryResult(resourceList.TotalResults, contact);
         }
 
         public void UpdateContacts(CfContact[] updateContacts)
         {
-            BaseRequest<string>(HttpMethod.Put, updateContacts.Select(ContactMapper.ToContact).ToArray(), new CallfireRestRoute<Contact>());
+            var arrayUpdateContacts = updateContacts == null ? null : updateContacts.Select(ContactMapper.ToContact).ToArray();
+            BaseRequest<string>(HttpMethod.Put, arrayUpdateContacts, new CallfireRestRoute<Contact>());
         }
 
         public void RemoveContacts(CfRemoveContacts removeContacts)
@@ -59,7 +61,8 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
             var resource = BaseRequest<Resource>(HttpMethod.Get, new GetContactHistory(getContactHistory),
                 new CallfireRestRoute<Contact>(getContactHistory.ContactId, null, RestRouteObjects.History));
             var contactHistory = resource.Resources as ContactHistory;
-            return contactHistory == null ? null : contactHistory.ContactHistory1.Select(ActionMapper.FromAction).ToArray();
+            return contactHistory == null || contactHistory.ContactHistory1  == null ? null 
+                : contactHistory.ContactHistory1.Select(ActionMapper.FromAction).ToArray();
         }
 
         public long CreateContactList(CfCreateContactList createContactList)

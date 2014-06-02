@@ -32,7 +32,8 @@ namespace CallFire_csharp_sdk.API.Soap
 
         public void UpdateContacts(CfContact[] updateContacts)
         {
-            ContactService.UpdateContacts(updateContacts.Select(ContactMapper.ToContact).ToArray());
+            var arrayUpdateContacts = updateContacts == null ? null : updateContacts.Select(ContactMapper.ToContact).ToArray();
+            ContactService.UpdateContacts(arrayUpdateContacts);
         }
 
         public void RemoveContacts(CfRemoveContacts removeContacts)
@@ -49,7 +50,7 @@ namespace CallFire_csharp_sdk.API.Soap
         public CfAction[] GetContactHistory(CfGetContactHistory getContactHistory)
         {
             var action = ContactService.GetContactHistory(new GetContactHistory(getContactHistory));
-            return action.Select(ActionMapper.FromAction).ToArray();
+            return action == null ? null : action.Select(ActionMapper.FromAction).ToArray();
         }
 
         public long CreateContactList(CfCreateContactList createContactList)

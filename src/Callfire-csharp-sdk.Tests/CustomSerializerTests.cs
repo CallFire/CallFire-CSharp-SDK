@@ -56,7 +56,7 @@ namespace Callfire_csharp_sdk.Tests
 
         private class TestObject
         {
-            private string[] Values { get; set; }
+            public string[] Values { get; set; }
 
             public TestObject(string[] values)
             {

@@ -154,8 +154,11 @@ namespace CallFire_csharp_sdk.Common.DataManagement
             Inbound = source.Inbound;
             Created = source.Created;
             Modified = source.Modified;
-            FinalResult = EnumeratedMapper.EnumFromSoapEnumerated<CfResult>(source.FinalResult);
-            Label = source.Label.Select(LabelMapper.FromLabel).ToArray();
+            if (!string.IsNullOrEmpty(source.FinalResult))
+            {
+                FinalResult = EnumeratedMapper.EnumFromSoapEnumerated<CfResult>(source.FinalResult);
+            }
+            Label = source.Label == null ? null : source.Label.Select(LabelMapper.FromLabel).ToArray();
             Id = source.id;
         }
 
