@@ -1,4 +1,7 @@
-﻿// ReSharper disable once CheckNamespace - This is an extension from API.Soap
+﻿using CallFire_csharp_sdk.Common.DataManagement;
+// ReSharper disable once CheckNamespace - This is an extension from API.Soap
+
+
 namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class AutoReply
@@ -7,13 +10,17 @@ namespace CallFire_csharp_sdk.API.Soap
         {
         }
         
-        public AutoReply(string number, string keyword, string match, string message, long identifier)
+        public AutoReply(CfAutoReply source)
         {
-            Number = number;
-            Keyword = keyword;
-            Match = match;
-            Message = message;
-            id = identifier;
+            Number = source.Number;
+            Keyword = source.Keyword;
+            Match = source.Match;
+            Message = source.Message;
+            if (source.Id.HasValue)
+            {
+                id = source.Id.Value;
+                idSpecified = true;
+            }
         }
     }
 }

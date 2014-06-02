@@ -126,7 +126,7 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfAction
     {
-        public CfAction(string fromNumber, CfToNumber toNumber, CfActionState state, long batchId, long broadcastId, long contactId,
+        public CfAction(string fromNumber, CfToNumber toNumber, CfActionState state, long? batchId, long? broadcastId, long contactId,
             bool inbound, DateTime created, DateTime modified, CfResult finalResult, CfLabel[] label, long id)
         {
             FromNumber = fromNumber;
@@ -172,9 +172,9 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
         public CfActionState State { get; set; }
 
-        public long BatchId { get; set; }
+        public long? BatchId { get; set; }
 
-        public long BroadcastId { get; set; }
+        public long? BroadcastId { get; set; }
 
         public long ContactId { get; set; }
 
@@ -634,7 +634,7 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfSoundMeta
     {
-        public CfSoundMeta(CfSoundStatus status, string name, DateTime created, int lengthInSeconds, long id)
+        public CfSoundMeta(CfSoundStatus status, string name, DateTime created, int? lengthInSeconds, long id)
         {
             Status = status;
             Name = name;
@@ -649,7 +649,7 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
         public DateTime Created { get; set; }
 
-        public int LengthInSeconds { get; set; }
+        public int? LengthInSeconds { get; set; }
 
         public long Id { get; set; }
     }
@@ -690,7 +690,7 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfAutoReply
     {
-        public CfAutoReply(string number, string keyword, string match, string message, long id)
+        public CfAutoReply(string number, string keyword, string match, string message, long? id)
         {
             Number = number;
             Keyword = keyword;
@@ -707,7 +707,7 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
         public string Message { get; set; }
 
-        public long Id { get; set; }
+        public long? Id { get; set; }
     }
 
     public class CfSubscription
@@ -786,7 +786,7 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfContact
     {
-        public CfContact(long id, string firstName, string lastName, string zipcode, string homePhone, string workPhone, string mobilePhone,
+        public CfContact(long? id, string firstName, string lastName, string zipcode, string homePhone, string workPhone, string mobilePhone,
             string externalId, string externalSystem, System.Xml.XmlAttribute[] anyAttr)
         {
             Id = id;
@@ -801,7 +801,7 @@ namespace CallFire_csharp_sdk.Common.DataManagement
             AnyAttr = anyAttr;
         }
 
-        public long Id { get; set; }
+        public long? Id { get; set; }
 
         public string FirstName { get; set; }
 

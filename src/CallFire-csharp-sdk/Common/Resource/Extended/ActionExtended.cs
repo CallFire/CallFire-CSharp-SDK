@@ -17,8 +17,16 @@ namespace CallFire_csharp_sdk.API.Soap
             FromNumber = source.FromNumber;
             ToNumber = ToNumberMapper.ToToNumber(source.ToNumber);
             State = EnumeratedMapper.ScreamingSnakeCase(source.State.ToString());
-            BatchId = source.BatchId;
-            BroadcastId = source.BroadcastId;
+            if (source.BatchId.HasValue)
+            {
+                BatchId = source.BatchId.Value;
+                BatchIdSpecified = true;
+            }
+            if (source.BroadcastId.HasValue)
+            {
+                BroadcastId = source.BroadcastId.Value;
+                BroadcastIdSpecified = true;
+            }
             ContactId = source.ContactId;
             Inbound = source.Inbound;
             Created = source.Created;

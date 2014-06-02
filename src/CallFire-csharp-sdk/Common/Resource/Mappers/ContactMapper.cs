@@ -14,9 +14,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
 
         internal static Contact ToContact(CfContact source)
         {
-            return source == null ? null
-                : new Contact(source.Id, source.FirstName, source.LastName, source.Zipcode, source.HomePhone,
-                    source.WorkPhone, source.MobilePhone, source.ExternalId, source.ExternalSystem, source.AnyAttr);
+            return source == null ? null : new Contact(source);
         }
     }
 }
