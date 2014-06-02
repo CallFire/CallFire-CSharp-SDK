@@ -14,7 +14,11 @@ namespace CallFire_csharp_sdk.API.Soap
             : base(source.MaxResults, source.FirstResult)
         {
             Field = source.Field;
-            ContactListId = source.ContactListId;
+            if (source.ContactListId.HasValue)
+            {
+                ContactListId = source.ContactListId.Value;
+                ContactListIdSpecified = true;
+            }
             String = source.String;
         }
     }

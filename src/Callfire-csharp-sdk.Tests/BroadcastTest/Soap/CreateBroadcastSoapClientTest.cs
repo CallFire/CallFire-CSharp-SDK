@@ -25,7 +25,7 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Soap
                                                                                 x.Broadcast.LastModified == ExpectedBroadcast.LastModified &&
                                                                                 x.Broadcast.Status == BroadcastStatus.RUNNING &&
                                                                                 x.Broadcast.Type == BroadcastType.TEXT)))
-                .Return(ExpectedBroadcast.Id);
+                .Return(ExpectedBroadcast.Id == null ? 0 : ExpectedBroadcast.Id.Value);
         }
     }
 }

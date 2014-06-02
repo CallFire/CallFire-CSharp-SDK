@@ -13,7 +13,7 @@ namespace Callfire_csharp_sdk.IntegrationTests.Soap
             Client = new SoapContactClient(MockClient.User(), MockClient.Password());
 
             ContactId = 160672080001;
-            QueryContact = new CfQueryContacts();
+            QueryContact = new CfQueryContacts(1000, 0, null, null, null);
             GetContactHistory = new CfGetContactHistory(1000, 0, ContactId);
             object[] ids = {ContactId};
             CreateContactList = new CfCreateContactList(null, "ContactListTest", false, new CfContactSource(ids));

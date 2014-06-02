@@ -17,7 +17,7 @@ namespace CallFire_csharp_sdk.Common
 
         internal string[] ToCustomFormatArray(IEnumerable<KeyValuePair<string, string>> properties)
         {
-            return properties.Select(v => string.Format("{0}={1}", v.Key, v.Value)).ToArray();
+            return properties.Where(v => !string.IsNullOrEmpty(v.Value)).Select(v => string.Format("{0}={1}", v.Key, v.Value)).ToArray();
         }
 
         internal IEnumerable<KeyValuePair<string, string>> GetProperties(object o)
@@ -29,7 +29,13 @@ namespace CallFire_csharp_sdk.Common
             foreach (var propertyInfo in props)
             {
                 var value = propertyInfo.GetValue(o, null);
-                if (value == null)
+                if ((value == null) || propertyInfo.Name.EndsWith("Specified") || propertyInfo.Name.EndsWith("ContactId"))
+                {
+                    continue;
+                }
+                
+                var name = string.Format("{0}{1}", propertyInfo.Name, "Specified");
+                if (props.Any(p => p.Name == name && !((bool) p.GetValue(o, null))))
                 {
                     continue;
                 }

@@ -23,18 +23,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
         
         internal static VoiceBroadcastConfig ToSoapVoiceBroadcastConfig(CfVoiceBroadcastConfig source)
         {
-            if (source == null)
-            {
-                return null;
-            }
-            var localTimeZoneRestriction =
-                LocalTimeZoneRestrictionMapper.ToSoapLocalTimeZoneRestriction(source.LocalTimeZoneRestriction);
-            var retryConfig = BroadcastConfigRetryConfigMapper.ToBroadcastConfigRetryConfig(source.RetryConfig);
-            var answeringMachineConfig = EnumeratedMapper.ToSoapEnumerated<AnsweringMachineConfig>(source.AnsweringMachineConfig.ToString());
-            return new VoiceBroadcastConfig(source.Id, source.Created, source.FromNumber, localTimeZoneRestriction,
-                retryConfig, answeringMachineConfig, source.Item, source.LiveSoundTextVoice, source.Item1,
-                source.MachineSoundTextVoice, source.Item2, source.TransferSoundTextVoice, source.TransferDigit,
-                source.TransferNumber, source.Item3, source.DncSoundTextVoice, source.DncDigit, source.MaxActiveTransfers);
+            return source == null ? null : new VoiceBroadcastConfig(source);
         }
     }
 }

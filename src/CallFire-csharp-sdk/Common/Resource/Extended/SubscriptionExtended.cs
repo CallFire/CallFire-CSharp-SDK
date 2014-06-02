@@ -1,18 +1,32 @@
-﻿// ReSharper disable once CheckNamespace - This is an extension from API.Soap
+﻿using CallFire_csharp_sdk.Common.DataManagement;
+using CallFire_csharp_sdk.Common.Resource.Mappers;
+// ReSharper disable once CheckNamespace - This is an extension from API.Soap
+
+
 namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class Subscription
     {
-        public Subscription(long identifier, bool enabled, string endpoint, NotificationFormat notificationFormat,
-            SubscriptionTriggerEvent triggerEvent, SubscriptionSubscriptionFilter subscriptionFilter)
+        public Subscription(CfSubscription source)
         {
-            id = identifier;
-            Enabled = enabled;
-            Endpoint = endpoint;
-            NotificationFormat = notificationFormat;
-            TriggerEvent = triggerEvent;
-            TriggerEventSpecified = true;
-            SubscriptionFilter = subscriptionFilter;
+            if (source.Id.HasValue)
+            {
+                id = source.Id.Value;
+                idSpecified = true;
+            }
+            if (source.Enabled.HasValue)
+            {
+                Enabled = source.Enabled.Value;
+                EnabledSpecified = true;
+            }
+            Endpoint = source.Endpoint;
+            NotificationFormat = EnumeratedMapper.ToSoapEnumerated<NotificationFormat>(source.NotificationFormat.ToString());
+            if (source.TriggerEvent.HasValue)
+            {
+                TriggerEvent = EnumeratedMapper.ToSoapEnumerated<SubscriptionTriggerEvent>(source.TriggerEvent.ToString());
+                TriggerEventSpecified = true;
+            }
+            SubscriptionFilter = SubscriptionSubscriptionFilterMapper.ToSoapSubscriptionSubscriptionFilter(source.SubscriptionFilter);
         }
     }
 }

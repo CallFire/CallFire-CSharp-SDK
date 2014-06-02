@@ -65,8 +65,7 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
 
         public void ControlBroadcast(CfControlBroadcast cfControlBroadcast)
         {
-            var controlBroadcast = new ControlBroadcast(cfControlBroadcast.Id, cfControlBroadcast.RequestId,
-                EnumeratedMapper.ToSoapEnumerated<BroadcastCommand>(cfControlBroadcast.Command.ToString()), cfControlBroadcast.MaxActive);
+            var controlBroadcast = new ControlBroadcast(cfControlBroadcast);
             BaseRequest<string>(HttpMethod.Put, controlBroadcast,
                 new CallfireRestRoute<Broadcast>(controlBroadcast.Id, null, RestRouteObjects.Control));
         }
@@ -101,7 +100,7 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
 
         public void ControlContactBatch(CfControlContactBatch cfControlContactBatch)
         {
-            var controlContactBatch = new ControlContactBatch(cfControlContactBatch.Id, cfControlContactBatch.Name, cfControlContactBatch.Enabled);
+            var controlContactBatch = new ControlContactBatch(cfControlContactBatch);
             BaseRequest<string>(HttpMethod.Put, controlContactBatch,
                 new CallfireRestRoute<Broadcast>(controlContactBatch.Id, RestRouteObjects.Batch, RestRouteObjects.Control));
         }

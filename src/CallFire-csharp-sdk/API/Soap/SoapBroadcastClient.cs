@@ -52,8 +52,7 @@ namespace CallFire_csharp_sdk.API.Soap
 
         public void ControlBroadcast(CfControlBroadcast controlBroadcast)
         {
-            BroadcastService.ControlBroadcast(new ControlBroadcast(controlBroadcast.Id, controlBroadcast.RequestId,
-                EnumeratedMapper.ToSoapEnumerated<BroadcastCommand>(controlBroadcast.Command.ToString()), controlBroadcast.MaxActive));
+            BroadcastService.ControlBroadcast(new ControlBroadcast(controlBroadcast));
         }
 
         public long CreateContactBatch(CfCreateContactBatch createContactBatch)
@@ -77,8 +76,7 @@ namespace CallFire_csharp_sdk.API.Soap
 
         public void ControlContactBatch(CfControlContactBatch controlContactBatch)
         {
-            BroadcastService.ControlContactBatch(new ControlContactBatch(controlContactBatch.Id,
-                controlContactBatch.Name, controlContactBatch.Enabled));
+            BroadcastService.ControlContactBatch(new ControlContactBatch(controlContactBatch));
         }
 
         public long CreateBroadcastSchedule(CfCreateBroadcastSchedule createBroadcastSchedule)

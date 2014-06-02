@@ -68,7 +68,7 @@
     <Compile Include="API\Rest\Clients\RestBroadcastClient.cs" />
     <Compile Include="API\Rest\CallfireRestRoute.cs" />
     <Compile Include="API\Rest\Clients\RestSubscriptionClient.cs" />
-    <Compile Include="API\Rest\RestLabelClient.cs" />
+    <Compile Include="API\Rest\Clients\RestLabelClient.cs" />
     <Compile Include="API\Soap\BaseSoapClient.cs" />
     <Compile Include="API\Soap\BroadcastServicePortTypeClient.cs" />
     <Compile Include="API\Soap\ContactServicePortTypeClient.cs" />

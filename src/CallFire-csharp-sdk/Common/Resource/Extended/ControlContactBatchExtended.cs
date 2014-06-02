@@ -1,4 +1,7 @@
-﻿// ReSharper disable once CheckNamespace - This is an extension from API.Soap
+﻿using CallFire_csharp_sdk.Common.Resource;
+// ReSharper disable once CheckNamespace - This is an extension from API.Soap
+
+
 namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class ControlContactBatch
@@ -7,11 +10,15 @@ namespace CallFire_csharp_sdk.API.Soap
         {
         }
         
-        public ControlContactBatch(long id, string name, bool enabled)
-            : base(id)
+        public ControlContactBatch(CfControlContactBatch cfControlContactBatch)
+            : base(cfControlContactBatch.Id)
         {
-            Name = name;
-            Enabled = enabled;
+            Name = cfControlContactBatch.Name;
+            if (cfControlContactBatch.Enabled.HasValue)
+            {
+                Enabled = cfControlContactBatch.Enabled.Value;
+                EnabledSpecified = true;
+            }
         }
     }
 }

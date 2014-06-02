@@ -1,4 +1,4 @@
-﻿using CallFire_csharp_sdk.API.Soap;
+﻿using CallFire_csharp_sdk.API.Rest.Clients;
 using CallFire_csharp_sdk.Common.Resource;
 using NUnit.Framework;
 
@@ -10,10 +10,10 @@ namespace Callfire_csharp_sdk.IntegrationTests.Rest
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            Client = new SoapContactClient(MockClient.User(), MockClient.Password());
+            Client = new RestContactClient(MockClient.User(), MockClient.Password());
 
             ContactId = 160672080001;
-            QueryContact = new CfQueryContacts();
+            QueryContact = new CfQueryContacts(1000, 0, null, null, null);
             GetContactHistory = new CfGetContactHistory(1000, 0, ContactId);
             object[] ids = { ContactId };
             CreateContactList = new CfCreateContactList(null, "ContactListTest", false, new CfContactSource(ids));

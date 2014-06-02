@@ -24,7 +24,7 @@ namespace CallFire_csharp_sdk.API.Soap
             Created = source.Created;
             Modified = source.Modified;
             FinalResult = EnumeratedMapper.ScreamingSnakeCase(source.FinalResult.ToString());
-            Label = source.Label.Select(LabelMapper.ToLabel).ToArray();
+            Label = source.Label == null ? null : source.Label.Select(LabelMapper.ToLabel).ToArray();
             id = source.Id;
         }
     }

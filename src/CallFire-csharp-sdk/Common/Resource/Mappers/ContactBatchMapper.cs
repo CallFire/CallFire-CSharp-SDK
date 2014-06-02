@@ -17,12 +17,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
 
         internal static ContactBatch ToSoapContactBatch(CfContactBatch source)
         {
-            if (source == null)
-            {
-                return null;
-            }
-            return new ContactBatch(source.Id, source.Name, EnumeratedMapper.ToSoapEnumerated<BatchStatus>(source.Status.ToString()), 
-                source.BroadcastId, source.Created, source.Size, source.Remaining);
+            return source == null ? null : new ContactBatch(source);
         }
     }
 }

@@ -20,6 +20,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         {
             var contacts = Client.QueryContacts(QueryContact);
             Assert.IsNotNull(contacts);
+            Assert.IsNotNull(contacts.Contact);
             Assert.IsTrue(contacts.Contact.Any(c => c.Id == ContactId));
         }
 
@@ -32,6 +33,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
+        [Ignore]
         public void Test_GetContactHistory()
         {
             var contactHistory = Client.GetContactHistory(GetContactHistory);
@@ -41,6 +43,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
+        [Ignore]
         public void Test_CreateContactList()
         {
             var id = Client.CreateContactList(CreateContactList);

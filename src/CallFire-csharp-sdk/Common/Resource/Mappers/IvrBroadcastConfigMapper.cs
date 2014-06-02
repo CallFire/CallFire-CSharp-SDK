@@ -19,14 +19,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
 
         internal static IvrBroadcastConfig ToSoapIvrBroadcastConfig(CfIvrBroadcastConfig source)
         {
-            if (source == null)
-            {
-                return null;
-            }
-            var localTimeZoneRestriction =
-                LocalTimeZoneRestrictionMapper.ToSoapLocalTimeZoneRestriction(source.LocalTimeZoneRestriction);
-            var retryConfig = BroadcastConfigRetryConfigMapper.ToBroadcastConfigRetryConfig(source.RetryConfig);
-            return new IvrBroadcastConfig(source.Id, source.Created, source.FromNumber, localTimeZoneRestriction, retryConfig, source.DialplanXml);
+            return source == null ? null : new IvrBroadcastConfig(source);
         }
     }
 }

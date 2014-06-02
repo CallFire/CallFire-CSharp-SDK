@@ -21,6 +21,8 @@ namespace Callfire_csharp_sdk.Tests
                 new DateTime(2014, 1, 1, 3, 0, 0), BroadcastType.TEXT,
                 new TextBroadcastConfig(2, new DateTime(2014, 1, 1, 3, 0, 0),
                     "111", null, new BroadcastConfigRetryConfig(1, 1, "1", "1"), "message", new BigMessageStrategy()));
+            _broadcast.idSpecified = true;
+            _broadcast.LastModifiedSpecified = true;
         }
 
         [Test]

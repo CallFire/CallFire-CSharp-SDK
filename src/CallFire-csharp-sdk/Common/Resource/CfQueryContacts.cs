@@ -6,7 +6,7 @@
         {
         }
 
-        public CfQueryContacts(long maxResult, long firstResult, string field, long contactListId, string str)
+        public CfQueryContacts(long maxResult, long firstResult, string field, long? contactListId, string str)
             : base(maxResult, firstResult)
         {
             Field = field;
@@ -16,7 +16,7 @@
 
         public string Field { get; set; }
 
-        public long ContactListId { get; set; }
+        public long? ContactListId { get; set; }
 
         public string String { get; set; }  
     }
