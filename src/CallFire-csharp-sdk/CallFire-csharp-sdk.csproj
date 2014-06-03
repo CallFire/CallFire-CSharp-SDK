@@ -86,6 +86,7 @@
     <Compile Include="API\Soap\SoapCallClient.cs" />
     <Compile Include="Common\Resource\CfContactListRequest.cs" />
     <Compile Include="Common\Resource\CfContactSource.cs" />
+    <Compile Include="Common\Resource\CfContactSourceNumbers.cs" />
     <Compile Include="Common\Resource\CfCreateContactList.cs" />
     <Compile Include="Common\Resource\CfGetBroadcastStats.cs" />
     <Compile Include="Common\CustomSerializer.cs" />

@@ -44,7 +44,9 @@ namespace CallFire_csharp_sdk.Common
                 {
                     var array = ((Array)value);
                     var arrayValue = string.Join(" ", array.OfType<object>().Select(e => e.ToString()).ToArray());
+                    //var arrayValue = string.Join(" ", array.OfType<object>().Select(e => string.Join("&", ToCustomFormatArray(GetProperties(e)))).ToArray());
                     result.Add(new KeyValuePair<string, string>(propertyInfo.Name, HttpUtility.UrlEncode(arrayValue)));
+                    //result.Add(new KeyValuePair<string, string>(propertyInfo.Name, arrayValue));
                 }
                 else if (!IsCustomClass(propertyInfo))
                 {
