@@ -13,6 +13,8 @@ namespace Callfire_csharp_sdk.IntegrationTests
         protected CfQueryContacts QueryContact;
         protected CfGetContactHistory GetContactHistory;
         protected CfCreateContactList CreateContactList;
+        protected CfCreateContactList CreateContactList2;
+        protected CfCreateContactList CreateContactList3;
         protected long ContactId;
 
         [Test]
@@ -33,6 +35,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
+        [Ignore]
         public void Test_GetContactHistory()
         {
             var contactHistory = Client.GetContactHistory(GetContactHistory);
@@ -42,9 +45,24 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
-        public void Test_CreateContactList()
+        public void Test_CreateContactList_Contact()
         {
             var id = Client.CreateContactList(CreateContactList);
+            Assert.IsTrue(id > 0);
+        }
+
+        [Test]
+        public void Test_CreateContactList_ContactId()
+        {
+            var id = Client.CreateContactList(CreateContactList2);
+            Assert.IsTrue(id > 0);
+        }
+
+        [Test]
+        [Ignore]
+        public void Test_CreateContactList_ContactSourceNumbers()
+        {
+            var id = Client.CreateContactList(CreateContactList3);
             Assert.IsTrue(id > 0);
         }
     }

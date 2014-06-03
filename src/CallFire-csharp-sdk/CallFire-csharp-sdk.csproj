@@ -116,6 +116,7 @@
     <Compile Include="Common\Resource\Extended\ContactListExtended.cs" />
     <Compile Include="Common\Resource\Extended\ContactListRequestExtended.cs" />
     <Compile Include="Common\Resource\Extended\ContactSourceExtended.cs" />
+    <Compile Include="Common\Resource\Extended\ContactSourceNumbersExtended.cs" />
     <Compile Include="Common\Resource\Extended\CreateContactListExtended.cs" />
     <Compile Include="Common\Resource\Extended\CreateSoundExtended.cs" />
     <Compile Include="Common\Resource\Extended\GetRecordingDataExtended.cs" />
@@ -128,6 +129,7 @@
     <Compile Include="Common\Resource\Mappers\CallRecordMapper.cs" />
     <Compile Include="Common\Resource\Mappers\ContactListMapper.cs" />
     <Compile Include="Common\Resource\Mappers\ContactSourceMapper.cs" />
+    <Compile Include="Common\Resource\Mappers\ContactSourceNumbersMapper.cs" />
     <Compile Include="Common\Resource\Mappers\EnumeratedMapper.cs" />
     <Compile Include="Common\Resource\Mappers\RecordingMetaMapper.cs" />
     <Compile Include="Common\Resource\Mappers\SoundMetaMapper.cs" />
