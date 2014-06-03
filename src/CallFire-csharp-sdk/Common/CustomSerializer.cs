@@ -33,9 +33,9 @@ namespace CallFire_csharp_sdk.Common
                 {
                     continue;
                 }
-                
+
                 var name = string.Format("{0}{1}", propertyInfo.Name, "Specified");
-                if (props.Any(p => p.Name == name && !((bool) p.GetValue(o, null))))
+                if (props.Any(p => p.Name == name && !((bool)p.GetValue(o, null))))
                 {
                     continue;
                 }
@@ -43,8 +43,21 @@ namespace CallFire_csharp_sdk.Common
                 if (propertyInfo.PropertyType.IsArray)
                 {
                     var array = ((Array)value);
-                    var arrayValue = string.Join(" ", array.OfType<object>().Select(e => e.ToString()).ToArray());
-                    result.Add(new KeyValuePair<string, string>(propertyInfo.Name, HttpUtility.UrlEncode(arrayValue)));
+                    if (IsCustomClass(array.GetType().GetElementType()))
+                    {
+                        for (var i = 0; i < array.Length; i++)
+                        {
+                            var elementProperties = GetProperties(array.GetValue(i));
+                            result.AddRange(
+                                elementProperties.Select(a => new KeyValuePair<string, string>
+                                    (string.Format("{0}[{1}].[{2}]", propertyInfo.Name, i, a.Key), a.Value)));
+                        }
+                    }
+                    else
+                    {
+                        var arrayValue = string.Join(" ", array.OfType<object>().Select(e => e.ToString()).ToArray());
+                        result.Add(new KeyValuePair<string, string>(propertyInfo.Name, HttpUtility.UrlEncode(arrayValue)));
+                    }
                 }
                 else if (!IsCustomClass(propertyInfo))
                 {
@@ -68,6 +81,11 @@ namespace CallFire_csharp_sdk.Common
         private bool IsCustomClass(PropertyInfo propertyInfo)
         {
             return propertyInfo.PropertyType.IsClass && propertyInfo.PropertyType.Namespace != "System";
+        }
+
+        private bool IsCustomClass(Type type)
+        {
+            return type.IsClass && type.Namespace != "System";
         }
     }
 }
