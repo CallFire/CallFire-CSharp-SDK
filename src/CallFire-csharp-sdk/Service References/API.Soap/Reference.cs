@@ -6802,7 +6802,7 @@ namespace CallFire_csharp_sdk.API.Soap {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class ContactHistory {
+    internal partial class ContactHistory {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="ContactHistory", Namespace="http://api.callfire.com/data", Order=0)]
         [System.Xml.Serialization.XmlArrayItemAttribute("Call", typeof(Call), IsNullable=false)]
