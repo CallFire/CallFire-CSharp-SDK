@@ -1,6 +1,8 @@
 ﻿using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
+using CallFire_csharp_sdk.Common.Resource.Mappers;
 using CallFire_csharp_sdk.Common.Result;
+using CallFire_csharp_sdk.Common.Result.Mappers;
 
 namespace CallFire_csharp_sdk.API.Soap
 {
@@ -23,50 +25,57 @@ namespace CallFire_csharp_sdk.API.Soap
 
         public CfRegionQueryResult QueryRegions(CfRegionQuery queryRegions)
         {
-            return null;
+            var regionQueryResult = NumberService.QueryRegions(new RegionQuery(queryRegions));
+            return RegionQueryResultMapper.FromRegionQueryResult(regionQueryResult);
         }
 
         public CfNumberQueryResult QueryNumbers(CfQueryNumbers queryNumbers)
         {
-            return null;
+            var numberQueryResult = NumberService.QueryNumbers(new QueryNumbers(queryNumbers));
+            return NumberQueryResultMapper.FromNumberQueryResult(numberQueryResult);
         }
 
         public CfNumber GetNumber(CfGetNumber getNumber)
         {
-            return null;
+            return NumberMapper.FromNumber(NumberService.GetNumber(new GetNumber(getNumber)));
         }
 
         public void ConfigureNumber(CfConfigureNumber configureNumber)
         {
+            NumberService.ConfigureNumber(new ConfigureNumber(configureNumber));
         }
 
         public CfNumberQueryResult SearchAvailableNumbers(CfSearchAvailableNumbers searchAvailableNumbers)
         {
-            return null;
+            var numberQueryResult = NumberService.SearchAvailableNumbers(new SearchAvailableNumbers());
+            return NumberQueryResultMapper.FromNumberQueryResult(numberQueryResult);
         }
 
         public CfKeywordQueryResult QueryKeywords(CfQuery queryKeywords)
         {
-            return null;
+            var keywordQueryResult = NumberService.QueryKeywords(new Query(queryKeywords));
+            return KeywordQueryResultMapper.FromKeywordQueryResult(keywordQueryResult);
         }
 
         public CfKeywordQueryResult SearchAvailableKeywords(CfSearchAvailableKeywords searchAvailableKeywords)
         {
-            return null;
+            var keywordQueryResult = NumberService.SearchAvailableKeywords(new SearchAvailableKeywords(searchAvailableKeywords));
+            return KeywordQueryResultMapper.FromKeywordQueryResult(keywordQueryResult);
         }
 
         public long CreateNumberOrder(CfCreateNumberOrder createNumberOrder)
         {
-            return 0;
+            return NumberService.CreateNumberOrder(new CreateNumberOrder(createNumberOrder));
         }
 
         public CfNumberOrder GetNumberOrder(long id)
         {
-            return null;
+            return NumberOrderMapper.FromNumberOrder(NumberService.GetNumberOrder(new IdRequest(id)));
         }
 
         public void Release(CfRelease release)
         {
+            NumberService.Release(new Release(release));
         }
     }
 }

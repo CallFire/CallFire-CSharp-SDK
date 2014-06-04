@@ -4,7 +4,7 @@ using CallFire_csharp_sdk.Common.Resource.Mappers;
 
 namespace CallFire_csharp_sdk.Common.Result.Mappers
 {
-    internal static class CfKeywordQueryResultMapper
+    internal static class KeywordQueryResultMapper
     {
         internal static CfKeywordQueryResult FromKeywordQueryResult(KeywordQueryResult source)
         {

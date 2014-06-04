@@ -99,6 +99,13 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfNumberOrderItem
     {
+        public CfNumberOrderItem(int ordered, float unitCost, string fulfilled)
+        {
+            Ordered = ordered;
+            UnitCost = unitCost;
+            Fulfilled = fulfilled;
+        }
+
         public int Ordered { get; set; }
 
         public float UnitCost { get; set; }
@@ -985,6 +992,18 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfNumberOrder
     {
+        public CfNumberOrder(CfOrderStatus status, DateTime created, float totalCost, CfNumberOrderItem localNumbers,
+            CfNumberOrderItem tollFreeNumbers, CfNumberOrderItem keywords, long id)
+        {
+            Status = status;
+            Created = created;
+            TotalCost = totalCost;
+            LocalNumbers = localNumbers;
+            TollFreeNumbers = tollFreeNumbers;
+            Keywords = keywords;
+            Id = id;
+        }
+
         public CfOrderStatus Status { get; set; }
 
         public DateTime Created { get; set; }
