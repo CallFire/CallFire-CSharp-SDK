@@ -1,4 +1,6 @@
 ﻿using System;
+using CallFire_csharp_sdk.API.Soap;
+using Action = System.Action;
 
 namespace CallFire_csharp_sdk.Common.DataManagement
 {
@@ -230,7 +232,7 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public abstract class CfInboundConfig
     {
-        public long Id { get; set; }
+        public long? Id { get; set; }
     }
 
     public class CfBroadcastConfigRetryConfig
@@ -389,6 +391,16 @@ namespace CallFire_csharp_sdk.Common.DataManagement
             Screen = false;
             Record = false;
         }
+        
+        public CfCallTrackingConfig(long? id, string transferNumber, bool screen, bool record, long? introSoundId, long? whisperSoundId)
+        {
+            Id = id;
+            TransferNumber = transferNumber;
+            Screen = screen;
+            Record = record;
+            IntroSoundId = introSoundId;
+            WhisperSoundId = whisperSoundId;
+        }
 
         public string TransferNumber { get; set; }
 
@@ -396,13 +408,19 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
         public bool Record { get; set; }
 
-        public long IntroSoundId { get; set; }
+        public long? IntroSoundId { get; set; }
 
-        public long WhisperSoundId { get; set; }
+        public long? WhisperSoundId { get; set; }
     }
 
     public class CfIvrInboundConfig : CfInboundConfig
     {
+        public CfIvrInboundConfig(long? id, string dialplanXml)
+        {
+            Id = id;
+            DialplanXml = dialplanXml;
+        }
+
         public string DialplanXml { get; set; }
     }
 
@@ -813,6 +831,21 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfRegion
     {
+        public CfRegion(string prefix, string city, string state, string zipcode, string country, string lata, 
+            string rateCenter, float? latitude, float? longitude, string timeZone)
+        {
+            Prefix = prefix;
+            City = city;
+            State = state;
+            Zipcode = zipcode;
+            Country = country;
+            Lata = lata;
+            RateCenter = rateCenter;
+            Latitude = latitude;
+            Longitude = longitude;
+            TimeZone = timeZone;
+        }
+
         public string Prefix { get; set; }
 
         public string City { get; set; }
@@ -827,24 +860,43 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
         public string RateCenter { get; set; }
 
-        public float Latitude { get; set; }
+        public float? Latitude { get; set; }
 
-        public float Longitude { get; set; }
+        public float? Longitude { get; set; }
 
         public string TimeZone { get; set; }
     }
 
     public class CfLeaseInfo
     {
-        public DateTime LeaseBegin { get; set; }
+        public CfLeaseInfo(DateTime? leaseBegin, DateTime? leaseEnd, bool autoRenew)
+        {
+            LeaseBegin = leaseBegin;
+            LeaseEnd = leaseEnd;
+            AutoRenew = autoRenew;
+        }
 
-        public DateTime LeaseEnd { get; set; }
+        public DateTime? LeaseBegin { get; set; }
+
+        public DateTime? LeaseEnd { get; set; }
 
         public bool AutoRenew { get; set; }
     }
 
     public class CfNumber
     {
+        public CfNumber(string number1, string nationalFormat, bool tollFree, CfRegion region, CfNumberStatus? status, 
+            CfLeaseInfo leaseInfo, CfNumberConfiguration numberConfiguration)
+        {
+            Number1 = number1;
+            NationalFormat = nationalFormat;
+            TollFree = tollFree;
+            Region = region;
+            Status = status;
+            LeaseInfo = leaseInfo;
+            NumberConfiguration = numberConfiguration;
+        }
+
         public string Number1 { get; set; }
 
         public string NationalFormat { get; set; }
@@ -853,7 +905,7 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
         public CfRegion Region { get; set; }
 
-        public CfNumberStatus Status { get; set; }
+        public CfNumberStatus? Status { get; set; }
 
         public CfLeaseInfo LeaseInfo { get; set; }
 
@@ -870,11 +922,20 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfNumberConfiguration
     {
-        public CfNumberFeature CallFeature { get; set; }
+        public CfNumberConfiguration(CfNumberFeature? callFeature, CfNumberFeature? textFeature, CfInboundType? inboundCallConfigurationType,
+            CfNumberConfigurationInboundCallConfiguration inboundCallConfiguration)
+        {
+            CallFeature = callFeature;
+            TextFeature = textFeature;
+            InboundCallConfigurationType = inboundCallConfigurationType;
+            InboundCallConfiguration = inboundCallConfiguration;
+        }
 
-        public CfNumberFeature TextFeature { get; set; }
+        public CfNumberFeature? CallFeature { get; set; }
 
-        public CfInboundType InboundCallConfigurationType { get; set; }
+        public CfNumberFeature? TextFeature { get; set; }
+
+        public CfInboundType? InboundCallConfigurationType { get; set; }
 
         public CfNumberConfigurationInboundCallConfiguration InboundCallConfiguration { get; set; }
     }
@@ -895,16 +956,29 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfNumberConfigurationInboundCallConfiguration
     {
+        public CfNumberConfigurationInboundCallConfiguration(CfInboundConfig item)
+        {
+            Item = item;
+        }
+
         public CfInboundConfig Item { get; set; }
     }
 
     public class CfKeyword
     {
+        public CfKeyword(string shortCode, string keyword1, CfNumberStatus? status, CfLeaseInfo leaseInfo)
+        {
+            ShortCode = shortCode;
+            Keyword1 = keyword1;
+            Status = status;
+            LeaseInfo = leaseInfo;
+        }
+
         public string ShortCode { get; set; }
 
         public string Keyword1 { get; set; }
 
-        public CfNumberStatus Status { get; set; }
+        public CfNumberStatus? Status { get; set; }
 
         public CfLeaseInfo LeaseInfo { get; set; }
     }

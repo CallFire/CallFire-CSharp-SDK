@@ -9,5 +9,7 @@
         ITextClient Text { get; }
 
         ICallClient Call { get; }
+
+        INumberClient Number { get; }
     }
 }
