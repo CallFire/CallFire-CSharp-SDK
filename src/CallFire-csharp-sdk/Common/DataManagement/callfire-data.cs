@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Linq;
+using CallFire_csharp_sdk.API.Soap;
+using CallFire_csharp_sdk.Common.Resource.Mappers;
+using Action = CallFire_csharp_sdk.API.Soap.Action;
 
 namespace CallFire_csharp_sdk.Common.DataManagement
 {
     public class CfBroadcast
     {
-        public CfBroadcast(long id, string name, CfBroadcastStatus status, DateTime lastModified, CfBroadcastType type, CfBroadcastConfig item)
+        public CfBroadcast(long? id, string name, CfBroadcastStatus? status, DateTime? lastModified, CfBroadcastType? type, CfBroadcastConfig item)
         {
             Id = id;
             Name = name;
@@ -16,15 +20,15 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
         public string Name { get; set; }
 
-        public CfBroadcastStatus Status { get; set; }
+        public CfBroadcastStatus? Status { get; set; }
 
-        public DateTime LastModified { get; set; }
+        public DateTime? LastModified { get; set; }
 
-        public CfBroadcastType Type { get; set; }
+        public CfBroadcastType? Type { get; set; }
 
         public CfBroadcastConfig Item { get; set; }
 
-        public long Id { get; set; }
+        public long? Id { get; set; }
     }
 
     public enum CfBroadcastStatus
@@ -61,7 +65,7 @@ namespace CallFire_csharp_sdk.Common.DataManagement
             Id = 0;
         }
 
-        protected CfBroadcastConfig(long identifier, DateTime created, string fromNumber,
+        protected CfBroadcastConfig(long? identifier, DateTime? created, string fromNumber,
         CfLocalTimeZoneRestriction localTimeZoneRestriction, CfBroadcastConfigRetryConfig retryConfig)
         {
             Id = identifier;
@@ -71,7 +75,7 @@ namespace CallFire_csharp_sdk.Common.DataManagement
             RetryConfig = retryConfig;
         }
 
-        public DateTime Created { get; set; }
+        public DateTime? Created { get; set; }
 
         public string FromNumber { get; set; }
 
@@ -79,20 +83,20 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
         public CfBroadcastConfigRetryConfig RetryConfig { get; set; }
 
-        public long Id { get; set; }
+        public long? Id { get; set; }
     }
 
     public class CfLocalTimeZoneRestriction
     {
-        public CfLocalTimeZoneRestriction(DateTime beginTime, DateTime endTime)
+        public CfLocalTimeZoneRestriction(DateTime? beginTime, DateTime? endTime)
         {
             BeginTime = beginTime;
             EndTime = endTime;
         }
         
-        public DateTime BeginTime { get; set; }
+        public DateTime? BeginTime { get; set; }
 
-        public DateTime EndTime { get; set; }
+        public DateTime? EndTime { get; set; }
     }
 
     public class CfNumberOrderItem
@@ -122,7 +126,7 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfAction
     {
-        public CfAction(string fromNumber, CfToNumber toNumber, CfActionState state, long batchId, long broadcastId, long contactId,
+        public CfAction(string fromNumber, CfToNumber toNumber, CfActionState state, long? batchId, long? broadcastId, long contactId,
             bool inbound, DateTime created, DateTime modified, CfResult finalResult, CfLabel[] label, long id)
         {
             FromNumber = fromNumber;
@@ -139,6 +143,25 @@ namespace CallFire_csharp_sdk.Common.DataManagement
             Id = id;
         }
 
+        public CfAction(Action source)
+        {
+            FromNumber = source.FromNumber;
+            ToNumber = ToNumberMapper.FromToNumber(source.ToNumber);
+            State = EnumeratedMapper.EnumFromSoapEnumerated<CfActionState>(source.State);
+            BatchId = source.BatchId;
+            BroadcastId = source.BroadcastId;
+            ContactId = source.ContactId;
+            Inbound = source.Inbound;
+            Created = source.Created;
+            Modified = source.Modified;
+            if (!string.IsNullOrEmpty(source.FinalResult))
+            {
+                FinalResult = EnumeratedMapper.EnumFromSoapEnumerated<CfResult>(source.FinalResult);
+            }
+            Label = source.Label == null ? null : source.Label.Select(LabelMapper.FromLabel).ToArray();
+            Id = source.id;
+        }
+
         public CfAction()
         {
         }
@@ -149,9 +172,9 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
         public CfActionState State { get; set; }
 
-        public long BatchId { get; set; }
+        public long? BatchId { get; set; }
 
-        public long BroadcastId { get; set; }
+        public long? BroadcastId { get; set; }
 
         public long ContactId { get; set; }
 
@@ -327,9 +350,9 @@ namespace CallFire_csharp_sdk.Common.DataManagement
     {
         public CfVoiceBroadcastConfig(long identifier, DateTime created, string fromNumber,
         CfLocalTimeZoneRestriction localTimeZoneRestriction, CfBroadcastConfigRetryConfig retryConfig,
-        CfAnsweringMachineConfig answeringMachineConfig, object item, string liveSoundTextVoice, object item1,
+        CfAnsweringMachineConfig? answeringMachineConfig, object item, string liveSoundTextVoice, object item1,
         string machineSoundTextVoice, object item2, string transferSoundTextVoice, string transferDigit,
-        string transferNumber, object item3, string dncSoundTextVoice, string dncDigit, int maxActiveTransfers)
+        string transferNumber, object item3, string dncSoundTextVoice, string dncDigit, int? maxActiveTransfers)
             : base(identifier, created, fromNumber, localTimeZoneRestriction, retryConfig)
         {
             AnsweringMachineConfig = answeringMachineConfig;
@@ -347,7 +370,7 @@ namespace CallFire_csharp_sdk.Common.DataManagement
             MaxActiveTransfers = maxActiveTransfers;
         }
         
-        public CfAnsweringMachineConfig AnsweringMachineConfig { get; set; }
+        public CfAnsweringMachineConfig? AnsweringMachineConfig { get; set; }
 
         public object Item { get; set; }
 
@@ -371,7 +394,7 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
         public string DncDigit { get; set; }
 
-        public int MaxActiveTransfers { get; set; }
+        public int? MaxActiveTransfers { get; set; }
     }
 
     public enum CfAnsweringMachineConfig
@@ -408,7 +431,7 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfContactBatch
     {
-        public CfContactBatch(long id, string name, CfBatchStatus status, long broadcastId, DateTime created, int size, int remaining)
+        public CfContactBatch(long id, string name, CfBatchStatus status, long broadcastId, DateTime created, int? size, int? remaining)
         {
             Name = name;
             Status = status;
@@ -427,9 +450,9 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
         public DateTime Created { get; set; }
 
-        public int Size { get; set; }
+        public int? Size { get; set; }
 
-        public int Remaining { get; set; }
+        public int? Remaining { get; set; }
 
         public long Id { get; set; }
     }
@@ -445,21 +468,8 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfBroadcastSchedule
     {
-        public DateTime StartTimeOfDay { get; set; }
-
-        public DateTime StopTimeOfDay { get; set; }
-
-        public string TimeZone { get; set; }
-
-        public DateTime BeginDate { get; set; }
-
-        public DateTime EndDate { get; set; }
-
-        public CfDaysOfWeek[] DaysOfWeek { get; set; }
-
-        public long Id { get; set; }
-
-        public CfBroadcastSchedule(long identifier, DateTime startTimeOfDay, DateTime stopTimeOfDay, string timeZone, DateTime beginDate, DateTime endDate, CfDaysOfWeek[] daysOfWeek)
+        public CfBroadcastSchedule(long? identifier, DateTime startTimeOfDay, DateTime stopTimeOfDay, string timeZone, 
+            DateTime? beginDate, DateTime? endDate, CfDaysOfWeek[] daysOfWeek)
         {
             Id = identifier;
             StartTimeOfDay = startTimeOfDay;
@@ -469,6 +479,20 @@ namespace CallFire_csharp_sdk.Common.DataManagement
             EndDate = endDate;
             DaysOfWeek = daysOfWeek;
         }
+
+        public DateTime StartTimeOfDay { get; set; }
+
+        public DateTime StopTimeOfDay { get; set; }
+
+        public string TimeZone { get; set; }
+
+        public DateTime? BeginDate { get; set; }
+
+        public DateTime? EndDate { get; set; }
+
+        public CfDaysOfWeek[] DaysOfWeek { get; set; }
+
+        public long? Id { get; set; }
     }
 
     public enum CfDaysOfWeek
@@ -556,7 +580,7 @@ namespace CallFire_csharp_sdk.Common.DataManagement
     public class CfCallRecord : CfActionRecord
     {
         public CfCallRecord(CfResult result, DateTime finishTime, float billedAmount, CfActionRecordQuestionResponse[] questionResponse, long id,
-            DateTime originateTime, DateTime answerTime, int duration, CfRecordingMeta[] recordingMeta)
+            DateTime? originateTime, DateTime? answerTime, int duration, CfRecordingMeta[] recordingMeta)
             : base(result, finishTime, billedAmount, questionResponse, id)
         {
             OriginateTime = originateTime;
@@ -565,9 +589,9 @@ namespace CallFire_csharp_sdk.Common.DataManagement
             RecordingMeta = recordingMeta;
         }
 
-        public DateTime OriginateTime { get; set; }
+        public DateTime? OriginateTime { get; set; }
 
-        public DateTime AnswerTime { get; set; }
+        public DateTime? AnswerTime { get; set; }
 
         public int Duration { get; set; }
 
@@ -610,7 +634,7 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfSoundMeta
     {
-        public CfSoundMeta(CfSoundStatus status, string name, DateTime created, int lengthInSeconds, long id)
+        public CfSoundMeta(CfSoundStatus status, string name, DateTime created, int? lengthInSeconds, long id)
         {
             Status = status;
             Name = name;
@@ -625,7 +649,7 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
         public DateTime Created { get; set; }
 
-        public int LengthInSeconds { get; set; }
+        public int? LengthInSeconds { get; set; }
 
         public long Id { get; set; }
     }
@@ -666,7 +690,7 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfAutoReply
     {
-        public CfAutoReply(string number, string keyword, string match, string message, long id)
+        public CfAutoReply(string number, string keyword, string match, string message, long? id)
         {
             Number = number;
             Keyword = keyword;
@@ -683,13 +707,13 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
         public string Message { get; set; }
 
-        public long Id { get; set; }
+        public long? Id { get; set; }
     }
 
     public class CfSubscription
     {
-        public CfSubscription(long id, bool enabled, string endpoint, CfNotificationFormat notificationFormat,
-            CfSubscriptionTriggerEvent triggerEvent, CfSubscriptionSubscriptionFilter subscriptionFilter)
+        public CfSubscription(long? id, bool? enabled, string endpoint, CfNotificationFormat notificationFormat,
+            CfSubscriptionTriggerEvent? triggerEvent, CfSubscriptionSubscriptionFilter subscriptionFilter)
         {
             Id = id;
             Enabled = enabled;
@@ -704,17 +728,17 @@ namespace CallFire_csharp_sdk.Common.DataManagement
             NotificationFormat = CfNotificationFormat.Xml;
         }
 
-        public bool Enabled { get; set; }
+        public bool? Enabled { get; set; }
 
         public string Endpoint { get; set; }
 
         public CfNotificationFormat NotificationFormat { get; set; }
 
-        public CfSubscriptionTriggerEvent TriggerEvent { get; set; }
+        public CfSubscriptionTriggerEvent? TriggerEvent { get; set; }
 
         public CfSubscriptionSubscriptionFilter SubscriptionFilter { get; set; }
 
-        public long Id { get; set; }
+        public long? Id { get; set; }
     }
 
     public enum CfNotificationFormat
@@ -762,7 +786,22 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfContact
     {
-        public long Id { get; set; }
+        public CfContact(long? id, string firstName, string lastName, string zipcode, string homePhone, string workPhone, string mobilePhone,
+            string externalId, string externalSystem, System.Xml.XmlAttribute[] anyAttr)
+        {
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+            Zipcode = zipcode;
+            HomePhone = homePhone;
+            WorkPhone = workPhone;
+            MobilePhone = mobilePhone;
+            ExternalId = externalId;
+            ExternalSystem = externalSystem;
+            AnyAttr = anyAttr;
+        }
+
+        public long? Id { get; set; }
 
         public string FirstName { get; set; }
 
@@ -785,11 +824,20 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfContactHistory
     {
-        public Action[] Items { get; set; }
+        public CfAction[] Items { get; set; }
     }
 
     public class CfContactList
     {
+        public CfContactList(ContactList source)
+        {
+            Name = source.Name;
+            Size = source.Size;
+            Created = source.Created;
+            Status = EnumeratedMapper.EnumFromSoapEnumerated<CfContactListStatus>(source.Status.ToString());
+            Id = source.id;
+        }
+
         public string Name { get; set; }
 
         public string Size { get; set; }

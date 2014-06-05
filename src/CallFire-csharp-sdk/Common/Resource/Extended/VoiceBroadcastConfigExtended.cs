@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CallFire_csharp_sdk.Common.DataManagement;
+using CallFire_csharp_sdk.Common.Resource.Mappers;
+
 // ReSharper disable once CheckNamespace - This is an extension from API.Soap
 
 namespace CallFire_csharp_sdk.API.Soap
@@ -9,26 +11,43 @@ namespace CallFire_csharp_sdk.API.Soap
         {
         }
         
-        public VoiceBroadcastConfig(long identifier, DateTime created, string fromNumber,
-        LocalTimeZoneRestriction localTimeZoneRestriction, BroadcastConfigRetryConfig retryConfig,
-        AnsweringMachineConfig answeringMachineConfig, object item, string liveSoundTextVoice, object item1,
-        string machineSoundTextVoice, object item2, string transferSoundTextVoice, string transferDigit,
-        string transferNumber, object item3, string dncSoundTextVoice, string dncDigit, int maxActiveTransfers)
-            : base(identifier, created, fromNumber, localTimeZoneRestriction, retryConfig)
+        public VoiceBroadcastConfig(CfVoiceBroadcastConfig source)
         {
-            AnsweringMachineConfig = answeringMachineConfig;
-            Item = item;
-            LiveSoundTextVoice = liveSoundTextVoice;
-            Item1 = item1;
-            MachineSoundTextVoice = machineSoundTextVoice;
-            Item2 = item2;
-            TransferSoundTextVoice = transferSoundTextVoice;
-            TransferDigit = transferDigit;
-            TransferNumber = transferNumber;
-            Item3 = item3;
-            DncSoundTextVoice = dncSoundTextVoice;
-            DncDigit = dncDigit;
-            MaxActiveTransfers = maxActiveTransfers;
+            if (source.Id.HasValue)
+            {
+                id = source.Id.Value;
+                idSpecified = true;
+            }
+            if (source.Created.HasValue)
+            {
+                Created = source.Created.Value;
+                CreatedSpecified = true;
+            }
+            FromNumber = source.FromNumber;
+            LocalTimeZoneRestriction = LocalTimeZoneRestrictionMapper.ToSoapLocalTimeZoneRestriction(source.LocalTimeZoneRestriction);
+            RetryConfig = BroadcastConfigRetryConfigMapper.ToBroadcastConfigRetryConfig(source.RetryConfig);
+
+            if (source.AnsweringMachineConfig.HasValue)
+            {
+                AnsweringMachineConfig = EnumeratedMapper.ToSoapEnumerated<AnsweringMachineConfig>(source.AnsweringMachineConfig.ToString());
+                AnsweringMachineConfigSpecified = true;
+            }
+            Item = source.Item;
+            LiveSoundTextVoice = source.LiveSoundTextVoice;
+            Item1 = source.Item1;
+            MachineSoundTextVoice = source.MachineSoundTextVoice;
+            Item2 = source.Item2;
+            TransferSoundTextVoice = source.TransferSoundTextVoice;
+            TransferDigit = source.TransferDigit;
+            TransferNumber = source.TransferNumber;
+            Item3 = source.Item3;
+            DncSoundTextVoice = source.DncSoundTextVoice;
+            DncDigit = source.DncDigit;
+            if (source.MaxActiveTransfers.HasValue)
+            {
+                MaxActiveTransfers = source.MaxActiveTransfers.Value;
+                MaxActiveTransfersSpecified = true;
+            }
         }
     }
 }

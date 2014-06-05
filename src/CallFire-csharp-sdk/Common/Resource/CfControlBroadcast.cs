@@ -2,7 +2,7 @@
 {
     public class CfControlBroadcast : CfUniqueResource
     {
-        public CfControlBroadcast(long id, string requestId, CfBroadcastCommand command, int maxActive)
+        public CfControlBroadcast(long id, string requestId, CfBroadcastCommand? command, int? maxActive)
             : base(id)
         {
             RequestId = requestId;
@@ -12,8 +12,8 @@
 
         public string RequestId { get; set; }
 
-        public CfBroadcastCommand Command { get; set; }
+        public CfBroadcastCommand? Command { get; set; }
 
-        public int MaxActive { get; set; }
+        public int? MaxActive { get; set; }
     }
 }

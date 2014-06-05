@@ -1,0 +1,33 @@
+﻿using CallFire_csharp_sdk.API.Soap;
+using CallFire_csharp_sdk.Common.DataManagement;
+using CallFire_csharp_sdk.Common.Resource;
+using NUnit.Framework;
+
+namespace Callfire_csharp_sdk.IntegrationTests.Soap
+{
+    [TestFixture]
+    public class CallfireContactSoapClientTest : CallfireContactClientTest
+    {
+        [TestFixtureSetUp]
+        public void FixtureSetup()
+        {
+            Client = new SoapContactClient(MockClient.User(), MockClient.Password());
+
+            ContactId = 160672080001;
+            QueryContact = new CfQueryContacts(1000, 0, null, null, null);
+            GetContactHistory = new CfGetContactHistory(1000, 0, ContactId);
+            
+            var contact1 = new CfContact(null, "Contact1_Name", "Contact1_LastName", null, "14252163710", null, null, null, null, null);
+            var contact2 = new CfContact(null, "Contact2_Name", "Contact2_LastName", null, "14252163710", null, null, null, null, null);
+            CfContact[] contacts = { contact1, contact2 };
+            CreateContactList = new CfCreateContactList(null, "NewContactListTest", false, new CfContactSource(contacts));
+
+            object[] contacts2 = { ContactId };
+            CreateContactList2 = new CfCreateContactList(null, "NewContactListTest2", false, new CfContactSource(contacts2));
+
+            var contactNumbers = new CfContactSourceNumbers("14252163710", new[] { "homePhone" });
+            CfContactSourceNumbers[] contacts3 = { contactNumbers };
+            CreateContactList3 = new CfCreateContactList(null, "NewContactListTest3", false, new CfContactSource(contacts3));
+        }
+    }
+}

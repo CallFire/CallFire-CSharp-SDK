@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CallFire_csharp_sdk.Common.DataManagement;
+using CallFire_csharp_sdk.Common.Resource.Mappers;
+
 // ReSharper disable once CheckNamespace - This is an extension from API.Soap
 namespace CallFire_csharp_sdk.API.Soap
 {
@@ -8,13 +10,17 @@ namespace CallFire_csharp_sdk.API.Soap
         {
         }
         
-        public SoundMeta(SoundStatus status, string name, DateTime created, int lengthInSeconds, long identifier)
+        public SoundMeta(CfSoundMeta source)
         {
-            Status = status;
-            Name = name;
-            Created = created;
-            LengthInSeconds = lengthInSeconds;
-            id = identifier;
+            Status = EnumeratedMapper.ToSoapEnumerated<SoundStatus>(source.Status.ToString());
+            Name = source.Name;
+            Created = source.Created;
+            if (source.LengthInSeconds.HasValue)
+            {
+                LengthInSeconds = source.LengthInSeconds.Value;
+                lengthInSecondsFieldSpecified = true;
+            }
+            id = source.Id;
         }
     }
 }

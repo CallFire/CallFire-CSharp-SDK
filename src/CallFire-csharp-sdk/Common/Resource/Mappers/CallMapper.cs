@@ -33,17 +33,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
 
         internal static Call ToCall(CfCall source)
         {
-            if (source == null)
-            {
-                return null;
-            }
-            var toNumber = ToNumberMapper.ToToNumber(source.ToNumber);
-            var state = EnumeratedMapper.ScreamingSnakeCase(source.State.ToString());
-            var label = LabelMapper.ToLabel(source.Label);
-            var callRecord = CallRecordMapper.ToCallRecord(source.CallRecord);
-            var result = EnumeratedMapper.ScreamingSnakeCase(source.FinalResult.ToString());
-            return new Call(source.FromNumber, toNumber, state, source.BatchId, source.BroadcastId,
-                source.ContactId, source.Inbound, source.Created, source.Modified, result, label, source.Id, callRecord);
+            return source == null ? null : new Call(source);
         }
     }
 }

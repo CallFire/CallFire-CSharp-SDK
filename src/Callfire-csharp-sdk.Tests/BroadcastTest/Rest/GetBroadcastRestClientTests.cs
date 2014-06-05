@@ -52,10 +52,13 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
 
         private void CreateExpectedBroadcast(long broadcastId)
         {
+            var lastModified = ExpectedBroadcast.LastModified == null ? DateTime.Now : ExpectedBroadcast.LastModified.Value;
+            var type = ExpectedBroadcast.Type == null ? CfBroadcastType.Text : ExpectedBroadcast.Type.Value;
+
             var expectedBroadcast = new Broadcast(broadcastId, ExpectedBroadcast.Name,
-                EnumeratedMapper.ToSoapEnumerated<BroadcastStatus>(ExpectedBroadcast.Status.ToString()), ExpectedBroadcast.LastModified,
-                EnumeratedMapper.ToSoapEnumerated<BroadcastType>(ExpectedBroadcast.Type.ToString()),
-                BroadcastConfigMapper.ToBroadcastConfig(ExpectedBroadcast.Item, ExpectedBroadcast.Type));
+                EnumeratedMapper.ToSoapEnumerated<BroadcastStatus>(ExpectedBroadcast.Status.ToString()), lastModified,
+                EnumeratedMapper.ToSoapEnumerated<BroadcastType>(type.ToString()),
+                BroadcastConfigMapper.ToBroadcastConfig(ExpectedBroadcast.Item, type));
 
             var resource = new Resource {Resources = expectedBroadcast};
             GetValue(broadcastId, resource);

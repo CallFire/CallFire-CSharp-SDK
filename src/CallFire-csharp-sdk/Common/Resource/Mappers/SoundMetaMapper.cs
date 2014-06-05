@@ -24,8 +24,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
 
         internal static SoundMeta ToSoundMeta(CfSoundMeta source)
         {
-            return source == null ? null : new SoundMeta(EnumeratedMapper.ToSoapEnumerated<SoundStatus>(source.Status.ToString()),
-                source.Name, source.Created, source.LengthInSeconds, source.Id);
+            return source == null ? null : new SoundMeta(source);
         }
     }
 }

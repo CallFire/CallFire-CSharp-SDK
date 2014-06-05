@@ -17,7 +17,11 @@ namespace CallFire_csharp_sdk.API.Soap
             MaxResults = source.MaxResults;
             FirstResult = source.FirstResult;
             Type = EnumeratedMapper.ToSoapEnumerated(source.Type);
-            Running = source.Running.HasValue && source.Running.Value;
+            if (source.Running.HasValue)
+            {
+                Running = source.Running.Value;
+                RunningSpecified = true;
+            }
             LabelName = source.LabelName;
         }
     }

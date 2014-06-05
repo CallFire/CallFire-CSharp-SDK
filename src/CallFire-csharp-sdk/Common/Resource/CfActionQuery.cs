@@ -5,8 +5,8 @@ namespace CallFire_csharp_sdk.Common.Resource
 {
     public class CfActionQuery : CfQuery
     {
-        public CfActionQuery(long maxResult, long firstResult, long broadcastId, long batchId, CfActionState[] state, CfResult[] result,
-            bool inbound, DateTime intervalBegin, DateTime intervalEnd, string fromNumber, string toNumber, string labelName)
+        public CfActionQuery(long maxResult, long firstResult, long? broadcastId, long? batchId, CfActionState[] state, CfResult[] result,
+            bool? inbound, DateTime? intervalBegin, DateTime? intervalEnd, string fromNumber, string toNumber, string labelName)
             : base (maxResult, firstResult)
         {
             BroadcastId = broadcastId;
@@ -21,19 +21,19 @@ namespace CallFire_csharp_sdk.Common.Resource
             LabelName = labelName;
         }
 
-        public long BroadcastId { get; set; }
+        public long? BroadcastId { get; set; }
 
-        public long BatchId { get; set; }
+        public long? BatchId { get; set; }
 
         public CfActionState[] State { get; set; }
 
         public CfResult[] Result { get; set; }
 
-        public bool Inbound { get; set; }
+        public bool? Inbound { get; set; }
 
-        public DateTime IntervalBegin { get; set; }
+        public DateTime? IntervalBegin { get; set; }
 
-        public DateTime IntervalEnd { get; set; }
+        public DateTime? IntervalEnd { get; set; }
 
         public string FromNumber { get; set; }
 
@@ -42,3 +42,5 @@ namespace CallFire_csharp_sdk.Common.Resource
         public string LabelName { get; set; }
     }
 }
+        
+     
