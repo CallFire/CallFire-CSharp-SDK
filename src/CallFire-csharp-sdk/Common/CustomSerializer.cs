@@ -30,13 +30,7 @@ namespace CallFire_csharp_sdk.Common
             foreach (var propertyInfo in props)
             {
                 var value = propertyInfo.GetValue(o, null);
-                if ((value == null) || propertyInfo.Name.EndsWith("Specified") || propertyInfo.Name.EndsWith("ContactId"))
-                {
-                    continue;
-                }
-
-                var name = string.Format("{0}{1}", propertyInfo.Name, "Specified");
-                if (props.Any(p => p.Name == name && !((bool)p.GetValue(o, null))))
+                if (CheckSpecifiedProperties(o, value, propertyInfo, props))
                 {
                     continue;
                 }
@@ -81,6 +75,21 @@ namespace CallFire_csharp_sdk.Common
                 }
             }
             return result;
+        }
+
+        private static bool CheckSpecifiedProperties(object o, object value, PropertyInfo propertyInfo, IEnumerable<PropertyInfo> props)
+        {
+            if ((value == null) || propertyInfo.Name.EndsWith("Specified"))
+            {
+                return true;
+            }
+
+            var name = string.Format("{0}{1}", propertyInfo.Name, "Specified");
+            if (props.Any(p => p.Name == name && !((bool) p.GetValue(o, null))))
+            {
+                return true;
+            }
+            return false;
         }
 
         private bool IsCustomClass(PropertyInfo propertyInfo)
