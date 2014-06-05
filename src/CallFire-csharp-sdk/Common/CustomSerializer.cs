@@ -39,7 +39,7 @@ namespace CallFire_csharp_sdk.Common
                 {
                     var array = ((Array)value);
                     var attribs = (XmlElementAttribute[])Attribute.GetCustomAttributes(propertyInfo, typeof(XmlElementAttribute));
-                    if (attribs.Any() && array.Length > 0)
+                    if (array.Length > 0 && attribs.Any(i => i.Type == array.GetValue(0).GetType()))
                     {
                         var elementName = attribs.First(i => i.Type == array.GetValue(0).GetType()).ElementName;
                         if (IsCustomClass(array.GetType().GetElementType()))
@@ -67,7 +67,14 @@ namespace CallFire_csharp_sdk.Common
                         stringValue = ((DateTime)value).ToString(DateFormat);
                     }
 
-                    result.Add(new KeyValuePair<string, string>(propertyInfo.Name, HttpUtility.UrlEncode(stringValue)));
+                    var elementName = propertyInfo.Name;
+                    var attribs = (XmlElementAttribute[])Attribute.GetCustomAttributes(propertyInfo, typeof(XmlElementAttribute));
+                    if (attribs.Any(i => i.Type == value.GetType()))
+                    {
+                        elementName = attribs.First(i => i.Type == value.GetType()).ElementName;
+                    }
+                    result.Add(new KeyValuePair<string, string>(elementName, HttpUtility.UrlEncode(stringValue)));
+
                 }
                 else
                 {

@@ -39,7 +39,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
             var numbersQueryResult = NumberClient.SearchAvailableNumbers(SearchAvailableNumbers);
             Assert.IsNotNull(numbersQueryResult);
             Assert.IsNotNull(numbersQueryResult.Number);
-            Assert.IsTrue(numbersQueryResult.Number.Any(r => r.Number1 != null && r.Number1.Equals("18558649944")));
+            Assert.IsTrue(numbersQueryResult.Number.Any(r => r.Number1 != null));
         }
 
         [Test]
