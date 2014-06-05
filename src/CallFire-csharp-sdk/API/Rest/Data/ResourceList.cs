@@ -14,6 +14,9 @@ namespace CallFire_csharp_sdk.API.Rest.Data
         [XmlElement("ContactBatch", typeof(ContactBatch), Namespace = CallFireNamespace.Data, Order = 0)]
         [XmlElement("BroadcastSchedule", typeof(BroadcastSchedule), Namespace = CallFireNamespace.Data, Order = 0)]
         [XmlElement("Subscription", typeof(Subscription), Namespace = CallFireNamespace.Data, Order = 0)]
+        [XmlElement("Region", typeof(Region), Namespace = CallFireNamespace.Data, Order = 0)]
+        [XmlElement("Number", typeof(Number), Namespace = CallFireNamespace.Data, Order = 0)]
+        [XmlElement("Keyword", typeof(Keyword), Namespace = CallFireNamespace.Data, Order = 0)]
         [XmlElement("Label", typeof(Label), Namespace = CallFireNamespace.Data, Order = 0)]
         public object[] Resource { get; set; }
     }

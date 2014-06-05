@@ -10,7 +10,7 @@ namespace CallFire_csharp_sdk.API
         
         CfNumberQueryResult QueryNumbers(CfQueryNumbers queryNumbers);
         
-        CfNumber GetNumber(CfGetNumber getNumber);
+        CfNumber GetNumber(string number);
         
         void ConfigureNumber(CfConfigureNumber configureNumber);
         

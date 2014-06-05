@@ -35,9 +35,9 @@ namespace CallFire_csharp_sdk.API.Soap
             return NumberQueryResultMapper.FromNumberQueryResult(numberQueryResult);
         }
 
-        public CfNumber GetNumber(CfGetNumber getNumber)
+        public CfNumber GetNumber(string number)
         {
-            return NumberMapper.FromNumber(NumberService.GetNumber(new GetNumber(getNumber)));
+            return NumberMapper.FromNumber(NumberService.GetNumber(new GetNumber(number)));
         }
 
         public void ConfigureNumber(CfConfigureNumber configureNumber)

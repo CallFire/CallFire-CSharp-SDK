@@ -63,6 +63,7 @@
     <Compile Include="API\Rest\Data\Resource.cs" />
     <Compile Include="API\Rest\Data\ResourceList.cs" />
     <Compile Include="API\Rest\LabelRestRouteObjects.cs" />
+    <Compile Include="API\Rest\NumberRestRouteObjects.cs" />
     <Compile Include="API\Rest\ResourceListOperations.cs" />
     <Compile Include="API\Rest\Data\ResourceReference.cs" />
     <Compile Include="API\Rest\Clients\RestBroadcastClient.cs" />
@@ -98,7 +99,6 @@
     <Compile Include="Common\Resource\CfCreateSound.cs" />
     <Compile Include="Common\Resource\CfActionQuery.cs" />
     <Compile Include="Common\Resource\CfCreateAutoReplay.cs" />
-    <Compile Include="Common\Resource\CfGetNumber.cs" />
     <Compile Include="Common\Resource\CfGetRecordingData.cs" />
     <Compile Include="Common\Resource\CfGetSoundData.cs" />
     <Compile Include="Common\Resource\CfQueryAutoReplies.cs" />

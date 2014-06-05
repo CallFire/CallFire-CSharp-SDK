@@ -1,5 +1,4 @@
 ﻿using System;
-using CallFire_csharp_sdk.API.Soap;
 using Action = System.Action;
 
 namespace CallFire_csharp_sdk.Common.DataManagement

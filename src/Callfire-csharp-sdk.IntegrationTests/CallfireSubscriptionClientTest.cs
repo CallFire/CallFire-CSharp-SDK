@@ -1,8 +1,6 @@
 ﻿using CallFire_csharp_sdk.API;
-using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
-using CallFire_csharp_sdk.Common.Resource.Mappers;
 using NUnit.Framework;
 
 namespace Callfire_csharp_sdk.IntegrationTests

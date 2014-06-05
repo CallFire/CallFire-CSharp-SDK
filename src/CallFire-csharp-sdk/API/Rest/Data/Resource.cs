@@ -12,6 +12,8 @@ namespace CallFire_csharp_sdk.API.Rest.Data
         [XmlElement("ContactBatch", typeof(ContactBatch), Namespace = CallFireNamespace.Data, Order = 0)]
         [XmlElement("BroadcastSchedule", typeof(BroadcastSchedule), Namespace = CallFireNamespace.Data, Order = 0)]
         [XmlElement("Subscription", typeof(Subscription), Namespace = CallFireNamespace.Data, Order = 0)]
+        [XmlElement("Number", typeof(Number), Namespace = CallFireNamespace.Data, Order = 0)]
+        [XmlElement("NumberOrder", typeof(NumberOrder), Namespace = CallFireNamespace.Data, Order = 0)]
         public object Resources { get; set; }
     }
 }
