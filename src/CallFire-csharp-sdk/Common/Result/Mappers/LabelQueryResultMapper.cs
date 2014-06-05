@@ -8,20 +8,24 @@ namespace CallFire_csharp_sdk.Common.Result.Mappers
     {
         internal static CfLabelQueryResult FromSoapLabelQueryResult(LabelQueryResult source)
         {
-            return source == null
-                ? null
-                : new CfLabelQueryResult(source.TotalResults, source.Label.Select(LabelMapper.FromLabel).ToArray());
+            if (source == null)
+            {
+                return null;
+            }
+
+            var label = source.Label == null ? null : source.Label.Select(LabelMapper.FromLabel).ToArray();
+            return new CfLabelQueryResult(source.TotalResults, label);
         }
 
         internal static LabelQueryResult ToSoapLabelQueryResult(CfLabelQueryResult source)
         {
-            return source == null
-                ? null
-                : new LabelQueryResult
-                {
-                    TotalResults = source.TotalResults,
-                    Label = source.Labels.Select(LabelMapper.ToLabel).ToArray()
-                };
+            if (source == null)
+            {
+                return null;
+            }
+
+            var label = source.Labels == null ? null : source.Labels.Select(LabelMapper.ToLabel).ToArray();
+            return new LabelQueryResult(source.TotalResults, label);
         }
     }
 }

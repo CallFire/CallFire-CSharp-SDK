@@ -23,7 +23,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
 
         internal static AutoReply ToAutoReplay(CfAutoReply source)
         {
-            return source == null ? null : new AutoReply(source.Number, source.Keyword, source.Match, source.Message, source.Id);
+            return source == null ? null : new AutoReply(source);
         }
     }
 }

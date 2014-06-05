@@ -2,8 +2,8 @@
 
 namespace CallFire_csharp_sdk.API.Rest.Data
 {
-    [XmlType(AnonymousType = true, Namespace = CallFireNamespace.Resource)]
-    [XmlRoot("ResourceReference", Namespace = CallFireNamespace.Resource, IsNullable = false)]
+    [XmlType(AnonymousType = true, Namespace = CallfireNamespace.Resource)]
+    [XmlRoot("ResourceReference", Namespace = CallfireNamespace.Resource, IsNullable = false)]
     public class ResourceReference
     {
         [XmlElement("Id")]

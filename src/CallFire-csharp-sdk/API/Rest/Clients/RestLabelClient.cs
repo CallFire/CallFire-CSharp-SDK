@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using CallFire_csharp_sdk.API.Rest.Clients;
 using CallFire_csharp_sdk.API.Rest.Data;
 using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common;
@@ -7,7 +6,7 @@ using CallFire_csharp_sdk.Common.Resource;
 using CallFire_csharp_sdk.Common.Result;
 using CallFire_csharp_sdk.Common.Result.Mappers;
 
-namespace CallFire_csharp_sdk.API.Rest
+namespace CallFire_csharp_sdk.API.Rest.Clients
 {
     public class RestLabelClient : BaseRestClient<Label>, ILabelClient
     {
@@ -23,7 +22,7 @@ namespace CallFire_csharp_sdk.API.Rest
 
         public void DeleteLabel(string labelName)
         {
-            BaseRequest<string>(HttpMethod.Delete, new { LabelName = labelName }, new CallfireRestRoute<Label>(null));
+            BaseRequest<string>(HttpMethod.Delete, new { LabelName = labelName }, new CallfireRestRoute<Label>());
         }
 
         public CfLabelQueryResult QueryLabels(CfQuery queryLabels)

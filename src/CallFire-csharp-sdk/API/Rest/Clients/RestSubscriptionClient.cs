@@ -1,11 +1,11 @@
-﻿using CallFire_csharp_sdk.API.Rest.Data;
+﻿using System.Linq;
+using CallFire_csharp_sdk.API.Rest.Data;
 using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common;
 using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
 using CallFire_csharp_sdk.Common.Resource.Mappers;
 using CallFire_csharp_sdk.Common.Result;
-using CallFire_csharp_sdk.Common.Result.Mappers;
 
 namespace CallFire_csharp_sdk.API.Rest.Clients
 {
@@ -31,12 +31,12 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
 
         public CfSubscriptionQueryResult QuerySubscriptions(CfQuery cfQuerySubscriptions)
         {
-            var resource = BaseRequest<ResourceList>(HttpMethod.Get, new Query(cfQuerySubscriptions),
+            var resourceList = BaseRequest<ResourceList>(HttpMethod.Get, new Query(cfQuerySubscriptions),
                 new CallfireRestRoute<Subscription>());
 
-            var subscription = ResourceListOperations.CastResourceList<Subscription>(resource);
-            var subscriptionQueryResult = new SubscriptionQueryResult(resource.TotalResults, subscription);
-            return SubscriptionQueryResultMapper.FromSoapSubscriptionQueryResult(subscriptionQueryResult);
+            var subscription = resourceList.Resource == null ? null
+               : resourceList.Resource.Select(r => SubscriptionMapper.FromSoapSubscription((Subscription)r)).ToArray();
+            return new CfSubscriptionQueryResult(resourceList.TotalResults, subscription);
         }
 
         public CfSubscription GetSubscription(long id)

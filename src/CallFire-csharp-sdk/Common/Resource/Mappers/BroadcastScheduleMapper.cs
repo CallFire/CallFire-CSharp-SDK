@@ -18,13 +18,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
 
         internal static BroadcastSchedule ToSoapBroadcastSchedule(CfBroadcastSchedule source)
         {
-            if (source == null)
-            {
-                return null;
-            }
-            var daysOfWeek = EnumeratedMapper.ToSoapEnumerated(source.DaysOfWeek);
-            return new BroadcastSchedule(source.Id, source.StartTimeOfDay, source.StopTimeOfDay,
-                source.TimeZone, source.BeginDate, source.EndDate, daysOfWeek);
+            return source == null ? null : new BroadcastSchedule(source);
         }
     }
 }

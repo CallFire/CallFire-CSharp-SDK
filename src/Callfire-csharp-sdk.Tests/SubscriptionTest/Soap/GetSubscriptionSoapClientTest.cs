@@ -20,11 +20,11 @@ namespace Callfire_csharp_sdk.Tests.SubscriptionTest.Soap
             SubscriptionFilter = new CfSubscriptionSubscriptionFilter(1, 5, "fromNumber", "toNumber", true);
             Subscription = new CfSubscription(1, true, "endPoint", CfNotificationFormat.Soap,
                 CfSubscriptionTriggerEvent.CampaignStarted, SubscriptionFilter);
-            GenerateMock(Subscription, Subscription.Id);
+            GenerateMock(Subscription, 1);
 
             var subscription = new CfSubscription(2, true, "endPoint", CfNotificationFormat.Soap,
                 CfSubscriptionTriggerEvent.CampaignStarted, null);
-            GenerateMock(subscription, subscription.Id);
+            GenerateMock(subscription, 2);
         }
 
         private void GenerateMock(CfSubscription subscription, long id)

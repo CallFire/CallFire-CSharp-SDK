@@ -31,15 +31,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
 
         internal static CallRecord ToCallRecord(CfCallRecord source)
         {
-            if (source == null)
-            {
-                return null;
-            }
-            var result = EnumeratedMapper.ScreamingSnakeCase(source.Result.ToString());
-            var questionResponse = ActionRecordQuestionResponseMapper.ToActionRecordQuestionResponse(source.QuestionResponse);
-            var recordingMeta = RecordingMetaMapper.ToRecordingMeta(source.RecordingMeta);
-            return new CallRecord(result, source.FinishTime, source.BilledAmount, questionResponse, source.Id, source.OriginateTime,
-                source.AnswerTime, source.Duration, recordingMeta);
+            return source == null ? null : new CallRecord(source);
         }
     }
 }

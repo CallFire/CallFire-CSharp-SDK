@@ -20,16 +20,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
 
         internal static TextBroadcastConfig ToSoapTextBroadcastConfig(CfTextBroadcastConfig source)
         {
-            if (source == null)
-            {
-                return null;
-            }
-            var localTimeZoneRestriction =
-                LocalTimeZoneRestrictionMapper.ToSoapLocalTimeZoneRestriction(source.LocalTimeZoneRestriction);
-            var retryConfig = BroadcastConfigRetryConfigMapper.ToBroadcastConfigRetryConfig(source.RetryConfig);
-            var bigMessageStrategy = EnumeratedMapper.ToSoapEnumerated<BigMessageStrategy>(source.BigMessageStrategy.ToString());
-            return new TextBroadcastConfig(source.Id, source.Created, source.FromNumber,
-                localTimeZoneRestriction, retryConfig, source.Message, bigMessageStrategy);
+            return source == null ? null : new TextBroadcastConfig(source);
         }
     }
 }

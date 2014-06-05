@@ -1,5 +1,4 @@
-﻿using CallFire_csharp_sdk.API.Rest;
-using CallFire_csharp_sdk.API.Rest.Clients;
+﻿using CallFire_csharp_sdk.API.Rest.Clients;
 using CallFire_csharp_sdk.API.Soap;
 
 namespace CallFire_csharp_sdk.API
@@ -13,6 +12,7 @@ namespace CallFire_csharp_sdk.API
         private ISubscriptionClient _subscriptionClient;
         private ITextClient _textClient;
         private ICallClient _callClient;
+        private IContactClient _contactClient;
         private INumberClient _numberClient;
         private ILabelClient _labelClient;
 
@@ -79,6 +79,20 @@ namespace CallFire_csharp_sdk.API
             }
         }
         
+        public IContactClient Contact
+        {
+            get
+            {
+                if (_contactClient != null)
+                {
+                    return _contactClient;
+                }
+                return _client == CallfireClients.Rest ? 
+                    (_contactClient = new RestContactClient(_username, _password)) : 
+                    (_contactClient = new SoapContactClient(_username, _password));
+            }
+        }
+
         public INumberClient Number
         {
             get

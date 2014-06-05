@@ -45,14 +45,14 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
 
         public long CreateAutoReply(CfCreateAutoReply cfCreateAutoReply)
         {
-            var resource = BaseRequest<ResourceReference>(HttpMethod.Post, new CreateAutoReply(cfCreateAutoReply), new CallfireRestRoute<Text>());
+            var resource = BaseRequest<ResourceReference>(HttpMethod.Post, new CreateAutoReply(cfCreateAutoReply), new CallfireRestRoute<Text>(null, TextRestRouteObjects.AutoReply, null));
             return resource.Id;
         }
 
         public CfAutoReplyQueryResult QueryAutoReplies(CfQueryAutoReplies cfQueryAutoReplies)
         {
             var resourceList = BaseRequest<ResourceList>(HttpMethod.Get, new QueryAutoReplies(cfQueryAutoReplies),
-                new CallfireRestRoute<Text>());
+                new CallfireRestRoute<Text>(null, TextRestRouteObjects.AutoReply, null));
 
             var autoReply = resourceList.Resource == null ? null
                 : resourceList.Resource.Select(r => AutoReplyMapper.FromAutoReplay((AutoReply)r)).ToArray();
@@ -61,13 +61,13 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
 
         public CfAutoReply GetAutoReply(long id)
         {
-            var resource = BaseRequest<Resource>(HttpMethod.Get, null, new CallfireRestRoute<Text>(id, BroadcastRestRouteObjects.AutoReply, null));
+            var resource = BaseRequest<Resource>(HttpMethod.Get, null, new CallfireRestRoute<Text>(id, TextRestRouteObjects.AutoReply, null));
             return AutoReplyMapper.FromAutoReplay(resource.Resources as AutoReply);
         }
 
         public void DeleteAutoReply(long id)
         {
-            BaseRequest<string>(HttpMethod.Delete, null, new CallfireRestRoute<Text>(id, BroadcastRestRouteObjects.AutoReply, null));
+            BaseRequest<string>(HttpMethod.Delete, null, new CallfireRestRoute<Text>(id, TextRestRouteObjects.AutoReply, null));
         }
     }
 }

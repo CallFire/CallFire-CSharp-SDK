@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CallFire_csharp_sdk.Common.DataManagement;
+using CallFire_csharp_sdk.Common.Resource.Mappers;
 
 // ReSharper disable once CheckNamespace - This is an extension from API.Soap
 namespace CallFire_csharp_sdk.API.Soap
@@ -9,18 +10,25 @@ namespace CallFire_csharp_sdk.API.Soap
         {
         }
         
-        public CallRecord(string result, DateTime finishTime, float billedAmount, ActionRecordQuestionResponse[] questionResponse, long identifier,
-            DateTime originateTime, DateTime answerTime, int duration, RecordingMeta[] recordingMeta)
+        public CallRecord(CfCallRecord source)
         {
-            Result = result;
-            FinishTime = finishTime;
-            BilledAmount = billedAmount;
-            QuestionResponse = questionResponse;
-            id = identifier;
-            OriginateTime = originateTime;
-            AnswerTime = answerTime;
-            Duration = duration;
-            RecordingMeta = recordingMeta;
+            Result = EnumeratedMapper.ScreamingSnakeCase(source.Result.ToString());
+            FinishTime = source.FinishTime;
+            BilledAmount = source.BilledAmount;
+            QuestionResponse = ActionRecordQuestionResponseMapper.ToActionRecordQuestionResponse(source.QuestionResponse);
+            id = source.Id;
+            if (source.OriginateTime.HasValue)
+            {
+                OriginateTime = source.OriginateTime.Value;
+                OriginateTimeSpecified = true;
+            }
+            if (source.AnswerTime.HasValue)
+            {
+                AnswerTime = source.AnswerTime.Value;
+                AnswerTimeSpecified = true;
+            }
+            Duration = source.Duration;
+            RecordingMeta = RecordingMetaMapper.ToRecordingMeta(source.RecordingMeta);
         }
     }
 }

@@ -10,6 +10,10 @@
 
         ICallClient Call { get; }
 
+        IContactClient Contact { get; }
+
         INumberClient Number { get; }
+
+        ILabelClient Label { get; }
     }
 }

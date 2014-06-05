@@ -12,7 +12,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
 
         internal static LocalTimeZoneRestriction ToSoapLocalTimeZoneRestriction(CfLocalTimeZoneRestriction source)
         {
-            return source == null ? null : new LocalTimeZoneRestriction(source.BeginTime, source.EndTime);
+            return source == null ? null : new LocalTimeZoneRestriction(source);
         }
     }
 }
