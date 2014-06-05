@@ -26,7 +26,7 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
             var resourceList = BaseRequest<ResourceList>(HttpMethod.Get, new RegionQuery(queryRegions),
                 new CallfireRestRoute<Number>(null, NumberRestRouteObjects.Regions, null));
 
-            var region = !resourceList.Resource.Any() ? null
+            var region = resourceList.Resource == null ? null
                 : resourceList.Resource.Select(r => RegionMapper.FromRegion((Region) r)).ToArray();
             return new CfRegionQueryResult(resourceList.TotalResults, region);
         }
@@ -36,7 +36,7 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
             var resourceList = BaseRequest<ResourceList>(HttpMethod.Get, new QueryNumbers(queryNumbers),
                 new CallfireRestRoute<Number>());
 
-            var number = !resourceList.Resource.Any() ? null
+            var number = resourceList.Resource == null ? null
                 : resourceList.Resource.Select(r => NumberMapper.FromNumber((Number)r)).ToArray();
             return new CfNumberQueryResult(resourceList.TotalResults, number);
         }
@@ -61,7 +61,7 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
             var resourceList = BaseRequest<ResourceList>(HttpMethod.Get, new SearchAvailableNumbers(searchAvailableNumbers),
                 new CallfireRestRoute<Number>(null, NumberRestRouteObjects.Search, null));
 
-            var number = !resourceList.Resource.Any() ? null
+            var number =  resourceList.Resource == null ? null
                 : resourceList.Resource.Select(r => NumberMapper.FromNumber((Number)r)).ToArray();
             return new CfNumberQueryResult(resourceList.TotalResults, number);
         }
@@ -71,7 +71,7 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
             var resourceList = BaseRequest<ResourceList>(HttpMethod.Get, new Query(queryKeywords),
                 new CallfireRestRoute<Number>(null, NumberRestRouteObjects.Keyword, null));
 
-            var keyword = !resourceList.Resource.Any() ? null
+            var keyword = resourceList.Resource == null ? null 
                 : resourceList.Resource.Select(r => KeywordMapper.FromKeyword((Keyword)r)).ToArray();
             return new CfKeywordQueryResult(resourceList.TotalResults, keyword);
         }
@@ -81,7 +81,7 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
             var resourceList = BaseRequest<ResourceList>(HttpMethod.Get, new SearchAvailableKeywords(searchAvailableKeywords),
                 new CallfireRestRoute<Number>(null, NumberRestRouteObjects.Keyword, NumberRestRouteObjects.Search));
 
-            var keyword = !resourceList.Resource.Any() ? null
+            var keyword = resourceList.Resource == null ? null
                 : resourceList.Resource.Select(r => KeywordMapper.FromKeyword((Keyword)r)).ToArray();
             return new CfKeywordQueryResult(resourceList.TotalResults, keyword);
         }

@@ -32,7 +32,7 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
             var resourceList = BaseRequest<ResourceList>(HttpMethod.Get, new ActionQuery(cfQueryText),
                 new CallfireRestRoute<Text>());
 
-            var text = !resourceList.Resource.Any() ? null
+            var text = resourceList.Resource == null ? null
                 : resourceList.Resource.Select(r => TextMapper.FromText((Text)r)).ToArray();
             return new CfTextQueryResult(resourceList.TotalResults, text);
         }
@@ -54,7 +54,7 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
             var resourceList = BaseRequest<ResourceList>(HttpMethod.Get, new QueryAutoReplies(cfQueryAutoReplies),
                 new CallfireRestRoute<Text>());
 
-            var autoReply = !resourceList.Resource.Any() ? null
+            var autoReply = resourceList.Resource == null ? null
                 : resourceList.Resource.Select(r => AutoReplyMapper.FromAutoReplay((AutoReply)r)).ToArray();
             return new CfAutoReplyQueryResult(resourceList.TotalResults, autoReply);
         }

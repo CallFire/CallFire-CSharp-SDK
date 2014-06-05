@@ -47,7 +47,7 @@ namespace CallFire_csharp_sdk.API.Soap
 
         public CfNumberQueryResult SearchAvailableNumbers(CfSearchAvailableNumbers searchAvailableNumbers)
         {
-            var numberQueryResult = NumberService.SearchAvailableNumbers(new SearchAvailableNumbers());
+            var numberQueryResult = NumberService.SearchAvailableNumbers(new SearchAvailableNumbers(searchAvailableNumbers));
             return NumberQueryResultMapper.FromNumberQueryResult(numberQueryResult);
         }
 
