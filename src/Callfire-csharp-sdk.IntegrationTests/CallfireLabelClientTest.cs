@@ -11,6 +11,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         protected ILabelClient LabelClient;
         protected IBroadcastClient BroadcastClient;
         protected long BroadcastId;
+        protected string LabelName; 
         
         [Test]
         public void Test_CreateBroadcastLabel()
@@ -19,6 +20,22 @@ namespace Callfire_csharp_sdk.IntegrationTests
 
             var result = LabelClient.QueryLabels(new CfQuery(10, 0));
             Assert.IsTrue(result.Labels.Any(l => l.Name == "New broadcastlabel"));
+        }
+
+        [Test]
+        public void Test_DeleteLabel()
+        {
+            LabelClient.LabelBroadcast(BroadcastId, LabelName);
+            LabelClient.DeleteLabel(LabelName);
+            var result = LabelClient.QueryLabels(new CfQuery(10, 0));
+            Assert.IsTrue(result.Labels.All(l => l.Name != LabelName));
+        }
+
+        [Test]
+        public void Test_UnlabelBroadcast()
+        {
+            LabelClient.LabelBroadcast(BroadcastId, LabelName);
+            LabelClient.UnlabelBroadcast(BroadcastId, LabelName);
         }
     }
 }

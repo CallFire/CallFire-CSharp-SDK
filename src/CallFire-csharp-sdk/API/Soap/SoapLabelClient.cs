@@ -34,22 +34,22 @@ namespace CallFire_csharp_sdk.API.Soap
 
         public void LabelBroadcast(long id, string labelName)
         {
-            LabelService.LabelBroadcast(new IdLabelRequest { Id = id, LabelName = labelName });
+            LabelService.LabelBroadcast(new IdLabelRequest(id, labelName));
         }
 
         public void UnlabelBroadcast(long id, string labelName)
         {
-            LabelService.UnlabelBroadcast(new IdLabelRequest { Id = id, LabelName = labelName });
+            LabelService.UnlabelBroadcast(new IdLabelRequest(id, labelName));
         }
 
         public void LabelNumber(string number, string labelName)
         {
-            LabelService.LabelNumber(new NumberLabelRequest { Number = number, LabelName = labelName });
+            LabelService.LabelNumber(new NumberLabelRequest(number, labelName));
         }
 
         public void UnlabelNumber(string number, string labelName)
         {
-            LabelService.UnlabelNumber(new NumberLabelRequest { Number = number, LabelName = labelName });
+            LabelService.UnlabelNumber(new NumberLabelRequest(number, labelName));
         }
     }
 }

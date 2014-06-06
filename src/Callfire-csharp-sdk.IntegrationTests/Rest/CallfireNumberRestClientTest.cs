@@ -11,11 +11,13 @@ namespace Callfire_csharp_sdk.IntegrationTests.Rest
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
+            var region = new CfRegion(null, null, null, null, null, null, null, null, null, null);
             NumberClient = new RestNumberClient(MockClient.User(), MockClient.Password());
-            RegionQuery = new CfRegionQuery(100, 0, new CfRegion(null, null, null, null, null, null, null, null, null, null));
+            RegionQuery = new CfRegionQuery(100, 0, region);
             SearchAvailableKeywords = new CfSearchAvailableKeywords("null");
             SearchAvailableNumbers = new CfSearchAvailableNumbers(null, true, 100);
             QueryKeywords = new CfQuery();
+            QueryNumbers = new CfQueryNumbers(100, 0, region, null);
         }
     }
 }

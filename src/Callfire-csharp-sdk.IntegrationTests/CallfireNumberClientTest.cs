@@ -14,6 +14,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         protected CfSearchAvailableKeywords SearchAvailableKeywords;
         protected CfSearchAvailableNumbers SearchAvailableNumbers;
         protected CfQuery QueryKeywords;
+        protected CfQueryNumbers QueryNumbers;
         
         [Test]
         public void Test_QueryRegions()
@@ -48,6 +49,14 @@ namespace Callfire_csharp_sdk.IntegrationTests
             var keywordQueryResult = NumberClient.QueryKeywords(QueryKeywords);
             Assert.IsNotNull(keywordQueryResult);
             Assert.AreEqual(keywordQueryResult.TotalResults, 0);
+        }
+
+        [Test]
+        public void Test_QueryNumbers()
+        {
+            var numbersQueryResult = NumberClient.QueryNumbers(QueryNumbers);
+            Assert.IsNotNull(numbersQueryResult);
+            Assert.AreEqual(numbersQueryResult.TotalResults, 0);
         }
     }
 }

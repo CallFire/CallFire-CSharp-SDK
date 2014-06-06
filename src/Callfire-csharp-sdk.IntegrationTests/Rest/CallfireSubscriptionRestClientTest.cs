@@ -16,7 +16,13 @@ namespace Callfire_csharp_sdk.IntegrationTests.Rest
             var subscriptionFilter = new CfSubscriptionSubscriptionFilter(1, 5, "fromNumber", "toNumber", true);
             CfSubscription = new CfSubscription(1, true, "endPoint", CfNotificationFormat.Soap,
                 CfSubscriptionTriggerEvent.CampaignStarted, subscriptionFilter);
-            CfSubscriptionRequest = new CfSubscriptionRequest("requestId", CfSubscription);
+            CfSubscriptionRequest = new CfSubscriptionRequest("", CfSubscription);
+
+            QuerySubscription = new CfQuery();
+
+            var subscription = new CfSubscription(140553001, true, "endPoint", CfNotificationFormat.Soap, 
+                CfSubscriptionTriggerEvent.CampaignStopped, subscriptionFilter);
+            CfUpdateSubscription = new CfSubscriptionRequest("", subscription);
         }
     }
 }

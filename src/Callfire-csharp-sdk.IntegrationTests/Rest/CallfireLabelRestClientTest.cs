@@ -26,6 +26,7 @@ namespace Callfire_csharp_sdk.IntegrationTests.Rest
 
             BroadcastId = BroadcastClient.CreateBroadcast(broadcastRequest);
 
+            LabelName = "New RestLabel";
         }
     }
 }

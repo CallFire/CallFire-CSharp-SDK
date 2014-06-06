@@ -146,10 +146,12 @@
     <Compile Include="Common\Resource\Extended\GetSoundDataExtended.cs" />
     <Compile Include="Common\Resource\Extended\IvrInboundConfigExtended.cs" />
     <Compile Include="Common\Resource\Extended\KeywordExtended.cs" />
+    <Compile Include="Common\Resource\Extended\IdLabelRequestExtended.cs" />
     <Compile Include="Common\Resource\Extended\LeaseInfoExtended.cs" />
     <Compile Include="Common\Resource\Extended\NumberConfigurationExtended.cs" />
     <Compile Include="Common\Resource\Extended\NumberConfigurationInboundCallConfigurationExtended.cs" />
     <Compile Include="Common\Resource\Extended\NumberExtended.cs" />
+    <Compile Include="Common\Resource\Extended\NumberLabelRequestExtended.cs" />
     <Compile Include="Common\Resource\Extended\NumberOrderExtended.cs" />
     <Compile Include="Common\Resource\Extended\NumberOrderItemExtended.cs" />
     <Compile Include="Common\Resource\Extended\QueryNumbersExtended.cs" />
