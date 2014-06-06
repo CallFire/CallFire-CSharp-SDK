@@ -11,6 +11,9 @@ namespace CallFire_csharp_sdk.Common.Result
             Calls = calls;
         }
 
+        /// <summary>
+        /// List of Calls
+        /// </summary>
         public CfCall[] Calls { get; set; }
     }
 }

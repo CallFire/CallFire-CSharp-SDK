@@ -10,6 +10,9 @@ namespace CallFire_csharp_sdk.Common.Result
             Keyword = keyword;
         }
 
+        /// <summary>
+        /// List of Keywords
+        /// </summary>
         public CfKeyword[] Keyword { get; set; }
     }
 }

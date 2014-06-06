@@ -10,6 +10,9 @@ namespace CallFire_csharp_sdk.Common.Result
             Region = region;
         }
 
+        /// <summary>
+        /// List of Regions
+        /// </summary>
         public CfRegion[] Region { get; set; }
     }
 }

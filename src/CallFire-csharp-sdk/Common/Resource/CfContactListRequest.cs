@@ -9,10 +9,19 @@
             ContactSource = contactSource;
         }
 
+        /// <summary>
+        /// Unique ID of ContactList
+        /// </summary>
         public long ContactListId { get; set; }
 
+        /// <summary>
+        /// Turn off list validation
+        /// </summary>
         public bool Validate { get; set; }
 
+        /// <summary>
+        /// List of contacts, numbers, contactIds, or csv file
+        /// </summary>
         public CfContactSource ContactSource { get; set; }
     }
 }

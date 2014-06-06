@@ -21,24 +21,54 @@ namespace CallFire_csharp_sdk.Common.Resource
             LabelName = labelName;
         }
 
+        /// <summary>
+        /// BroadcastId to query on
+        /// </summary>
         public long? BroadcastId { get; set; }
 
+        /// <summary>
+        /// BatchId to query on
+        /// </summary>
         public long? BatchId { get; set; }
 
+        /// <summary>
+        /// List of Action States to query on
+        /// </summary>
         public CfActionState[] State { get; set; }
 
+        /// <summary>
+        /// List of Results to query on
+        /// </summary>
         public CfResult[] Result { get; set; }
 
+        /// <summary>
+        /// Is call inbound
+        /// </summary>
         public bool? Inbound { get; set; }
 
+        /// <summary>
+        /// Beginning of DateTime interval to search on
+        /// </summary>
         public DateTime? IntervalBegin { get; set; }
 
+        /// <summary>
+        /// End of DateTime interval to search on
+        /// </summary>
         public DateTime? IntervalEnd { get; set; }
 
+        /// <summary>
+        /// E.164 11 digit number
+        /// </summary>
         public string FromNumber { get; set; }
 
+        /// <summary>
+        /// E.164 11 digit number
+        /// </summary>
         public string ToNumber { get; set; }
 
+        /// <summary>
+        /// Label that result must have to be included
+        /// </summary>
         public string LabelName { get; set; }
     }
 }

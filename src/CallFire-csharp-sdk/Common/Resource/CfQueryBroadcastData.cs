@@ -9,6 +9,9 @@
             BroadcastId = broadcastId;
         }
 
+        /// <summary>
+        /// Unique ID of Broadcast
+        /// </summary>
         public long BroadcastId { get; set; }
     }
 }

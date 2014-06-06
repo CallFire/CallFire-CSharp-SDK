@@ -10,6 +10,9 @@ namespace CallFire_csharp_sdk.Common.Result
             Text = text;
         }
 
+        /// <summary>
+        /// List of Texts 
+        /// </summary>
         public CfText[] Text { get; set; }
     }
 }

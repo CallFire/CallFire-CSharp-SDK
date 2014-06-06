@@ -10,10 +10,19 @@
             ContactSource = contactSource;
         }
 
+        /// <summary>
+        /// Name of contact list
+        /// </summary>
         public string Name { get; set; }
 
+        /// <summary>
+        /// Turn off list validation
+        /// </summary>
         public bool Validate { get; set; }
 
+        /// <summary>
+        /// List of contacts, numbers, contactIds, or csv file
+        /// </summary>
         public CfContactSource ContactSource { get; set; }
     }
 }

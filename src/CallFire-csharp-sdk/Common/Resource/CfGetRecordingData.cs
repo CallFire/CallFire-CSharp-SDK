@@ -15,6 +15,9 @@ namespace CallFire_csharp_sdk.Common.Resource
 
         public CfItemsChoiceType[] ItemsElementNameField { get; set; }
 
+        /// <summary>
+        /// Format of the returned recording
+        /// </summary>
         public CfSoundFormat Format { get; set; }
     }
 }

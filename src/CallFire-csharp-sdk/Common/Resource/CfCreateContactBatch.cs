@@ -13,10 +13,16 @@
 
         public string RequestId { get; set; }
 
+        /// <summary>
+        /// Id of Broadcast
+        /// </summary>
         public long BroadcastId { get; set; }
 
         public string Name { get; set; }
 
+        /// <summary>
+        /// List of E.164 11 digit numbers 
+        /// </summary>
         public object[] Items { get; set; }
 
         public bool ScrubBroadcastDuplicates { get; set; }

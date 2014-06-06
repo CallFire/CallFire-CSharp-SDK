@@ -9,6 +9,9 @@
             SoundTextVoice = soundTextVoice;
         }
 
+        /// <summary>
+        /// The name of your sound. This name is included in SoundMeta and shown in the web interface
+        /// </summary>
         public string Name { get; set; }
 
         public object Item { get; set; }

@@ -10,6 +10,9 @@ namespace CallFire_csharp_sdk.Common.Result
             CfAutoReply = cfAutoReply;
         }
 
+        /// <summary>
+        /// List of AutoReplies
+        /// </summary>
         public CfAutoReply[] CfAutoReply { get; set; }
     }
 }

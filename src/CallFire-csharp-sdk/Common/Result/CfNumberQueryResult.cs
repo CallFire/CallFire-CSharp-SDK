@@ -10,6 +10,9 @@ namespace CallFire_csharp_sdk.Common.Result
             Number = number;
         }
 
+        /// <summary>
+        /// List of Numbers
+        /// </summary>
         public CfNumber[] Number { get; set; }
     }
 }

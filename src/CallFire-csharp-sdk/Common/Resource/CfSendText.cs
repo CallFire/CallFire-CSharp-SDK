@@ -18,10 +18,19 @@ namespace CallFire_csharp_sdk.Common.Resource
             UseDefaultBroadcast = useDefaultBroadcast;
         }
 
+        /// <summary>
+        /// Configuration needed for a Text Broadcast
+        /// </summary>
         public CfTextBroadcastConfig TextBroadcastConfig { get; set; }
 
+        /// <summary>
+        /// BroadcastId to send message from
+        /// </summary>
         public long BroadcastId { get; set; }
 
+        /// <summary>
+        /// If true send text through existing default broadcast 
+        /// </summary>
         public Boolean UseDefaultBroadcast { get; set; }
     }
 }

@@ -10,6 +10,9 @@ namespace CallFire_csharp_sdk.Common.Result
             SoundMeta = soundMeta;
         }
 
+        /// <summary>
+        /// List of SoundMeta
+        /// </summary>
         public CfSoundMeta[] SoundMeta { get; set; }
     }
 }

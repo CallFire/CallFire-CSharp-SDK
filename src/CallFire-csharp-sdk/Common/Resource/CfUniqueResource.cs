@@ -7,6 +7,9 @@
             Id = id;
         }
 
+        /// <summary>
+        /// Unique ID of resource
+        /// </summary>
         public long Id { get; set; }
     }
 }

@@ -14,6 +14,9 @@
 
         public CfBroadcastCommand? Command { get; set; }
 
+        /// <summary>
+        /// Max simultaneous calls
+        /// </summary>
         public int? MaxActive { get; set; }
     }
 }

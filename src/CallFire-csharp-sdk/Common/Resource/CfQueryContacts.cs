@@ -14,10 +14,19 @@
             String = str;
         }
 
+        /// <summary>
+        /// Field to filter by
+        /// </summary>
         public string Field { get; set; }
 
+        /// <summary>
+        /// ContactList to filter by
+        /// </summary>
         public long? ContactListId { get; set; }
 
+        /// <summary>
+        /// Substring contained in Contact to filter by
+        /// </summary>
         public string String { get; set; }  
     }
 }

@@ -208,7 +208,6 @@
     <Compile Include="Common\Resource\Mappers\TextMapper.cs" />
     <Compile Include="Common\Resource\Mappers\TextRecordMapper.cs" />
     <Compile Include="Common\Resource\Mappers\ToNumberMapper.cs" />
-    <Compile Include="Common\Resource\TwoWayMapper.cs" />
     <Compile Include="Common\Resource\Extended\BroadcastRequestExtended.cs" />
     <Compile Include="Common\Resource\Extended\ControlBroadcastExtended.cs" />
     <Compile Include="Common\Resource\Extended\ControlContactBatchExtended.cs" />

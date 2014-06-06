@@ -13,10 +13,19 @@ namespace CallFire_csharp_sdk.Common.Resource
             LabelName = labelName;
         }
 
+        /// <summary>
+        /// Broadcast Type
+        /// </summary>
         public CfBroadcastType[] Type { get; set; }
 
+        /// <summary>
+        /// Filter on running Broadcasts
+        /// </summary>
         public bool? Running;
 
+        /// <summary>
+        /// Label that result must have to be included
+        /// </summary>
         public string LabelName { get; set; }
     }
 }
