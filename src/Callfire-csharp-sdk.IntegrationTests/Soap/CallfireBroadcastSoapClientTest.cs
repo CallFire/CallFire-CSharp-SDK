@@ -35,6 +35,12 @@ namespace Callfire_csharp_sdk.IntegrationTests.Soap
             var broadcast = new CfBroadcast(1838228001, "broadcastUpdated_Soap", CfBroadcastStatus.Running, DateTime.Now,
                 CfBroadcastType.Text, textBroadcastConfig);
             UpdateBroadcast = new CfBroadcastRequest("", broadcast);
+
+            ControlBroadcast = new CfControlBroadcast(0, null, CfBroadcastCommand.Archive, null);
+
+            const long id = 188717001;
+            object[] contactList = { id };
+            CreateContactBatch = new CfCreateContactBatch("", 1907978001, "ContactBatchSoap", contactList, false);
         }
     }
 }

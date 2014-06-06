@@ -7,6 +7,10 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
     {
         internal static CfInboundConfig FromInboundConfig(InboundConfig source)
         {
+            if (source == null)
+            {
+                return null;
+            }
             CfInboundConfig item = null;
             if (source.GetType() == typeof(IvrInboundConfig))
             {
@@ -21,6 +25,10 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
 
         internal static InboundConfig ToInboundConfig(CfInboundConfig source)
         {
+            if (source == null)
+            {
+                return null;
+            }
             InboundConfig item = null;
             if (source.GetType() == typeof(CfIvrInboundConfig))
             {

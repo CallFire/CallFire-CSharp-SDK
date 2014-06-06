@@ -16,6 +16,8 @@ namespace Callfire_csharp_sdk.IntegrationTests
         protected CfControlContactBatch ControlContactBatches;
         protected CfGetBroadcastStats GetBroadcastStats;
         protected CfBroadcastRequest UpdateBroadcast;
+        protected CfControlBroadcast ControlBroadcast;
+        protected CfCreateContactBatch CreateContactBatch;
         
         [Test]
         public void Test_CreateBroadcast()
@@ -80,6 +82,21 @@ namespace Callfire_csharp_sdk.IntegrationTests
         public void Test_UpdateBroadcast()
         {
             Client.UpdateBroadcast(UpdateBroadcast);
+        }
+
+        [Test]
+        public void Test_ControlBroadcast()
+        {
+            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcast);
+            ControlBroadcast.Id = Client.CreateBroadcast(broadcastRequest);
+            Client.ControlBroadcast(ControlBroadcast);
+        }
+
+        [Test]
+        public void Test_CreateContactBatch()
+        {
+            var id = Client.CreateContactBatch(CreateContactBatch);
+            Assert.IsNotNull(id);
         }
     }
 }

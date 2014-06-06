@@ -100,6 +100,7 @@
     <Compile Include="Common\Resource\CfContactSource.cs" />
     <Compile Include="Common\Resource\CfContactSourceNumbers.cs" />
     <Compile Include="Common\Resource\CfCreateContactList.cs" />
+    <Compile Include="Common\Resource\CfCreateSoundRecordingCall.cs" />
     <Compile Include="Common\Resource\CfGetBroadcastStats.cs" />
     <Compile Include="Common\CustomSerializer.cs" />
     <Compile Include="Common\HttpClient.cs" />
@@ -126,7 +127,6 @@
     <Compile Include="Common\Resource\CfSendCall.cs" />
     <Compile Include="Common\Resource\CfSendRequest.cs" />
     <Compile Include="Common\Resource\CfSendText.cs" />
-    <Compile Include="Common\Resource\Extended\ActionExtended.cs" />
     <Compile Include="Common\Resource\Extended\ActionQueryExtended.cs" />
     <Compile Include="Common\Resource\Extended\CallExtended.cs" />
     <Compile Include="Common\Resource\Extended\CallRecordExtended.cs" />
@@ -141,6 +141,7 @@
     <Compile Include="Common\Resource\Extended\ContactSourceNumbersExtended.cs" />
     <Compile Include="Common\Resource\Extended\CreateContactListExtended.cs" />
     <Compile Include="Common\Resource\Extended\CreateSoundExtended.cs" />
+    <Compile Include="Common\Resource\Extended\CreateSoundRecordingCallExtended.cs" />
     <Compile Include="Common\Resource\Extended\GetNumberExtended.cs" />
     <Compile Include="Common\Resource\Extended\GetRecordingDataExtended.cs" />
     <Compile Include="Common\Resource\Extended\GetSoundDataExtended.cs" />

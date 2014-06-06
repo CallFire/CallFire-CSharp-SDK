@@ -1,4 +1,9 @@
-﻿// ReSharper disable once CheckNamespace - This is an extension from API.Soap
+﻿using System.Linq;
+using CallFire_csharp_sdk.Common.DataManagement;
+using CallFire_csharp_sdk.Common.Resource.Mappers;
+// ReSharper disable once CheckNamespace - This is an extension from API.Soap
+
+
 namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class CreateContactBatch
@@ -8,7 +13,9 @@ namespace CallFire_csharp_sdk.API.Soap
             RequestId = requestId;
             BroadcastId = broadcastId;
             Name = name;
-            Items = items;
+
+            Items = items.GetType() == typeof(CfToNumber[]) ? 
+                items.Select(i => ToNumberMapper.ToToNumber(i as CfToNumber)).ToArray() : items;
             ScrubBroadcastDuplicates = scrubBroadcastDuplicates;
         }
     }

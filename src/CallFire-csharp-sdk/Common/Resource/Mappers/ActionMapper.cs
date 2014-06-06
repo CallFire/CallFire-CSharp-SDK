@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using CallFire_csharp_sdk.API.Soap;
+﻿using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common.DataManagement;
 
 namespace CallFire_csharp_sdk.Common.Resource.Mappers
@@ -12,17 +11,36 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
             {
                 return null;
             }
-            var toNumber = ToNumberMapper.FromToNumber(source.ToNumber);
-            var state = EnumeratedMapper.EnumFromSoapEnumerated<CfActionState>(source.State);
-            var finalResult = EnumeratedMapper.EnumFromSoapEnumerated<CfResult>(source.FinalResult);
-            var label = source.Label == null ? null : source.Label.Select(LabelMapper.FromLabel).ToArray();
-            return new CfAction(source.FromNumber, toNumber, state, source.BatchId, source.BroadcastId, source.ContactId,
-                source.Inbound, source.Created, source.Modified, finalResult, label, source.id);
+
+            CfAction item = null;
+            if (source.GetType() == typeof(Text))
+            {
+                item = TextMapper.FromText((Text)source);
+            }
+            else if (source.GetType() == typeof(Call))
+            {
+                item = CallMapper.FromCall((Call)source);
+            }
+            return item;
         }
 
         internal static Action ToAction(CfAction source)
         {
-            return source == null ? null : new Action(source);
+            if (source == null)
+            {
+                return null;
+            }
+
+            Action item = null;
+            if (source.GetType() == typeof(CfText))
+            {
+                item = TextMapper.ToText((CfText)source);
+            }
+            else if (source.GetType() == typeof(CfCall))
+            {
+                item = CallMapper.ToCall((CfCall)source);
+            }
+            return item;
         }
     }
 }
