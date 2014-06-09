@@ -30,8 +30,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         {
             var keywordQueryResult = NumberClient.SearchAvailableKeywords(SearchAvailableKeywords);
             Assert.IsNotNull(keywordQueryResult);
-            Assert.IsNotNull(keywordQueryResult.Keyword);
-            Assert.IsTrue(keywordQueryResult.Keyword.Any(r => r.ShortCode != null && r.ShortCode.Equals("67076")));
+            Assert.IsNull(keywordQueryResult.Keyword);
         }
 
         [Test]
