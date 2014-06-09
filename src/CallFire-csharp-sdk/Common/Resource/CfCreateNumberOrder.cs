@@ -11,12 +11,24 @@
             BulkTollFree = bulkTollFree;
         }
 
+        /// <summary>
+        /// List E.164 11 digit numbers space seperated
+        /// </summary>
         public string Numbers { get; set; }
 
+        /// <summary>
+        /// List of keywords space seperated
+        /// </summary>
         public string Keywords { get; set; }
 
+        /// <summary>
+        /// Local numbers to aquire
+        /// </summary>
         public CfCreateNumberOrderBulkLocal BulkLocal { get; set; }
 
+        /// <summary>
+        /// Toll free numbers to aquire
+        /// </summary>
         public CfCreateNumberOrderBulkTollFree BulkTollFree { get; set; }
     }
 }

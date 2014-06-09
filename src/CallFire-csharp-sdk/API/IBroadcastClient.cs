@@ -17,14 +17,14 @@ namespace CallFire_csharp_sdk.API
         /// Lists existing Broadcasts
         /// </summary>
         /// <param name="queryBroadcasts"></param>
-        /// <returns></returns>
+        /// <returns>List of Broadcasts</returns>
         CfBroadcastQueryResult QueryBroadcasts(CfQueryBroadcasts queryBroadcasts);
         
         /// <summary>
         /// Gets a single Broadcast by ID
         /// </summary>
         /// <param name="id">Unique ID of resource</param>
-        /// <returns></returns>
+        /// <returns>A Text, Ivr, or Voice Broadcast</returns>
         CfBroadcast GetBroadcast(long id);
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace CallFire_csharp_sdk.API
         /// Gets performance and result statistics for a Broadcast
         /// </summary>
         /// <param name="getBroadcastStats"></param>
-        /// <returns></returns>
+        /// <returns>BroadcastStats requested</returns>
         CfBroadcastStats GetBroadcastStats(CfGetBroadcastStats getBroadcastStats);
 
         /// <summary>
@@ -57,14 +57,14 @@ namespace CallFire_csharp_sdk.API
         /// Lists a Broadcast's ContactBatch
         /// </summary>
         /// <param name="queryBroadcastData"></param>
-        /// <returns></returns>
+        /// <returns>List of ContactBatches</returns>
         CfContactBatchQueryResult QueryContactBatches(CfQueryBroadcastData queryBroadcastData);
 
         /// <summary>
         /// Gets a ContactBatch by ID
         /// </summary>
         /// <param name="id">Unique ID of resource</param>
-        /// <returns></returns>
+        /// <returns>ContactBatch requested</returns>
         CfContactBatch GetContactBatch(long id);
 
         /// <summary>
@@ -84,14 +84,14 @@ namespace CallFire_csharp_sdk.API
         /// Lists existing BroadcastSchedules
         /// </summary>
         /// <param name="queryBroadcastData"></param>
-        /// <returns></returns>
+        /// <returns>List of BroadcastSchedules</returns>
         CfBroadcastScheduleQueryResult QueryBroadcastSchedule(CfQueryBroadcastData queryBroadcastData);
 
         /// <summary>
         /// Gets a BroadcastSchedule by ID
         /// </summary>
         /// <param name="id">Unique ID of resource</param>
-        /// <returns></returns>
+        /// <returns>BroadcastSchedule requested</returns>
         CfBroadcastSchedule GetBroadcastSchedule(long id);
 
         /// <summary>

@@ -12,6 +12,9 @@
 
         public string RequestId { get; set; }
 
+        /// <summary>
+        /// Command [Start, Stop, Archive]
+        /// </summary>
         public CfBroadcastCommand? Command { get; set; }
 
         /// <summary>

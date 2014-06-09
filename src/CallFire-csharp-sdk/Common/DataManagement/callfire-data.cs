@@ -22,7 +22,7 @@ namespace CallFire_csharp_sdk.Common.DataManagement
         public string Name { get; set; }
 
         /// <summary>
-        /// Status of Broadcast
+        /// Status of Broadcast [StartPending, Running, Stopped, Finished, Archived]
         /// </summary>
         public CfBroadcastStatus? Status { get; set; }
 
@@ -32,12 +32,12 @@ namespace CallFire_csharp_sdk.Common.DataManagement
         public DateTime? LastModified { get; set; }
 
         /// <summary>
-        /// Type of Broadcast
+        /// Type of Broadcast [Voice, Ivr, Text]
         /// </summary>
         public CfBroadcastType? Type { get; set; }
 
         /// <summary>
-        /// Configuration
+        /// Configuration needed
         /// </summary>
         public CfBroadcastConfig Item { get; set; }
 
@@ -326,6 +326,9 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public abstract class CfInboundConfig
     {
+        /// <summary>
+        /// Unique ID of InboundConfig
+        /// </summary>
         public long? Id { get; set; }
     }
 
@@ -356,12 +359,13 @@ namespace CallFire_csharp_sdk.Common.DataManagement
         public int MinutesBetweenAttempts { get; set; }
 
         /// <summary>
-        /// Conditions to retry on
+        /// Conditions to retry on [La, Am, Busy, Dnc, Xfer, XferLeg, NoAns, Undialed, Sent, 
+        /// Received, Dnt, TooBig, InternalError, CarrierError, CarrierTempError]
         /// </summary>
         public CfResult[] RetryResults { get; set; }
 
         /// <summary>
-        /// Phone types to call in retry
+        /// Phone types to call in retry [FirstNumber, HomePhone, WorkPhone, MobilePhone]
         /// </summary>
         public CfRetryPhoneType[] RetryPhoneTypes { get; set; }
     }
@@ -386,7 +390,8 @@ namespace CallFire_csharp_sdk.Common.DataManagement
         public string Message { get; set; }
 
         /// <summary>
-        /// Set strategy if message is over 160 chars (default: SEND_MULTIPLE)
+        /// Set strategy if message is over 160 chars (default: SEND_MULTIPLE) 
+        /// [SendMultiple, DoNotSend, Trim,]
         /// </summary>
         public CfBigMessageStrategy BigMessageStrategy { get; set; }
     }
@@ -462,7 +467,7 @@ namespace CallFire_csharp_sdk.Common.DataManagement
         }
         
         /// <summary>
-        /// Action to take if machine answers
+        /// Action to take if machine answers [AmOnly, AmAndLive, LiveWithAmd, LiveImmediate]
         /// </summary>
         public CfAnsweringMachineConfig? AnsweringMachineConfig { get; set; }
 
@@ -636,6 +641,9 @@ namespace CallFire_csharp_sdk.Common.DataManagement
         /// </summary>
         public DateTime? EndDate { get; set; }
 
+        /// <summary>
+        /// List of days of week [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
+        /// </summary>
         public CfDaysOfWeek[] DaysOfWeek { get; set; }
 
         /// <summary>
@@ -807,6 +815,9 @@ namespace CallFire_csharp_sdk.Common.DataManagement
             Id = id;
         }
 
+        /// <summary>
+        /// Status [Pending, Active, Failed, Archived]
+        /// </summary>
         public CfSoundStatus Status { get; set; }
 
         /// <summary>
@@ -917,10 +928,14 @@ namespace CallFire_csharp_sdk.Common.DataManagement
         /// </summary>
         public string Endpoint { get; set; }
 
+        /// <summary>
+        /// [Xml, Json, Soap, Email]
+        /// </summary>
         public CfNotificationFormat NotificationFormat { get; set; }
 
         /// <summary>
-        /// Event to trigger on
+        /// Event to trigger on [UndefinedEvent, InboundCallFinished, InboundTextFinished, OutboundCallFinished, 
+        /// OutboundTextFinished, CampaignStarted, CampaignStopped, CampaignFinished]
         /// </summary>
         public CfSubscriptionTriggerEvent? TriggerEvent { get; set; }
 
@@ -1010,6 +1025,9 @@ namespace CallFire_csharp_sdk.Common.DataManagement
             AnyAttr = anyAttr;
         }
 
+        /// <summary>
+        /// Unique ID of Contact
+        /// </summary>
         public long? Id { get; set; }
 
         /// <summary>
@@ -1043,12 +1061,12 @@ namespace CallFire_csharp_sdk.Common.DataManagement
         public string MobilePhone { get; set; }
 
         /// <summary>
-        /// id of contact defined by external system 
+        /// id of contact defined by external system (NATION_BUILDER, GOOGLE_GROUPS, etc...)
         /// </summary>
         public string ExternalId { get; set; }
 
         /// <summary>
-        /// System where externalId was generated from 
+        /// System where externalId was generated from (NATION_BUILDER, GOOGLE_GROUPS, etc...)
         /// </summary>
         public string ExternalSystem { get; set; }
 
@@ -1163,10 +1181,19 @@ namespace CallFire_csharp_sdk.Common.DataManagement
             AutoRenew = autoRenew;
         }
 
+        /// <summary>
+        /// Date lease began
+        /// </summary>
         public DateTime? LeaseBegin { get; set; }
 
+        /// <summary>
+        /// Date lease ends
+        /// </summary>
         public DateTime? LeaseEnd { get; set; }
 
+        /// <summary>
+        /// Is lease set to renew each month
+        /// </summary>
         public bool AutoRenew { get; set; }
     }
 
@@ -1184,18 +1211,39 @@ namespace CallFire_csharp_sdk.Common.DataManagement
             NumberConfiguration = numberConfiguration;
         }
 
+        /// <summary>
+        /// 11 digit E.164 number
+        /// </summary>
         public string Number1 { get; set; }
 
+        /// <summary>
+        /// Phone number formatted for local
+        /// </summary>
         public string NationalFormat { get; set; }
 
+        /// <summary>
+        /// Is toll free number
+        /// </summary>
         public bool TollFree { get; set; }
 
+        /// <summary>
+        /// Region of number represented by city, state, prefix, etc..
+        /// </summary>
         public CfRegion Region { get; set; }
 
+        /// <summary>
+        /// Status [Pending, Active, Released, Unavailable]
+        /// </summary>
         public CfNumberStatus? Status { get; set; }
 
+        /// <summary>
+        /// Info about Lease
+        /// </summary>
         public CfLeaseInfo LeaseInfo { get; set; }
 
+        /// <summary>
+        /// Configure Call and Text features
+        /// </summary>
         public CfNumberConfiguration NumberConfiguration { get; set; }
     }
 
@@ -1218,10 +1266,19 @@ namespace CallFire_csharp_sdk.Common.DataManagement
             InboundCallConfiguration = inboundCallConfiguration;
         }
 
+        /// <summary>
+        /// [Unsupported, Pending, Disabled, Enabled]
+        /// </summary>
         public CfNumberFeature? CallFeature { get; set; }
 
+        /// <summary>
+        /// [Unsupported, Pending, Disabled, Enabled]
+        /// </summary>
         public CfNumberFeature? TextFeature { get; set; }
 
+        /// <summary>
+        /// [Tracking, Ivr]
+        /// </summary>
         public CfInboundType? InboundCallConfigurationType { get; set; }
 
         public CfNumberConfigurationInboundCallConfiguration InboundCallConfiguration { get; set; }
@@ -1284,6 +1341,9 @@ namespace CallFire_csharp_sdk.Common.DataManagement
             Id = id;
         }
 
+        /// <summary>
+        /// Status [New, Processing, Finished, Errored, Void, WaitForPayment, Adjusted]
+        /// </summary>
         public CfOrderStatus Status { get; set; }
 
         public DateTime Created { get; set; }

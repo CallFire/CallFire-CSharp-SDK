@@ -16,7 +16,7 @@ namespace CallFire_csharp_sdk.Common.Resource
         public long Id { get; set; }
 
         /// <summary>
-        /// Specifies the format of the returned sound data
+        /// Specifies the format of the returned sound data [Wav, Mp3]
         /// </summary>
         public CfSoundFormat Format { get; set; }
     }

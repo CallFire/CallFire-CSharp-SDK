@@ -11,10 +11,16 @@ namespace CallFire_csharp_sdk.Common.Resource
             Count = count;
         }
 
+        /// <summary>
+        /// Region of number represented by city, state, prefix, etc...
+        /// </summary>
         public CfRegion Region { get; set; }
 
         public bool TollFree { get; set; }
 
+        /// <summary>
+        /// Keywords request by query
+        /// </summary>
         public int Count { get; set; }
     }
 }

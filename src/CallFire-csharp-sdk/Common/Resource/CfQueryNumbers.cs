@@ -10,6 +10,9 @@ namespace CallFire_csharp_sdk.Common.Resource
             LabelName = labelName;
         }
 
+        /// <summary>
+        /// Label that number must have to be included
+        /// </summary>
         public string LabelName { get; set; }
     }
 }

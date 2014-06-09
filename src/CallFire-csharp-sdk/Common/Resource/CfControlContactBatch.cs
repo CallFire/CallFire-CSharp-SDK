@@ -8,6 +8,9 @@
             Enabled = enabled;
         }
 
+        /// <summary>
+        /// Name of ContactBatch
+        /// </summary>
         public string Name { get; set; }
 
         public bool? Enabled { get; set; }

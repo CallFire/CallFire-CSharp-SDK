@@ -7,6 +7,9 @@
             ContactId = contactId;
         }
 
+        /// <summary>
+        /// List of contact ids
+        /// </summary>
         public long[] ContactId { get; set; }
     }
 }

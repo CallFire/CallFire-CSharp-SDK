@@ -10,7 +10,7 @@ namespace CallFire_csharp_sdk.API
         /// Lists existing contacts
         /// </summary>
         /// <param name="queryContacts"></param>
-        /// <returns></returns>
+        /// <returns>List of Contacts</returns>
         CfContactQueryResult QueryContacts(CfQueryContacts queryContacts);
 
         /// <summary>
@@ -29,14 +29,14 @@ namespace CallFire_csharp_sdk.API
         /// Gets the contact by ID
         /// </summary>
         /// <param name="id">Unique ID of resource</param>
-        /// <returns></returns>
+        /// <returns>Contact requested</returns>
         CfContact GetContact(long id);
 
         /// <summary>
         /// Gets a contact's history by contact ID
         /// </summary>
         /// <param name="getContactHistory"></param>
-        /// <returns></returns>
+        /// <returns>List Calls or Texts associated with Contact</returns>
         CfAction[] GetContactHistory(CfGetContactHistory getContactHistory);
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace CallFire_csharp_sdk.API
         /// Lists existing contact lists
         /// </summary>
         /// <param name="queryContactLists"></param>
-        /// <returns></returns>
+        /// <returns>List of ContactLists</returns>
         CfContactListQueryResult QueryContactLists(CfQuery queryContactLists);
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace CallFire_csharp_sdk.API
         /// Gets the contact list by ID
         /// </summary>
         /// <param name="id">Unique ID of resource</param>
-        /// <returns></returns>
+        /// <returns>Contact list requested</returns>
         CfContactList GetContactList(long id);
         
         /// <summary>

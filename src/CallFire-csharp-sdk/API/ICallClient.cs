@@ -17,14 +17,14 @@ namespace CallFire_csharp_sdk.API
         /// Lists inbound and outbound calls
         /// </summary>
         /// <param name="cfActionQuery"></param>
-        /// <returns></returns>
+        /// <returns>List of Calls</returns>
         CfCallQueryResult QueryCalls(CfActionQuery cfActionQuery);
 
         /// <summary>
         /// Gets a call by ID
         /// </summary>
         /// <param name="id">Unique ID of resource</param>
-        /// <returns></returns>
+        /// <returns>Call requested</returns>
         CfCall GetCall(long id);
 
         /// <summary>
@@ -38,14 +38,14 @@ namespace CallFire_csharp_sdk.API
         /// Lists sounds available for use in calls
         /// </summary>
         /// <param name="cfQuerySoundMeta"></param>
-        /// <returns></returns>
+        /// <returns>List of SoundMeta</returns>
         CfSoundMetaQueryResult QuerySoundMeta(CfQuery cfQuerySoundMeta);
 
         /// <summary>
         /// Gets metadata for a sound for use in calls
         /// </summary>
         /// <param name="id">Unique ID of resource</param>
-        /// <returns></returns>
+        /// <returns>SoundMeta requested</returns>
         CfSoundMeta GetSoundMeta(long id);
 
         /// <summary>

@@ -15,7 +15,7 @@ namespace CallFire_csharp_sdk.API
         /// Returns all defined labels
         /// </summary>
         /// <param name="queryLabels"></param>
-        /// <returns></returns>
+        /// <returns>List of Labels</returns>
         CfLabelQueryResult QueryLabels(CfQuery queryLabels);
 
         /// <summary>

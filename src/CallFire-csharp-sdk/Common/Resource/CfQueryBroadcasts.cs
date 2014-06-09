@@ -14,7 +14,7 @@ namespace CallFire_csharp_sdk.Common.Resource
         }
 
         /// <summary>
-        /// Broadcast Type
+        /// List of Broadcast Type [Voice, Ivr, Text]
         /// </summary>
         public CfBroadcastType[] Type { get; set; }
 

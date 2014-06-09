@@ -10,6 +10,9 @@ namespace CallFire_csharp_sdk.Common.Resource
             Region = region;
         }
 
+        /// <summary>
+        /// Region of number represented by city, state, prefix, etc...
+        /// </summary>
         public CfRegion Region { get; set; }
     }
 }

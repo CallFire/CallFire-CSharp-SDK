@@ -5,6 +5,11 @@ namespace CallFire_csharp_sdk.Common.Resource
 {
     public class CfSendText : CfSendRequest
     {
+        public CfSendText()
+        {
+            UseDefaultBroadcast = false;
+        }
+
         public CfSendText(string requestId, CfBroadcastType type, string broadcastName, CfToNumber[] toNumber, bool scrubBroadcastDuplicates,
             CfTextBroadcastConfig textBroadcastConfig, long broadcastId, Boolean useDefaultBroadcast)
         {
@@ -29,7 +34,7 @@ namespace CallFire_csharp_sdk.Common.Resource
         public long BroadcastId { get; set; }
 
         /// <summary>
-        /// If true send text through existing default broadcast 
+        /// If true send text through existing default broadcast (default: false)
         /// </summary>
         public Boolean UseDefaultBroadcast { get; set; }
     }

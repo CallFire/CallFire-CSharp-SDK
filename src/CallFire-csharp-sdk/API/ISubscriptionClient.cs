@@ -17,14 +17,14 @@ namespace CallFire_csharp_sdk.API
         /// Get a list of registered subscriptions
         /// </summary>
         /// <param name="cfQuerySubscriptions"></param>
-        /// <returns></returns>
+        /// <returns>List of Subscriptions</returns>
         CfSubscriptionQueryResult QuerySubscriptions(CfQuery cfQuerySubscriptions);
 
         /// <summary>
         /// Gets an existing individual subscription by ID
         /// </summary>
         /// <param name="id">Unique ID of resource</param>
-        /// <returns></returns>
+        /// <returns>Subscription requested</returns>
         CfSubscription GetSubscription(long id);
 
         /// <summary>

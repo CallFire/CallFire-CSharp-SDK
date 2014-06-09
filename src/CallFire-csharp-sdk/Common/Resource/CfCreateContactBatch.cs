@@ -18,10 +18,13 @@
         /// </summary>
         public long BroadcastId { get; set; }
 
+        /// <summary>
+        /// Name of Contact Batch
+        /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// List of E.164 11 digit numbers 
+        /// List of E.164 11 digit numbers space or comma separated and contact list id
         /// </summary>
         public object[] Items { get; set; }
 

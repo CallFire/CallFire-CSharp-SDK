@@ -5,7 +5,7 @@ namespace CallFire_csharp_sdk.Common.Resource
     public class CfSendRequest : CfRequest
     {
         /// <summary>
-        /// Type of Broadcast
+        /// Type of Broadcast [Voice, Ivr, Text]
         /// </summary>
         public CfBroadcastType Type { get; set; }
 

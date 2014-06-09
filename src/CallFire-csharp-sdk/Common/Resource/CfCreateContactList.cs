@@ -2,6 +2,11 @@
 {
     public class CfCreateContactList : CfRequest
     {
+        public CfCreateContactList()
+        {
+            Validate = true;
+        }
+
         public CfCreateContactList(string requestId, string name, bool validate, CfContactSource contactSource)
         {
             RequestId = requestId;
@@ -16,7 +21,7 @@
         public string Name { get; set; }
 
         /// <summary>
-        /// Turn off list validation
+        /// Turn off list validation (default: true)
         /// </summary>
         public bool Validate { get; set; }
 

@@ -15,6 +15,9 @@ namespace CallFire_csharp_sdk.Common.Resource
             Item = item;
         }
 
+        /// <summary>
+        /// Configuration needed for a Broadcast
+        /// </summary>
         public CfBroadcastConfig Item { get; set; }
     }
 }

@@ -12,6 +12,9 @@ namespace CallFire_csharp_sdk.Common.Resource
 
         public string Number { get; set; }
 
+        /// <summary>
+        /// Configure Call and Text features
+        /// </summary>
         public CfNumberConfiguration NumberConfiguration { get; set; }
     }
 }

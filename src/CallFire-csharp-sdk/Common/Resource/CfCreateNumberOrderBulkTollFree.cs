@@ -7,6 +7,9 @@
             Count = count;
         }
 
+        /// <summary>
+        /// Amount of phone numbers to aquire
+        /// </summary>
         public int Count { get; set; }
     }
 }

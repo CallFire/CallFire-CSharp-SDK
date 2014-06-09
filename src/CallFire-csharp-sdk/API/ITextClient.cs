@@ -17,14 +17,14 @@ namespace CallFire_csharp_sdk.API
         /// List sent and received text messages
         /// </summary>
         /// <param name="cfActionQuery"></param>
-        /// <returns></returns>
+        /// <returns>List of Texts</returns>
         CfTextQueryResult QueryTexts(CfActionQuery cfActionQuery);
 
         /// <summary>
         /// Gets a text message by ID
         /// </summary>
         /// <param name="id">Unique ID of resource</param>
-        /// <returns></returns>
+        /// <returns>Text requested</returns>
         CfText GetText(long id);
 
         /// <summary>
@@ -38,14 +38,14 @@ namespace CallFire_csharp_sdk.API
         /// Lists configured auto-replies
         /// </summary>
         /// <param name="cfQueryAutoReplies"></param>
-        /// <returns></returns>
+        /// <returns>List of AutoReplies</returns>
         CfAutoReplyQueryResult QueryAutoReplies(CfQueryAutoReplies cfQueryAutoReplies);
 
         /// <summary>
         /// Gets an auto-reply by ID
         /// </summary>
         /// <param name="id">Unique ID of resource</param>
-        /// <returns></returns>
+        /// <returns>AutoReply requested</returns>
         CfAutoReply GetAutoReply(long id);
         
         /// <summary>

@@ -32,12 +32,13 @@ namespace CallFire_csharp_sdk.Common.Resource
         public long? BatchId { get; set; }
 
         /// <summary>
-        /// List of Action States to query on
+        /// List of Action States to query on [Ready, Selected, Finished, Dnc, Dup, Invalid, Timeout]
         /// </summary>
         public CfActionState[] State { get; set; }
 
         /// <summary>
-        /// List of Results to query on
+        /// List of Results to query on [La, Am, Busy, Dnc, Xfer, XferLeg, NoAns, Undialed, Sent, 
+        /// Received, Dnt, TooBig, InternalError, CarrierError, CarrierTempError]
         /// </summary>
         public CfResult[] Result { get; set; }
 
