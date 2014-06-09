@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Xml;
+using System.Xml.Serialization;
 using CallFire_csharp_sdk.API.Rest.Clients;
 using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
@@ -40,7 +42,7 @@ namespace Callfire_csharp_sdk.IntegrationTests.Rest
 
             const long id = 188717001;
             object[] contactList = { id };
-            CreateContactBatch = new CfCreateContactBatch("", 1907978001, "ContactBatchSoap", contactList, false);
+            CreateContactBatch = new CfCreateContactBatch(null, 1907978001, "ContactBatchSoap", contactList, false);
         }
     }
 }

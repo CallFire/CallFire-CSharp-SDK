@@ -12,12 +12,12 @@
         }
 
         /// <summary>
-        /// List E.164 11 digit numbers space seperated
+        /// List E.164 11 digit numbers space separated
         /// </summary>
         public string Numbers { get; set; }
 
         /// <summary>
-        /// List of keywords space seperated
+        /// List of keywords space separated
         /// </summary>
         public string Keywords { get; set; }
 

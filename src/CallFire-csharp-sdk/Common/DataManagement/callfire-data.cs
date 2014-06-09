@@ -1010,6 +1010,10 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfContact
     {
+        public CfContact()
+        {
+        }
+
         public CfContact(long? id, string firstName, string lastName, string zipcode, string homePhone, string workPhone, string mobilePhone,
             string externalId, string externalSystem, System.Xml.XmlAttribute[] anyAttr)
         {

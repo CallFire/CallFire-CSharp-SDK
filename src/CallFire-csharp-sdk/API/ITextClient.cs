@@ -7,7 +7,7 @@ namespace CallFire_csharp_sdk.API
     public interface ITextClient : IClient
     {
         /// <summary>
-        /// Send text message and return broadcastId
+        /// Send text message and return broadcast ID
         /// </summary>
         /// <param name="cfSendText"></param>
         /// <returns>Unique ID of resource</returns>
