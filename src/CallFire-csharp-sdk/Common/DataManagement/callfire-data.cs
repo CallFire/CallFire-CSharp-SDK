@@ -390,8 +390,8 @@ namespace CallFire_csharp_sdk.Common.DataManagement
         public string Message { get; set; }
 
         /// <summary>
-        /// Set strategy if message is over 160 chars (default: SEND_MULTIPLE) 
-        /// [SendMultiple, DoNotSend, Trim,]
+        /// Set strategy if message is over 160 chars (default: SendMultiple) 
+        /// [SendMultiple, DoNotSend, Trim]
         /// </summary>
         public CfBigMessageStrategy BigMessageStrategy { get; set; }
     }

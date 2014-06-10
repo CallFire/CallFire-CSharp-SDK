@@ -23,7 +23,7 @@ namespace CallFire_csharp_sdk.API.Soap
 
         public void DeleteLabel(string labelName)
         {
-            LabelService.DeleteLabel(new DeleteLabel { LabelName = labelName });
+            LabelService.DeleteLabel(new DeleteLabel(labelName));
         }
 
         public CfLabelQueryResult QueryLabels(CfQuery queryLabels)

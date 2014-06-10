@@ -142,6 +142,7 @@
     <Compile Include="Common\Resource\Extended\CreateContactListExtended.cs" />
     <Compile Include="Common\Resource\Extended\CreateSoundExtended.cs" />
     <Compile Include="Common\Resource\Extended\CreateSoundRecordingCallExtended.cs" />
+    <Compile Include="Common\Resource\Extended\DeleteLabelExtended.cs" />
     <Compile Include="Common\Resource\Extended\GetNumberExtended.cs" />
     <Compile Include="Common\Resource\Extended\GetRecordingDataExtended.cs" />
     <Compile Include="Common\Resource\Extended\GetSoundDataExtended.cs" />

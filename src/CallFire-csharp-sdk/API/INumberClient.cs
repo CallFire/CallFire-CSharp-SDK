@@ -65,7 +65,7 @@ namespace CallFire_csharp_sdk.API
         /// Get the status and results of a previous order
         /// </summary>
         /// <param name="id">Unique ID of resource</param>
-        /// <returns>Info on NumberOrder like id, status, and cost</returns>
+        /// <returns>Info on NumberOrder like ID, status, and cost</returns>
         CfNumberOrder GetNumberOrder(long id);
 
         /// <summary>

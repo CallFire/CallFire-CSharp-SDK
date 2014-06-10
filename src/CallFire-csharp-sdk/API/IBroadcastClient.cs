@@ -28,7 +28,7 @@ namespace CallFire_csharp_sdk.API
         CfBroadcast GetBroadcast(long id);
 
         /// <summary>
-        /// Updates an existing Broadcast's configuration
+        /// Updates an existing Broadcast configuration
         /// </summary>
         /// <param name="updateBroadcast"></param>
         void UpdateBroadcast(CfBroadcastRequest updateBroadcast);
@@ -68,7 +68,7 @@ namespace CallFire_csharp_sdk.API
         CfContactBatch GetContactBatch(long id);
 
         /// <summary>
-        /// Enables or Disables a Broadcast's ContactBatch
+        /// Enables or Disables a Broadcast ContactBatch
         /// </summary>
         /// <param name="controlContactBatch"></param>
         void ControlContactBatch(CfControlContactBatch controlContactBatch);

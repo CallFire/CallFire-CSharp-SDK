@@ -14,7 +14,7 @@
         public string RequestId { get; set; }
 
         /// <summary>
-        /// Id of Broadcast
+        /// ID of Broadcast
         /// </summary>
         public long BroadcastId { get; set; }
 
@@ -24,7 +24,7 @@
         public string Name { get; set; }
 
         /// <summary>
-        /// List of E.164 11 digit numbers space or comma separated and contact list id
+        /// List of E.164 11 digit numbers space or comma separated and contact list ID
         /// </summary>
         public object[] Items { get; set; }
 

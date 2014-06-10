@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Xml;
-using System.Xml.Serialization;
 using CallFire_csharp_sdk.API.Rest.Clients;
 using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;

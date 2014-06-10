@@ -22,7 +22,7 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
 
         public void DeleteLabel(string labelName)
         {
-            BaseRequest<string>(HttpMethod.Delete, new { LabelName = labelName }, new CallfireRestRoute<Label>());
+            BaseRequest<string>(HttpMethod.Delete, new DeleteLabel(labelName), new CallfireRestRoute<Label>());
         }
 
         public CfLabelQueryResult QueryLabels(CfQuery queryLabels)

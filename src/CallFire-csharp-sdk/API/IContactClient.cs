@@ -33,7 +33,7 @@ namespace CallFire_csharp_sdk.API
         CfContact GetContact(long id);
 
         /// <summary>
-        /// Gets a contact's history by contact ID
+        /// Gets contact's history by contact ID
         /// </summary>
         /// <param name="getContactHistory"></param>
         /// <returns>List Calls or Texts associated with Contact</returns>
