@@ -2,6 +2,10 @@
 {
     public class CfQueryBroadcastData : CfQuery
     {
+        public CfQueryBroadcastData()
+        {
+        }
+        
         public CfQueryBroadcastData(long maxResults, long firstResult, long broadcastId)
         {
             MaxResults = maxResults;

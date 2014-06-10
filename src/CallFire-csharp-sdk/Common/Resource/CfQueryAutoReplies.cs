@@ -2,6 +2,10 @@
 {
     public class CfQueryAutoReplies : CfQuery
     {
+        public CfQueryAutoReplies()
+        {
+        }
+
         public CfQueryAutoReplies(long maxResult, long firstResult, string number)
             : base(maxResult, firstResult)
         {

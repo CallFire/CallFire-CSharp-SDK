@@ -4,6 +4,10 @@ namespace CallFire_csharp_sdk.Common.Resource
 {
     public class CfRegionQuery : CfQuery
     {
+        public CfRegionQuery()
+        {
+        }
+
         public CfRegionQuery(long maxResults, long firstResult, CfRegion region)
             : base(maxResults, firstResult)
         {

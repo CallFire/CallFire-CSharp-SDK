@@ -4,6 +4,10 @@ namespace CallFire_csharp_sdk.Common.Resource
 {
     public class CfQueryBroadcasts : CfQuery
     {
+        public CfQueryBroadcasts()
+        {
+        }
+
         public CfQueryBroadcasts(long maxResult, long firstResult, CfBroadcastType[] type, bool? running, string labelName)
         {
             MaxResults = maxResult;
