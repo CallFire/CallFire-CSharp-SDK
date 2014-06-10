@@ -10,4 +10,5 @@ CallFire C# SDK
     * [Subscriptions (Postbacks)](/docs/en/02.subscriptions.md)
 	* [Texts](/docs/en/03.texts.md)
 	* [Calls](/docs/en/04.calls.md)
+	* [Numbers](/docs/en/06.numbers.md)
 
