@@ -2,6 +2,10 @@
 {
     public class CfContactListRequest
     {
+        public CfContactListRequest()
+        {
+        }
+
         public CfContactListRequest(long contactListId, bool validate, CfContactSource contactSource)
         {
             ContactListId = contactListId;

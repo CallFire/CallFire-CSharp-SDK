@@ -4,6 +4,10 @@ namespace CallFire_csharp_sdk.Common.Resource
 {
     public class CfGetSoundData
     {
+        public CfGetSoundData()
+        {
+        }
+
         public CfGetSoundData(long id, CfSoundFormat format)
         {
             Id = id;

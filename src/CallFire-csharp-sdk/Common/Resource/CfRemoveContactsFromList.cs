@@ -2,6 +2,10 @@
 {
     public class CfRemoveContactsFromList
     {
+        public CfRemoveContactsFromList()
+        {
+        }
+
         public CfRemoveContactsFromList(long contactListId, object item)
         {
             ContactListId = contactListId;

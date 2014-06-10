@@ -4,6 +4,10 @@ namespace CallFire_csharp_sdk.Common.Resource
 {
     public class CfCreateBroadcastSchedule
     {
+        public CfCreateBroadcastSchedule()
+        {
+        }
+        
         public CfCreateBroadcastSchedule(string requestId, long broadcastId, CfBroadcastSchedule broadcastSchedule)
         {
             RequestId = requestId;

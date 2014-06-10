@@ -4,6 +4,10 @@ namespace CallFire_csharp_sdk.Common.Resource
 {
     public class CfCreateAutoReply : CfRequest
     {
+        public CfCreateAutoReply()
+        {
+        }
+
         public CfCreateAutoReply(string requestId, CfAutoReply cfAutoReply)
         {
             RequestId = requestId;

@@ -2,6 +2,10 @@
 {
     public class CfCreateNumberOrder
     {
+        public CfCreateNumberOrder()
+        {
+        }
+
         public CfCreateNumberOrder(string numbers, string keywords, CfCreateNumberOrderBulkLocal bulkLocal, 
             CfCreateNumberOrderBulkTollFree bulkTollFree)
         {

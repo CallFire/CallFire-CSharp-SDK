@@ -6,6 +6,10 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 {
     public class CfBroadcast
     {
+        public CfBroadcast()
+        {
+        }
+
         public CfBroadcast(long? id, string name, CfBroadcastStatus? status, DateTime? lastModified, CfBroadcastType? type, CfBroadcastConfig item)
         {
             Id = id;
@@ -65,6 +69,10 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfIvrBroadcastConfig : CfBroadcastConfig
     {
+        public CfIvrBroadcastConfig()
+        {
+        }
+
         public CfIvrBroadcastConfig(long identifier, DateTime created, string fromNumber, CfLocalTimeZoneRestriction localTimeZoneRestriction, CfBroadcastConfigRetryConfig retryConfig, string dialplanXml)
             : base(identifier, created, fromNumber, localTimeZoneRestriction, retryConfig)
         {
@@ -157,6 +165,10 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfToNumber
     {
+        public CfToNumber()
+        {
+        }
+
         public CfToNumber(string clientData, System.Xml.XmlAttribute[] anyAttr, string value)
         {
             ClientData = clientData;
@@ -173,6 +185,10 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfAction
     {
+        public CfAction()
+        {
+        }
+        
         public CfAction(string fromNumber, CfToNumber toNumber, CfActionState state, long? batchId, long? broadcastId, long contactId,
             bool inbound, DateTime created, DateTime modified, CfResult finalResult, CfLabel[] label, long id)
         {
@@ -190,10 +206,6 @@ namespace CallFire_csharp_sdk.Common.DataManagement
             Id = id;
         }
         
-        public CfAction()
-        {
-        }
-
         /// <summary>
         /// E.164 11 digit number or short code
         /// </summary>
@@ -272,6 +284,10 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public abstract class CfActionRecord
     {
+        protected CfActionRecord()
+        {
+        }
+        
         protected CfActionRecord(CfResult result, DateTime finishTime, float billedAmount, CfActionRecordQuestionResponse[] questionResponse, long id)
         {
             Result = result;
@@ -279,10 +295,6 @@ namespace CallFire_csharp_sdk.Common.DataManagement
             BilledAmount = billedAmount;
             QuestionResponse = questionResponse;
             Id = id;
-        }
-
-        protected CfActionRecord()
-        {
         }
 
         public CfResult Result { get; set; }
@@ -444,6 +456,10 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfVoiceBroadcastConfig : CfBroadcastConfig
     {
+        public CfVoiceBroadcastConfig()
+        {
+        }
+
         public CfVoiceBroadcastConfig(long identifier, DateTime created, string fromNumber,
         CfLocalTimeZoneRestriction localTimeZoneRestriction, CfBroadcastConfigRetryConfig retryConfig,
         CfAnsweringMachineConfig? answeringMachineConfig, object item, string liveSoundTextVoice, object item1,
@@ -471,14 +487,23 @@ namespace CallFire_csharp_sdk.Common.DataManagement
         /// </summary>
         public CfAnsweringMachineConfig? AnsweringMachineConfig { get; set; }
 
+        /// <summary>
+        /// LiveSoundId or LiveSoundText
+        /// </summary>
         public object Item { get; set; }
 
         public string LiveSoundTextVoice { get; set; }
 
+        /// <summary>
+        /// MachineSoundId or MachineSoundText
+        /// </summary>
         public object Item1 { get; set; }
 
         public string MachineSoundTextVoice { get; set; }
 
+        /// <summary>
+        /// TransferSoundId or TransferSoundText
+        /// </summary>
         public object Item2 { get; set; }
 
         public string TransferSoundTextVoice { get; set; }
@@ -493,6 +518,9 @@ namespace CallFire_csharp_sdk.Common.DataManagement
         /// </summary>
         public string TransferNumber { get; set; }
 
+        /// <summary>
+        /// DncSoundId or DncSoundText
+        /// </summary>
         public object Item3 { get; set; }
 
         public string DncSoundTextVoice { get; set; }
@@ -558,6 +586,10 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfContactBatch
     {
+        public CfContactBatch()
+        {
+        }
+
         public CfContactBatch(long id, string name, CfBatchStatus status, long broadcastId, DateTime created, int? size, int? remaining)
         {
             Name = name;
@@ -604,6 +636,10 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfBroadcastSchedule
     {
+        public CfBroadcastSchedule()
+        {
+        }
+
         public CfBroadcastSchedule(long? identifier, DateTime startTimeOfDay, DateTime stopTimeOfDay, string timeZone, 
             DateTime? beginDate, DateTime? endDate, CfDaysOfWeek[] daysOfWeek)
         {
@@ -874,6 +910,10 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfAutoReply
     {
+        public CfAutoReply()
+        {
+        }
+
         public CfAutoReply(string number, string keyword, string match, string message, long? id)
         {
             Number = number;
@@ -902,6 +942,11 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfSubscription
     {
+        public CfSubscription()
+        {
+            NotificationFormat = CfNotificationFormat.Xml;
+        }
+        
         public CfSubscription(long? id, bool? enabled, string endpoint, CfNotificationFormat notificationFormat,
             CfSubscriptionTriggerEvent? triggerEvent, CfSubscriptionSubscriptionFilter subscriptionFilter)
         {
@@ -911,11 +956,6 @@ namespace CallFire_csharp_sdk.Common.DataManagement
             NotificationFormat = notificationFormat;
             TriggerEvent = triggerEvent;
             SubscriptionFilter = subscriptionFilter;
-        }
-
-        public CfSubscription()
-        {
-            NotificationFormat = CfNotificationFormat.Xml;
         }
 
         /// <summary>
@@ -1116,6 +1156,10 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfRegion
     {
+        public CfRegion()
+        {
+        }
+
         public CfRegion(string prefix, string city, string state, string zipcode, string country, string lata, 
             string rateCenter, float? latitude, float? longitude, string timeZone)
         {
@@ -1261,6 +1305,10 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfNumberConfiguration
     {
+        public CfNumberConfiguration()
+        {
+        }
+
         public CfNumberConfiguration(CfNumberFeature? callFeature, CfNumberFeature? textFeature, CfInboundType? inboundCallConfigurationType,
             CfNumberConfigurationInboundCallConfiguration inboundCallConfiguration)
         {

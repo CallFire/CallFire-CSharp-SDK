@@ -2,6 +2,10 @@
 {
     public class CfRelease
     {
+        public CfRelease()
+        {
+        }
+
         public CfRelease(string number, string keyword)
         {
             Number = number;

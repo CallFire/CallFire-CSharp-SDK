@@ -4,6 +4,10 @@ namespace CallFire_csharp_sdk.Common.Resource
 {
     public class CfSearchAvailableNumbers
     {
+        public CfSearchAvailableNumbers()
+        {
+        }
+
         public CfSearchAvailableNumbers(CfRegion region, bool tollFree, int count)
         {
             Region = region;
