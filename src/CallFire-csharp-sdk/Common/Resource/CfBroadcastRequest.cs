@@ -9,7 +9,10 @@ namespace CallFire_csharp_sdk.Common.Resource
             RequestId = requestId;
             Broadcast = broadcast;
         }
-
+        
+        /// <summary>
+        /// A Text, Ivr, or Voice Broadcast
+        /// </summary>
         public CfBroadcast Broadcast { get; set; }
     }
 }

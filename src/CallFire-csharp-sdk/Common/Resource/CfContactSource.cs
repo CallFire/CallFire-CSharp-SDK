@@ -22,6 +22,9 @@ namespace CallFire_csharp_sdk.Common.Resource
             }
         }
 
+        /// <summary>
+        /// List of contacts, numbers, contactIds, or csv file.
+        /// </summary>
         public object[] Items { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using CallFire_csharp_sdk.API;
+using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
 using NUnit.Framework;
 
@@ -15,8 +16,12 @@ namespace Callfire_csharp_sdk.IntegrationTests
         protected CfCreateContactList CreateContactList;
         protected CfCreateContactList CreateContactList2;
         protected CfCreateContactList CreateContactList3;
+        protected CfQuery QueryContactLists;
+        protected CfContactListRequest AddContactsToList;
+        protected CfRemoveContactsFromList RemoveContactsFromList;
         protected long ContactId;
-
+        protected long ContactListId;
+        
         [Test]
         public void Test_QueryContact()
         {
@@ -64,6 +69,37 @@ namespace Callfire_csharp_sdk.IntegrationTests
         {
             var id = Client.CreateContactList(CreateContactList3);
             Assert.IsTrue(id > 0);
+        }
+        
+        [Test]
+        public void Test_QueryContactList()
+        {
+            var contactListQueryResult = Client.QueryContactLists(QueryContactLists);
+            Assert.IsNotNull(contactListQueryResult);
+            Assert.IsNotNull(contactListQueryResult.ContactList);
+            Assert.IsTrue(contactListQueryResult.ContactList.Any(c => c.Name.Equals("NewContactListTest")));
+        }
+
+        [Test]
+        public void Test_DeleteContactList()
+        {
+            var id = Client.CreateContactList(CreateContactList2);
+            Client.DeleteContactList(id);
+        }
+
+        [Test]
+        public void Test_GetContactList()
+        {
+            var contactList = Client.GetContactList(188601001);
+            Assert.IsNotNull(contactList);
+            Assert.IsTrue(contactList.Status.Equals(CfContactListStatus.Active) && contactList.Size.Equals("2"));
+        }
+
+        [Test]
+        public void Test_AddContactToList()
+        {
+            Client.AddContactsToList(AddContactsToList);
+            Client.RemoveContactsFromList(RemoveContactsFromList);
         }
     }
 }

@@ -20,7 +20,9 @@ namespace Callfire_csharp_sdk.Tests.BroadcastTest.Rest
             Client = new RestBroadcastClient(HttpClientMock);
 
             BroadcastId = 28936;
-            ExpectedCreateContactBatch = new CfCreateContactBatch("1", BroadcastId, "name", null, false);
+            const long id = 188717001;
+            object[] contactList = { id };
+            ExpectedCreateContactBatch = new CfCreateContactBatch("1", BroadcastId, "name", contactList, false);
 
             var response = string.Format(
                "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +

@@ -9,7 +9,9 @@ namespace CallFire_csharp_sdk.API.Soap
         public CreateSound(CfCreateSound cfCreateSound)
         {
             Name = cfCreateSound.Name;
-            Item = cfCreateSound.Item;
+
+            Item = cfCreateSound.Item.GetType() == typeof(CfCreateSoundRecordingCall) ? 
+                new CreateSoundRecordingCall(((CfCreateSoundRecordingCall) cfCreateSound.Item).ToNumber) : cfCreateSound.Item;
             SoundTextVoice = cfCreateSound.SoundTextVoice;
         }
     }

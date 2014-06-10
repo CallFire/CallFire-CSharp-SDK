@@ -15,7 +15,7 @@ namespace CallFire_csharp_sdk.API
         /// Returns all defined labels
         /// </summary>
         /// <param name="queryLabels"></param>
-        /// <returns></returns>
+        /// <returns>List of Labels</returns>
         CfLabelQueryResult QueryLabels(CfQuery queryLabels);
 
         /// <summary>
@@ -35,14 +35,14 @@ namespace CallFire_csharp_sdk.API
         /// <summary>
         /// Adds a label to a single number
         /// </summary>
-        /// <param name="number">List of E.164 11 digit numbers space seperated and optional fieldName</param>
+        /// <param name="number">List of E.164 11 digit numbers space separated and optional fieldName</param>
         /// <param name="labelName">Label name</param>
         void LabelNumber(string number, string labelName);
 
         /// <summary>
         /// Removes a label to a single number
         /// </summary>
-        /// <param name="number">List of E.164 11 digit numbers space seperated and optional fieldName</param>
+        /// <param name="number">List of E.164 11 digit numbers space separated and optional fieldName</param>
         /// <param name="labelName">Label name</param>
         void UnlabelNumber(string number, string labelName);
     }

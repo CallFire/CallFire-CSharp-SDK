@@ -37,37 +37,11 @@ namespace CallFire_csharp_sdk.Common
 
                 if (propertyInfo.PropertyType.IsArray)
                 {
-                    var array = ((Array)value);
-                    var attribs = (XmlElementAttribute[])Attribute.GetCustomAttributes(propertyInfo, typeof(XmlElementAttribute));
-                    if (attribs.Any() && array.Length > 0)
-                    {
-                        var elementName = attribs.First(i => i.Type == array.GetValue(0).GetType()).ElementName;
-                        if (IsCustomClass(array.GetType().GetElementType()))
-                        {
-                            for (var i = 0; i < array.Length; i++)
-                            {
-                                var elementProperties = GetProperties(array.GetValue(i));
-                                result.AddRange(elementProperties.Select(a => new KeyValuePair<string, string>
-                                        (string.Format("{0}[{1}][{2}]", elementName, i, a.Key),a.Value)));
-                            }
-                        }
-                        else
-                        {
-                            var arrayValue = string.Join(" ", array.OfType<object>().Select(e => e.ToString()).ToArray());
-                            result.Add(new KeyValuePair<string, string>(elementName, HttpUtility.UrlEncode(arrayValue)));
-                        }
-                    }
+                    AddEncodedArray(value, propertyInfo, result);
                 }
                 else if (!IsCustomClass(propertyInfo))
                 {
-                    var stringValue = value.ToString();
-
-                    if (propertyInfo.PropertyType == typeof(DateTime))
-                    {
-                        stringValue = ((DateTime)value).ToString(DateFormat);
-                    }
-
-                    result.Add(new KeyValuePair<string, string>(propertyInfo.Name, HttpUtility.UrlEncode(stringValue)));
+                    AddEncodedValue(value, propertyInfo, result);
                 }
                 else
                 {
@@ -77,19 +51,61 @@ namespace CallFire_csharp_sdk.Common
             return result;
         }
 
+        private static void AddEncodedValue(object value, PropertyInfo propertyInfo, List<KeyValuePair<string, string>> result)
+        {
+            var stringValue = value.ToString();
+
+            if (propertyInfo.PropertyType == typeof (DateTime))
+            {
+                stringValue = ((DateTime) value).ToString(DateFormat);
+            }
+
+            var elementName = propertyInfo.Name;
+            var attribs = (XmlElementAttribute[]) Attribute.GetCustomAttributes(propertyInfo, typeof (XmlElementAttribute));
+            if (attribs.Any(i => i.Type == value.GetType()))
+            {
+                elementName = attribs.First(i => i.Type == value.GetType()).ElementName;
+            }
+            result.Add(new KeyValuePair<string, string>(elementName, HttpUtility.UrlEncode(stringValue)));
+        }
+
+        private void AddEncodedArray(object value, PropertyInfo propertyInfo, List<KeyValuePair<string, string>> result)
+        {
+            var array = ((Array) value);
+            var attribs = (XmlElementAttribute[]) Attribute.GetCustomAttributes(propertyInfo, typeof (XmlElementAttribute));
+            if (array.Length <= 0 || attribs.All(i => i.Type != array.GetValue(0).GetType()))
+            {
+                return;
+            }
+            var elementName = attribs.First(i => i.Type == array.GetValue(0).GetType()).ElementName;
+            if (IsCustomClass(array.GetType().GetElementType()))
+            {
+                for (var i = 0; i < array.Length; i++)
+                {
+                    var elementProperties = GetProperties(array.GetValue(i));
+                    result.AddRange(elementProperties.Select(a => new KeyValuePair<string, string>
+                        (string.Format("{0}[{1}][{2}]", elementName, i, a.Key), a.Value)));
+                }
+            }
+            else
+            {
+                var arrayValue = string.Join(" ", array.OfType<object>().Select(e => e.ToString()).ToArray());
+                result.Add(new KeyValuePair<string, string>(elementName, HttpUtility.UrlEncode(arrayValue)));
+            }
+        }
+
         private static bool CheckSpecifiedProperties(object o, object value, PropertyInfo propertyInfo, IEnumerable<PropertyInfo> props)
         {
-            if ((value == null) || propertyInfo.Name.EndsWith("Specified"))
+            const string specified = "Specified";
+
+            if ((value == null) || propertyInfo.Name.EndsWith(specified))
             {
                 return true;
             }
 
-            var name = string.Format("{0}{1}", propertyInfo.Name, "Specified");
-            if (props.Any(p => p.Name == name && !((bool) p.GetValue(o, null))))
-            {
-                return true;
-            }
-            return false;
+            var name = string.Format("{0}{1}", propertyInfo.Name, specified);
+
+            return props.Any(property => property.Name == name && !((bool)property.GetValue(o, null)));
         }
 
         private bool IsCustomClass(PropertyInfo propertyInfo)

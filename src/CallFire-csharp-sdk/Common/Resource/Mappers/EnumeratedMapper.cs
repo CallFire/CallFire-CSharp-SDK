@@ -25,9 +25,9 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
             return result;
         }
 
-        internal static T EnumFromSoapEnumerated<T>(string source)
+        internal static T EnumFromSoapEnumerated<T>(string source) 
         {
-            return (T)Enum.Parse(typeof(T), ToPascalCase(source));
+            return source == null ? default(T) : (T)Enum.Parse(typeof(T), ToPascalCase(source));
         }
 
         internal static string ToPascalCase(string screamingSnakeCase)
@@ -96,7 +96,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
 
         internal static T ToSoapEnumerated<T>(string source)
         {
-            return (T) Enum.Parse(typeof(T), ScreamingSnakeCase(source)); 
+            return source == null ? default(T) : (T)Enum.Parse(typeof(T), ScreamingSnakeCase(source)); 
         }
     }
 }

@@ -8,6 +8,9 @@
             Item = item;
         }
 
+        /// <summary>
+        /// Unique ID of ContactList
+        /// </summary>
         public long ContactListId { get; set; }
 
         public object Item { get; set; }

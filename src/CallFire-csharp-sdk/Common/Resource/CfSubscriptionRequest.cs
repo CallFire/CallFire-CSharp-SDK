@@ -10,6 +10,9 @@ namespace CallFire_csharp_sdk.Common.Resource
             Subscription = suscription;
         }
 
+        /// <summary>
+        /// Subscription
+        /// </summary>
         public CfSubscription Subscription { get; set; }
     }
 }

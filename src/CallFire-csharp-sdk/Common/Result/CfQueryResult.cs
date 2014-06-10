@@ -11,6 +11,9 @@
         {
         }
 
+        /// <summary>
+        /// Results count
+        /// </summary>
         public long TotalResults { get; set; }
     }
 }

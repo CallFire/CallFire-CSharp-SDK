@@ -10,6 +10,9 @@ namespace CallFire_csharp_sdk.Common.Result
             Contact = contact;
         }
 
+        /// <summary>
+        /// List of Contacts
+        /// </summary>
         public CfContact[] Contact { get; set; }
     }
 }

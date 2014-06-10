@@ -22,7 +22,7 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
 
         public void DeleteLabel(string labelName)
         {
-            BaseRequest<string>(HttpMethod.Delete, new { LabelName = labelName }, new CallfireRestRoute<Label>(null));
+            BaseRequest<string>(HttpMethod.Delete, new DeleteLabel(labelName), new CallfireRestRoute<Label>());
         }
 
         public CfLabelQueryResult QueryLabels(CfQuery queryLabels)
@@ -40,25 +40,25 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
 
         public void LabelBroadcast(long id, string labelName)
         {
-            BaseRequest<string>(HttpMethod.Post, new { LabelName = labelName },
+            BaseRequest<string>(HttpMethod.Post, new IdLabelRequest(id, labelName),
                 new CallfireRestRoute<Label>(id, LabelRestRouteObjects.Broadcast, null));
         }
 
         public void UnlabelBroadcast(long id, string labelName)
         {
-            BaseRequest<string>(HttpMethod.Delete, new { LabelName = labelName },
+            BaseRequest<string>(HttpMethod.Delete, new IdLabelRequest(id, labelName),
                 new CallfireRestRoute<Label>(id, LabelRestRouteObjects.Broadcast, null));
         }
 
         public void LabelNumber(string number, string labelName)
         {
-            BaseRequest<string>(HttpMethod.Post, new { LabelName = labelName },
+            BaseRequest<string>(HttpMethod.Post, new NumberLabelRequest(number, labelName),
                 new CallfireRestRoute<Label>(null, LabelRestRouteObjects.Number, number));
         }
 
         public void UnlabelNumber(string number, string labelName)
         {
-            BaseRequest<string>(HttpMethod.Delete, new { LabelName = labelName },
+            BaseRequest<string>(HttpMethod.Delete, new NumberLabelRequest(number, labelName),
                 new CallfireRestRoute<Label>(null, LabelRestRouteObjects.Number, number));
         }
     }

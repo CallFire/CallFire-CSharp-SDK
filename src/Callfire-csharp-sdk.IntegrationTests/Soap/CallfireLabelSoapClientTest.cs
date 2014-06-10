@@ -24,6 +24,8 @@ namespace Callfire_csharp_sdk.IntegrationTests.Soap
             var broadcastRequest = new CfBroadcastRequest("", expectedBroadcast);
 
             BroadcastId = BroadcastClient.CreateBroadcast(broadcastRequest);
+
+            LabelName = "New SoapLabel";
         }
     }
 }

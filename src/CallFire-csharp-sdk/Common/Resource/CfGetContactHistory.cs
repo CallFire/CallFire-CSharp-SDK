@@ -8,6 +8,9 @@
             ContactId = contactId;
         }
 
+        /// <summary>
+        /// Contact to get history
+        /// </summary>
         public long ContactId { get; set; }
     }
 }

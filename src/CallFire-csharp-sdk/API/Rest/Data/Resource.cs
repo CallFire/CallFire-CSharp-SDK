@@ -19,6 +19,8 @@ namespace CallFire_csharp_sdk.API.Rest.Data
         [XmlElement("Contact", typeof(Contact), Namespace = CallfireNamespace.Data, Order = 0)]
         //[XmlElement("ContactHistory", typeof(ContactHistory), Namespace = CallfireNamespace.Data, Order = 0)]
         [XmlElement("ContactList", typeof(ContactList), Namespace = CallfireNamespace.Data, Order = 0)]
+        [XmlElement("Number", typeof(Number), Namespace = CallfireNamespace.Data, Order = 0)]
+        [XmlElement("NumberOrder", typeof(NumberOrder), Namespace = CallfireNamespace.Data, Order = 0)]
         public object Resources { get; set; }
     }
 }

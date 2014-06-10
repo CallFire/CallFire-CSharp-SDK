@@ -20,6 +20,9 @@ namespace CallFire_csharp_sdk.API.Rest.Data
         [XmlElement("SoundMeta", typeof(SoundMeta), Namespace = CallfireNamespace.Data, Order = 0)]
         [XmlElement("Contact", typeof(Contact), Namespace = CallfireNamespace.Data, Order = 0)]
         [XmlElement("ContactList", typeof(ContactList), Namespace = CallfireNamespace.Data, Order = 0)]
+        [XmlElement("Region", typeof(Region), Namespace = CallfireNamespace.Data, Order = 0)]
+        [XmlElement("Number", typeof(Number), Namespace = CallfireNamespace.Data, Order = 0)]
+        [XmlElement("Keyword", typeof(Keyword), Namespace = CallfireNamespace.Data, Order = 0)]
         [XmlElement("Label", typeof(Label), Namespace = CallfireNamespace.Data, Order = 0)]
         public object[] Resource { get; set; }
     }

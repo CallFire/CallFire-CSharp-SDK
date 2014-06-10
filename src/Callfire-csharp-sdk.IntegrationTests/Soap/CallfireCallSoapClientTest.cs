@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace Callfire_csharp_sdk.IntegrationTests.Soap
 {
     [TestFixture]
-    class CallfireCallSoapClientTest : CallfireCallClientTest
+    public class CallfireCallSoapClientTest : CallfireCallClientTest
     {
         [TestFixtureSetUp]
         public void FixtureSetup()
@@ -18,16 +18,18 @@ namespace Callfire_csharp_sdk.IntegrationTests.Soap
             CfResult[] result = { CfResult.Received };
             CfRetryPhoneType[] phoneTypes = { CfRetryPhoneType.FirstNumber };
             var broadcastConfigRestryConfig = new CfBroadcastConfigRetryConfig(1000, 2, result, phoneTypes);
-            var ivrBroadcastConfig = new CfIvrBroadcastConfig(1, DateTime.Now, "+14252163710", localTimeZoneRestriction, broadcastConfigRestryConfig,
+            var ivrBroadcastConfig = new CfIvrBroadcastConfig(1, DateTime.Now, "14252163710", localTimeZoneRestriction, broadcastConfigRestryConfig,
                 "<dialplan><play type=\"tts\">Congratulations! You have successfully configured a CallFire I V R.</play></dialplan>");
 
             var toNumber = new CfToNumber[1];
-            toNumber[0] = new CfToNumber("Data", null, "+14252163710");
+            toNumber[0] = new CfToNumber("Data", null, "14252163710");
 
             SendCall = new CfSendCall(String.Empty, CfBroadcastType.Ivr, "broadcastSoap", toNumber, false, ivrBroadcastConfig);
 
-            ActionQuery = new CfActionQuery(100, 0, 1838228001, 1092170001, null, null, false, new DateTime(2014,1,1),
-                new DateTime(2014, 1, 1), "+14252163710", "+14252163710", string.Empty);
+            ActionQuery = new CfActionQuery(100, 0, 1836940001, 1092170001, new[] { CfActionState.Finished }, new[] { CfResult.La },
+                false, new DateTime(2014, 1, 1), new DateTime(2014, 12, 1), "12132609784", "14252163710", string.Empty);
+
+            QuerySoundMeta = new CfQuery();
         }
     }
 }

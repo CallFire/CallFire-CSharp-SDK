@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using CallFire_csharp_sdk.API.Rest.Data;
 using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common;
@@ -32,7 +33,8 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
             var resourceList = BaseRequest<ResourceList>(HttpMethod.Get, new ActionQuery(cfQueryCalls),
                 new CallfireRestRoute<Call>());
 
-            var call = CallMapper.FromCall(ResourceListOperations.CastResourceList<Call>(resourceList));
+            var call = resourceList.Resource == null ? null
+               : resourceList.Resource.Select(r => CallMapper.FromCall((Call)r)).ToArray();
             return new CfCallQueryResult(resourceList.TotalResults, call);
         }
 
@@ -44,22 +46,23 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
 
         public long CreateSound(CfCreateSound cfCreateSound)
         {
-            var resource = BaseRequest<ResourceReference>(HttpMethod.Post, new CreateSound(cfCreateSound), new CallfireRestRoute<Call>());
+            var resource = BaseRequest<ResourceReference>(HttpMethod.Post, new CreateSound(cfCreateSound), new CallfireRestRoute<Call>(null, CallRestRouteObjects.Sound, null));
             return resource.Id;
         }
 
         public CfSoundMetaQueryResult QuerySoundMeta(CfQuery cfQuerySoundMeta)
         {
             var resourceList = BaseRequest<ResourceList>(HttpMethod.Get, new Query(cfQuerySoundMeta),
-                new CallfireRestRoute<Call>());
-           
-            var soundMeta = SoundMetaMapper.FromSoundMeta(ResourceListOperations.CastResourceList<SoundMeta>(resourceList));
+                new CallfireRestRoute<Call>(null, CallRestRouteObjects.Sound, null));
+
+            var soundMeta = resourceList.Resource == null ? null
+               : resourceList.Resource.Select(r => SoundMetaMapper.FromSoundMeta((SoundMeta)r)).ToArray();
             return new CfSoundMetaQueryResult(resourceList.TotalResults, soundMeta);
         }
 
         public CfSoundMeta GetSoundMeta(long id)
         {
-            var resource = BaseRequest<Resource>(HttpMethod.Get, null, new CallfireRestRoute<Call>(id));
+            var resource = BaseRequest<Resource>(HttpMethod.Get, null, new CallfireRestRoute<Call>(id, CallRestRouteObjects.Sound, null));
             return SoundMetaMapper.FromSoundMeta(resource.Resources as SoundMeta);
         }
 
