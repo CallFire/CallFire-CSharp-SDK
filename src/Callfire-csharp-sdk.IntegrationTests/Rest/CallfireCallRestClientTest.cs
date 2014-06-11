@@ -21,9 +21,7 @@ namespace Callfire_csharp_sdk.IntegrationTests.Rest
             var ivrBroadcastConfig = new CfIvrBroadcastConfig(1, DateTime.Now, "14252163710", localTimeZoneRestriction, broadcastConfigRestryConfig,
                 "<dialplan><play type=\"tts\">Congratulations! You have successfully configured a CallFire I V R.</play></dialplan>");
 
-            var toNumber = new CfToNumber[1];
-            toNumber[0] = new CfToNumber("Data", null, "14252163710");
-
+            var toNumber = new[] { new CfToNumber("Data", null, "14252163710") };
             SendCall = new CfSendCall(String.Empty, CfBroadcastType.Ivr, "broadcastSoap", toNumber, false, ivrBroadcastConfig);
 
             ActionQuery = new CfActionQuery(100, 0, 1836940001, 1092170001, new[] { CfActionState.Finished }, new[] { CfResult.La },

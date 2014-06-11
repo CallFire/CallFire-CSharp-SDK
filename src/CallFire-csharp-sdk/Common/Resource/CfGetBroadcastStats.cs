@@ -4,6 +4,10 @@ namespace CallFire_csharp_sdk.Common.Resource
 {
     public class CfGetBroadcastStats
     {
+        public CfGetBroadcastStats()
+        {
+        }
+
         public CfGetBroadcastStats(long id, DateTime intervalBegin, DateTime intervalEnd)
         {
             Id = id;

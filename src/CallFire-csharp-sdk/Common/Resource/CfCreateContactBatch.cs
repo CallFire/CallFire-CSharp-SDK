@@ -2,6 +2,10 @@
 {
     public class CfCreateContactBatch
     {
+        public CfCreateContactBatch()
+        {
+        }
+
         public CfCreateContactBatch(string requestId, long broadcastId, string name, object[] items, bool scrubBroadcastDuplicates)
         {
             RequestId = requestId;

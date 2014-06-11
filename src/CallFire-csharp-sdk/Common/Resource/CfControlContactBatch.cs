@@ -2,6 +2,10 @@
 {
     public class CfControlContactBatch : CfUniqueResource
     {
+        public CfControlContactBatch()
+        {
+        }
+
         public CfControlContactBatch(long id, string name, bool? enabled) : base(id)
         {
             Name = name;

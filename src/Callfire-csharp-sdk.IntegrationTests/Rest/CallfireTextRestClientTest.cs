@@ -20,9 +20,7 @@ namespace Callfire_csharp_sdk.IntegrationTests.Rest
             var broadcastConfigRestryConfig = new CfBroadcastConfigRetryConfig(1000, 2, result, phoneTypes);
             var textBroadcastConfig = new CfTextBroadcastConfig(1, DateTime.Now, "14252163710", localTimeZoneRestriction, broadcastConfigRestryConfig, "Test", CfBigMessageStrategy.DoNotSend);
 
-            var toNumber = new CfToNumber[1];
-            toNumber[0] = new CfToNumber("Data", null, "14252163710");
-
+            var toNumber = new [] { new CfToNumber("Data", null, "14252163710") };
             SendText = new CfSendText(String.Empty, CfBroadcastType.Text, "broadcastSoap", toNumber, false, textBroadcastConfig, 1875873001, true);
 
             CfActionQuery = new CfActionQuery(100, 0, 1838228001, 1092170001, new[] { CfActionState.Ready }, null , false, new DateTime(2014, 1, 1),

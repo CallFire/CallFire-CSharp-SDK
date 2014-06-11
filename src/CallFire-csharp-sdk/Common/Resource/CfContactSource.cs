@@ -6,6 +6,10 @@ namespace CallFire_csharp_sdk.Common.Resource
 {
     public class CfContactSource
     {
+        public CfContactSource()
+        {
+        }
+
         public CfContactSource(object[] items)
         {
             if (items.GetType() == typeof(Contact[]))

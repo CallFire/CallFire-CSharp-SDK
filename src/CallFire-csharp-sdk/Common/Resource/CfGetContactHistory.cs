@@ -2,6 +2,10 @@
 {
     public class CfGetContactHistory : CfQuery
     {
+        public CfGetContactHistory()
+        {
+        }
+        
         public CfGetContactHistory(long maxResult, long firstResult, long contactId)
             : base(maxResult, firstResult)
         {

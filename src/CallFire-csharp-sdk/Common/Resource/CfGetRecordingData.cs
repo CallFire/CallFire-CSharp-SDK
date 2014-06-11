@@ -4,6 +4,10 @@ namespace CallFire_csharp_sdk.Common.Resource
 {
     public class CfGetRecordingData
     {
+        public CfGetRecordingData()
+        {
+        }
+
         public CfGetRecordingData(object[] items, CfItemsChoiceType[] itemsElementNameField, CfSoundFormat format)
         {
             Items = items;

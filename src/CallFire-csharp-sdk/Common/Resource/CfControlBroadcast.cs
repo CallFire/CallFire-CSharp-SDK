@@ -2,6 +2,10 @@
 {
     public class CfControlBroadcast : CfUniqueResource
     {
+        public CfControlBroadcast()
+        {
+        }
+
         public CfControlBroadcast(long id, string requestId, CfBroadcastCommand? command, int? maxActive)
             : base(id)
         {

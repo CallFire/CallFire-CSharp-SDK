@@ -4,6 +4,10 @@ namespace CallFire_csharp_sdk.Common.Resource
 {
     public class CfBroadcastRequest : CfRequest
     {
+        public CfBroadcastRequest()
+        {
+        }
+
         public CfBroadcastRequest(string requestId, CfBroadcast broadcast)
         {
             RequestId = requestId;

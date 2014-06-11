@@ -5,6 +5,10 @@ namespace CallFire_csharp_sdk.Common.Resource
 {
     public class CfActionQuery : CfQuery
     {
+        public CfActionQuery()
+        {
+        }
+
         public CfActionQuery(long maxResult, long firstResult, long? broadcastId, long? batchId, CfActionState[] state, CfResult[] result,
             bool? inbound, DateTime? intervalBegin, DateTime? intervalEnd, string fromNumber, string toNumber, string labelName)
             : base (maxResult, firstResult)

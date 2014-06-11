@@ -2,6 +2,10 @@
 {
     public class CfCreateSound
     {
+        public CfCreateSound()
+        {
+        }
+
         public CfCreateSound(string name, object item, string soundTextVoice)
         {
             Name = name;

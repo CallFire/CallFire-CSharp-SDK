@@ -4,6 +4,10 @@ namespace CallFire_csharp_sdk.Common.Resource
 {
     public class CfSubscriptionRequest : CfRequest
     {
+        public CfSubscriptionRequest()
+        {
+        }
+
         public CfSubscriptionRequest(string requestId, CfSubscription suscription)
         {
             RequestId = requestId;

@@ -8,5 +8,7 @@ CallFire C# SDK
 * Examples
     * [Broadcasts](/docs/en/01.broadcasts.md)
     * [Subscriptions (Postbacks)](/docs/en/02.subscriptions.md)
-
-
+	* [Texts](/docs/en/03.texts.md)
+	* [Calls](/docs/en/04.calls.md)
+	* [Numbers](/docs/en/06.numbers.md)
+	* [Labels](/docs/en/07.labels.md)

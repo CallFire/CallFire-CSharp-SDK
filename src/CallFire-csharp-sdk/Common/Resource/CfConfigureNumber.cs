@@ -4,6 +4,10 @@ namespace CallFire_csharp_sdk.Common.Resource
 {
     public class CfConfigureNumber
     {
+        public CfConfigureNumber()
+        {
+        }
+        
         public CfConfigureNumber(string number, CfNumberConfiguration numberConfiguration)
         {
             Number = number;

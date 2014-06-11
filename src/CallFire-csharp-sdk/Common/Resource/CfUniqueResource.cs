@@ -2,6 +2,10 @@
 {
     public abstract class CfUniqueResource
     {
+        protected CfUniqueResource()
+        {
+        }
+
         protected CfUniqueResource(long id)
         {
             Id = id;

@@ -4,6 +4,10 @@ namespace CallFire_csharp_sdk.Common.Resource
 {
     public class CfCreateNumberOrderBulkLocal
     {
+        public CfCreateNumberOrderBulkLocal()
+        {
+        }
+
         public CfCreateNumberOrderBulkLocal(int count, CfRegion region)
         {
             Count = count;
