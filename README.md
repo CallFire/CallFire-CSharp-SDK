@@ -11,4 +11,4 @@ CallFire C# SDK
 	* [Texts](/docs/en/03.texts.md)
 	* [Calls](/docs/en/04.calls.md)
 	* [Numbers](/docs/en/06.numbers.md)
-
+	* [Labels](/docs/en/07.labels.md)
