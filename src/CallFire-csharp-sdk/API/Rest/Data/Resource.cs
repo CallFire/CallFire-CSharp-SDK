@@ -17,7 +17,7 @@ namespace CallFire_csharp_sdk.API.Rest.Data
         [XmlElement("Call", typeof(Call), Namespace = CallfireNamespace.Data, Order = 0)]
         [XmlElement("SoundMeta", typeof(SoundMeta), Namespace = CallfireNamespace.Data, Order = 0)]
         [XmlElement("Contact", typeof(Contact), Namespace = CallfireNamespace.Data, Order = 0)]
-        //[XmlElement("ContactHistory", typeof(ContactHistory), Namespace = CallfireNamespace.Data, Order = 0)]
+        [XmlElement("ContactHistory", typeof(Common.Resource.ContactHistory), Namespace = CallfireNamespace.Data, Order = 0)]
         [XmlElement("ContactList", typeof(ContactList), Namespace = CallfireNamespace.Data, Order = 0)]
         [XmlElement("Number", typeof(Number), Namespace = CallfireNamespace.Data, Order = 0)]
         [XmlElement("NumberOrder", typeof(NumberOrder), Namespace = CallfireNamespace.Data, Order = 0)]
