@@ -8,6 +8,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
     [TestFixture]
     public abstract class CallfireTextClientTest
     {
+        protected CallfireClient CallfireClient;
         protected ITextClient Client;
 
         protected CfSendText SendText;

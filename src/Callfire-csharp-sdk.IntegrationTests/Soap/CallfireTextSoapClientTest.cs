@@ -1,5 +1,5 @@
 ﻿using System;
-using CallFire_csharp_sdk.API.Soap;
+using CallFire_csharp_sdk.API;
 using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
 using NUnit.Framework;
@@ -12,7 +12,8 @@ namespace Callfire_csharp_sdk.IntegrationTests.Soap
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            Client = new SoapTextClient(MockClient.User(), MockClient.Password());
+            CallfireClient = new CallfireClient(MockClient.User(), MockClient.Password(), CallfireClients.Soap);
+            Client = CallfireClient.Text;
 
             var localTimeZoneRestriction = new CfLocalTimeZoneRestriction(DateTime.Now, DateTime.Now);
             CfResult[] result = { CfResult.Received };

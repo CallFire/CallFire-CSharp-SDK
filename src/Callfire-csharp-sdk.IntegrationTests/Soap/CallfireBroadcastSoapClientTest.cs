@@ -23,6 +23,7 @@ namespace Callfire_csharp_sdk.IntegrationTests.Soap
             ExpectedBroadcast = new CfBroadcast(14898, "broadcastSoap", CfBroadcastStatus.Running, DateTime.Now, 
                 CfBroadcastType.Text, expectedTextBroadcastConfig);
 
+            
             CfBroadcastType[] broadcastType = {CfBroadcastType.Text};
             CfQueryBroadcasts = new CfQueryBroadcasts(100, 0, broadcastType, null, null);
 

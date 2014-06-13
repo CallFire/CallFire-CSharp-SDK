@@ -23,6 +23,8 @@ namespace Callfire_csharp_sdk.IntegrationTests
             Assert.IsNotNull(regionQueryResult);
             Assert.IsNotNull(regionQueryResult.Region);
             Assert.IsTrue(regionQueryResult.Region.Any(r => r.City != null && r.City.Equals("HACKENSACK")));
+            //Assert.IsTrue(regionQueryResult.Region.Any(r => r.Prefix == "1201208" && r.City.Equals("HACKENSACK")));
+            //Assert.AreEqual("1201208", regionQueryResult.nUMBERO);
         }
 
         [Test]
