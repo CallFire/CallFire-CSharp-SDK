@@ -170,31 +170,14 @@ namespace Callfire_csharp_sdk.IntegrationTests
                  },
              };
          }
-         [Test]
-         public void Test_CreateBroadcast_VoiceLocalTimeZoneRestrictionCompleteWrongFormat()
-         {
-             ExpectedBroadcastVoice = new CfBroadcast
-             {
-                 Name = "Name",
-                 Type = CfBroadcastType.Voice,
-                 Item = new CfVoiceBroadcastConfig
-                 {
-                     Id = 1,
-                     Created = new DateTime(2012, 10, 26),
-                     FromNumber = "14252163710",
-                     Item = "56",
-                     MachineSoundTextVoice = "SPANISH1",
-                     Item1 = "12",
-                     //LocalTimeZoneRestriction = new LocalTimeZoneRestriction(new DateTime(2014, 01, 01, 09, 00, 00)),
-
-                 },
-             };
-         }
+         
          [Test]
          public void Test_CreateBroadcast_VoiceRetryConfigMandatoryFieldsOnlyComple()
          {
+
              // si  AnsweringMachineConfig es obligatorio = LIVE_WITH_AMD
             //with Items  1, 2, 3 = string, 
+             // RetryResults=XFER
 
              
          }
@@ -202,18 +185,24 @@ namespace Callfire_csharp_sdk.IntegrationTests
          [Test]
          public void Test_CreateBroadcast_VoiceRetryConfigCompleteItem_Item1_Item2_Item3Long()
          {
+             //RetryResults= LA
              // AnsweringMachineConfig = AM_ONLY
              //Item_Item1_Item2_Item3Long
+             //RetryPhoneTypes= FIRST_NUMBER
          }
          [Test]
          public void Test_CreateBroadcast_VoiceRetryConfigComplete()
          {
+             //RetryResults= AM
+             //RetryPhoneTypes= HOME_PHONE
              //AnsweringMachineConfig =AM_AND_LIVE
              //all fileds complete
          }
          [Test]
          public void Test_CreateBroadcast_VoiceRetryConfigNotAllComplete()
          {
+             //RetryResults= BUSY, 
+             //RetryPhoneTypes= WORK_PHONE
              //AnsweringMachineConfig =LIVE_IMMEDIATE
              //not all mandatory complete
          }
@@ -222,15 +211,96 @@ namespace Callfire_csharp_sdk.IntegrationTests
          [Test]
          public void Test_CreateBroadcast_VoiceRetryConfigMandatoryFieldInvalid()
          {
+             //RetryResults= DNC
+             //RetryPhoneTypes= MOBILE_PHONE
              //mandatory fiels invalids
          }
 
+        //TEXT
+        [Test]
+        public void Test_CreateBroadcast_TextBroadcastConfigFaildCreated()
+        {
+            //created date wrong format
+        }
+
+        [Test]
+        public void Test_CreateBroadcast_TextLocalTimeZoneRestrictionEndTimeOnly()
+         {
+             ExpectedBroadcastVoice = new CfBroadcast
+             {
+                 Name = "Name",
+                 Type = CfBroadcastType.Text,
+                 Item = new CfTextBroadcastConfig()
+                 {
+                    
+                 },
+             };
+         }
+        [Test]
+        public void Test_CreateBroadcast_TextRetryConfigMandatoryFieldsOnlyComple()
+        {
+
+            //RetryResults= XFER_LEG
+            //with Items  1, 2, 3 = string, 
+            
+
+
+        }
+        public void Test_CreateBroadcast_TextRetryConfigNotAllComplete()
+        {
+            
+            //not all mandatory complete
+            //RetryResults= NO_ANS
+            //RetryPhoneTypes =FIRST_NUMBER
+        }
+        
+        [Test]
+        public void Test_CreateBroadcast_TextRetryConfigMessage160caracters()
+        {
+            //message=160
+            //RetryResults = UNDIALED
+            //BigMessageStrategy=SEND_MULTIPLE
+        }
+        [Test]
+        public void Test_CreateBroadcast_TextRetryConfigMessage161caractersANDRetryResultsSENT()
+        {
+            //message=161
+            //RetryResults = SENT
+            //BigMessageStrategy=DO_NOT_SEND
+
+        }
+        [Test]
+        public void Test_CreateBroadcast_TextRetryConfigMessage161caractersANDRetryResultsRECEIVED()
+        {
+            //message=161
+            //RetryResults =RECEIVED
+            //BigMessageStrategy=TRIM
+
+        }
+        [Test]
+        public void Test_CreateBroadcast_TextRetryConfigMessage161caractersANDRetryResultsDNT()
+        {
+            //message=161 !"#$%&/()=
+            //RetryResults =DNT
+
+        }
+
+
+        //IVR
+        [Test]
+        public void Test_CreateBroadcast_IvrBroadcastConfigFaildId()
+        {
+            //with wrong Id
+        }
 
 
 
+      
+      
+    
 
 
-
+    
 
 
 
