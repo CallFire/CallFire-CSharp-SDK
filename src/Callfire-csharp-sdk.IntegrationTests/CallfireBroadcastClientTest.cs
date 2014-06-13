@@ -77,6 +77,8 @@ namespace Callfire_csharp_sdk.IntegrationTests
             AssertClientException(() => Client.CreateBroadcast(broadcastRequest));
         }
 
+
+
         [Test]
         public void Test_CreateBroadcast_VoiceBroadcastConfigFaildNumber()
         {
@@ -100,7 +102,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
-        public void Test_CreateBroadcast_VoiceBroadcastConfigSuccess() //mal el numero
+        public void Test_CreateBroadcast_VoiceBroadcastConfigComplete() //mal el numero
         {
             ExpectedBroadcastVoice = new CfBroadcast
             {
@@ -122,7 +124,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
-        public void Test_CreateBroadcast_VoiceLocalTimeZoneRestrictionSuccess() 
+        public void Test_CreateBroadcast_VoiceLocalTimeZoneRestrictionComplete() 
         {
             ExpectedBroadcastVoice = new CfBroadcast
             {
@@ -146,6 +148,47 @@ namespace Callfire_csharp_sdk.IntegrationTests
             var id = Client.CreateBroadcast(broadcastRequest);
             Assert.IsNotNull(id);
         }
+
+       //part 2
+         [Test]
+        public void Test_CreateBroadcast_VoiceLocalTimeZoneRestrictionBeginTimeOnly()
+         {
+             ExpectedBroadcastVoice = new CfBroadcast
+             {
+                 Name = "Name",
+                 Type = CfBroadcastType.Voice,
+                 Item = new CfVoiceBroadcastConfig
+                 {
+                     Id = 1,
+                     Created = new DateTime(2012, 10, 26),
+                     FromNumber = "14252163710",
+                     Item = "56",
+                     MachineSoundTextVoice = "SPANISH1",
+                     Item1 = "12",
+                     //LocalTimeZoneRestriction = new LocalTimeZoneRestriction(new DateTime(2014, 01, 01, 09, 00, 00)),
+
+                 },
+             };
+         }
+
+         [Test]
+         public void Test_CreateBroadcast_VoiceRetryConfigMandatoryFieldsOnly()
+         {
+             
+         }
+
+         [Test]
+         public void Test_CreateBroadcast_VoiceRetryConfigComplete()
+         {
+
+         }
+         [Test]
+         public void Test_CreateBroadcast_VoiceRetryConfigMandatoryFieldInvalid()// vemos cual puede ser 
+         {
+
+         }
+
+
 
 
 
