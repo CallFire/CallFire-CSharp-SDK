@@ -18,12 +18,11 @@ namespace Callfire_csharp_sdk.IntegrationTests.Soap
             CfResult[] result = { CfResult.Received };
             CfRetryPhoneType[] phoneTypes = { CfRetryPhoneType.FirstNumber };
             var broadcastConfigRestryConfig = new CfBroadcastConfigRetryConfig(1000, 2, result, phoneTypes);
-            var expectedTextBroadcastConfig = new CfTextBroadcastConfig(1, DateTime.Now, null, localTimeZoneRestriction, 
+            var expectedTextBroadcastConfig = new CfTextBroadcastConfig(1, DateTime.Now, null, localTimeZoneRestriction,
                 broadcastConfigRestryConfig, "Test", CfBigMessageStrategy.DoNotSend);
-            ExpectedBroadcast = new CfBroadcast(14898, "broadcastSoap", CfBroadcastStatus.Running, DateTime.Now, 
+            ExpectedBroadcastDefault = new CfBroadcast(14898, "broadcastSoap", CfBroadcastStatus.Running, DateTime.Now,
                 CfBroadcastType.Text, expectedTextBroadcastConfig);
 
-            
             CfBroadcastType[] broadcastType = {CfBroadcastType.Text};
             CfQueryBroadcasts = new CfQueryBroadcasts(100, 0, broadcastType, null, null);
 

@@ -14,6 +14,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
     public abstract class CallfireBroadcastClientTest
     {
         protected IBroadcastClient Client;
+        protected CfBroadcast ExpectedBroadcastDefault;
         protected CfBroadcast ExpectedBroadcast;
         protected CfBroadcast ExpectedBroadcastVoice;
         protected CfBroadcast ExpectedBroadcastText;
@@ -25,37 +26,9 @@ namespace Callfire_csharp_sdk.IntegrationTests
         protected CfControlBroadcast ControlBroadcast;
         protected CfCreateContactBatch CreateContactBatch;
 
-        [Test]
-        public void Test_CreateBroadcast()
-        {
-            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcast);
-            var id = Client.CreateBroadcast(broadcastRequest);
-            Assert.IsNotNull(id);
-        }
-
-        [Test]
-        public void Test_CreateBroadcastNull()
-        {
-            var broadcastRequest = new CfBroadcastRequest("ABC", null);
-            Assert.Throws<WebException>(() => Client.CreateBroadcast(broadcastRequest));
-        }
-
-        [Test]
-        public void Test_CreateBroadcast_WithNameOnly()
-        {
-            ExpectedBroadcast = new CfBroadcast();
-            ExpectedBroadcast.Name = "Name";
-            //CfBroadcast
-            //CfTextBroadcastConfig 
-
-            var broadcastRequest = new CfBroadcastRequest(null, ExpectedBroadcast);
-            AssertClientException(() => Client.CreateBroadcast(broadcastRequest));
-
-        }
-
         private void AssertClientException(TestDelegate test)
         {
-            if (Client.GetType() == typeof (RestBroadcastClient))
+            if (Client.GetType() == typeof(RestBroadcastClient))
             {
                 Assert.Throws<WebException>(test);
             }
@@ -66,12 +39,40 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
+        public void Test_CreateBroadcast()
+        {
+            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastDefault);
+            var id = Client.CreateBroadcast(broadcastRequest);
+            Assert.IsNotNull(id);
+        }
+
+        [Test]
+        public void Test_CreateBroadcastNull()
+        {
+            var broadcastRequest = new CfBroadcastRequest("ABC", null);
+            AssertClientException(() => Client.CreateBroadcast(broadcastRequest));
+        }
+
+        [Test]
+        public void Test_CreateBroadcast_WithNameOnly()
+        {
+            ExpectedBroadcast = new CfBroadcast
+            {
+                Name = "Name"
+            };
+
+            var broadcastRequest = new CfBroadcastRequest(null, ExpectedBroadcast);
+            AssertClientException(() => Client.CreateBroadcast(broadcastRequest));
+        }
+
+        [Test]
         public void Test_CreateBroadcast_WithNameandTypeVoice()
         {
-            ExpectedBroadcast = new CfBroadcast();
-            ExpectedBroadcast.Name = "Name";
-            ExpectedBroadcast.Type = CfBroadcastType.Voice;
-            //CfTextBroadcastConfig 
+            ExpectedBroadcast = new CfBroadcast
+            {
+                Name = "Name", 
+                Type = CfBroadcastType.Voice
+            };
 
             var broadcastRequest = new CfBroadcastRequest(null, ExpectedBroadcast);
             AssertClientException(() => Client.CreateBroadcast(broadcastRequest));
@@ -95,8 +96,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
                 },
             };
             var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastVoice);
-            var id = Client.CreateBroadcast(broadcastRequest);
-            Assert.IsNotNull(id);
+            AssertClientException(() => Client.CreateBroadcast(broadcastRequest));
         }
 
         [Test]
@@ -137,7 +137,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
                     MachineSoundTextVoice = "SPANISH1",
                     Item1 = "12",
                     //LocalTimeZoneRestriction = new LocalTimeZoneRestriction(new DateTime(2014, 01, 01, 09, 00, 00),new DateTime(2014, 01, 01, 17, 00, 00)),
-                       
                 },
                 
             };
@@ -146,14 +145,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
             var id = Client.CreateBroadcast(broadcastRequest);
             Assert.IsNotNull(id);
         }
-
-
-
-
-
-
-
-
 
         [Test]
         public void Test_CreateBroadcast_TextConfigSuccess()
@@ -167,7 +158,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
                     Id = 1,
                     Created = new DateTime(2012, 10, 26),
                     FromNumber = "14252163710",
-                   
                 },
             };
 
@@ -237,7 +227,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         [Test]
         public void Test_ControlBroadcast()
         {
-            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcast);
+            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastDefault);
             ControlBroadcast.Id = Client.CreateBroadcast(broadcastRequest);
             Client.ControlBroadcast(ControlBroadcast);
         }
