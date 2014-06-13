@@ -170,23 +170,62 @@ namespace Callfire_csharp_sdk.IntegrationTests
                  },
              };
          }
-
          [Test]
-         public void Test_CreateBroadcast_VoiceRetryConfigMandatoryFieldsOnly()
+         public void Test_CreateBroadcast_VoiceLocalTimeZoneRestrictionCompleteWrongFormat()
          {
+             ExpectedBroadcastVoice = new CfBroadcast
+             {
+                 Name = "Name",
+                 Type = CfBroadcastType.Voice,
+                 Item = new CfVoiceBroadcastConfig
+                 {
+                     Id = 1,
+                     Created = new DateTime(2012, 10, 26),
+                     FromNumber = "14252163710",
+                     Item = "56",
+                     MachineSoundTextVoice = "SPANISH1",
+                     Item1 = "12",
+                     //LocalTimeZoneRestriction = new LocalTimeZoneRestriction(new DateTime(2014, 01, 01, 09, 00, 00)),
+
+                 },
+             };
+         }
+         [Test]
+         public void Test_CreateBroadcast_VoiceRetryConfigMandatoryFieldsOnlyComple()
+         {
+             // si  AnsweringMachineConfig es obligatorio = LIVE_WITH_AMD
+            //with Items  1, 2, 3 = string, 
+
              
          }
 
          [Test]
-         public void Test_CreateBroadcast_VoiceRetryConfigComplete()
+         public void Test_CreateBroadcast_VoiceRetryConfigCompleteItem_Item1_Item2_Item3Long()
          {
-
+             // AnsweringMachineConfig = AM_ONLY
+             //Item_Item1_Item2_Item3Long
          }
          [Test]
-         public void Test_CreateBroadcast_VoiceRetryConfigMandatoryFieldInvalid()// vemos cual puede ser 
+         public void Test_CreateBroadcast_VoiceRetryConfigComplete()
          {
-
+             //AnsweringMachineConfig =AM_AND_LIVE
+             //all fileds complete
          }
+         [Test]
+         public void Test_CreateBroadcast_VoiceRetryConfigNotAllComplete()
+         {
+             //AnsweringMachineConfig =LIVE_IMMEDIATE
+             //not all mandatory complete
+         }
+
+
+         [Test]
+         public void Test_CreateBroadcast_VoiceRetryConfigMandatoryFieldInvalid()
+         {
+             //mandatory fiels invalids
+         }
+
+
 
 
 
