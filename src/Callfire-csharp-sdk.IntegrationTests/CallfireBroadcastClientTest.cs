@@ -3,7 +3,6 @@ using System.Linq;
 using System.Net;
 using CallFire_csharp_sdk.API;
 using CallFire_csharp_sdk.API.Rest.Clients;
-using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
 using NUnit.Framework;
@@ -79,7 +78,28 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
-        public void Test_CreateBroadcast_VoiceBroadcastConfigFaildNumber()
+        public void Test_CreateBroadcast_VoiceBroadcastConfigFaildNumber() //Soap Expected: <System.ServiceModel.FaultException> But was:  <System.ServiceModel.FaultException`1[CallFire_csharp_sdk.API.Soap.ServiceFaultInfo]>
+        {
+            ExpectedBroadcastVoice = new CfBroadcast
+            {
+                Name = "Name",
+                Type = CfBroadcastType.Voice,
+                Item = new CfVoiceBroadcastConfig
+                {
+                    Id = 1,
+                    Created = new DateTime(2012, 10, 26),
+                    FromNumber = "45879163710", 
+                    Item = "56",
+                    MachineSoundTextVoice = "SPANISH1",
+                    Item1 = "12"
+                },
+            };
+            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastVoice);
+            AssertClientException(() => Client.CreateBroadcast(broadcastRequest));
+        }
+
+        [Test]
+        public void Test_CreateBroadcast_VoiceBroadcastConfigComplete() //mal el numero
         {
             ExpectedBroadcastVoice = new CfBroadcast
             {
@@ -96,33 +116,12 @@ namespace Callfire_csharp_sdk.IntegrationTests
                 },
             };
             var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastVoice);
-            AssertClientException(() => Client.CreateBroadcast(broadcastRequest));
-        }
-
-        [Test]
-        public void Test_CreateBroadcast_VoiceBroadcastConfigSuccess() //mal el numero
-        {
-            ExpectedBroadcastVoice = new CfBroadcast
-            {
-                Name = "Name",
-                Type = CfBroadcastType.Voice,
-                Item = new CfVoiceBroadcastConfig
-                {
-                    Id = 1,
-                    Created = new DateTime(2012, 10, 26),
-                    FromNumber = "4252163710",
-                    Item = "56",
-                    MachineSoundTextVoice = "SPANISH1",
-                    Item1 = "12"
-                },
-            };
-            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastVoice);
             var id = Client.CreateBroadcast(broadcastRequest);
             Assert.IsNotNull(id);
         }
 
         [Test]
-        public void Test_CreateBroadcast_VoiceLocalTimeZoneRestrictionSuccess() 
+        public void Test_CreateBroadcast_VoiceLocalTimeZoneRestrictionComplete() 
         {
             ExpectedBroadcastVoice = new CfBroadcast
             {
@@ -136,7 +135,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
                     Item = "56",
                     MachineSoundTextVoice = "SPANISH1",
                     Item1 = "12",
-                    //LocalTimeZoneRestriction = new LocalTimeZoneRestriction(new DateTime(2014, 01, 01, 09, 00, 00),new DateTime(2014, 01, 01, 17, 00, 00)),
+                    LocalTimeZoneRestriction = new CfLocalTimeZoneRestriction(new DateTime(2014, 01, 01, 09, 00, 00), new DateTime(2014, 01, 01, 17, 00, 00)),
                 },
                 
             };
@@ -146,6 +145,44 @@ namespace Callfire_csharp_sdk.IntegrationTests
             Assert.IsNotNull(id);
         }
 
+        //part 2
+        [Test]
+        public void Test_CreateBroadcast_VoiceLocalTimeZoneRestrictionBeginTimeOnly()
+        {
+            ExpectedBroadcastVoice = new CfBroadcast
+            {
+                Name = "Name",
+                Type = CfBroadcastType.Voice,
+                Item = new CfVoiceBroadcastConfig
+                {
+                    Id = 1,
+                    Created = new DateTime(2012, 10, 26),
+                    FromNumber = "14252163710",
+                    Item = "56",
+                    MachineSoundTextVoice = "SPANISH1",
+                    Item1 = "12",
+                    //LocalTimeZoneRestriction = new LocalTimeZoneRestriction(new DateTime(2014, 01, 01, 09, 00, 00)),
+                },
+            };
+        }
+
+        [Test]
+        public void Test_CreateBroadcast_VoiceRetryConfigMandatoryFieldsOnly()
+        {
+                          
+        }
+
+        [Test]
+        public void Test_CreateBroadcast_VoiceRetryConfigComplete()
+        {
+
+        }
+        [Test]
+        public void Test_CreateBroadcast_VoiceRetryConfigMandatoryFieldInvalid()// vemos cual puede ser 
+        {
+
+        }
+
         [Test]
         public void Test_CreateBroadcast_TextConfigSuccess()
         {
@@ -153,7 +190,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
             {
                 Name = "Name",
                 Type = CfBroadcastType.Text,
-                Item = new CfTextBroadcastConfig()
+                Item = new CfTextBroadcastConfig
                 {
                     Id = 1,
                     Created = new DateTime(2012, 10, 26),
