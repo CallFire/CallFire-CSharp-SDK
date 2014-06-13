@@ -38,8 +38,11 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
                     HttpStatusCode.InternalServerError == ((HttpWebResponse)ex.Response).StatusCode)
                 {
                     var exceptionDeserializer = new XmlSerializer(typeof(ResourceException));
-                    TextReader exceptionReader = new StringReader(response);
-                    ex.Data.Add("Exception", exceptionDeserializer.Deserialize(exceptionReader));
+                    if (!string.IsNullOrEmpty(response))
+                    {
+                        TextReader exceptionReader = new StringReader(response);
+                        ex.Data.Add("Exception", exceptionDeserializer.Deserialize(exceptionReader));
+                    }
                 }
                 throw;
             }
