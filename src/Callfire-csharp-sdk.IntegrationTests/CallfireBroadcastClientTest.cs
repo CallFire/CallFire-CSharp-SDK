@@ -217,11 +217,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
          }
 
         //TEXT
-        [Test]
-        public void Test_CreateBroadcast_TextBroadcastConfigFaildCreated()
-        {
-            //created date wrong format
-        }
 
         [Test]
         public void Test_CreateBroadcast_TextLocalTimeZoneRestrictionEndTimeOnly()
@@ -249,13 +244,13 @@ namespace Callfire_csharp_sdk.IntegrationTests
         public void Test_CreateBroadcast_TextRetryConfigNotAllComplete()
         {
             
-            //not all mandatory complete
+            //not all no mandatory complete
             //RetryResults= NO_ANS
             //RetryPhoneTypes =FIRST_NUMBER
         }
         
         [Test]
-        public void Test_CreateBroadcast_TextRetryConfigMessage160caracters()
+        public void Test_CreateBroadcast_TextRetryConfigMessage160caractersANDRetryResultsUNDIALED()
         {
             //message=160
             //RetryResults = UNDIALED
@@ -292,6 +287,71 @@ namespace Callfire_csharp_sdk.IntegrationTests
         {
             //with wrong Id
         }
+
+        [Test]
+        public void Test_CreateBroadcast_IvrBroadcastConfigComplete()
+        {
+            //all data ok
+
+        }
+        [Test]
+        public void Test_CreateBroadcast_IvrLocalTimeZoneRestrictionComplete()
+        {
+            //all data ok
+
+        }
+        [Test]
+        public void Test_CreateBroadcast_IvrRetryConfigNODialplanXml()
+        {
+            //RetryResults= TOO_BIG
+            //DialplanXml= NO
+
+
+        }
+        [Test]
+        public void Test_CreateBroadcast_IvrRetryConfigVALIDDialplanXml()
+        {
+            //RetryResults= INTERNAL_ERROR
+            //DialplanXml= Valid 
+
+
+        }
+        [Test]
+        public void Test_CreateBroadcast_IvrRetryConfigINVALIDDialplanXml()
+        {
+            //RetryResults= CARRIER_ERROR
+            //DialplanXml= Invalid 
+
+        }
+        [Test]
+        public void Test_CreateBroadcast_IvrRetryConfigMandatoryFieldsOnlyComple()
+        {
+            //RetryResults= CARRIER_TEMP_ERROR
+            //DialplanXml= Valid 
+
+        }
+        [Test]
+        public void Test_CreateBroadcast_IvrRetryConfigNotallComplete()
+        {
+            //not all no mandatory complete
+            //RetryResults= SD
+            //DialplanXml= Valid 
+
+        }
+        [Test]
+
+        public void Test_CreateBroadcast_IvrRetryConfigMaxAttemptsANDMinutesBetweenAttemptsFaild()
+        {
+            //MaxAttempts=abc
+            //MinutesBetweenAttempts=abc
+            //not all mandatory complete
+            //RetryResults= POSTPONED
+            //DialplanXml= Valid 
+
+        }
+
+
+
 
 
 
