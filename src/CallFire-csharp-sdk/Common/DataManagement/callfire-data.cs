@@ -130,6 +130,10 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfLocalTimeZoneRestriction
     {
+        public CfLocalTimeZoneRestriction()
+        {
+        }
+
         public CfLocalTimeZoneRestriction(DateTime? beginTime, DateTime? endTime)
         {
             BeginTime = beginTime;

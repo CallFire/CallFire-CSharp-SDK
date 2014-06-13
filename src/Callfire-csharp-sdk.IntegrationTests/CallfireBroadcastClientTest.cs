@@ -88,10 +88,10 @@ namespace Callfire_csharp_sdk.IntegrationTests
                 {
                     Id = 1,
                     Created = new DateTime(2012, 10, 26),
-                    FromNumber = "45879163710", 
-                    Item = "56",
+                    FromNumber = "45879163710",
+                    Item = "TTS: eeee",
                     MachineSoundTextVoice = "SPANISH1",
-                    Item1 = "12"
+                    Item1 = "TTS: eeee"
                 },
             };
             var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastVoice);
@@ -99,7 +99,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
-        public void Test_CreateBroadcast_VoiceBroadcastConfigComplete() //mal el numero
+        public void Test_CreateBroadcast_VoiceBroadcastConfigComplete() // not a valid from number
         {
             ExpectedBroadcastVoice = new CfBroadcast
             {
@@ -109,10 +109,10 @@ namespace Callfire_csharp_sdk.IntegrationTests
                 {
                     Id = 1,
                     Created = new DateTime(2012, 10, 26),
-                    FromNumber = "14252163710",
-                    Item = "56",
+                    FromNumber = "67076",
+                    Item = "TTS: eeee",
                     MachineSoundTextVoice = "SPANISH1",
-                    Item1 = "12"
+                    Item1 = "TTS: eeee",
                 },
             };
             var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastVoice);
@@ -121,7 +121,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
-        public void Test_CreateBroadcast_VoiceLocalTimeZoneRestrictionComplete() 
+        public void Test_CreateBroadcast_VoiceLocalTimeZoneRestrictionComplete() // not a valid from number
         {
             ExpectedBroadcastVoice = new CfBroadcast
             {
@@ -131,23 +131,24 @@ namespace Callfire_csharp_sdk.IntegrationTests
                 {
                     Id = 1,
                     Created = new DateTime(2012, 10, 26),
-                    FromNumber = "14252163710",
-                    Item = "56",
+                    FromNumber = "67076",
+                    Item = "TTS: eeee",
                     MachineSoundTextVoice = "SPANISH1",
-                    Item1 = "12",
-                    LocalTimeZoneRestriction = new CfLocalTimeZoneRestriction(new DateTime(2014, 01, 01, 09, 00, 00), new DateTime(2014, 01, 01, 17, 00, 00)),
+                    Item1 = "TTS: eeee",
+                    LocalTimeZoneRestriction = new CfLocalTimeZoneRestriction
+                    {
+                        BeginTime = new DateTime(2014, 01, 01, 09, 00, 00),
+                        EndTime = new DateTime(2014, 01, 01, 17, 00, 00)
+                    },
                 },
-                
             };
-
             var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastVoice);
             var id = Client.CreateBroadcast(broadcastRequest);
             Assert.IsNotNull(id);
         }
 
-        //part 2
         [Test]
-        public void Test_CreateBroadcast_VoiceLocalTimeZoneRestrictionBeginTimeOnly()
+        public void Test_CreateBroadcast_VoiceLocalTimeZoneRestrictionBeginTimeOnly() // not a valid from number
         {
             ExpectedBroadcastVoice = new CfBroadcast
             {
@@ -158,31 +159,159 @@ namespace Callfire_csharp_sdk.IntegrationTests
                     Id = 1,
                     Created = new DateTime(2012, 10, 26),
                     FromNumber = "14252163710",
-                    Item = "56",
+                    Item = "TTS: eeee",
                     MachineSoundTextVoice = "SPANISH1",
-                    Item1 = "12",
-                    //LocalTimeZoneRestriction = new LocalTimeZoneRestriction(new DateTime(2014, 01, 01, 09, 00, 00)),
+                    Item1 = "TTS: eeee",
+                    LocalTimeZoneRestriction = new CfLocalTimeZoneRestriction
+                    {
+                        BeginTime = new DateTime(2014, 01, 01, 09, 00, 00),
+                    },
                 },
             };
+            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastVoice);
+            var id = Client.CreateBroadcast(broadcastRequest);
+            Assert.IsNotNull(id);
+        }
+        
+        [Test]
+        public void Test_CreateBroadcast_VoiceRetryConfigMandatoryFieldsOnlyComplete() // not a valid from number
+        {
+            ExpectedBroadcastVoice = new CfBroadcast
+            {
+                Name = "Name",
+                Type = CfBroadcastType.Voice,
+                Item = new CfVoiceBroadcastConfig
+                {
+                    Id = 1,
+                    Created = new DateTime(2012, 10, 26),
+                    FromNumber = "14252163710",
+                    Item = "TTS: eeee",
+                    MachineSoundTextVoice = "SPANISH1",
+                    Item1 = "TTS: eeee",
+                    RetryConfig = new CfBroadcastConfigRetryConfig
+                    {
+                        RetryPhoneTypes = new[] { CfRetryPhoneType.FirstNumber }
+                    }
+                },
+            };
+            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastVoice);
+            var id = Client.CreateBroadcast(broadcastRequest);
+            Assert.IsNotNull(id);
         }
 
         [Test]
-        public void Test_CreateBroadcast_VoiceRetryConfigMandatoryFieldsOnly()
+        public void Test_CreateBroadcast_VoiceRetryConfigCompleteItem_Item1_Item2_Item3Long()
         {
-                          
+            ExpectedBroadcastVoice = new CfBroadcast
+            {
+                Name = "Name",
+                Type = CfBroadcastType.Voice,
+                Item = new CfVoiceBroadcastConfig
+                {
+                    Id = 1,
+                    Created = new DateTime(2012, 10, 26),
+                    FromNumber = "14252163710",
+                    Item = 426834001,
+                    MachineSoundTextVoice = "SPANISH1",
+                    Item1 = 426834001,
+                    RetryConfig = new CfBroadcastConfigRetryConfig
+                    {
+                        RetryPhoneTypes = new[] { CfRetryPhoneType.FirstNumber }
+                    }
+                },
+            };
+            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastVoice);
+            var id = Client.CreateBroadcast(broadcastRequest);
+            Assert.IsNotNull(id);
         }
 
         [Test]
-        public void Test_CreateBroadcast_VoiceRetryConfigComplete()
+        public void Test_CreateBroadcast_VoiceRetryConfigComplete() // not a valid from number
         {
-
+            ExpectedBroadcastVoice = new CfBroadcast
+            {
+                Name = "Name",
+                Type = CfBroadcastType.Voice,
+                Item = new CfVoiceBroadcastConfig
+                {
+                    Id = 1,
+                    Created = new DateTime(2012, 10, 26),
+                    FromNumber = "14252163710",
+                    Item = "TTS: eeee",
+                    MachineSoundTextVoice = "SPANISH1",
+                    Item1 = "TTS: eeee",
+                    RetryConfig = new CfBroadcastConfigRetryConfig
+                    {
+                        MaxAttempts = 2,
+                        MinutesBetweenAttempts = 5,
+                        RetryPhoneTypes = new[] { CfRetryPhoneType.HomePhone },
+                        RetryResults = new[] { CfResult.Received }
+                    }
+                },
+            };
+            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastVoice);
+            var id = Client.CreateBroadcast(broadcastRequest);
+            Assert.IsNotNull(id);
         }
+       
         [Test]
-        public void Test_CreateBroadcast_VoiceRetryConfigMandatoryFieldInvalid()// vemos cual puede ser 
+        public void Test_CreateBroadcast_VoiceRetryConfigNotAllComplete() // not a valid from number
         {
-
+            ExpectedBroadcastVoice = new CfBroadcast
+            {
+                Name = "Name",
+                Type = CfBroadcastType.Voice,
+                Item = new CfVoiceBroadcastConfig
+                {
+                    Id = 1,
+                    Created = new DateTime(2012, 10, 26),
+                    FromNumber = "14252163710",
+                    Item = "TTS: eeee",
+                    MachineSoundTextVoice = "SPANISH1",
+                    Item1 = "TTS: eeee",
+                    RetryConfig = new CfBroadcastConfigRetryConfig
+                    {
+                        MaxAttempts = 2,
+                        MinutesBetweenAttempts = 5,
+                    }
+                },
+            };
+            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastVoice);
+            AssertClientException(() => Client.CreateBroadcast(broadcastRequest));
         }
 
+
+        [Test]
+        public void Test_CreateBroadcast_VoiceRetryConfigMandatoryFieldInvalid() // not a valid from number
+        {
+            ExpectedBroadcastVoice = new CfBroadcast
+            {
+                Name = "Name",
+                Type = CfBroadcastType.Voice,
+                Item = new CfVoiceBroadcastConfig
+                {
+                    Id = 1,
+                    Created = new DateTime(2012, 10, 26),
+                    FromNumber = "14252163710",
+                    Item = "TTS: eeee",
+                    MachineSoundTextVoice = "SPANISH1",
+                    Item1 = "TTS: eeee",
+                    RetryConfig = new CfBroadcastConfigRetryConfig
+                    {
+                        MaxAttempts = 2,
+                        MinutesBetweenAttempts = 5,
+                        RetryPhoneTypes = null
+                    }
+                },
+            };
+            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastVoice);
+            AssertClientException(() => Client.CreateBroadcast(broadcastRequest));
+        }
+
+        /// <summary>
+        /// ////////
+        /// </summary>
+        
         [Test]
         public void Test_CreateBroadcast_TextConfigSuccess()
         {
