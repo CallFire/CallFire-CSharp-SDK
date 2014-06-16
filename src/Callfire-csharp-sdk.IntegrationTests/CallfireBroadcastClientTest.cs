@@ -17,6 +17,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         protected CfBroadcast ExpectedBroadcast;
         protected CfBroadcast ExpectedBroadcastVoice;
         protected CfBroadcast ExpectedBroadcastText;
+        protected CfBroadcast ExpectedBroadcastIvr;
         protected CfQueryBroadcasts CfQueryBroadcasts;
         protected CfQueryBroadcastData QueryContactBatches;
         protected CfControlContactBatch ControlContactBatches;
@@ -40,7 +41,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         [Test]
         public void Test_CreateBroadcast()
         {
-            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastDefault);
+            var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastDefault);
             var id = Client.CreateBroadcast(broadcastRequest);
             Assert.IsNotNull(id);
         }
@@ -95,7 +96,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
                     Item1 = "TTS: eeee"
                 },
             };
-            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastVoice);
+            var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastVoice);
             AssertClientException(() => Client.CreateBroadcast(broadcastRequest));
         }
 
@@ -116,7 +117,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
                     Item1 = "TTS: eeee",
                 },
             };
-            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastVoice);
+            var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastVoice);
             var id = Client.CreateBroadcast(broadcastRequest);
             Assert.IsNotNull(id);
         }
@@ -143,7 +144,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
                     },
                 },
             };
-            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastVoice);
+            var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastVoice);
             var id = Client.CreateBroadcast(broadcastRequest);
             Assert.IsNotNull(id);
         }
@@ -169,7 +170,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
                     },
                 },
             };
-            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastVoice);
+            var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastVoice);
             var id = Client.CreateBroadcast(broadcastRequest);
             Assert.IsNotNull(id);
         }
@@ -191,11 +192,11 @@ namespace Callfire_csharp_sdk.IntegrationTests
                     Item1 = "TTS: eeee",
                     RetryConfig = new CfBroadcastConfigRetryConfig
                     {
-                        RetryPhoneTypes = new[] { CfRetryPhoneType.FirstNumber }
+                        RetryResults = new[] { CfResult.Received }
                     }
                 },
             };
-            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastVoice);
+            var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastVoice);
             var id = Client.CreateBroadcast(broadcastRequest);
             Assert.IsNotNull(id);
         }
@@ -217,11 +218,11 @@ namespace Callfire_csharp_sdk.IntegrationTests
                     Item1 = 426834001,
                     RetryConfig = new CfBroadcastConfigRetryConfig
                     {
-                        RetryPhoneTypes = new[] { CfRetryPhoneType.FirstNumber }
+                        RetryResults = new[] { CfResult.Received }
                     }
                 },
             };
-            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastVoice);
+            var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastVoice);
             var id = Client.CreateBroadcast(broadcastRequest);
             Assert.IsNotNull(id);
         }
@@ -250,7 +251,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
                     }
                 },
             };
-            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastVoice);
+            var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastVoice);
             var id = Client.CreateBroadcast(broadcastRequest);
             Assert.IsNotNull(id);
         }
@@ -277,7 +278,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
                     }
                 },
             };
-            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastVoice);
+            var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastVoice);
             AssertClientException(() => Client.CreateBroadcast(broadcastRequest));
         }
 
@@ -300,17 +301,17 @@ namespace Callfire_csharp_sdk.IntegrationTests
                     {
                         MaxAttempts = 2,
                         MinutesBetweenAttempts = 5,
-                        RetryPhoneTypes = null
+                        RetryResults = null
                     }
                 },
             };
-            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastVoice);
+            var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastVoice);
             AssertClientException(() => Client.CreateBroadcast(broadcastRequest));
         }
 
         //TEXT BROADCAST
         [Test]
-        public void Test_CreateBroadcast_TextLocalTimeZoneRestrictionEndTimeOnly()
+        public void Test_CreateBroadcast_TextLocalTimeZoneRestrictionEndTimeOnly() //invalid from number
         {
             ExpectedBroadcastText = new CfBroadcast
             {
@@ -329,13 +330,13 @@ namespace Callfire_csharp_sdk.IntegrationTests
                     BigMessageStrategy = CfBigMessageStrategy.DoNotSend
                 },
             };
-            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastText);
+            var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastText);
             var id = Client.CreateBroadcast(broadcastRequest);
             Assert.IsNotNull(id);
         }
 
         [Test]
-        public void Test_CreateBroadcast_TextRetryConfigMandatoryFieldsOnlyComple()
+        public void Test_CreateBroadcast_TextRetryConfigMandatoryFieldsOnlyComple() //invalid from number
         {
             ExpectedBroadcastText = new CfBroadcast
             {
@@ -354,12 +355,13 @@ namespace Callfire_csharp_sdk.IntegrationTests
                     BigMessageStrategy = CfBigMessageStrategy.DoNotSend
                 },
             };
-            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastText);
+            var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastText);
             var id = Client.CreateBroadcast(broadcastRequest);
             Assert.IsNotNull(id);
         }
 
-        public void Test_CreateBroadcast_TextRetryConfigNotAllComplete()
+        [Test]
+        public void Test_CreateBroadcast_TextRetryConfigNotAllComplete() //invalid from number
         {
             ExpectedBroadcastText = new CfBroadcast
             {
@@ -379,13 +381,13 @@ namespace Callfire_csharp_sdk.IntegrationTests
                     BigMessageStrategy = CfBigMessageStrategy.Trim
                 },
             };
-            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastText);
+            var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastText);
             var id = Client.CreateBroadcast(broadcastRequest);
             Assert.IsNotNull(id);
         }
         
         [Test]
-        public void Test_CreateBroadcast_TextRetryConfigMessage160caracters()
+        public void Test_CreateBroadcast_TextRetryConfigMessage160caracters()//invalid from number
         {
             ExpectedBroadcastText = new CfBroadcast
             {
@@ -400,13 +402,13 @@ namespace Callfire_csharp_sdk.IntegrationTests
                     BigMessageStrategy = CfBigMessageStrategy.SendMultiple
                 },
             };
-            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastText);
+            var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastText);
             var id = Client.CreateBroadcast(broadcastRequest);
             Assert.IsNotNull(id);
         }
 
         [Test]
-        public void Test_CreateBroadcast_TextRetryConfigMessage161caractersANDRetryResultsSENT()
+        public void Test_CreateBroadcast_TextRetryConfigMessage161caractersANDRetryResultsSENT() //invalid from number
         {
             ExpectedBroadcastText = new CfBroadcast
             {
@@ -426,7 +428,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
                     BigMessageStrategy = CfBigMessageStrategy.DoNotSend
                 },
             };
-            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastText);
+            var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastText);
             var id = Client.CreateBroadcast(broadcastRequest);
             Assert.IsNotNull(id);
         }
@@ -435,37 +437,21 @@ namespace Callfire_csharp_sdk.IntegrationTests
         [Test]
         public void Test_CreateBroadcast_IvrBroadcastConfigFaildId()
         {
-            //with wrong Id
-        }
-
-    
-/*
-        ExpectedBroadcastText = new CfBroadcast
+            ExpectedBroadcastIvr = new CfBroadcast
             {
                 Name = "Name",
-                Type = CfBroadcastType.Text,
-                Item = new CfTextBroadcastConfig
+                Type = CfBroadcastType.Ivr,
+                Item = new CfIvrBroadcastConfig
                 {
-                    Id = 1,
+                    Id = -1,
                     Created = new DateTime(2012, 10, 26),
                     FromNumber = "14252163710",
-                    LocalTimeZoneRestriction = new CfLocalTimeZoneRestriction
-                    {
-                        BeginTime = new DateTime(2014, 01, 01, 09, 00, 00),
-                        EndTime = new DateTime(2014, 01, 01, 17, 00, 00)
-                    },
-                    RetryConfig = new CfBroadcastConfigRetryConfig
-                    {
-                        MaxAttempts = 2,
-                        MinutesBetweenAttempts = 5,
-                        RetryPhoneTypes = new[] { CfRetryPhoneType.HomePhone },
-                        RetryResults = new[] { CfResult.Received }
-                    },
-                    Message = "Message Test",
-                    BigMessageStrategy = CfBigMessageStrategy.DoNotSend
                 },
             };
-*/
+            var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastIvr);
+            var id = Client.CreateBroadcast(broadcastRequest);
+            Assert.IsNotNull(id);
+        }
     
         [Test]
         public void Test_CreateBroadcast_TextConfigSuccess()
@@ -482,7 +468,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
                 },
             };
 
-            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastText);
+            var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastText);
             var id = Client.CreateBroadcast(broadcastRequest);
             Assert.IsNotNull(id);
         }
