@@ -350,6 +350,82 @@ namespace Callfire_csharp_sdk.IntegrationTests
 
         }
 
+        //QueryBroadcasts
+        [Test]
+        public void Test_QueryBroadcastsEmpty()
+        {
+            
+
+        }
+        [Test]
+        public void Test_QueryBroadcastsCompleteTrue()
+        {
+            //Type= voice
+            //with running true
+        }
+        [Test]
+        public void Test_QueryBroadcastsCompleteFalse()
+        {
+            //Type= Text
+            //with running true
+        }
+        //GetBroadcast
+        
+        [Test]
+        public void Test_GetBroadcastSuccess()
+        {
+
+            //valid id
+            //
+
+        }
+        //UpdateBroadcast
+        [Test]
+        public void Test_UpdateBroadcastChangeTypeVoice()
+        {
+            
+            //Name=changeType
+            //type= VOICE
+            //Status= ARCHIVE
+            //Cambiar algunos parametros de Voice
+            
+        }
+        [Test]
+        public void Test_UpdateBroadcastChangeTypeText()
+        {
+            //Name=changeTypeText
+            //type= TEXT
+            //Status= RUNNING
+            //Cambiar algunos parametros de Text
+
+        }
+        [Test]
+        public void Test_UpdateBroadcastChangeTypeIVR()
+        {
+            //Name=changeTypeIVR
+            //type= IVR
+            //Status= START PENDING
+            //Cambiar algunos parametros de IVR
+
+        }
+        [Test]
+        public void Test_UpdateBroadcastChangeTypeINVALID()
+        {
+            //invalid ID
+
+        }
+
+        //GetBroadcastStats
+
+
+
+
+
+
+     
+
+
+       
 
 
 
