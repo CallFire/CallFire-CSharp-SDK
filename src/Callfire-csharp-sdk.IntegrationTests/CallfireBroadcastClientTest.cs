@@ -77,6 +77,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
             AssertClientException(() => Client.CreateBroadcast(broadcastRequest));
         }
 
+        //VOICE BROADCAST 
         [Test]
         public void Test_CreateBroadcast_VoiceBroadcastConfigFaildNumber() //Soap Expected: <System.ServiceModel.FaultException> But was:  <System.ServiceModel.FaultException`1[CallFire_csharp_sdk.API.Soap.ServiceFaultInfo]>
         {
@@ -280,7 +281,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
             AssertClientException(() => Client.CreateBroadcast(broadcastRequest));
         }
 
-
         [Test]
         public void Test_CreateBroadcast_VoiceRetryConfigMandatoryFieldInvalid() // not a valid from number
         {
@@ -308,10 +308,165 @@ namespace Callfire_csharp_sdk.IntegrationTests
             AssertClientException(() => Client.CreateBroadcast(broadcastRequest));
         }
 
-        /// <summary>
-        /// ////////
-        /// </summary>
+        //TEXT BROADCAST
+        [Test]
+        public void Test_CreateBroadcast_TextLocalTimeZoneRestrictionEndTimeOnly()
+        {
+            ExpectedBroadcastText = new CfBroadcast
+            {
+                Name = "Name",
+                Type = CfBroadcastType.Text,
+                Item = new CfTextBroadcastConfig
+                {
+                    Id = 1,
+                    Created = new DateTime(2012, 10, 26),
+                    FromNumber = "14252163710",
+                    LocalTimeZoneRestriction = new CfLocalTimeZoneRestriction
+                    {
+                        EndTime = new DateTime(2014, 01, 01, 17, 00, 00)
+                    },
+                    Message = "Message Test",
+                    BigMessageStrategy = CfBigMessageStrategy.DoNotSend
+                },
+            };
+            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastText);
+            var id = Client.CreateBroadcast(broadcastRequest);
+            Assert.IsNotNull(id);
+        }
+
+        [Test]
+        public void Test_CreateBroadcast_TextRetryConfigMandatoryFieldsOnlyComple()
+        {
+            ExpectedBroadcastText = new CfBroadcast
+            {
+                Name = "Name",
+                Type = CfBroadcastType.Text,
+                Item = new CfTextBroadcastConfig
+                {
+                    Id = 1,
+                    Created = new DateTime(2012, 10, 26),
+                    FromNumber = "14252163710",
+                    RetryConfig = new CfBroadcastConfigRetryConfig
+                    {
+                        RetryPhoneTypes = new[] { CfRetryPhoneType.HomePhone },
+                    },
+                    Message = "Message Test",
+                    BigMessageStrategy = CfBigMessageStrategy.DoNotSend
+                },
+            };
+            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastText);
+            var id = Client.CreateBroadcast(broadcastRequest);
+            Assert.IsNotNull(id);
+        }
+
+        public void Test_CreateBroadcast_TextRetryConfigNotAllComplete()
+        {
+            ExpectedBroadcastText = new CfBroadcast
+            {
+                Name = "Name",
+                Type = CfBroadcastType.Text,
+                Item = new CfTextBroadcastConfig
+                {
+                    Id = 1,
+                    Created = new DateTime(2012, 10, 26),
+                    FromNumber = "14252163710",
+                    RetryConfig = new CfBroadcastConfigRetryConfig
+                    {
+                        RetryPhoneTypes = new[] { CfRetryPhoneType.FirstNumber },
+                        RetryResults = new[] { CfResult.NoAns }
+                    },
+                    Message = "Message Test",
+                    BigMessageStrategy = CfBigMessageStrategy.Trim
+                },
+            };
+            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastText);
+            var id = Client.CreateBroadcast(broadcastRequest);
+            Assert.IsNotNull(id);
+        }
         
+        [Test]
+        public void Test_CreateBroadcast_TextRetryConfigMessage160caracters()
+        {
+            ExpectedBroadcastText = new CfBroadcast
+            {
+                Name = "Name",
+                Type = CfBroadcastType.Text,
+                Item = new CfTextBroadcastConfig
+                {
+                    Id = 1,
+                    Created = new DateTime(2012, 10, 26),
+                    FromNumber = "14252163710",
+                    Message = "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adineque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adi",
+                    BigMessageStrategy = CfBigMessageStrategy.SendMultiple
+                },
+            };
+            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastText);
+            var id = Client.CreateBroadcast(broadcastRequest);
+            Assert.IsNotNull(id);
+        }
+
+        [Test]
+        public void Test_CreateBroadcast_TextRetryConfigMessage161caractersANDRetryResultsSENT()
+        {
+            ExpectedBroadcastText = new CfBroadcast
+            {
+                Name = "Name",
+                Type = CfBroadcastType.Text,
+                Item = new CfTextBroadcastConfig
+                {
+                    Id = 1,
+                    Created = new DateTime(2012, 10, 26),
+                    FromNumber = "14252163710",
+                    RetryConfig = new CfBroadcastConfigRetryConfig
+                    {
+                        RetryPhoneTypes = new[] { CfRetryPhoneType.FirstNumber },
+                        RetryResults = new[] { CfResult.Sent }
+                    },
+                    Message = "XNeque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adineque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adi",
+                    BigMessageStrategy = CfBigMessageStrategy.DoNotSend
+                },
+            };
+            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastText);
+            var id = Client.CreateBroadcast(broadcastRequest);
+            Assert.IsNotNull(id);
+        }
+
+        //IVR
+        [Test]
+        public void Test_CreateBroadcast_IvrBroadcastConfigFaildId()
+        {
+            //with wrong Id
+        }
+
+    
+/*
+        ExpectedBroadcastText = new CfBroadcast
+            {
+                Name = "Name",
+                Type = CfBroadcastType.Text,
+                Item = new CfTextBroadcastConfig
+                {
+                    Id = 1,
+                    Created = new DateTime(2012, 10, 26),
+                    FromNumber = "14252163710",
+                    LocalTimeZoneRestriction = new CfLocalTimeZoneRestriction
+                    {
+                        BeginTime = new DateTime(2014, 01, 01, 09, 00, 00),
+                        EndTime = new DateTime(2014, 01, 01, 17, 00, 00)
+                    },
+                    RetryConfig = new CfBroadcastConfigRetryConfig
+                    {
+                        MaxAttempts = 2,
+                        MinutesBetweenAttempts = 5,
+                        RetryPhoneTypes = new[] { CfRetryPhoneType.HomePhone },
+                        RetryResults = new[] { CfResult.Received }
+                    },
+                    Message = "Message Test",
+                    BigMessageStrategy = CfBigMessageStrategy.DoNotSend
+                },
+            };
+*/
+    
         [Test]
         public void Test_CreateBroadcast_TextConfigSuccess()
         {
