@@ -37,7 +37,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         [Test]
         public void Test_CreateBroadcast()
         {
-            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcast);
+            var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcast);
             var id = Client.CreateBroadcast(broadcastRequest);
             Assert.IsNotNull(id);
         }
@@ -45,7 +45,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         [Test]
         public void Test_CreateBroadcast_WithBroadcastNull()
         {
-            var broadcastRequest = new CfBroadcastRequest("", null);
+            var broadcastRequest = new CfBroadcastRequest(string.Empty, null);
             AssertClientException(() => Client.CreateBroadcast(broadcastRequest));
         }
 
@@ -109,7 +109,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         [Test]
         public void Test_ControlBroadcast()
         {
-            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcast);
+            var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcast);
             ControlBroadcast.Id = Client.CreateBroadcast(broadcastRequest);
             Client.ControlBroadcast(ControlBroadcast);
         }

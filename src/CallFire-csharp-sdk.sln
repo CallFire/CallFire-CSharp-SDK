@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallFire-csharp-sdk", "CallFire-csharp-sdk\CallFire-csharp-sdk.csproj", "{50266DB9-D429-4F75-91F6-287E95A0FED8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Callfire-csharp-sdk.Tests", "Callfire-csharp-sdk.Tests\Callfire-csharp-sdk.Tests.csproj", "{DF95432C-5F61-4737-80E0-D5B0C3C7DD61}"
@@ -8,9 +8,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Callfire-csharp-sdk.IntegrationTests", "Callfire-csharp-sdk.IntegrationTests\Callfire-csharp-sdk.IntegrationTests.csproj", "{B7489EAE-31B1-42B6-98C1-E76C8F6DDB03}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F0C8C9A4-86E4-4952-822E-C28CB2AFDBAE}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\packages.config = .nuget\packages.config
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
