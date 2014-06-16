@@ -416,6 +416,259 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         //GetBroadcastStats
+        [Test]
+        public void Test_GetBroadcastStatsComplete()
+        {
+            //valid ID
+            //IntervalBegin YEs
+            //IntervalEnd YEs
+
+        }
+        [Test]
+        public void Test_GetBroadcastStatsIncomplete()
+        {
+            //valid ID
+            //IntervalBegin YEs
+            //IntervalEnd YEs
+
+        }
+
+        //ControlBroadcast
+        [Test]
+        public void Test_ControlBroadcastStart()
+        {
+            //valid ID
+            //Start
+
+        }
+        [Test]
+        public void Test_ControlBroadcastStop()
+        {
+            //valid ID
+            //Stop
+
+        }
+        [Test]
+        public void Test_ControlBroadcastArchive()
+        {
+            //valid ID
+            //Archive
+
+        }
+        [Test]
+        public void Test_ControlBroadcastInvalidID()
+        {
+       
+
+        }
+
+        //CreateContactBatch
+
+        [Test]
+        public void Test_CreateContactBatchBroadcastId()
+        {
+
+            //BroadcastId valid
+  
+        }
+        [Test]
+        public void Test_CreateContactBatchComplete()
+        {
+
+            //all fields complete
+            //ScrubBroadcastDuplicates	= true
+
+        }
+        [Test]
+        public void Test_CreateContactBatchInComplete()
+        {
+
+            //Not all fields complete
+            //ScrubBroadcastDuplicates	= false
+
+        }
+
+        //QueryContactBatches
+        [Test]
+        public void Test_QueryContactBatchesAllResults()
+        {
+
+            //BroadcastId Valid
+
+        }
+        
+        [Test]
+        public void Test_QueryContactBatchesComplete()
+        {
+
+            //BroadcastId Valid
+            //MaxResults 20
+            //FirstResult 2
+            
+        }
+        //GetContactBatches
+        [Test]
+        public void Test_GetContactBatchesValidId()
+        {
+            //ID Valido
+
+
+        }
+        [Test]
+        public void Test_GetContactBatchesInValidId()
+        {
+            //ID InValido
+
+        }
+        //ControlContactBatches
+        [Test]
+        public void Test_ControlContactBatchesCompleteTrue()
+        {
+            //id valid
+            //Name
+            //True
+
+        }
+        [Test]
+        public void Test_ControlContactBatchesCompleteFalse()
+        {
+            //id valid
+            //Name
+            //False
+
+        }
+        //CreateBroadcastSchedule
+
+        [Test]
+        public void Test_CreateBroadcastScheduleMandatory()
+        {
+            //Complete only mandatories field
+
+        }
+        [Test]
+        public void Test_CreateBroadcastScheduleComplete()
+        {
+            //Complete only mandatories field
+
+        }
+        //QueryBroadcastSchedule
+        [Test]
+        public void Test_QueryBroadcastScheduleBroadcastId()
+        {
+            //BroadcastId only
+
+        }
+        [Test]
+        public void Test_QueryBroadcastScheduleComplete()
+        {
+            //all complete
+
+        }
+
+        //GetBroadcastSchedule
+        [Test]
+        public void Test_GetBroadcastScheduleValidId()
+        {
+            //id valid
+
+        }
+        [Test]
+        public void Test_GetBroadcastScheduleInvalidID()
+        {
+            //id invalid
+
+        }
+        //DeleteBroadcastSchedule
+        [Test]
+        public void Test_DeleteBroadcastScheduleValidID()
+        {
+            //id valid
+
+        }
+        [Test]
+        public void Test_DeleteBroadcastScheduleInvalidID()
+        {
+            //id invalid
+
+        }
+
+        /// <summary>
+        /// //////////////Subscription////////
+        /// </summary>
+        /// 
+        //CreateSubscription
+        [Test]
+        public void Test_CreateSubscriptionEndpointID()
+        {
+            //
+            //Endpoint= valid
+
+        }
+        public void Test_CreateSubscriptionCompleteTrue()
+        {
+            //
+            //Enabled= TRue
+            //NotificationFormat= XML
+            //TriggerEvent = INBOULND_CALL_FINISHED
+            //Inbound = true
+
+        }
+        public void Test_CreateSubscriptionCompleteFalse()
+        {
+            //
+            //Enabled= False
+            //NotificationFormat= Email
+            //TriggerEvent = OUTBOUND_TEXT_FINISHED 
+            //Inbound = False
+
+        }
+        //querySubsctiptions
+        public void Test_querySubsctiptionsAllResults()
+        {
+            //all empty
+         
+
+        }
+        public void Test_querySubsctiptionsSpecialResults()
+        {
+            //MaxResults= 20
+            //FirstResult= 1
+            
+        }
+        //getsubscriptions
+        public void Test_getsubscriptionsValid()
+        {
+            //ID valid
+        }
+        public void Test_getsubscriptionsInValidID()
+        {
+            //ID INvalid
+        }
+
+        //UpdateSubscription
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 
 
 
@@ -443,43 +696,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
 
 
 
-        [Test]
-        public void Test_CreateBroadcast_TextConfigSuccess()
-        {
-            ExpectedBroadcastText = new CfBroadcast
-            {
-                Name = "Name",
-                Type = CfBroadcastType.Text,
-                Item = new CfTextBroadcastConfig()
-                {
-                    Id = 1,
-                    Created = new DateTime(2012, 10, 26),
-                    FromNumber = "14252163710",
-                   
-                },
-            };
 
-            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastText);
-            var id = Client.CreateBroadcast(broadcastRequest);
-            Assert.IsNotNull(id);
-        }
-
-
-        [Test]
-        public void Test_QueryBroadcast()
-        {
-            var queryResult = Client.QueryBroadcasts(CfQueryBroadcasts);
-            Assert.NotNull(queryResult);
-            Assert.NotNull(queryResult.Broadcast);
-        }
-
-        [Test]
-        public void Test_GetBroadcast()
-        {
-            var broadcast = Client.GetBroadcast(651);
-            Assert.IsNotNull(broadcast);
-            Assert.AreEqual(broadcast.Type, CfBroadcastType.Text);
-        }
 
         [Test]
         public void Test_QueryContactBatches()
