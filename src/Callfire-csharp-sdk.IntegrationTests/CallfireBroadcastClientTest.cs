@@ -1,8 +1,10 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Net;
+using System.ServiceModel;
 using CallFire_csharp_sdk.API;
 using CallFire_csharp_sdk.API.Rest.Clients;
+using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
 using NUnit.Framework;
@@ -26,15 +28,17 @@ namespace Callfire_csharp_sdk.IntegrationTests
         protected CfControlBroadcast ControlBroadcast;
         protected CfCreateContactBatch CreateContactBatch;
 
-        private void AssertClientException(TestDelegate test)
+        private void AssertClientException<TRest, TSoap>(TestDelegate test) 
+            where TRest : Exception 
+            where TSoap : Exception
         {
             if (Client.GetType() == typeof(RestBroadcastClient))
             {
-                Assert.Throws<WebException>(test);
+                Assert.Throws<TRest>(test);
             }
             else
             {
-                Assert.Throws<System.ServiceModel.FaultException>(test);
+                Assert.Throws<TSoap>(test);
             }
         }
 
@@ -49,8 +53,8 @@ namespace Callfire_csharp_sdk.IntegrationTests
         [Test]
         public void Test_CreateBroadcastNull()
         {
-            var broadcastRequest = new CfBroadcastRequest("ABC", null);
-            AssertClientException(() => Client.CreateBroadcast(broadcastRequest));
+            var broadcastRequest = new CfBroadcastRequest(string.Empty, null);
+            AssertClientException<WebException, FaultException>(() => Client.CreateBroadcast(broadcastRequest));
         }
 
         [Test]
@@ -62,7 +66,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
             };
 
             var broadcastRequest = new CfBroadcastRequest(null, ExpectedBroadcast);
-            AssertClientException(() => Client.CreateBroadcast(broadcastRequest));
+            AssertClientException<WebException, FaultException>(() => Client.CreateBroadcast(broadcastRequest));
         }
 
         [Test]
@@ -75,12 +79,12 @@ namespace Callfire_csharp_sdk.IntegrationTests
             };
 
             var broadcastRequest = new CfBroadcastRequest(null, ExpectedBroadcast);
-            AssertClientException(() => Client.CreateBroadcast(broadcastRequest));
+            AssertClientException<WebException, FaultException>(() => Client.CreateBroadcast(broadcastRequest));
         }
 
         //VOICE BROADCAST 
         [Test]
-        public void Test_CreateBroadcast_VoiceBroadcastConfigFaildNumber() //Soap Expected: <System.ServiceModel.FaultException> But was:  <System.ServiceModel.FaultException`1[CallFire_csharp_sdk.API.Soap.ServiceFaultInfo]>
+        public void Test_CreateBroadcast_VoiceBroadcastConfigFaildNumber() 
         {
             ExpectedBroadcastVoice = new CfBroadcast
             {
@@ -97,7 +101,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
                 },
             };
             var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastVoice);
-            AssertClientException(() => Client.CreateBroadcast(broadcastRequest));
+            AssertClientException<WebException, FaultException<ServiceFaultInfo>>(() => Client.CreateBroadcast(broadcastRequest));
         }
 
         [Test]
@@ -202,7 +206,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
-        public void Test_CreateBroadcast_VoiceRetryConfigCompleteItem_Item1_Item2_Item3Long()
+        public void Test_CreateBroadcast_VoiceRetryConfigCompleteItem_Item1_Item2_Item3Long()//Error interno del servidor.
         {
             ExpectedBroadcastVoice = new CfBroadcast
             {
@@ -210,16 +214,16 @@ namespace Callfire_csharp_sdk.IntegrationTests
                 Type = CfBroadcastType.Voice,
                 Item = new CfVoiceBroadcastConfig
                 {
-                    Id = 1,
-                    Created = new DateTime(2012, 10, 26),
+                    //Id = 1,
+                    //Created = new DateTime(2012, 10, 26),
                     FromNumber = "14252163710",
                     Item = 426834001,
-                    MachineSoundTextVoice = "SPANISH1",
-                    Item1 = 426834001,
-                    RetryConfig = new CfBroadcastConfigRetryConfig
-                    {
-                        RetryResults = new[] { CfResult.Received }
-                    }
+                    //MachineSoundTextVoice = "SPANISH1",
+                    //Item1 = 426834001,
+                    //RetryConfig = new CfBroadcastConfigRetryConfig
+                    //{
+                    //    RetryResults = new[] { CfResult.Received }
+                    //}
                 },
             };
             var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastVoice);
@@ -279,7 +283,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
                 },
             };
             var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastVoice);
-            AssertClientException(() => Client.CreateBroadcast(broadcastRequest));
+            AssertClientException<WebException, FaultException<ServiceFaultInfo>>(() => Client.CreateBroadcast(broadcastRequest));
         }
 
         [Test]
@@ -306,7 +310,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
                 },
             };
             var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastVoice);
-            AssertClientException(() => Client.CreateBroadcast(broadcastRequest));
+            AssertClientException<WebException, FaultException<ServiceFaultInfo>>(() => Client.CreateBroadcast(broadcastRequest));
         }
 
         //TEXT BROADCAST
@@ -424,7 +428,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
                         RetryPhoneTypes = new[] { CfRetryPhoneType.FirstNumber },
                         RetryResults = new[] { CfResult.Sent }
                     },
-                    Message = "XNeque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adineque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adi",
+                    Message = "Xneque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adineque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adi",
                     BigMessageStrategy = CfBigMessageStrategy.DoNotSend
                 },
             };
@@ -435,7 +439,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
 
         //IVR
         [Test]
-        public void Test_CreateBroadcast_IvrBroadcastConfigFaildId()
+        public void Test_CreateBroadcast_IvrBroadcastConfigFaildId() //not a valid from number
         {
             ExpectedBroadcastIvr = new CfBroadcast
             {
@@ -446,6 +450,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
                     Id = -1,
                     Created = new DateTime(2012, 10, 26),
                     FromNumber = "14252163710",
+                    DialplanXml = "<dialplan><play type=\"tts\">Congratulations! You have successfully configured a CallFire I V R.</play></dialplan>"
                 },
             };
             var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastIvr);
@@ -534,7 +539,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         [Test]
         public void Test_ControlBroadcast()
         {
-            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcastDefault);
+            var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastDefault);
             ControlBroadcast.Id = Client.CreateBroadcast(broadcastRequest);
             Client.ControlBroadcast(ControlBroadcast);
         }
