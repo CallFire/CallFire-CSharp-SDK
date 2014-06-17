@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.ServiceModel;
@@ -45,7 +46,9 @@ namespace Callfire_csharp_sdk.IntegrationTests
             }
         }
         
-        //Create Broadcast
+        /// <summary>
+        /// Create Broadcasts
+        /// </summary>
         [Test]
         public void Test_CreateBroadcast()
         {
@@ -86,7 +89,9 @@ namespace Callfire_csharp_sdk.IntegrationTests
             AssertClientException<WebException, FaultException>(() => Client.CreateBroadcast(broadcastRequest));
         }
 
-        //Create Voice Broadcast
+        /// <summary>
+        /// Create Voice Broadcasts
+        /// </summary>
         [Test]
         public void Test_CreateBroadcast_VoiceBroadcastConfigFaildNumber() 
         {
@@ -96,8 +101,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
                 Type = CfBroadcastType.Voice,
                 Item = new CfVoiceBroadcastConfig
                 {
-                    Id = 1,
-                    Created = new DateTime(2012, 10, 26),
                     FromNumber = "45879163710",
                     Item = "TTS: eeee",
                     MachineSoundTextVoice = "SPANISH1",
@@ -117,8 +120,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
                 Type = CfBroadcastType.Voice,
                 Item = new CfVoiceBroadcastConfig
                 {
-                    Id = 1,
-                    Created = new DateTime(2012, 10, 26),
                     FromNumber = VerifyFromNumber,
                     Item = "TTS: eeee",
                     MachineSoundTextVoice = "SPANISH1",
@@ -139,8 +140,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
                 Type = CfBroadcastType.Voice,
                 Item = new CfVoiceBroadcastConfig
                 {
-                    Id = 1,
-                    Created = new DateTime(2012, 10, 26),
                     FromNumber = VerifyFromNumber,
                     Item = "TTS: eeee",
                     MachineSoundTextVoice = "SPANISH1",
@@ -166,8 +165,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
                 Type = CfBroadcastType.Voice,
                 Item = new CfVoiceBroadcastConfig
                 {
-                    Id = 1,
-                    Created = new DateTime(2012, 10, 26),
                     FromNumber = VerifyFromNumber,
                     Item = "TTS: eeee",
                     MachineSoundTextVoice = "SPANISH1",
@@ -199,8 +196,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
                 Type = CfBroadcastType.Voice,
                 Item = new CfVoiceBroadcastConfig
                 {
-                    Id = 1,
-                    Created = new DateTime(2012, 10, 26),
                     FromNumber = VerifyFromNumber,
                     Item = 426834001,
                     MachineSoundTextVoice = "SPANISH1",
@@ -225,8 +220,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
                 Type = CfBroadcastType.Voice,
                 Item = new CfVoiceBroadcastConfig
                 {
-                    Id = 1,
-                    Created = new DateTime(2012, 10, 26),
                     FromNumber = VerifyFromNumber,
                     Item = "TTS: eeee",
                     MachineSoundTextVoice = "SPANISH1",
@@ -254,8 +247,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
                 Type = CfBroadcastType.Voice,
                 Item = new CfVoiceBroadcastConfig
                 {
-                    Id = 1,
-                    Created = new DateTime(2012, 10, 26),
                     FromNumber = VerifyFromNumber,
                     Item = "TTS: eeee",
                     MachineSoundTextVoice = "SPANISH1",
@@ -268,7 +259,9 @@ namespace Callfire_csharp_sdk.IntegrationTests
             Assert.IsNotNull(id);
         }
 
-        //Create Text Broadcast
+        /// <summary>
+        /// Create Text Broadcast
+        /// </summary>
         [Test]
         public void Test_CreateBroadcast_TextConfigSuccess()
         {
@@ -302,8 +295,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
                 Type = CfBroadcastType.Text,
                 Item = new CfTextBroadcastConfig
                 {
-                    Id = 1,
-                    Created = new DateTime(2012, 10, 26),
                     FromNumber = VerifyShortCode,
                     LocalTimeZoneRestriction = new CfLocalTimeZoneRestriction
                     {
@@ -334,8 +325,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
                 Type = CfBroadcastType.Text,
                 Item = new CfTextBroadcastConfig
                 {
-                    Id = 1,
-                    Created = new DateTime(2012, 10, 26),
                     FromNumber = VerifyShortCode,
                     RetryConfig = new CfBroadcastConfigRetryConfig
                     {
@@ -396,7 +385,9 @@ namespace Callfire_csharp_sdk.IntegrationTests
             Assert.IsNotNull(id);
         }
 
-        //Create Ivr Broadcast
+        /// <summary>
+        /// Create Ivr Broadcast
+        /// </summary>
         [Test]
         public void Test_CreateBroadcast_IvrBroadcastConfigComplete()
         {
@@ -523,7 +514,9 @@ namespace Callfire_csharp_sdk.IntegrationTests
             Assert.IsNotNull(id);
         }
 
-        //QueryBroadcasts
+        /// <summary>
+        /// QueryBroadcasts
+        /// </summary>
         [Test]
         public void Test_QueryBroadcast()
         {
@@ -573,7 +566,9 @@ namespace Callfire_csharp_sdk.IntegrationTests
             Assert.IsNotNull(broadcastQueryResult);
         }
 
-        //GetBroadcast
+        /// <summary>
+        /// GetBroadcast
+        /// </summary>
         [Test]
         public void Test_GetBroadcast()
         {
@@ -589,7 +584,9 @@ namespace Callfire_csharp_sdk.IntegrationTests
             Assert.IsNotNull(broadcast);
         }
 
-        //UpdateBroadcast
+        /// <summary>
+        /// Update Broadcast
+        /// </summary>
         [Test]
         public void Test_UpdateBroadcast()
         {
@@ -700,9 +697,10 @@ namespace Callfire_csharp_sdk.IntegrationTests
                 Item = new CfIvrBroadcastConfig
                 {
                     FromNumber = VerifyFromNumber,
-                    DialplanXml = "<dialplan><play type=\"tts\">Congratulations! You have successfully configured a CallFire I V R.</play></dialplan>",
+                    DialplanXml =
+                        "<dialplan><play type=\"tts\">Congratulations! You have successfully configured a CallFire I V R.</play></dialplan>",
                     RetryConfig = new CfBroadcastConfigRetryConfig(),
-               },
+                },
             };
             var id = Client.CreateBroadcast(new CfBroadcastRequest(string.Empty, ExpectedBroadcastIvr));
 
@@ -724,7 +722,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
             var broadcast = Client.GetBroadcast(id);
 
             Assert.AreEqual(newName, broadcast.Name);
-            Assert.AreEqual(newDialplanXml, ((CfIvrBroadcastConfig)broadcast.Item).DialplanXml);
+            Assert.AreEqual(newDialplanXml, ((CfIvrBroadcastConfig) broadcast.Item).DialplanXml);
         }
 
         [Test]
@@ -741,11 +739,274 @@ namespace Callfire_csharp_sdk.IntegrationTests
                     DialplanXml = "<dialplan><play type=\"tts\">Fail Updated DialplanXml</play></dialplan>",
                 },
             };
-            AssertClientException<WebException, FaultException<ServiceFaultInfo>>(() => Client.UpdateBroadcast(new CfBroadcastRequest(string.Empty, ExpectedBroadcast)));
+            AssertClientException<WebException, FaultException<ServiceFaultInfo>>(
+                () => Client.UpdateBroadcast(new CfBroadcastRequest(string.Empty, ExpectedBroadcast)));
         }
 
-        //GetBroadcastStats
+        /// <summary>
+        /// GetBroadcastStats
+        /// </summary>
+        [Test]
+        public void Test_GetBroadcastStats()
+        {
+            var broadcastStats = Client.GetBroadcastStats(GetBroadcastStats);
+            Assert.IsNotNull(broadcastStats);
+            Assert.IsNotNull(broadcastStats.ActionStatistics);
+            Assert.AreEqual(broadcastStats.ActionStatistics.Unattempted, 1);
+            Assert.IsNotNull(broadcastStats.UsageStats);
+            Assert.AreEqual(broadcastStats.UsageStats.Duration, 0);
+        }
 
+        [Test]
+        public void Test_GetBroadcastStatsComplete()
+        {
+            var getBroadcastStats = new CfGetBroadcastStats
+            {
+                Id = 1838228001,
+                IntervalBegin = new DateTime(2014, 01, 01, 00, 00, 01),
+                IntervalEnd = new DateTime(2014, 12, 31, 23, 59, 59)
+            };
+            var broadcastStats = Client.GetBroadcastStats(getBroadcastStats);
+            Assert.IsNotNull(broadcastStats);
+        }
+
+        [Test]
+        public void Test_GetBroadcastStatsIncomplete()
+        {
+            AssertClientException<WebException, FaultException<ServiceFaultInfo>>(() => Client.GetBroadcastStats(new CfGetBroadcastStats()));
+        }
+
+        /// <summary>
+        /// ControlBroadcast
+        /// </summary>
+        [Test]
+        public void Test_ControlBroadcast()
+        {
+            var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastDefault);
+            ControlBroadcast.Id = Client.CreateBroadcast(broadcastRequest);
+            Client.ControlBroadcast(ControlBroadcast);
+        }
+
+        [Test]
+        public void Test_ControlBroadcastStart()
+        {
+            var controlBroadcast = new CfControlBroadcast
+            {
+                Command = CfBroadcastCommand.Start
+            };
+            var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastDefault);
+            controlBroadcast.Id = Client.CreateBroadcast(broadcastRequest);
+           
+            AssertClientException<WebException, FaultException<ServiceFaultInfo>>(() => Client.ControlBroadcast(controlBroadcast));
+        }
+
+        [Test]
+        public void Test_ControlBroadcastStop()
+        {
+            var controlBroadcast = new CfControlBroadcast
+            {
+                Command = CfBroadcastCommand.Stop
+            };
+            var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastDefault);
+            controlBroadcast.Id = Client.CreateBroadcast(broadcastRequest);
+
+            Client.ControlBroadcast(controlBroadcast);
+            var broadcast = Client.GetBroadcast(controlBroadcast.Id);
+            Assert.AreEqual(CfBroadcastStatus.Stopped, broadcast.Status);
+        }
+
+        [Test]
+        public void Test_ControlBroadcastArchive()
+        {
+            var controlBroadcast = new CfControlBroadcast
+            {
+                Command = CfBroadcastCommand.Archive
+            };
+            var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastDefault);
+            controlBroadcast.Id = Client.CreateBroadcast(broadcastRequest);
+
+            Client.ControlBroadcast(controlBroadcast);
+            var broadcast = Client.GetBroadcast(controlBroadcast.Id);
+            Assert.AreEqual(CfBroadcastStatus.Archived, broadcast.Status);
+        }
+
+        [Test]
+        public void Test_ControlBroadcastInvalidID()
+        {
+            var controlBroadcast = new CfControlBroadcast
+            {
+                Command = CfBroadcastCommand.Start
+            };
+            AssertClientException<WebException, FaultException<ServiceFaultInfo>>(() => Client.ControlBroadcast(controlBroadcast));
+        }
+
+        /// <summary>
+        /// CreateContactBatch
+        /// </summary>
+        [Test]
+        public void Test_CreateContactBatch()
+        {
+            var id = Client.CreateContactBatch(CreateContactBatch);
+            Assert.IsNotNull(id);
+        }
+
+        [Test]
+        public void Test_CreateContactBatchBroadcastId()
+        {
+            var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastDefault);
+            var id = Client.CreateBroadcast(broadcastRequest);
+
+            object[] contactListId = { Convert.ToInt64(188601001), Convert.ToInt64(188605001) };
+            var createContactBatch = new CfCreateContactBatch
+            {
+                BroadcastId = id,
+                Name = "Test Contact Batch",
+                Items = contactListId,
+                ScrubBroadcastDuplicates = false
+            };
+            var idContactBatch = Client.CreateContactBatch(createContactBatch);
+            Assert.NotNull(idContactBatch);
+        }
+
+        [Test]
+        public void Test_CreateContactBatchComplete()
+        {
+            var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastDefault);
+            var id = Client.CreateBroadcast(broadcastRequest);
+
+            object[] toNumberList = { new ToNumber { Value = VerifyFromNumber, ClientData = "Client1" },
+                                      new ToNumber { Value = VerifyShortCode,  ClientData = "Client2" }};
+            var createContactBatch = new CfCreateContactBatch
+            {
+                BroadcastId = id,
+                Name = "Test Contact Batch",
+                Items = toNumberList,
+                ScrubBroadcastDuplicates = true
+            };
+            var idContactBatch = Client.CreateContactBatch(createContactBatch);
+            Assert.NotNull(idContactBatch);
+        }
+
+        [Test]
+        public void Test_CreateContactBatchInComplete()
+        {
+
+            //Not all fields complete
+            //ScrubBroadcastDuplicates	= false
+
+        }
+
+        /// <summary>
+        /// QueryContactBatches
+        /// </summary>
+        [Test]
+        public void Test_QueryContactBatchesAllResults()
+        {
+
+            //BroadcastId Valid
+
+        }
+        
+        [Test]
+        public void Test_QueryContactBatchesComplete()
+        {
+
+            //BroadcastId Valid
+            //MaxResults 20
+            //FirstResult 2
+            
+        }
+
+        /// <summary>
+        /// GetContactBatches
+        /// </summary>
+        [Test]
+        public void Test_GetContactBatchesValidId()
+        {
+            //ID Valido
+        }
+
+        [Test]
+        public void Test_GetContactBatchesInValidId()
+        {
+            //ID InValido
+        }
+
+        /// <summary>
+        /// ControlContactBatches
+        /// </summary>
+        [Test]
+        public void Test_ControlContactBatchesCompleteTrue()
+        {
+            //id valid
+            //Name
+            //True
+
+        }
+
+        [Test]
+        public void Test_ControlContactBatchesCompleteFalse()
+        {
+            //id valid
+            //Name
+            //False
+
+        }
+
+        /// <summary>
+        /// CreateBroadcastSchedule
+        /// </summary>
+        [Test]
+        public void Test_CreateBroadcastScheduleMandatory()
+        {
+            //Complete only mandatories field
+
+        }
+
+        [Test]
+        public void Test_CreateBroadcastScheduleComplete()
+        {
+            //Complete only mandatories field
+        }
+
+        //QueryBroadcastSchedule
+        [Test]
+        public void Test_QueryBroadcastScheduleBroadcastId()
+        {
+            //BroadcastId only
+        }
+        
+        public void Test_QueryBroadcastScheduleComplete()
+        {
+            //all complete
+        }
+
+        //GetBroadcastSchedule
+        [Test]
+        public void Test_GetBroadcastScheduleValidId()
+        {
+            //id valid
+
+        }
+
+        public void Test_GetBroadcastScheduleInvalidID()
+        {
+            //id invalid
+        }
+
+        //DeleteBroadcastSchedule
+        [Test]
+        public void Test_DeleteBroadcastScheduleValidID()
+        {
+            //id valid
+
+        }
+        [Test]
+        public void Test_DeleteBroadcastScheduleInvalidID()
+        {
+            //id invalid
+
+        }
 
         [Test]
         public void Test_QueryContactBatches()
@@ -769,32 +1030,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
         public void Test_ControlContactBatches()
         {
             Client.ControlContactBatch(ControlContactBatches);
-        }
-
-        [Test]
-        public void Test_GetBroadcastStats()
-        {
-            var broadcastStats = Client.GetBroadcastStats(GetBroadcastStats);
-            Assert.IsNotNull(broadcastStats);
-            Assert.IsNotNull(broadcastStats.ActionStatistics);
-            Assert.AreEqual(broadcastStats.ActionStatistics.Unattempted, 1);
-            Assert.IsNotNull(broadcastStats.UsageStats);
-            Assert.AreEqual(broadcastStats.UsageStats.Duration, 0);
-        }
-
-        [Test]
-        public void Test_ControlBroadcast()
-        {
-            var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastDefault);
-            ControlBroadcast.Id = Client.CreateBroadcast(broadcastRequest);
-            Client.ControlBroadcast(ControlBroadcast);
-        }
-
-        [Test]
-        public void Test_CreateContactBatch()
-        {
-            var id = Client.CreateContactBatch(CreateContactBatch);
-            Assert.IsNotNull(id);
         }
     }
 }

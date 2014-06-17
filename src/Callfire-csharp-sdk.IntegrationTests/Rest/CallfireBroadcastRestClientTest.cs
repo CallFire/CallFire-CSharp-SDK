@@ -20,7 +20,7 @@ namespace Callfire_csharp_sdk.IntegrationTests.Rest
             var broadcastConfigRestryConfig = new CfBroadcastConfigRetryConfig(1000, 2, result, phoneTypes);
             var expectedTextBroadcastConfig = new CfTextBroadcastConfig(1, DateTime.Now, string.Empty, localTimeZoneRestriction,
                 broadcastConfigRestryConfig, "Test", CfBigMessageStrategy.DoNotSend);
-            ExpectedBroadcastDefault = new CfBroadcast(14898, "broadcastRest", CfBroadcastStatus.Running, DateTime.Now,
+            ExpectedBroadcastDefault = new CfBroadcast(14898, "broadcastRest", CfBroadcastStatus.StartPending, DateTime.Now,
                 CfBroadcastType.Text, expectedTextBroadcastConfig);
 
             CfBroadcastType[] broadcastType = { CfBroadcastType.Text };

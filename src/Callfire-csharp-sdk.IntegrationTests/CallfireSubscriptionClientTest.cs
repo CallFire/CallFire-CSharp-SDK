@@ -16,6 +16,62 @@ namespace Callfire_csharp_sdk.IntegrationTests
         protected CfQuery QuerySubscription;
         protected CfSubscriptionRequest CfUpdateSubscription;
 
+        /// <summary>
+        /// //////////////Subscription////////
+        /// </summary>
+        /// 
+        //CreateSubscription
+        [Test]
+        public void Test_CreateSubscriptionEndpointID()
+        {
+            //
+            //Endpoint= valid
+
+        }
+        public void Test_CreateSubscriptionCompleteTrue()
+        {
+            //
+            //Enabled= TRue
+            //NotificationFormat= XML
+            //TriggerEvent = INBOULND_CALL_FINISHED
+            //Inbound = true
+
+        }
+        public void Test_CreateSubscriptionCompleteFalse()
+        {
+            //
+            //Enabled= False
+            //NotificationFormat= Email
+            //TriggerEvent = OUTBOUND_TEXT_FINISHED 
+            //Inbound = False
+
+        }
+        //querySubsctiptions
+        public void Test_querySubsctiptionsAllResults()
+        {
+            //all empty
+
+
+        }
+        public void Test_querySubsctiptionsSpecialResults()
+        {
+            //MaxResults= 20
+            //FirstResult= 1
+
+        }
+        //getsubscriptions
+        public void Test_getsubscriptionsValid()
+        {
+            //ID valid
+        }
+        public void Test_getsubscriptionsInValidID()
+        {
+            //ID INvalid
+        }
+
+        //UpdateSubscription
+
+
         [Test]
         public void Test_CreateSuscription()
         {
