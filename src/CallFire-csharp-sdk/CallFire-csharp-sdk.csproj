@@ -127,6 +127,7 @@
     <Compile Include="Common\Resource\CfSendCall.cs" />
     <Compile Include="Common\Resource\CfSendRequest.cs" />
     <Compile Include="Common\Resource\CfSendText.cs" />
+    <Compile Include="Common\Resource\ContactHistory.cs" />
     <Compile Include="Common\Resource\Extended\ActionQueryExtended.cs" />
     <Compile Include="Common\Resource\Extended\CallExtended.cs" />
     <Compile Include="Common\Resource\Extended\CallRecordExtended.cs" />

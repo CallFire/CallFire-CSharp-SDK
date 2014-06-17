@@ -6,7 +6,7 @@ using CallFire_csharp_sdk.Common;
 using CallFire_csharp_sdk.Common.DataManagement;
 using NUnit.Framework;
 
-namespace Callfire_csharp_sdk.Tests
+namespace Callfire_csharp_sdk.IntegrationTests.UnitTest
 {
     [TestFixture]
     public class CustomSerializerTests

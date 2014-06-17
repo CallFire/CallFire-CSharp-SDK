@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace CallFire_csharp_sdk.Common
 {
-    internal class CustomSerializer : ICustomSerializer
+    public class CustomSerializer : ICustomSerializer
     {
         private const string DateFormat = "yyyy-MM-ddThh:mm:ss";
 
@@ -21,7 +21,7 @@ namespace CallFire_csharp_sdk.Common
             return properties.Where(v => !string.IsNullOrEmpty(v.Value)).Select(v => string.Format("{0}={1}", v.Key, v.Value)).ToArray();
         }
 
-        internal IEnumerable<KeyValuePair<string, string>> GetProperties(object o)
+        public IEnumerable<KeyValuePair<string, string>> GetProperties(object o)
         {
             var result = new List<KeyValuePair<string, string>>();
 

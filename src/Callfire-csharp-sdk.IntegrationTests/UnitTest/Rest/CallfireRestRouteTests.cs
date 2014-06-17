@@ -4,7 +4,7 @@ using CallFire_csharp_sdk.API.Rest;
 using CallFire_csharp_sdk.API.Soap;
 using NUnit.Framework;
 
-namespace Callfire_csharp_sdk.Tests.Rest
+namespace Callfire_csharp_sdk.IntegrationTests.UnitTest.Rest
 {
     [TestFixture]
     public class CallfireRestRouteTests

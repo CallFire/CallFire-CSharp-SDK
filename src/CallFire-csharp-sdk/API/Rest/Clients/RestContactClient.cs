@@ -7,6 +7,7 @@ using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
 using CallFire_csharp_sdk.Common.Resource.Mappers;
 using CallFire_csharp_sdk.Common.Result;
+using ContactHistory = CallFire_csharp_sdk.Common.Resource.ContactHistory;
 
 namespace CallFire_csharp_sdk.API.Rest.Clients
 {
