@@ -1,5 +1,8 @@
 ﻿using System.Linq;
+using System.Net;
+using System.ServiceModel;
 using CallFire_csharp_sdk.API;
+using CallFire_csharp_sdk.API.Rest.Clients;
 using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
 using NUnit.Framework;
@@ -18,13 +21,32 @@ namespace Callfire_csharp_sdk.IntegrationTests
         protected CfBroadcastRequest UpdateBroadcast;
         protected CfControlBroadcast ControlBroadcast;
         protected CfCreateContactBatch CreateContactBatch;
-        
+
+        private void AssertClientException(TestDelegate test)
+        {
+            if (Client.GetType() == typeof(RestBroadcastClient))
+            {
+                Assert.Throws<WebException>(test);
+            }
+            else
+            {
+                Assert.Throws<FaultException>(test);
+            }
+        }
+
         [Test]
         public void Test_CreateBroadcast()
         {
-            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcast);
+            var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcast);
             var id = Client.CreateBroadcast(broadcastRequest);
             Assert.IsNotNull(id);
+        }
+
+        [Test]
+        public void Test_CreateBroadcast_WithBroadcastNull()
+        {
+            var broadcastRequest = new CfBroadcastRequest(string.Empty, null);
+            AssertClientException(() => Client.CreateBroadcast(broadcastRequest));
         }
 
         [Test]
@@ -87,7 +109,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         [Test]
         public void Test_ControlBroadcast()
         {
-            var broadcastRequest = new CfBroadcastRequest("", ExpectedBroadcast);
+            var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcast);
             ControlBroadcast.Id = Client.CreateBroadcast(broadcastRequest);
             Client.ControlBroadcast(ControlBroadcast);
         }
