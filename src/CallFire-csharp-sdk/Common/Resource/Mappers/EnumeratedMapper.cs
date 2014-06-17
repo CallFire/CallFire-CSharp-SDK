@@ -10,7 +10,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
 
         internal static T[] ArrayFromSoapEnumerated<T>(string source)
         {
-            if (source == null)
+            if (string.IsNullOrEmpty(source))
             {
                 return null;
             }

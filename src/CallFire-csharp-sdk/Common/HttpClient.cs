@@ -46,7 +46,7 @@ namespace CallFire_csharp_sdk.Common
             }
 
             var formEncodedObject = _serializer.SerializeToFormData(body);
-
+            
             if (method == HttpMethod.Get && !string.IsNullOrEmpty(formEncodedObject))
             {
                 relativeUrl = string.Format("{0}?{1}", relativeUrl, formEncodedObject);
