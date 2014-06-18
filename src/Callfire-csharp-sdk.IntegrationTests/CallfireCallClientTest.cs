@@ -57,5 +57,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
             Assert.IsNotNull(call);
             Assert.AreEqual(call.ContactId, 165251012001);
         }
+
     }
 }
+
