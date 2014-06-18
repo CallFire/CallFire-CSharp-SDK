@@ -1,4 +1,5 @@
-﻿using CallFire_csharp_sdk.Common.DataManagement;
+﻿using System.Linq;
+using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
 using CallFire_csharp_sdk.Common.Resource.Mappers;
 using CallFire_csharp_sdk.Common.Result;
@@ -57,8 +58,7 @@ namespace CallFire_csharp_sdk.API.Soap
 
         public long CreateContactBatch(CfCreateContactBatch createContactBatch)
         {
-            return
-                BroadcastService.CreateContactBatch(new CreateContactBatch(createContactBatch.RequestId,
+            return BroadcastService.CreateContactBatch(new CreateContactBatch(createContactBatch.RequestId,
                     createContactBatch.BroadcastId, createContactBatch.Name, createContactBatch.Items,
                     createContactBatch.ScrubBroadcastDuplicates));
         }

@@ -1,5 +1,4 @@
 using System;
-using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.ServiceModel;
@@ -856,7 +855,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
             var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastDefault);
             var id = Client.CreateBroadcast(broadcastRequest);
 
-            object[] contactListId = { Convert.ToInt64(188601001), Convert.ToInt64(188605001) };
+            object[] contactListId = { Convert.ToInt64(188601001) };
             var createContactBatch = new CfCreateContactBatch
             {
                 BroadcastId = id,
@@ -874,8 +873,8 @@ namespace Callfire_csharp_sdk.IntegrationTests
             var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastDefault);
             var id = Client.CreateBroadcast(broadcastRequest);
 
-            object[] toNumberList = { new ToNumber { Value = VerifyFromNumber, ClientData = "Client1" },
-                                      new ToNumber { Value = VerifyShortCode,  ClientData = "Client2" }};
+            object[] toNumberList = { new CfToNumber { Value = VerifyFromNumber, ClientData = "Client1" },
+                                      new CfToNumber { Value = VerifyShortCode,  ClientData = "Client2" }};
             var createContactBatch = new CfCreateContactBatch
             {
                 BroadcastId = id,
@@ -890,124 +889,17 @@ namespace Callfire_csharp_sdk.IntegrationTests
         [Test]
         public void Test_CreateContactBatchInComplete()
         {
-
-            //Not all fields complete
-            //ScrubBroadcastDuplicates	= false
-
+            var createContactBatch = new CfCreateContactBatch
+            {
+                Name = "Test Contact Batch",
+                ScrubBroadcastDuplicates = false
+            };
+            AssertClientException<WebException, FaultException>(() => Client.CreateContactBatch(createContactBatch));
         }
 
         /// <summary>
         /// QueryContactBatches
         /// </summary>
-        [Test]
-        public void Test_QueryContactBatchesAllResults()
-        {
-
-            //BroadcastId Valid
-
-        }
-        
-        [Test]
-        public void Test_QueryContactBatchesComplete()
-        {
-
-            //BroadcastId Valid
-            //MaxResults 20
-            //FirstResult 2
-            
-        }
-
-        /// <summary>
-        /// GetContactBatches
-        /// </summary>
-        [Test]
-        public void Test_GetContactBatchesValidId()
-        {
-            //ID Valido
-        }
-
-        [Test]
-        public void Test_GetContactBatchesInValidId()
-        {
-            //ID InValido
-        }
-
-        /// <summary>
-        /// ControlContactBatches
-        /// </summary>
-        [Test]
-        public void Test_ControlContactBatchesCompleteTrue()
-        {
-            //id valid
-            //Name
-            //True
-
-        }
-
-        [Test]
-        public void Test_ControlContactBatchesCompleteFalse()
-        {
-            //id valid
-            //Name
-            //False
-
-        }
-
-        /// <summary>
-        /// CreateBroadcastSchedule
-        /// </summary>
-        [Test]
-        public void Test_CreateBroadcastScheduleMandatory()
-        {
-            //Complete only mandatories field
-
-        }
-
-        [Test]
-        public void Test_CreateBroadcastScheduleComplete()
-        {
-            //Complete only mandatories field
-        }
-
-        //QueryBroadcastSchedule
-        [Test]
-        public void Test_QueryBroadcastScheduleBroadcastId()
-        {
-            //BroadcastId only
-        }
-        
-        public void Test_QueryBroadcastScheduleComplete()
-        {
-            //all complete
-        }
-
-        //GetBroadcastSchedule
-        [Test]
-        public void Test_GetBroadcastScheduleValidId()
-        {
-            //id valid
-
-        }
-
-        public void Test_GetBroadcastScheduleInvalidID()
-        {
-            //id invalid
-        }
-
-        //DeleteBroadcastSchedule
-        [Test]
-        public void Test_DeleteBroadcastScheduleValidID()
-        {
-            //id valid
-
-        }
-        [Test]
-        public void Test_DeleteBroadcastScheduleInvalidID()
-        {
-            //id invalid
-
-        }
-
         [Test]
         public void Test_QueryContactBatches()
         {
@@ -1018,18 +910,187 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
-        public void Test_GetContactBatches()
+        public void Test_QueryContactBatchesAllResults()
+        {
+            var queryBroadcastData = new CfQueryBroadcastData
+            {
+                BroadcastId = 1951201001
+            };
+            var contactBatchQueryResult = Client.QueryContactBatches(queryBroadcastData);
+            Assert.IsNotNull(contactBatchQueryResult);
+        }
+        
+        [Test]
+        public void Test_QueryContactBatchesComplete()
+        {
+            var queryBroadcastData = new CfQueryBroadcastData
+            {
+                BroadcastId = 1951201001,
+                MaxResults = 20,
+                FirstResult = 2
+            };
+            var contactBatchQueryResult = Client.QueryContactBatches(queryBroadcastData);
+            Assert.IsNotNull(contactBatchQueryResult);
+        }
+
+        /// <summary>
+        /// GetContactBatches
+        /// </summary>
+        [Test]
+        public void Test_GetContactBatchesValidId()
         {
             var contactBatch = Client.GetContactBatch(1092170001);
             Assert.IsNotNull(contactBatch);
             Assert.AreEqual(contactBatch.Status, CfBatchStatus.Active);
             Assert.AreEqual(contactBatch.Size, 1);
         }
+        
+        [Test]
+        public void Test_GetContactBatchesInValidId()
+        {
+            AssertClientException<WebException, FaultException<ServiceFaultInfo>>(() => Client.GetContactBatch(1092170000));
+        }
 
+        /// <summary>
+        /// ControlContactBatches
+        /// </summary>
         [Test]
         public void Test_ControlContactBatches()
         {
             Client.ControlContactBatch(ControlContactBatches);
+        }
+
+        [Test]
+        public void Test_ControlContactBatchesCompleteTrue()
+        {
+            var controlContactBatch = new CfControlContactBatch
+            {
+                Id = 1199291001,
+                Enabled = true,
+                Name = "Enabled Contact Batch Enabled"
+            };
+            Client.ControlContactBatch(controlContactBatch);
+        }
+
+        [Test]
+        public void Test_ControlContactBatchesCompleteFalse()
+        {
+            var controlContactBatch = new CfControlContactBatch
+            {
+                Id = 1199291001,
+                Enabled = false,
+                Name = "Disabled Contact Batch"
+            };
+            Client.ControlContactBatch(controlContactBatch);
+        }
+
+        /// <summary>
+        /// CreateBroadcastSchedule
+        /// </summary>
+        [Test]
+        public void Test_CreateBroadcastScheduleMandatory()
+        {
+            var createBroadcastSchedule = new CfCreateBroadcastSchedule
+            {
+                BroadcastId = 1918588001,
+                BroadcastSchedule = new CfBroadcastSchedule
+                {
+                    StartTimeOfDay = new DateTime(2014,01,01,08,00,00),
+                    StopTimeOfDay = new DateTime(2014,01,01,20,00,00),
+                    TimeZone = "America/Edmonton"
+                }
+            };
+            var id = Client.CreateBroadcastSchedule(createBroadcastSchedule);
+            Assert.NotNull(id);
+        }
+
+        [Test]
+        public void Test_CreateBroadcastScheduleComplete()
+        {
+            var createBroadcastSchedule = new CfCreateBroadcastSchedule
+            {
+                BroadcastId = 1918588001,
+                BroadcastSchedule = new CfBroadcastSchedule
+                {
+                    BeginDate = new DateTime(2014, 06, 18, 00, 00, 00),
+                    EndDate = new DateTime(2014, 07, 18, 00, 00, 00),
+                    StartTimeOfDay = new DateTime(2014, 01, 01, 13, 00, 00),
+                    StopTimeOfDay = new DateTime(2014, 01, 01, 20, 00, 00),
+                    TimeZone = "America/Edmonton",
+                    DaysOfWeek = new [] { CfDaysOfWeek.Monday, CfDaysOfWeek.Sunday }
+                }
+            };
+            var id = Client.CreateBroadcastSchedule(createBroadcastSchedule);
+            Assert.NotNull(id);
+        }
+
+        /// <summary>
+        /// QueryBroadcastSchedule
+        /// </summary>
+        [Test]
+        public void Test_QueryBroadcastScheduleBroadcastId()
+        {
+            var queryBroadcastData = new CfQueryBroadcastData
+            {
+                BroadcastId = 1918588001
+            };
+            var broadcastScheduleQueryResult = Client.QueryBroadcastSchedule(queryBroadcastData);
+            Assert.IsNotNull(broadcastScheduleQueryResult);
+        }
+
+        [Test]
+        public void Test_QueryBroadcastScheduleComplete()
+        {
+            var queryBroadcastData = new CfQueryBroadcastData
+            {
+                BroadcastId = 1918588001,
+                FirstResult = 1,
+                MaxResults = 10
+            };
+            var broadcastScheduleQueryResult = Client.QueryBroadcastSchedule(queryBroadcastData);
+            Assert.IsNotNull(broadcastScheduleQueryResult);
+        }
+
+        /// <summary>
+        /// GetBroadcastSchedule
+        /// </summary>
+        [Test]
+        public void Test_GetBroadcastScheduleValidId()
+        {
+            var broadcastSchedule = Client.GetBroadcastSchedule(58373001);
+            Assert.IsNotNull(broadcastSchedule);
+        }
+
+        [Test]
+        public void Test_GetBroadcastScheduleInvalidID()
+        {
+            AssertClientException<WebException, FaultException<ServiceFaultInfo>>(() => Client.GetBroadcastSchedule(58373000));
+        }
+
+        /// <summary>
+        /// DeleteBroadcastSchedule
+        /// </summary>
+        [Test]
+        public void Test_DeleteBroadcastScheduleValidID()
+        {
+             var createBroadcastSchedule = new CfCreateBroadcastSchedule
+            {
+                BroadcastId = 1918588001,
+                BroadcastSchedule = new CfBroadcastSchedule
+                {
+                    StartTimeOfDay = new DateTime(2014,01,01,08,00,00),
+                    StopTimeOfDay = new DateTime(2014,01,01,20,00,00),
+                    TimeZone = "America/Edmonton"
+                }
+            };
+            var id = Client.CreateBroadcastSchedule(createBroadcastSchedule);
+            Client.DeleteBroadcastSchedule(id);
+        }
+
+        [Test]
+        public void Test_DeleteBroadcastScheduleInvalidID()
+        {
+            AssertClientException<WebException, FaultException<ServiceFaultInfo>>(() => Client.DeleteBroadcastSchedule(58378000));
         }
     }
 }

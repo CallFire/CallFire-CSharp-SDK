@@ -9,7 +9,9 @@ namespace CallFire_csharp_sdk.Common
 {
     internal class CustomSerializer : ICustomSerializer
     {
-        private const string DateFormat = "yyyy-MM-ddThh:mm:ss";
+        private const string DateTimeFormat = "yyyy-MM-ddTHH:mm:ss";
+        private const string TimeFormat = "HH:mm:ss";
+        private const string DateFormat = "yyyy-MM-dd";
 
         public string SerializeToFormData(object o)
         {
@@ -55,13 +57,13 @@ namespace CallFire_csharp_sdk.Common
         {
             var stringValue = value.ToString();
 
+            var attribs = (XmlElementAttribute[])Attribute.GetCustomAttributes(propertyInfo, typeof(XmlElementAttribute));
             if (propertyInfo.PropertyType == typeof (DateTime))
             {
-                stringValue = ((DateTime) value).ToString(DateFormat);
+                stringValue = FindDateFormat(value, attribs);
             }
 
             var elementName = propertyInfo.Name;
-            var attribs = (XmlElementAttribute[]) Attribute.GetCustomAttributes(propertyInfo, typeof (XmlElementAttribute));
             if (attribs.Any(i => i.Type == value.GetType()))
             {
                 elementName = attribs.First(i => i.Type == value.GetType()).ElementName;
@@ -74,6 +76,24 @@ namespace CallFire_csharp_sdk.Common
             {
                 result.Add(new KeyValuePair<string, string>(elementName, HttpUtility.UrlEncode(stringValue)));
             }
+        }
+
+        private static string FindDateFormat(object value, XmlElementAttribute[] attribs)
+        {
+            if (attribs.Any())
+            {
+                var dataType = attribs[0].DataType;
+                switch (dataType)
+                {
+                    case "time":
+                        return ((DateTime)value).ToString(TimeFormat);
+                    case "date":
+                        return ((DateTime)value).ToString(DateFormat);
+                    default:
+                        return ((DateTime)value).ToString(DateTimeFormat);
+                }
+            }
+            return ((DateTime) value).ToString(DateTimeFormat);
         }
 
         private void AddEncodedArray(object value, PropertyInfo propertyInfo, List<KeyValuePair<string, string>> result)

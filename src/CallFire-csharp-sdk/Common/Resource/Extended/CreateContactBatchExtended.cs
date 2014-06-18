@@ -13,8 +13,7 @@ namespace CallFire_csharp_sdk.API.Soap
             RequestId = requestId;
             BroadcastId = broadcastId;
             Name = name;
-
-            Items = items.GetType() == typeof(CfToNumber[]) ? 
+            Items = items == null || !items.Any() ? null : items[0].GetType() == typeof(CfToNumber) ?
                 items.Select(i => ToNumberMapper.ToToNumber(i as CfToNumber)).ToArray() : items;
             ScrubBroadcastDuplicates = scrubBroadcastDuplicates;
         }
