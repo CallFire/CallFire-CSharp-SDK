@@ -28,6 +28,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
             //Endpoint= valid
 
         }
+        [Test]
         public void Test_CreateSubscriptionCompleteTrue()
         {
             //
@@ -37,6 +38,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
             //Inbound = true
 
         }
+        [Test]
         public void Test_CreateSubscriptionCompleteFalse()
         {
             //
@@ -46,7 +48,9 @@ namespace Callfire_csharp_sdk.IntegrationTests
             //Inbound = False
 
         }
+
         //querySubsctiptions
+        [Test]
         public void Test_querySubsctiptionsAllResults()
         {
             //all empty
@@ -60,6 +64,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
 
         }
         //getsubscriptions
+        [Test]
         public void Test_getsubscriptionsValid()
         {
             //ID valid
@@ -70,6 +75,46 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         //UpdateSubscription
+        [Test]
+        public void Test_UpdateSubscriptionEmpty()
+        {
+            //Subscription[id]= null
+        }
+
+        [Test]
+        public void Test_UpdateSubscriptionTrue()
+        {
+            //Enabled=true
+            //NotificationFormat=Xml
+            //TriggerEvent= wherever
+            //Inbound=True
+            //Subscription[id]= valid
+        }
+        public void Test_UpdateSubscriptionFalse()
+        {
+            //Enabled=False
+            //NotificationFormat=Soup
+            //TriggerEvent= wherever
+            //Inbound=false
+            //Subscription[id]= valid
+        }
+
+        //DeleteSubscription
+
+        [Test]
+        public void Test_DeleteSubscriptionIdNull()
+        {
+            //
+        }
+        [Test]
+        public void Test_DeleteSubscriptionComplete()
+        {
+            //valid id
+        }
+
+
+
+
 
 
         [Test]
