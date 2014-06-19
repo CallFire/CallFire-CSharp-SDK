@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Xml.Serialization;
+using CallFire_csharp_sdk.API.Soap;
 
 namespace CallFire_csharp_sdk.Common
 {
@@ -100,11 +101,22 @@ namespace CallFire_csharp_sdk.Common
             var elementName = attribs.First(i => i.Type == array.GetValue(0).GetType()).ElementName;
             if (IsCustomClass(array.GetType().GetElementType()))
             {
-                for (var i = 0; i < array.Length; i++)
+                if (array.GetType().GetElementType() == typeof (ToNumber))
                 {
-                    var elementProperties = GetProperties(array.GetValue(i));
-                    result.AddRange(elementProperties.Select(a => new KeyValuePair<string, string>
-                        (string.Format("{0}[{1}][{2}]", elementName, i, a.Key), a.Value)));
+                    var arrayValue = string.Join(" ", array.OfType<ToNumber>().Select(e => e.Value).ToArray());
+                    result.Add(new KeyValuePair<string, string>("To", HttpUtility.UrlEncode(arrayValue)));
+
+                    var arrayData = string.Join(" ", array.OfType<ToNumber>().Select(e => e.ClientData).ToArray());
+                    result.Add(new KeyValuePair<string, string>("ToNumber[ClientData]", HttpUtility.UrlEncode(arrayData)));
+                }
+                else
+                {
+                    for (var i = 0; i < array.Length; i++)
+                    {
+                        var elementProperties = GetProperties(array.GetValue(i));
+                        result.AddRange(elementProperties.Select(a => new KeyValuePair<string, string>
+                            (string.Format("{0}[{1}][{2}]", elementName, i, a.Key), a.Value)));
+                    }
                 }
             }
             else
