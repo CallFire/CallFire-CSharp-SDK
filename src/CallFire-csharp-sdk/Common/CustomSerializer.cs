@@ -68,14 +68,7 @@ namespace CallFire_csharp_sdk.Common
             {
                 elementName = attribs.First(i => i.Type == value.GetType()).ElementName;
             }
-            if (elementName.Equals("FromNumber"))
-            {
-                result.Add(new KeyValuePair<string, string>("From", HttpUtility.UrlEncode(stringValue)));
-            }
-            else
-            {
-                result.Add(new KeyValuePair<string, string>(elementName, HttpUtility.UrlEncode(stringValue)));
-            }
+            result.Add(new KeyValuePair<string, string>(elementName, HttpUtility.UrlEncode(stringValue)));
         }
 
         private static string FindDateFormat(object value, XmlElementAttribute[] attribs)

@@ -1,4 +1,5 @@
 ﻿using System;
+
 // ReSharper disable once CheckNamespace - This is an extension from API.Soap
 namespace CallFire_csharp_sdk.API.Soap
 {
@@ -16,6 +17,13 @@ namespace CallFire_csharp_sdk.API.Soap
             FromNumber = fromNumber;
             LocalTimeZoneRestriction = localTimeZoneRestriction;
             RetryConfig = retryConfig;
+        }
+        
+        [System.Xml.Serialization.XmlIgnore]
+        public string From
+        {
+            get { return FromNumber; }
+            set { FromNumber = value; }
         }
     }
 }

@@ -579,7 +579,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         [Test]
         public void Test_GetBroadcastSuccess()
         {
-            var broadcast = Client.GetBroadcast(1903343001);
+            var broadcast = Client.GetBroadcast(1953755001);
             Assert.IsNotNull(broadcast);
         }
 
