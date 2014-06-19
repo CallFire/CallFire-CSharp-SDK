@@ -88,15 +88,10 @@
     <Compile Include="BroadcastTest\Soap\QueryContactBatchSoapClientTest.cs" />
     <Compile Include="BroadcastTest\Soap\UpdateBroadcastSoapClientTest.cs" />
     <Compile Include="BroadcastTest\UpdateBroadcastClientTest.cs" />
-    <Compile Include="ClientCreationTests.cs" />
-    <Compile Include="CustomSerializerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BroadcastTest\Rest\GetBroadcastRestClientTests.cs" />
-    <Compile Include="Rest\CallfireRestRouteTests.cs" />
-    <Compile Include="Rest\RestClientCreationTests.cs" />
     <Compile Include="BroadcastTest\GetBroadcastClientTest.cs" />
     <Compile Include="BroadcastTest\Soap\GetBroadcastSoapClientTests.cs" />
-    <Compile Include="Soap\SoapClientCreationTests.cs" />
     <Compile Include="SubscriptionTest\CreateSubscriptionClientTest.cs" />
     <Compile Include="SubscriptionTest\DeleteSubscriptionClientTest.cs" />
     <Compile Include="SubscriptionTest\GetSubscriptionClientTest.cs" />
@@ -112,7 +107,6 @@
     <Compile Include="SubscriptionTest\Soap\QuerySubscriptionsSoapClientTest.cs" />
     <Compile Include="SubscriptionTest\Soap\UpdateSubscriptionSoapClientTest.cs" />
     <Compile Include="SubscriptionTest\UpdateSubscriptionClientTest.cs" />
-    <Compile Include="XMLDeserialization.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CallFire-csharp-sdk\CallFire-csharp-sdk.csproj">
