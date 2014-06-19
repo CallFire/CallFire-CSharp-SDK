@@ -31,8 +31,8 @@ namespace Callfire_csharp_sdk.IntegrationTests
         protected const string VerifyFromNumber = "+19196991764";
         protected const string VerifyShortCode = "67076";
 
-        private void AssertClientException<TRest, TSoap>(TestDelegate test) 
-            where TRest : Exception 
+        public void AssertClientException<TRest, TSoap>(TestDelegate test)
+            where TRest : Exception
             where TSoap : Exception
         {
             if (Client.GetType() == typeof(RestBroadcastClient))
@@ -44,7 +44,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
                 Assert.Throws<TSoap>(test);
             }
         }
-        
+
         /// <summary>
         /// Create Broadcasts
         /// </summary>
@@ -738,8 +738,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
                     DialplanXml = "<dialplan><play type=\"tts\">Fail Updated DialplanXml</play></dialplan>",
                 },
             };
-            AssertClientException<WebException, FaultException<ServiceFaultInfo>>(
-                () => Client.UpdateBroadcast(new CfBroadcastRequest(string.Empty, ExpectedBroadcast)));
+            AssertClientException<WebException, FaultException<ServiceFaultInfo>>(() => Client.UpdateBroadcast(new CfBroadcastRequest(string.Empty, ExpectedBroadcast)));
         }
 
         /// <summary>
@@ -795,7 +794,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
             };
             var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastDefault);
             controlBroadcast.Id = Client.CreateBroadcast(broadcastRequest);
-           
+
             AssertClientException<WebException, FaultException<ServiceFaultInfo>>(() => Client.ControlBroadcast(controlBroadcast));
         }
 

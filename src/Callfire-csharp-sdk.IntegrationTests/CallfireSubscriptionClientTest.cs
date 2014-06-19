@@ -1,5 +1,10 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Net;
+using System.ServiceModel;
 using CallFire_csharp_sdk.API;
+using CallFire_csharp_sdk.API.Rest.Clients;
+using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
 using NUnit.Framework;
@@ -16,121 +21,99 @@ namespace Callfire_csharp_sdk.IntegrationTests
         protected CfQuery QuerySubscription;
         protected CfSubscriptionRequest CfUpdateSubscription;
 
+        protected const string VerifyFromNumber = "+19196991764";
+        protected const string VerifyShortCode = "67076";
+
+        public void AssertClientException<TRest, TSoap>(TestDelegate test)
+            where TRest : Exception
+            where TSoap : Exception
+        {
+            if (Client.GetType() == typeof(RestSubscriptionClient))
+            {
+                Assert.Throws<TRest>(test);
+            }
+            else
+            {
+                Assert.Throws<TSoap>(test);
+            }
+        }
+
         /// <summary>
-        /// //////////////Subscription////////
+        /// CreateSubscription
         /// </summary>
-        /// 
-        //CreateSubscription
-        [Test]
-        public void Test_CreateSubscriptionEndpointID()
-        {
-            //
-            //Endpoint= valid
-
-        }
-        [Test]
-        public void Test_CreateSubscriptionCompleteTrue()
-        {
-            //
-            //Enabled= TRue
-            //NotificationFormat= XML
-            //TriggerEvent = INBOULND_CALL_FINISHED
-            //Inbound = true
-
-        }
-        [Test]
-        public void Test_CreateSubscriptionCompleteFalse()
-        {
-            //
-            //Enabled= False
-            //NotificationFormat= Email
-            //TriggerEvent = OUTBOUND_TEXT_FINISHED 
-            //Inbound = False
-
-        }
-
-        //querySubsctiptions
-        [Test]
-        public void Test_querySubsctiptionsAllResults()
-        {
-            //all empty
-
-
-        }
-        public void Test_querySubsctiptionsSpecialResults()
-        {
-            //MaxResults= 20
-            //FirstResult= 1
-
-        }
-        //getsubscriptions
-        [Test]
-        public void Test_getsubscriptionsValid()
-        {
-            //ID valid
-        }
-        public void Test_getsubscriptionsInValidID()
-        {
-            //ID INvalid
-        }
-
-        //UpdateSubscription
-        [Test]
-        public void Test_UpdateSubscriptionEmpty()
-        {
-            //Subscription[id]= null
-        }
-
-        [Test]
-        public void Test_UpdateSubscriptionTrue()
-        {
-            //Enabled=true
-            //NotificationFormat=Xml
-            //TriggerEvent= wherever
-            //Inbound=True
-            //Subscription[id]= valid
-        }
-        public void Test_UpdateSubscriptionFalse()
-        {
-            //Enabled=False
-            //NotificationFormat=Soup
-            //TriggerEvent= wherever
-            //Inbound=false
-            //Subscription[id]= valid
-        }
-
-        //DeleteSubscription
-
-        [Test]
-        public void Test_DeleteSubscriptionIdNull()
-        {
-            //
-        }
-        [Test]
-        public void Test_DeleteSubscriptionComplete()
-        {
-            //valid id
-        }
-
-
-
-
-
-
         [Test]
         public void Test_CreateSuscription()
         {
             var id = Client.CreateSubscription(CfSubscriptionRequest);
             Assert.IsNotNull(id);
         }
-
+        
         [Test]
-        public void Test_GetSuscription()
+        public void Test_CreateSubscriptionEndpointID()
         {
-            var subscription = Client.GetSubscription(139597001);
-            Assert.NotNull(subscription);
+            var subscriptionRequest = new CfSubscriptionRequest
+            {
+                Subscription = new CfSubscription
+                {
+                    Endpoint = "mbaliero@callfire.com",
+                    TriggerEvent = CfSubscriptionTriggerEvent.CampaignStarted
+                }
+            };
+            var id = Client.CreateSubscription(subscriptionRequest);
+            Assert.IsNotNull(id);
         }
 
+        [Test]
+        public void Test_CreateSubscriptionCompleteTrue()
+        {
+            var subscriptionRequest = new CfSubscriptionRequest
+            {
+                Subscription = new CfSubscription
+                {
+                    Endpoint = "mbaliero@callfire.com",
+                    TriggerEvent = CfSubscriptionTriggerEvent.InboundCallFinished,
+                    NotificationFormat = CfNotificationFormat.Xml,
+                    Enabled = true,
+                    SubscriptionFilter = new CfSubscriptionSubscriptionFilter
+                    {
+                        FromNumber = VerifyShortCode,
+                        Inbound = true,
+                        BroadcastId = 1903388001,
+                        ToNumber = VerifyFromNumber
+                    }
+                }
+            };
+            var id = Client.CreateSubscription(subscriptionRequest);
+            Assert.IsNotNull(id);
+        }
+
+        [Test]
+        public void Test_CreateSubscriptionCompleteFalse()
+        {
+            var subscriptionRequest = new CfSubscriptionRequest
+            {
+                Subscription = new CfSubscription
+                {
+                    Endpoint = "mbaliero@callfire.com",
+                    TriggerEvent = CfSubscriptionTriggerEvent.OutboundTextFinished,
+                    NotificationFormat = CfNotificationFormat.Email,
+                    Enabled = false,
+                    SubscriptionFilter = new CfSubscriptionSubscriptionFilter
+                    {
+                        FromNumber = VerifyShortCode,
+                        Inbound = false,
+                        BroadcastId = 1903388001,
+                        ToNumber = VerifyFromNumber
+                    }
+                }
+            };
+            var id = Client.CreateSubscription(subscriptionRequest);
+            Assert.IsNotNull(id);
+        }
+
+        /// <summary>
+        /// QuerySubscriptions
+        /// </summary>
         [Test]
         public void Test_QuerySuscription()
         {
@@ -139,7 +122,164 @@ namespace Callfire_csharp_sdk.IntegrationTests
             Assert.IsNotNull(subscriptionQueryResult.Subscription);
             Assert.IsTrue(subscriptionQueryResult.Subscription.Any(s => s.NotificationFormat.Equals(CfNotificationFormat.Email)));
         }
+        
+        [Test]
+        public void Test_querySubsctiptionsAllResults()
+        {
+            var subscriptionQueryResult = Client.QuerySubscriptions(new CfQuery());
+            Assert.IsNotNull(subscriptionQueryResult);
+        }
 
+        [Test]
+        public void Test_querySubsctiptionsSpecialResults()
+        {
+            var query = new CfQuery
+            {
+                FirstResult = 1,
+                MaxResults = 20
+            };
+            var subscriptionQueryResult = Client.QuerySubscriptions(query);
+            Assert.IsNotNull(subscriptionQueryResult);
+        }
+
+        /// <summary>
+        /// GetSubscriptions
+        /// </summary>
+        [Test]
+        public void Test_GetSuscription()
+        {
+            var subscription = Client.GetSubscription(139597001);
+            Assert.NotNull(subscription);
+        }
+        
+        [Test]
+        public void Test_GetSubscriptionsValid()
+        {
+            var subscription = Client.GetSubscription(150415001);
+            Assert.IsNotNull(subscription);
+        }
+
+        [Test]
+        public void Test_GetSubscriptionsInValidID()
+        {
+            AssertClientException<WebException, FaultException<ServiceFaultInfo>>(() => Client.GetSubscription(150415000));
+        }
+
+        /// <summary>
+        /// UpdateSubscription
+        /// </summary>
+        [Test]
+        [Ignore]
+        public void Test_UpdateSuscription()
+        {
+            Client.UpdateSubscription(CfUpdateSubscription);
+        }
+        
+        [Test]
+        public void Test_UpdateSubscriptionEmpty()
+        {
+            var subscriptionRequest = new CfSubscriptionRequest
+            {
+                Subscription = new CfSubscription()
+            };
+            AssertClientException<WebException, FaultException>(() => Client.UpdateSubscription(subscriptionRequest));
+        }
+
+        [Test]
+        public void Test_UpdateSubscriptionTrue()
+        {
+            var subscriptionRequest = new CfSubscriptionRequest
+            {
+                Subscription = new CfSubscription
+                {
+                    Endpoint = "mbaliero@callfire.com",
+                    TriggerEvent = CfSubscriptionTriggerEvent.OutboundTextFinished,
+                    NotificationFormat = CfNotificationFormat.Email,
+                    Enabled = false,
+                    SubscriptionFilter = new CfSubscriptionSubscriptionFilter
+                    {
+                        FromNumber = VerifyShortCode,
+                        Inbound = false,
+                        BroadcastId = 1903388001,
+                        ToNumber = VerifyFromNumber
+                    }
+                }
+            };
+            var id = Client.CreateSubscription(subscriptionRequest);
+
+            var updateSubscriptionRequest = new CfSubscriptionRequest
+            {
+                Subscription = new CfSubscription
+                {
+                    Id = id,
+                    Enabled = true,
+                    NotificationFormat = CfNotificationFormat.Xml,
+                    TriggerEvent = CfSubscriptionTriggerEvent.CampaignStopped,
+                    SubscriptionFilter = new CfSubscriptionSubscriptionFilter
+                    {
+                        FromNumber = VerifyFromNumber,
+                        Inbound = true
+                    }
+                }
+            };
+            Client.UpdateSubscription(updateSubscriptionRequest);
+
+            var subscription = Client.GetSubscription(id);
+            Assert.AreEqual(true, subscription.Enabled);
+            Assert.AreEqual(CfNotificationFormat.Xml, subscription.NotificationFormat);
+            Assert.AreEqual(CfSubscriptionTriggerEvent.CampaignStopped, subscription.TriggerEvent);
+            Assert.AreEqual(VerifyFromNumber, subscription.SubscriptionFilter.FromNumber);
+        }
+
+        [Test]
+        public void Test_UpdateSubscriptionFalse()
+        {
+            var subscriptionRequest = new CfSubscriptionRequest
+            {
+                Subscription = new CfSubscription
+                {
+                    Endpoint = "mbaliero@callfire.com",
+                    TriggerEvent = CfSubscriptionTriggerEvent.OutboundTextFinished,
+                    NotificationFormat = CfNotificationFormat.Email,
+                    Enabled = true,
+                    SubscriptionFilter = new CfSubscriptionSubscriptionFilter
+                    {
+                        FromNumber = VerifyShortCode,
+                        Inbound = true,
+                        BroadcastId = 1903388001,
+                        ToNumber = VerifyFromNumber
+                    }
+                }
+            };
+            var id = Client.CreateSubscription(subscriptionRequest);
+
+            var updateSubscriptionRequest = new CfSubscriptionRequest
+            {
+                Subscription = new CfSubscription
+                {
+                    Id = id,
+                    Enabled = false,
+                    NotificationFormat = CfNotificationFormat.Soap,
+                    TriggerEvent = CfSubscriptionTriggerEvent.CampaignStarted,
+                    SubscriptionFilter = new CfSubscriptionSubscriptionFilter
+                    {
+                        FromNumber = VerifyFromNumber,
+                        Inbound = false
+                    }
+                }
+            };
+            Client.UpdateSubscription(updateSubscriptionRequest);
+
+            var subscription = Client.GetSubscription(id);
+            Assert.AreEqual(false, subscription.Enabled);
+            Assert.AreEqual(CfNotificationFormat.Soap, subscription.NotificationFormat);
+            Assert.AreEqual(CfSubscriptionTriggerEvent.CampaignStarted, subscription.TriggerEvent);
+            Assert.AreEqual(VerifyFromNumber, subscription.SubscriptionFilter.FromNumber);
+        }
+
+        /// <summary>
+        /// DeleteSubscription
+        /// </summary>
         [Test]
         [Ignore]
         public void Test_DeleteSuscription()
@@ -147,12 +287,29 @@ namespace Callfire_csharp_sdk.IntegrationTests
             var id = Client.CreateSubscription(CfSubscriptionRequest);
             Client.DeleteSubscription(id);
         }
+        
+        [Test]
+        public void Test_DeleteSubscriptionIdNull()
+        {
+            AssertClientException<WebException, FaultException<ServiceFaultInfo>>(() => Client.DeleteSubscription(4867));
+        }
 
         [Test]
-        [Ignore]
-        public void Test_UpdateSuscription()
+        public void Test_DeleteSubscriptionComplete()
         {
-            Client.UpdateSubscription(CfUpdateSubscription);
+            var subscriptionRequest = new CfSubscriptionRequest
+            {
+                Subscription = new CfSubscription
+                {
+                    Endpoint = "mbaliero@callfire.com",
+                    TriggerEvent = CfSubscriptionTriggerEvent.OutboundTextFinished,
+                    NotificationFormat = CfNotificationFormat.Email,
+                    Enabled = true,
+                }
+            };
+            var id = Client.CreateSubscription(subscriptionRequest);
+
+            Client.DeleteSubscription(id);
         }
     }
 }
