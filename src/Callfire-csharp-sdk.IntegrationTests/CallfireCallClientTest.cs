@@ -15,6 +15,140 @@ namespace Callfire_csharp_sdk.IntegrationTests
         protected CfActionQuery ActionQuery;
         protected CfQuery QuerySoundMeta;
 
+        //SendCall
+        [Test]
+        public void Test_SendCallEmpty()
+        {
+            //No To
+        }
+        [Test]
+        public void Test_SendCallMandatoryVoice()
+        {
+            //To= valid, 2 numbers
+            //all mandatory field complete
+
+        }
+        [Test]
+        public void Test_SendCallVoiceComplete()
+        {
+            //To= valid
+            //all field complete
+            //ScrubBroadcastDuplicates=true
+
+        }
+        [Test]
+        public void Test_SendCallMandatoryText()
+        {
+            //To= valid, 2 numbers
+            //all mandatory field complete
+
+        }
+        [Test]
+        public void Test_SendCallTextComplete()
+        {
+            //To= valid
+            //all field complete
+            //ScrubBroadcastDuplicates=true
+
+        }
+        [Test]
+        public void Test_SendCallMandatoryIVR()
+        {
+            //To= valid, 2 numbers
+            //all mandatory field complete
+
+        }
+        [Test]
+        public void Test_SendCallIVRComplete()
+        {
+            //To= valid
+            //all field complete
+            //ScrubBroadcastDuplicates=true
+
+
+        }
+
+        //QueryCalls
+
+        [Test]
+        public void Test_QueryCallsNotExistNumber()
+        {
+            //Number= not exist
+        }
+
+        [Test]
+        public void Test_QueryCallsAllResults()
+        {
+
+            //go to Try it out!
+
+        }
+
+        [Test]
+        public void Test_QueryCallsComplete()
+        {
+
+            //Id Valid
+            //MaxResults 20
+            //FirstResult 2
+            //Inbound=true
+            //all fields complete
+
+        }
+        public void Test_QueryCallsInvalidBatchId()
+        {
+
+            ////BatchId
+        }
+
+        //GetCall
+        [Test]
+        public void Test_GetCallValidId()
+        {
+            //ID Valido
+        }
+
+        [Test]
+        public void Test_GetCallInValidIdLetters()
+        {
+            //ID InValido= "ABC"
+        }
+
+        //CreateSound
+        [Test]
+        public void Test_CreateSoundInvalidData()
+        {
+            //Data= file .png x example
+        }
+        [Test]
+        public void Test_CreateSoundMandatoryFields()
+        {
+            //all mandatory fields complete
+        }
+        [Test]
+        public void Test_CreateSoundNoMandatoryFields()
+        {
+            //all mandatory fields complete
+        }
+        
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         [Test]
         [Ignore]
         public void Test_SendCall()
