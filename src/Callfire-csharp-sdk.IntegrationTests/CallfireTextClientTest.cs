@@ -1,5 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Net;
+using System.ServiceModel;
 using CallFire_csharp_sdk.API;
+using CallFire_csharp_sdk.API.Rest.Clients;
+using CallFire_csharp_sdk.API.Soap;
+using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
 using NUnit.Framework;
 
@@ -15,26 +21,64 @@ namespace Callfire_csharp_sdk.IntegrationTests
         protected CfActionQuery CfActionQuery;
         protected CfQueryAutoReplies QueryAutoReplies;
 
-        //SendText
+        protected const string VerifyFromNumber = "+19196991764";
+        protected const string VerifyShortCode = "67076";
 
+        public void AssertClientException<TRest, TSoap>(TestDelegate test)
+            where TRest : Exception
+            where TSoap : Exception
+        {
+            if (Client.GetType() == typeof(RestTextClient))
+            {
+                Assert.Throws<TRest>(test);
+            }
+            else
+            {
+                Assert.Throws<TSoap>(test);
+            }
+        }
+
+        /// <summary>
+        /// SendText
+        /// </summary>
+        [Test]
+        [Ignore]
+        public void Test_SendText()
+        {
+            var id = Client.SendText(SendText);
+            Assert.IsNotNull(id);
+        }
+        
         [Test]
         public void Test_SendTextEmpty()
         {
-
-            //
+            AssertClientException<WebException, FaultException>(() => Client.SendText(null));
         }
+
         [Test]
         public void Test_SendTextWrongFormat()
         {
-
-            //number wrong format
+            AssertClientException<WebException, FaultException>(() => Client.SendText(new CfSendText()));
         }
+
         [Test]
         public void Test_SendTextMandatotyVoice()
         {
-
-            //default
+            CfToNumber[] toNumberList = { new CfToNumber { Value = VerifyFromNumber, ClientData = "Client1" },
+                                      new CfToNumber { Value = VerifyShortCode,  ClientData = "Client2" }};
+            var sendText = new CfSendText
+            {
+                ToNumber = toNumberList,
+                TextBroadcastConfig = new CfTextBroadcastConfig
+                {
+                    Message = "Test message"
+                },
+                ScrubBroadcastDuplicates = false
+            };
+            var id = Client.SendText(sendText);
+            Assert.IsNotNull(id);
         }
+
         [Test]
         public void Test_SendTextCompleteVoice()
         {
@@ -42,6 +86,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
             //UseDefaultBroadcast=true
             //all fields completes
         }
+
         [Test]
         public void Test_SendTextMandatoryIVR()
         {
@@ -49,6 +94,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
             //UseDefaultBroadcast=default false
             //all fields completes
         }
+
         [Test]
         public void Test_SendTextCompleteIVR()
         {
@@ -56,6 +102,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
             //UseDefaultBroadcast=true
             //all fields completes
         }
+
         [Test]
         public void Test_SendTextMandatoryText()
         {
@@ -63,6 +110,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
             //UseDefaultBroadcast=default
             //all fields completes
         }
+
         [Test]
         public void Test_SendTextCompleteText()
         {
@@ -72,8 +120,10 @@ namespace Callfire_csharp_sdk.IntegrationTests
             //all fields completes
         }
 
-        //QueryTexts
-       [Test]
+        /// <summary>
+        /// QueryTexts
+        /// </summary>
+        [Test]
         public void Test_QueryTextsAllResults()
         {
 
@@ -82,7 +132,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
-       public void Test_QueryTextsComplete()
+        public void Test_QueryTextsComplete()
         {
 
             //Id Valid
@@ -132,6 +182,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         {
             //Number
         }
+
         [Test]
         public void Test_CreateAutoReplyComplete()
         {
@@ -167,6 +218,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
 
         }
         //GetAutoReply
+        
         [Test]
         public void Test_GetAutoReplyValidId()
         {
@@ -185,6 +237,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         {
             //
         }
+
         [Test]
         public void Test_DeleteAutoReplyComplete()
         {
@@ -207,13 +260,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
 
 
 
-        [Test]
-        [Ignore]
-        public void Test_SendText()
-        {
-            var id = Client.SendText(SendText);
-            Assert.IsNotNull(id);
-        }
+        
 
         [Test]
         public void Test_QueryText()
