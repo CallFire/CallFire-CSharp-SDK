@@ -15,7 +15,11 @@ namespace CallFire_csharp_sdk.API.Soap
             ToNumber = ToNumberMapper.ToToNumber(cfSendText.ToNumber);
             ScrubBroadcastDuplicates = cfSendText.ScrubBroadcastDuplicates;
             TextBroadcastConfig = TextBroadcastConfigMapper.ToSoapTextBroadcastConfig(cfSendText.TextBroadcastConfig);
-            BroadcastId = cfSendText.BroadcastId;
+            if (cfSendText.BroadcastId.HasValue)
+            {
+                BroadcastId = cfSendText.BroadcastId.Value;
+                BroadcastIdSpecified = true;
+            }
             UseDefaultBroadcast = cfSendText.UseDefaultBroadcast;
         }
     }

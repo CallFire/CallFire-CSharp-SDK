@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Web;
+using System.Xml;
 using System.Xml.Serialization;
 using CallFire_csharp_sdk.API.Soap;
 
@@ -94,11 +95,12 @@ namespace CallFire_csharp_sdk.Common
         {
             var array = ((Array) value);
             var attribs = (XmlElementAttribute[]) Attribute.GetCustomAttributes(propertyInfo, typeof (XmlElementAttribute));
-            if (array.Length <= 0 || attribs.All(i => i.Type != array.GetValue(0).GetType()))
+
+            var elementName = propertyInfo.Name;
+            if (array.Length > 0 && attribs.Any(i => i.Type == array.GetValue(0).GetType()))
             {
-                return;
+                elementName = attribs.First(i => i.Type == array.GetValue(0).GetType()).ElementName;
             }
-            var elementName = attribs.First(i => i.Type == array.GetValue(0).GetType()).ElementName;
             if (IsCustomClass(array.GetType().GetElementType()))
             {
                 if (array.GetType().GetElementType() == typeof (ToNumber))

@@ -8,13 +8,6 @@ namespace CallFire_csharp_sdk.API.Soap
 {
     public partial class TextBroadcastConfig
     {
-        public TextBroadcastConfig(long identifier, DateTime created, string fromNumber, LocalTimeZoneRestriction localTimeZoneRestriction, BroadcastConfigRetryConfig retryConfig, string message, BigMessageStrategy bigMessageStrategy)
-            : base(identifier, created, fromNumber, localTimeZoneRestriction, retryConfig)
-        {
-            Message = message;
-            BigMessageStrategy = bigMessageStrategy;
-        }
-
         public TextBroadcastConfig(CfTextBroadcastConfig source)
         {
             if (source.Id.HasValue)

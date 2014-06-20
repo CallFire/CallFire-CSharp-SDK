@@ -60,208 +60,104 @@ namespace Callfire_csharp_sdk.IntegrationTests
         {
             AssertClientException<WebException, FaultException>(() => Client.SendText(new CfSendText()));
         }
-
+        
         [Test]
-        public void Test_SendTextMandatotyVoice()
+        public void Test_SendTextVoiceFaild()
         {
-            CfToNumber[] toNumberList = { new CfToNumber { Value = VerifyFromNumber, ClientData = "Client1" },
-                                      new CfToNumber { Value = VerifyShortCode,  ClientData = "Client2" }};
+            CfToNumber[] toNumberList = { new CfToNumber { Value = VerifyFromNumber, ClientData = "Client1" } };
             var sendText = new CfSendText
             {
+                Type = CfBroadcastType.Voice,
                 ToNumber = toNumberList,
                 TextBroadcastConfig = new CfTextBroadcastConfig
                 {
-                    Message = "Test message"
+                    Message = "Test message",
+                    RetryConfig = new CfBroadcastConfigRetryConfig
+                    {
+                        RetryResults = new [] {CfResult.Busy}
+                    }
+                }
+            };
+            AssertClientException<WebException, FaultException<ServiceFaultInfo>>(() => Client.SendText(sendText));
+        }
+
+        [Test]
+        public void Test_SendTextIVRFaild()
+        {
+            CfToNumber[] toNumberList = { new CfToNumber { Value = VerifyFromNumber, ClientData = "Client1" } };
+            var sendText = new CfSendText
+            {
+                Type = CfBroadcastType.Ivr,
+                ToNumber = toNumberList,
+                TextBroadcastConfig = new CfTextBroadcastConfig
+                {
+                    Message = "Test message",
+                    RetryConfig = new CfBroadcastConfigRetryConfig
+                    {
+                        RetryResults = new[] { CfResult.Busy }
+                    }
+                }
+            };
+            AssertClientException<WebException, FaultException<ServiceFaultInfo>>(() => Client.SendText(sendText));
+        }
+
+        [Test]
+        [Ignore]
+        public void Test_SendTextMandatoryText()
+        {
+            CfToNumber[] toNumberList = { new CfToNumber { Value = VerifyFromNumber, ClientData = "Client1" } };
+            var sendText = new CfSendText
+            {
+                ToNumber = toNumberList,
+                UseDefaultBroadcast = true,
+                Type = CfBroadcastType.Text,
+                TextBroadcastConfig = new CfTextBroadcastConfig
+                {
+                    Message = "Test message",
                 },
-                ScrubBroadcastDuplicates = false
             };
             var id = Client.SendText(sendText);
             Assert.IsNotNull(id);
         }
 
         [Test]
-        public void Test_SendTextCompleteVoice()
-        {
-            //ScrubBroadcastDuplicates=true
-            //UseDefaultBroadcast=true
-            //all fields completes
-        }
-
-        [Test]
-        public void Test_SendTextMandatoryIVR()
-        {
-            //ScrubBroadcastDuplicates=default false
-            //UseDefaultBroadcast=default false
-            //all fields completes
-        }
-
-        [Test]
-        public void Test_SendTextCompleteIVR()
-        {
-            //ScrubBroadcastDuplicates=true
-            //UseDefaultBroadcast=true
-            //all fields completes
-        }
-
-        [Test]
-        public void Test_SendTextMandatoryText()
-        {
-            //ScrubBroadcastDuplicates=default
-            //UseDefaultBroadcast=default
-            //all fields completes
-        }
-
-        [Test]
+        [Ignore]
         public void Test_SendTextCompleteText()
         {
-            //
-            //ScrubBroadcastDuplicates=true
-            //UseDefaultBroadcast=true
-            //all fields completes
+            CfToNumber[] toNumberList = { new CfToNumber { Value = VerifyFromNumber, ClientData = "Client1" } };
+            var sendText = new CfSendText
+            {
+                ToNumber = toNumberList,
+                ScrubBroadcastDuplicates = true,
+                UseDefaultBroadcast = true,
+                Type = CfBroadcastType.Text,
+                BroadcastName = "BroadcastName",
+                TextBroadcastConfig = new CfTextBroadcastConfig
+                {
+                    Message = "Test message",
+                    BigMessageStrategy = CfBigMessageStrategy.DoNotSend,
+                    FromNumber = VerifyShortCode,
+                    LocalTimeZoneRestriction = new CfLocalTimeZoneRestriction
+                    {
+                        BeginTime = new DateTime(2014,01,01,12,00,00),
+                        EndTime = new DateTime(2014,12,01,17,00,00)
+                    },
+                    RetryConfig = new CfBroadcastConfigRetryConfig
+                    {
+                        MaxAttempts = 2,
+                        MinutesBetweenAttempts = 5,
+                        RetryResults = new []{CfResult.Am},
+                        RetryPhoneTypes = new []{CfRetryPhoneType.FirstNumber}
+                    }
+                },
+            };
+            var id = Client.SendText(sendText);
+            Assert.IsNotNull(id);
         }
 
         /// <summary>
         /// QueryTexts
         /// </summary>
-        [Test]
-        public void Test_QueryTextsAllResults()
-        {
-
-            //
-
-        }
-
-        [Test]
-        public void Test_QueryTextsComplete()
-        {
-
-            //Id Valid
-            //MaxResults 20
-            //FirstResult 2
-
-        }
-
-        [Test]
-        public void Test_QueryTextsOnlyFromNumber()
-        {
-
-            //From number= yes
-
-        }
-        [Test]
-        public void Test_QueryTextsOnlyLabelName()
-        {
-
-            //
-
-        }
-        [Test]
-        public void Test_QueryTextsOnlyState()
-        {
-
-            //State=READY
-
-        }
-
-        //GetText
-        [Test]
-        public void Test_GetTextValidId()
-        {
-            //ID Valido
-        }
-
-        [Test]
-        public void Test_GetTextInValidId()
-        {
-            //ID InValido
-        }
-
-        //CreateAutoReply
-        [Test]
-        public void Test_CreateAutoReplyMandatoryFields()
-        {
-            //Number
-        }
-
-        [Test]
-        public void Test_CreateAutoReplyComplete()
-        {
-            //all fields complete
-            //Message with !"·"·$$% numbers and letters
-            //Keyword
-
-        }
-
-
-        //QueryAutoReplies
-        [Test]
-        public void Test_QueryAutoRepliesNotExistNumber()
-        {
-            //Number= not exist
-        }
-
-        [Test]
-        public void Test_QueryAutoRepliesAllResults()
-        {
-
-            //go to Try it out!
-
-        }
-
-        [Test]
-        public void Test_QueryAutoRepliesComplete()
-        {
-
-            //Id Valid
-            //MaxResults 20
-            //FirstResult 2
-
-        }
-        //GetAutoReply
-        
-        [Test]
-        public void Test_GetAutoReplyValidId()
-        {
-            //ID Valido
-        }
-
-        [Test]
-        public void Test_GetAutoReplyInValidId()
-        {
-            //ID InValido
-        }
-
-        //DeleteAutoReply
-        [Test]
-        public void Test_DeleteAutoReplyIdNull()
-        {
-            //
-        }
-
-        [Test]
-        public void Test_DeleteAutoReplyComplete()
-        {
-            //valid id
-        }
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-
         [Test]
         public void Test_QueryText()
         {
@@ -270,7 +166,67 @@ namespace Callfire_csharp_sdk.IntegrationTests
             Assert.IsNotNull(cfTextQueryResult.Text);
             Assert.IsTrue(cfTextQueryResult.Text.Any(t => t.FromNumber.Equals("67076")));
         }
+        
+        [Test]
+        public void Test_QueryTextsAllResults()
+        {
+            var textQueryResult = Client.QueryTexts(new CfActionQuery());
+            Assert.IsNotNull(textQueryResult);
+        }
 
+        [Test]
+        public void Test_QueryTextsComplete()
+        {
+            var actionQuery = new CfActionQuery
+            {
+                MaxResults = 20,
+                FirstResult = 2,
+                BroadcastId = 1960056001,
+                FromNumber = VerifyShortCode,
+                State = new []{CfActionState.Finished},
+                ToNumber = VerifyFromNumber,
+                Inbound = false,
+                Result = new []{CfResult.Sent}
+            };
+            var textQueryResult = Client.QueryTexts(actionQuery);
+            Assert.IsNotNull(textQueryResult);
+        }
+
+        [Test]
+        public void Test_QueryTextsOnlyFromNumber()
+        {
+            var actionQuery = new CfActionQuery
+            {
+                FromNumber = VerifyShortCode,
+            };
+            var textQueryResult = Client.QueryTexts(actionQuery);
+            Assert.IsNotNull(textQueryResult);
+        }
+
+        [Test]
+        public void Test_QueryTextsOnlyLabelName()
+        {
+            var actionQuery = new CfActionQuery
+            {
+                LabelName = "TestLabel"
+            };
+            AssertClientException<WebException, FaultException<ServiceFaultInfo>>(() => Client.QueryTexts(actionQuery));
+        }
+
+        [Test]
+        public void Test_QueryTextsOnlyState()
+        {
+            var actionQuery = new CfActionQuery
+            {
+                State = new[] { CfActionState.Ready },
+            };
+            var textQueryResult = Client.QueryTexts(actionQuery);
+            Assert.IsNotNull(textQueryResult);
+        }
+
+        /// <summary>
+        /// GetText
+        /// </summary>
         [Test]
         public void Test_GetText()
         {
@@ -278,13 +234,141 @@ namespace Callfire_csharp_sdk.IntegrationTests
             Assert.IsNotNull(text);
             Assert.AreEqual(text.ToNumber.Value, "14252163710");
         }
+        
+        [Test]
+        public void Test_GetTextValidId()
+        {
+            var text = Client.GetText(226574986001);
+            Assert.IsNotNull(text);
+        }
 
+        [Test]
+        public void Test_GetTextInValidId()
+        {
+            AssertClientException<WebException, FaultException<ServiceFaultInfo>>(() => Client.GetText(226574986000));
+        }
+
+        /// <summary>
+        /// CreateAutoReply 
+        /// </summary>
+        [Test] //TODO
+        public void Test_CreateAutoReplyMandatoryFields() 
+        {
+            var createAutoReply = new CfCreateAutoReply
+            {
+                CfAutoReply = new CfAutoReply
+                {
+                    Number = VerifyFromNumber,
+                    Keyword = "Keyword",
+                    Match = "Match",
+                    Message = "Test AutoReply Message"
+                }
+            };
+            var id = Client.CreateAutoReply(createAutoReply);
+            Assert.IsNotNull(id);
+        }
+
+        [Test] //TODO
+        public void Test_CreateAutoReplyComplete()
+        {
+            var createAutoReply = new CfCreateAutoReply
+            {
+                RequestId = "TestURI",
+                CfAutoReply = new CfAutoReply
+                {
+                    Id = 38796,
+                    Number = VerifyFromNumber,
+                    Keyword = "Keyword",
+                    Match = "Match",
+                    Message = "Te$t.Aut0Reply Me55age!"
+                }
+            };
+            var id = Client.CreateAutoReply(createAutoReply);
+            Assert.IsNotNull(id);
+        }
+        
+        /// <summary>
+        /// QueryAutoReplies
+        /// </summary>
         [Test]
         public void Test_QueryAutoReplies()
         {
             var autoReplyQueryResult = Client.QueryAutoReplies(QueryAutoReplies);
             Assert.IsNotNull(autoReplyQueryResult);
             Assert.AreEqual(autoReplyQueryResult.TotalResults, 0);
+        }
+        
+        [Test]
+        public void Test_QueryAutoRepliesNotExistNumber()
+        {
+            var queryAutoReplies = new CfQueryAutoReplies
+            {
+                Number = "7819461123"
+            };
+            var autoReplyQueryResult = Client.QueryAutoReplies(queryAutoReplies);
+            Assert.IsNotNull(autoReplyQueryResult);
+        }
+
+        [Test]
+        public void Test_QueryAutoRepliesAllResults()
+        {
+            var autoReplyQueryResult = Client.QueryAutoReplies(new CfQueryAutoReplies());
+            Assert.IsNotNull(autoReplyQueryResult);
+        }
+
+        [Test] //TODO
+        public void Test_QueryAutoRepliesComplete()
+        {
+            var queryAutoReplies = new CfQueryAutoReplies
+            {
+                MaxResults = 20,
+                FirstResult = 2,
+                Number = "7819461123"
+            };
+            var autoReplyQueryResult = Client.QueryAutoReplies(queryAutoReplies);
+            Assert.IsNotNull(autoReplyQueryResult);
+        }
+
+        /// <summary>
+        /// GetAutoReply
+        /// </summary>
+        [Test] //TODO
+        public void Test_GetAutoReplyValidId()
+        {
+            var autoReply = Client.GetAutoReply(5448992);
+            Assert.IsNotNull(autoReply);
+        }
+
+        [Test]
+        public void Test_GetAutoReplyInValidId()
+        {
+            AssertClientException<WebException, FaultException<ServiceFaultInfo>>(() => Client.GetAutoReply(5448992));
+        }
+
+        /// <summary>
+        /// DeleteAutoReply
+        /// </summary>
+        [Test]
+        public void Test_DeleteAutoReplyIdNull()
+        {
+            AssertClientException<WebException, FaultException<ServiceFaultInfo>>(() => Client.DeleteAutoReply(0));
+        }
+
+        [Test] //TODO
+        public void Test_DeleteAutoReplyComplete()
+        {
+            var createAutoReply = new CfCreateAutoReply
+            {
+                CfAutoReply = new CfAutoReply
+                {
+                    Number = VerifyFromNumber,
+                    Keyword = "Keyword",
+                    Match = "Match",
+                    Message = "Test AutoReply Message"
+                }
+            };
+            var id = Client.CreateAutoReply(createAutoReply);
+            Client.DeleteAutoReply(id);
         }
     }
 }
