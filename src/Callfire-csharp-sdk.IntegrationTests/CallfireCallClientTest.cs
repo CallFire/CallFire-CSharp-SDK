@@ -37,18 +37,9 @@ namespace Callfire_csharp_sdk.IntegrationTests
 
         }
         [Test]
-        public void Test_SendCallMandatoryText()
+        public void Test_SendCallTextCompleteFaild()
         {
-            //To= valid, 2 numbers
-            //all mandatory field complete
-
-        }
-        [Test]
-        public void Test_SendCallTextComplete()
-        {
-            //To= valid
-            //all field complete
-            //ScrubBroadcastDuplicates=true
+            
 
         }
         [Test]
@@ -126,11 +117,81 @@ namespace Callfire_csharp_sdk.IntegrationTests
             //all mandatory fields complete
         }
         [Test]
-        public void Test_CreateSoundNoMandatoryFields()
+        public void Test_CreateSoundComplete()
         {
-            //all mandatory fields complete
+            //all fields complete
         }
-        
+
+        //QuerySoundMeta
+        [Test]
+        public void Test_QuerySoundMetaAllResults()
+        {
+            //MaxResults= empty
+            //FirstResult = empty
+        }
+        [Test]
+        public void Test_QuerySoundMetaSpecific()
+        {
+            //MaxResults= 2
+            //FirstResult = 80
+        }
+
+        //GetSoundMeta
+        [Test]
+        public void Test_GetSoundMetaInValidId()
+        {
+            //Id invalid
+        }
+        [Test]
+        public void Test_GetSoundMetaValidId()
+        {
+            //Id valid
+        }
+
+        //GetSoundData/SOAP
+        [Test]
+        public void Test_GetSoundDataMandatory()
+        {
+            //Id valid
+        }
+        [Test]
+        public void Test_GetSoundDataComplete()
+        {
+            //Id valid
+            //Format valid
+        }
+        [Test]
+        public void Test_GetSoundDataFormatInvalid()
+        {
+            //Id valid
+            //Format = ABC
+        }
+
+        //GetRecordingData/SOAP
+        [Test]
+        public void Test_GetRecordingDataMandatory()
+        {
+            //onlymandatory fields complete
+        }
+        [Test]
+        public void Test_GetRecordingDataComplete()
+        {
+            //All fields complete
+        }
+        [Test]
+        public void Test_GetRecordingDataRecordingIdInvalid()
+        {
+            //RecordingId invalid
+        }
+        [Test]
+        public void Test_GetRecordingDataRecordingDifferentName()
+        {
+            //Name= different Name of sound data as defined in IVR
+        }
+
+
+
+
 
 
 
