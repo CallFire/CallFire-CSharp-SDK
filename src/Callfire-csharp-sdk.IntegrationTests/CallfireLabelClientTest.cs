@@ -11,8 +11,53 @@ namespace Callfire_csharp_sdk.IntegrationTests
         protected ILabelClient LabelClient;
         protected IBroadcastClient BroadcastClient;
         protected long BroadcastId;
-        protected string LabelName; 
+        protected string LabelName;
+
+
+        //DeleteLabel
+
+        [Test]
+        public void Test_DeleteLabelComplete()
+        {
+            //Valid label
+        }
+        [Test]
+        public void Test_DeleteLabelInvalid()
+        {
+            //InValid label
+        }
+
+        //QueryLabels
+        [Test]
+        public void Test_QueryLabelsAllResults()
+        {
+            //go to Try it out!
+
+        }
+        [Test]
+        public void Test_QueryLabelsComplete()
+        {
+
+          
+            //MaxResults 1000
+            //FirstResult 0
+
+        }
+
+        //LabelBroadcast
+
+
+
+
+
+
         
+
+
+
+
+
+
         [Test]
         public void Test_CreateBroadcastLabel()
         {
