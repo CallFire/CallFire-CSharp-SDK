@@ -15,6 +15,237 @@ namespace Callfire_csharp_sdk.IntegrationTests
         protected CfSearchAvailableNumbers SearchAvailableNumbers;
         protected CfQuery QueryKeywords;
         protected CfQueryNumbers QueryNumbers;
+
+        //QueryRegions
+        [Test]
+        public void Test__QueryRegionsAllResults()
+        {
+
+            //go to Try it out!
+
+        }
+
+        [Test]
+        public void Test_QueryRegionsComplete()
+        {
+
+            //fields complete
+            //MaxResults 200
+            //FirstResult 90
+
+        }
+
+        //QueryNumbers
+        [Test]
+        public void Test__QueryNumbersAllResults()
+        {
+
+            //go to Try it out!
+
+        }
+
+        [Test]
+        public void Test_QueryNumbersComplete()
+        {
+
+            //fields complete
+            //MaxResults 10
+            //FirstResult 50
+
+        }
+
+        //GetNumber
+        [Test]
+        public void Test_GetNumberValidNumber()
+        {
+            //Number Valid
+        }
+
+        [Test]
+        public void Test_GetNumberInValidNumber()
+        {
+            //Number InValido
+        }
+        [Test]
+        public void Test_GetNumbernull()
+        {
+            //Number null
+        }
+
+        //ConfigureNumber
+        [Test]
+        public void Test_ConfigureNumberValidNumber()
+        {
+            //Number Valid only
+            //
+        }
+
+        [Test]
+        public void Test_ConfigureNumberInValidNumber()
+        {
+            //Number InValido 
+        }
+
+        [Test]
+        public void Test_ConfigureNumberNull()
+        {
+            // 
+        }
+        [Test]
+        public void Test_ConfigureNumberTrakingNull()
+        {
+            //InboundCallConfigurationType=  Traking 
+            //the rest of the fields empty
+        }
+        [Test]
+        public void Test_ConfigureNumberTrakingComplete()
+        {
+            //InboundCallConfigurationType=  Traking 
+            //all fields complete
+        }
+        [Test]
+        public void Test_ConfigureNumberIVRNull()
+        {
+            //InboundCallConfigurationType=  IVR
+            //the rest of the fields empty
+        }
+        [Test]
+        public void Test_ConfigureNumberIVRComplete()
+        {
+            //InboundCallConfigurationType=  IVR 
+            //all fields complete
+        }
+
+        //SearchAvailableNumbers
+        [Test]
+        public void Test_ConfigureNumberMandatory()
+        {
+            //mandatory= count?
+        }
+        [Test]
+        public void Test_ConfigureNumbeComplete()
+        {
+            //mandatory= count?
+            //all fields complete
+            //TollFree= true
+
+        }
+        [Test]
+        public void Test_ConfigureNumbeWrong()
+        {
+            //mandatory= count?
+            //State	!= Country ?
+            
+        }
+
+        //QueryKeywords
+
+        [Test]
+        public void Test_QueryKeywordsAllResults()
+        {
+            //go to Try it out!
+
+        }
+        [Test]
+        public void Test_QueryKeywordsComplete()
+        {
+
+            //fields complete
+            //MaxResults 37
+            //FirstResult 1
+
+        }
+
+        //SearchAvailableKeywords
+        [Test]
+        public void Test_SearchAvailableKeywordsNotExist()
+        {
+
+            //Not exist
+
+        }
+        [Test]
+        public void Test_SearchAvailableKeywordsComplete()
+        {
+
+            //valid
+
+        }
+
+
+        //CreateNumberOrder
+        [Test]
+        public void Test_CreateNumberOrderMandatory()
+        {
+
+            //Count 
+
+        }
+        [Test]
+        public void Test_CreateNumberOrderComplete()
+        {
+
+            //all fields complete
+
+        }
+
+        //GetNumberOrder
+        [Test]
+        public void Test_GetNumberOrderValidId()
+        {
+            //ID Valido
+        }
+
+        [Test]
+        public void Test_GetNumberOrderInValidId()
+        {
+            //ID InValido
+        }
+        [Test]
+        public void Test_GetContactIDnull()
+        {
+            //ID null
+        }
+
+        //Release
+        [Test]
+        public void Test_ReleaseMandatory()
+        {
+            //Num
+        }
+        [Test]
+        public void Test_ReleaseComplete()
+        {
+            //all fields complete
+        }
+        [Test]
+        public void Test_ReleaseInvalidNum()
+        {
+            //invalid number
+        }
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         
         [Test]
         public void Test_QueryRegions()
