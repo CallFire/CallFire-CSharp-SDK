@@ -21,8 +21,10 @@ namespace Callfire_csharp_sdk.IntegrationTests
         protected CfActionQuery CfActionQuery;
         protected CfQueryAutoReplies QueryAutoReplies;
 
-        protected const string VerifyFromNumber = "+19196991764";
+        protected const string VerifyFromNumber = "+15712655344";
         protected const string VerifyShortCode = "67076";
+        protected const string PurchaseNumber = "+13107742289";
+        protected const string PurchaseKeyword = "NETTEST";
 
         public void AssertClientException<TRest, TSoap>(TestDelegate test)
             where TRest : Exception
@@ -258,9 +260,8 @@ namespace Callfire_csharp_sdk.IntegrationTests
             {
                 CfAutoReply = new CfAutoReply
                 {
-                    Number = VerifyFromNumber,
-                    Keyword = "Keyword",
-                    Match = "Match",
+                    Number = PurchaseNumber,
+                    Keyword = PurchaseKeyword,
                     Message = "Test AutoReply Message"
                 }
             };
@@ -277,8 +278,8 @@ namespace Callfire_csharp_sdk.IntegrationTests
                 CfAutoReply = new CfAutoReply
                 {
                     Id = 38796,
-                    Number = VerifyFromNumber,
-                    Keyword = "Keyword",
+                    Number = PurchaseNumber,
+                    Keyword = PurchaseKeyword,
                     Match = "Match",
                     Message = "Te$t.Aut0Reply Me55age!"
                 }
@@ -361,8 +362,8 @@ namespace Callfire_csharp_sdk.IntegrationTests
             {
                 CfAutoReply = new CfAutoReply
                 {
-                    Number = VerifyFromNumber,
-                    Keyword = "Keyword",
+                    Number = PurchaseNumber,
+                    Keyword = PurchaseKeyword,
                     Match = "Match",
                     Message = "Test AutoReply Message"
                 }
