@@ -46,6 +46,102 @@ namespace Callfire_csharp_sdk.IntegrationTests
 
         //LabelBroadcast
 
+        [Test]
+        public void Test_LabelBroadcastMandatoryComplete()
+        {
+            //
+
+        }
+        [Test]
+        public void Test_LabelBroadcastWrongData()
+        {
+            //id valid
+            //name diferent
+
+        }
+        [Test]
+        public void Test_LabelBroadcastNotExistId()
+        {
+            //id not exist
+            //
+
+        }
+
+        //UnlabelBroadcast
+        [Test]
+        public void Test_UnlabelBroadcastNotExistId()
+        {
+            //id not exist
+            //
+
+        }
+        [Test]
+        public void Test_UnlabelBroadcastMandatoryComplete()
+        {
+            //
+
+        }
+        [Test]
+        public void Test_UnlabelBroadcastWrongData()
+        {
+            //id valid
+            //name diferent
+
+        }
+
+        //LabelNumber
+        [Test]
+        public void Test_LabelNumberNotExistNumber()
+        {
+            //number not exist
+            //
+
+        }
+        [Test]
+        public void Test_LabelNumberMandatoryComplete()
+        {
+            //
+
+        }
+        [Test]
+        public void Test_LabelNumberWrongData()
+        {
+            //number valid
+            //labelname diferent
+
+        }
+
+        //UnlabelNumber
+        [Test]
+        public void Test_UnlabelNumberNotExistNumber()
+        {
+            //number not exist
+            //
+
+        }
+        [Test]
+        public void Test_UnlabelNumberMandatoryComplete()
+        {
+            //
+
+        }
+        [Test]
+        public void Test_UnlabelNumberWrongData()
+        {
+            //number valid
+            //labelname diferent
+
+        }
+
+
+
+
+
+
+
+
+
+
 
 
 
