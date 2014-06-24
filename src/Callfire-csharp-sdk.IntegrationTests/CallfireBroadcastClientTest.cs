@@ -517,15 +517,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// <summary>
         /// QueryBroadcasts
         /// </summary>
-        [Test]
-        public void Test_QueryBroadcast()
-        {
-            var queryResult = Client.QueryBroadcasts(CfQueryBroadcasts);
-            Assert.NotNull(queryResult);
-            Assert.NotNull(queryResult.Broadcast);
-        }
-
-        [Test]
+       [Test]
         public void Test_QueryBroadcastsEmpty()
         {
             var broadcastQueryResult = Client.QueryBroadcasts(new CfQueryBroadcasts());
@@ -562,14 +554,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// <summary>
         /// GetBroadcast
         /// </summary>
-        [Test]
-        public void Test_GetBroadcast()
-        {
-            var broadcast = Client.GetBroadcast(651);
-            Assert.IsNotNull(broadcast);
-            Assert.AreEqual(broadcast.Type, CfBroadcastType.Text);
-        }
-
+        
         [Test]
         public void Test_GetBroadcastSuccess()
         {
@@ -580,12 +565,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// <summary>
         /// Update Broadcast
         /// </summary>
-        [Test]
-        public void Test_UpdateBroadcast()
-        {
-            Client.UpdateBroadcast(UpdateBroadcast);
-        }
-
         [Test]
         public void Test_UpdateBroadcastChangeTypeVoice()
         {
@@ -738,17 +717,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// <summary>
         /// GetBroadcastStats
         /// </summary>
-        [Test]
-        public void Test_GetBroadcastStats()
-        {
-            var broadcastStats = Client.GetBroadcastStats(GetBroadcastStats);
-            Assert.IsNotNull(broadcastStats);
-            Assert.IsNotNull(broadcastStats.ActionStatistics);
-            Assert.AreEqual(broadcastStats.ActionStatistics.Unattempted, 1);
-            Assert.IsNotNull(broadcastStats.UsageStats);
-            Assert.AreEqual(broadcastStats.UsageStats.Duration, 0);
-        }
-
+        
         [Test]
         public void Test_GetBroadcastStatsComplete()
         {
@@ -771,14 +740,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// <summary>
         /// ControlBroadcast
         /// </summary>
-        [Test]
-        public void Test_ControlBroadcast()
-        {
-            var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastDefault);
-            ControlBroadcast.Id = Client.CreateBroadcast(broadcastRequest);
-            Client.ControlBroadcast(ControlBroadcast);
-        }
-
+        
         [Test]
         public void Test_ControlBroadcastStart()
         {
@@ -836,13 +798,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// CreateContactBatch
         /// </summary>
         [Test]
-        public void Test_CreateContactBatch()
-        {
-            var id = Client.CreateContactBatch(CreateContactBatch);
-            Assert.IsNotNull(id);
-        }
-
-        [Test]
         public void Test_CreateContactBatchBroadcastId()
         {
             var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastDefault);
@@ -894,15 +849,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// QueryContactBatches
         /// </summary>
         [Test]
-        public void Test_QueryContactBatches()
-        {
-            var contactBatchQueryResult = Client.QueryContactBatches(QueryContactBatches);
-            Assert.IsNotNull(contactBatchQueryResult);
-            Assert.IsNotNull(contactBatchQueryResult.ContactBatch);
-            Assert.IsTrue(contactBatchQueryResult.ContactBatch.Any(c => c.Id.Equals(1092170001)));
-        }
-
-        [Test]
         public void Test_QueryContactBatchesAllResults()
         {
             var queryBroadcastData = new CfQueryBroadcastData
@@ -947,12 +893,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// <summary>
         /// ControlContactBatches
         /// </summary>
-        [Test]
-        public void Test_ControlContactBatches()
-        {
-            Client.ControlContactBatch(ControlContactBatches);
-        }
-
+        
         [Test]
         public void Test_ControlContactBatchesCompleteTrue()
         {
