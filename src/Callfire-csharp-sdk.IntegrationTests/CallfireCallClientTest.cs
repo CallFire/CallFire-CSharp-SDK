@@ -276,7 +276,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
-        public void Test_CreateSoundMandatoryFields() //TODO FIX REST
+        public void Test_CreateSoundMandatoryFields()
         {
             var stream = File.OpenRead(@"C:\Users\marcelob-ot\Documents\GitHub\CallFire-CSharp-SDK\src\test.mp3");
             var fileBytes = new byte[stream.Length];
@@ -413,7 +413,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         [Test]
         public void Test_GetRecordingDataMandatory() //TODO
         {
-            object[] items = { Convert.ToInt64(137448938001) };
+            object[] items = { Convert.ToInt64(138148426001) };
             var getRecordingData = new CfGetRecordingData
             {
                 ItemsElementNameField = new []{CfItemsChoiceType.RecordingId},
@@ -429,7 +429,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         [Test]
         public void Test_GetRecordingDataComplete() //TODO
         {
-            object[] items = { Convert.ToInt64(423763001), "SoundRecordingCall_1"};
+            object[] items = { Convert.ToInt64(229202915001), "SoundRecordingCall_1" };
             var getRecordingData = new CfGetRecordingData
             {
                 Format = CfSoundFormat.Mp3,

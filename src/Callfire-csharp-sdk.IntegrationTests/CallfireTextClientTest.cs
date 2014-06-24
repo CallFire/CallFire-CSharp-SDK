@@ -54,13 +54,20 @@ namespace Callfire_csharp_sdk.IntegrationTests
         [Test]
         public void Test_SendTextEmpty()
         {
-            AssertClientException<WebException, FaultException>(() => Client.SendText(null));
+            AssertClientException<WebException, FaultException>(() => Client.SendText(new CfSendText()));
         }
 
         [Test]
         public void Test_SendTextWrongFormat()
         {
-            AssertClientException<WebException, FaultException>(() => Client.SendText(new CfSendText()));
+            var sendText = new CfSendText
+            {
+                TextBroadcastConfig = new CfTextBroadcastConfig
+                {
+                    Message = null
+                }
+            };
+            AssertClientException<WebException, FaultException>(() => Client.SendText(sendText));
         }
         
         [Test]
@@ -262,6 +269,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
                 {
                     Number = PurchaseNumber,
                     Keyword = PurchaseKeyword,
+                    Match = "Match",
                     Message = "Test AutoReply Message"
                 }
             };
@@ -317,14 +325,14 @@ namespace Callfire_csharp_sdk.IntegrationTests
             Assert.IsNotNull(autoReplyQueryResult);
         }
 
-        [Test] //TODO
+        [Test]
         public void Test_QueryAutoRepliesComplete()
         {
             var queryAutoReplies = new CfQueryAutoReplies
             {
                 MaxResults = 20,
                 FirstResult = 2,
-                Number = "7819461123"
+                Number = PurchaseNumber
             };
             var autoReplyQueryResult = Client.QueryAutoReplies(queryAutoReplies);
             Assert.IsNotNull(autoReplyQueryResult);

@@ -23,6 +23,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
 
         protected const string VerifyFromNumber = "+15712655344";
         protected const string VerifyShortCode = "67076";
+        protected const long ExistingSubscriptionId = 148447001;
 
         public void AssertClientException<TRest, TSoap>(TestDelegate test)
             where TRest : Exception
@@ -155,7 +156,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         [Test]
         public void Test_GetSubscriptionsValid()
         {
-            var subscription = Client.GetSubscription(150415001);
+            var subscription = Client.GetSubscription(ExistingSubscriptionId);
             Assert.IsNotNull(subscription);
         }
 
