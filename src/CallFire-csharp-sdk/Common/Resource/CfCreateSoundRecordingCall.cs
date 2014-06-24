@@ -2,6 +2,10 @@
 {
     public class CfCreateSoundRecordingCall
     {
+        public CfCreateSoundRecordingCall()
+        {
+        }
+
         public CfCreateSoundRecordingCall(string toNumber)
         {
             ToNumber = toNumber;

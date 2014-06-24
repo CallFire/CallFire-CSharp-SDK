@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.ServiceModel;
@@ -7,7 +8,6 @@ using CallFire_csharp_sdk.API.Rest.Clients;
 using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
-using CallFire_csharp_sdk.Common.Resource.Mappers;
 using NUnit.Framework;
 
 namespace Callfire_csharp_sdk.IntegrationTests
@@ -21,7 +21,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         protected CfActionQuery ActionQuery;
         protected CfQuery QuerySoundMeta;
 
-        protected const string VerifyFromNumber = "+19196991764";
+        protected const string VerifyFromNumber = "+15712655344";
         protected const string VerifyShortCode = "67076";
 
         public void AssertClientException<TRest, TSoap>(TestDelegate test)
@@ -54,8 +54,9 @@ namespace Callfire_csharp_sdk.IntegrationTests
         {
             AssertClientException<WebException, FaultException>(() => Client.SendCall(new CfSendCall()));
         }
+
         [Test]
-        public void Test_SendCallMandatoryVoice() // TODO
+        public void Test_SendCallMandatoryVoice() 
         {
             CfToNumber[] toNumberList = { new CfToNumber { Value = VerifyFromNumber, ClientData = "Client1" } };
             var sendCall = new CfSendCall
@@ -74,7 +75,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
-        public void Test_SendCallVoiceComplete() // TODO
+        public void Test_SendCallVoiceComplete() 
         {
             CfToNumber[] toNumberList = { new CfToNumber { Value = VerifyFromNumber, ClientData = "Client1" } };
             var sendCall = new CfSendCall
@@ -120,16 +121,17 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
-        public void Test_SendCallMandatoryIVR() //TODO
+        public void Test_SendCallMandatoryIVR() 
         {
             CfToNumber[] toNumberList = { new CfToNumber { Value = VerifyFromNumber, ClientData = "Client1" } };
             var sendCall = new CfSendCall
             {
-                Type = CfBroadcastType.Voice,
+                Type = CfBroadcastType.Ivr,
                 ToNumber = toNumberList,
                 Item = new CfIvrBroadcastConfig
                 {
-                    DialplanXml = "<dialplan><play type=\"tts\">Congratulations! You have successfully configured a CallFire I V R.</play></dialplan>"
+                   DialplanXml = "<dialplan><play type=\"tts\">Congratulations! You have successfully configured a CallFire I V R.</play></dialplan>",
+                   FromNumber = VerifyFromNumber
                 }
             };
             var id = Client.SendCall(sendCall);
@@ -137,12 +139,12 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
-        public void Test_SendCallIVRComplete() //TODO
+        public void Test_SendCallIVRComplete()
         {
             CfToNumber[] toNumberList = { new CfToNumber { Value = VerifyFromNumber, ClientData = "Client1" } };
             var sendCall = new CfSendCall
             {
-                Type = CfBroadcastType.Voice,
+                Type = CfBroadcastType.Ivr,
                 ToNumber = toNumberList,
                 ScrubBroadcastDuplicates = true,
                 Item = new CfIvrBroadcastConfig
@@ -202,13 +204,13 @@ namespace Callfire_csharp_sdk.IntegrationTests
         {
             var actionQuery = new CfActionQuery
             {
-                BroadcastId = 1955902001,
+                BroadcastId = 1971748001,
                 ToNumber = VerifyShortCode,
                 MaxResults = 20,
                 FirstResult = 2,
                 Inbound = false,
                 State = new [] {CfActionState.Invalid},
-                BatchId = 1203601001,
+                BatchId = 1218740001,
                 FromNumber = VerifyFromNumber,
             };
             var callQueryResult = Client.QueryCalls(actionQuery);
@@ -224,7 +226,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
             };
             var callQueryResult = Client.QueryCalls(actionQuery);
             Assert.IsNotNull(callQueryResult);
-            Assert.AreEqual(0, callQueryResult.TotalResults);
         }
 
         /// <summary>
@@ -241,54 +242,114 @@ namespace Callfire_csharp_sdk.IntegrationTests
         [Test]
         public void Test_GetCallValidId()
         {
-            var call = Client.GetCall(225924967001);
+            var call = Client.GetCall(228327782001);
             Assert.IsNotNull(call);
         }
 
         [Test]
-        public void Test_GetCallInValidIdLetters()
+        public void Test_GetCallInValidId()
         {
             AssertClientException<WebException, FaultException<ServiceFaultInfo>>(() => Client.GetCall(48944));
         }
 
-        //CreateSound
+        /// <summary>
+        /// CreateSound
+        /// </summary>
         [Test]
         public void Test_CreateSoundInvalidData()
         {
-            //Data= file .png x example
+            var stream = File.OpenRead(@"C:\Users\marcelob-ot\Documents\GitHub\CallFire-CSharp-SDK\src\test.png");
+            var fileBytes = new byte[stream.Length];
+
+            stream.Read(fileBytes, 0, fileBytes.Length);
+            stream.Close();
+
+            var createSound = new CfCreateSound
+            {
+                Item = fileBytes,
+            };
+            AssertClientException<WebException, FaultException<ServiceFaultInfo>>(() => Client.CreateSound(createSound));
         }
 
         [Test]
-        public void Test_CreateSoundMandatoryFields()
+        public void Test_CreateSoundMandatoryFields() //TODO FIX REST
         {
-            //all mandatory fields complete
+            var stream = File.OpenRead(@"C:\Users\marcelob-ot\Documents\GitHub\CallFire-CSharp-SDK\src\test.mp3");
+            var fileBytes = new byte[stream.Length];
+
+            stream.Read(fileBytes, 0, fileBytes.Length);
+            stream.Close();
+
+            var createSound = new CfCreateSound
+            {
+                Item = fileBytes,
+            };
+            var id = Client.CreateSound(createSound);
+            Assert.IsNotNull(id);
         }
 
         [Test]
-        public void Test_CreateSoundNoMandatoryFields()
+        public void Test_CreateSoundMandatoryFieldsRecordingCall()
         {
-            //all mandatory fields complete
+            var createSound = new CfCreateSound
+            {
+                Name = "SoundRecordingCall_1",
+                Item = new CfCreateSoundRecordingCall
+                {
+                    ToNumber = VerifyFromNumber
+                },
+            };
+            var id = Client.CreateSound(createSound);
+            Assert.IsNotNull(id);
         }
-        
 
+        [Test]
+        public void Test_CreateSoundComplete()
+        {
+            var createSound = new CfCreateSound
+            {
+                Name = "SoundText_1",
+                Item = "Text sound test",
+                SoundTextVoice = "FEMALE1" 
+            };
+            var id = Client.CreateSound(createSound);
+            Assert.IsNotNull(id);
+        }
 
-
-        
-
-
-        
-
-        
-
+        /// <summary>
+        /// QuerySoundMeta
+        /// </summary>
         [Test]
         public void Test_QuerySoundMeta()
         {
             var soundMeta = Client.QuerySoundMeta(QuerySoundMeta);
             Assert.IsNotNull(soundMeta);
             Assert.IsNotNull(soundMeta.SoundMeta);
-            Assert.IsTrue(soundMeta.SoundMeta.Any(s => s.Id.Equals(426834001)));
+            Assert.IsTrue(soundMeta.SoundMeta.Any(s => s.Id.Equals(459849001)));
+        }
+        
+        [Test]
+        public void Test_QuerySoundMetaAllResults()
+        {
+            var soundMetaQueryResult = Client.QuerySoundMeta(new CfQuery());
+            Assert.IsNotNull(soundMetaQueryResult);
         }
 
+        [Test]
+        public void Test_QuerySoundMetaSpecific()
+        {
+            var query = new CfQuery
+            {
+                FirstResult = 80,
+                MaxResults = 2
+            };
+            var soundMetaQueryResult = Client.QuerySoundMeta(query);
+            Assert.IsNotNull(soundMetaQueryResult);
+        }
+
+        /// <summary>
+        /// GetSoundMeta
+        /// </summary>
         [Test]
         public void Test_GetSoundMeta()
         {
@@ -296,9 +357,116 @@ namespace Callfire_csharp_sdk.IntegrationTests
             Assert.IsNotNull(soundMeta);
             Assert.AreEqual(soundMeta.Status, CfSoundStatus.Active);
         }
-
         
+        [Test]
+        public void Test_GetSoundMetaInValidId()
+        {
+            AssertClientException<WebException, FaultException<ServiceFaultInfo>>(() => Client.GetSoundMeta(1568441320));
+        }
 
+        [Test]
+        public void Test_GetSoundMetaValidId()
+        {
+            var soundMeta = Client.GetSoundMeta(459849001);
+            Assert.IsNotNull(soundMeta);
+        }
+
+        /// <summary>
+        /// GetSoundData
+        /// </summary>
+        [Test]
+        public void Test_GetSoundDataMandatory()
+        {
+            var getSoundData = new CfGetSoundData
+            {
+                Id = 459849001
+            };
+            if (Client.GetType() == typeof (SoapCallClient))
+            {
+               var id = Client.GetSoundData(getSoundData);
+                Assert.IsNotNull(id);
+            }
+        }
+
+        [Test]
+        public void Test_GetSoundDataComplete()
+        {
+            var getSoundData = new CfGetSoundData
+            {
+                Id = 459849001,
+                Format = CfSoundFormat.Wav
+            };
+            if (Client.GetType() == typeof(SoapCallClient))
+            {
+                var id = Client.GetSoundData(getSoundData);
+                Assert.IsNotNull(id);
+            }
+        }
+
+        /// <summary>
+        /// GetRecordingData
+        /// </summary>
+        [Test]
+        public void Test_GetRecordingDataMandatory() //TODO
+        {
+            object[] items = { Convert.ToInt64(137448938001) };
+            var getRecordingData = new CfGetRecordingData
+            {
+                ItemsElementNameField = new []{CfItemsChoiceType.RecordingId},
+                Items = items
+            };
+            if (Client.GetType() == typeof(SoapCallClient))
+            {
+                var recordingData = Client.GetRecordingData(getRecordingData);
+                Assert.IsNotNull(recordingData);
+            }
+        }
+
+        [Test]
+        public void Test_GetRecordingDataComplete() //TODO
+        {
+            object[] items = { Convert.ToInt64(423763001), "SoundRecordingCall_1"};
+            var getRecordingData = new CfGetRecordingData
+            {
+                Format = CfSoundFormat.Mp3,
+                ItemsElementNameField = new[] { CfItemsChoiceType.CallId, CfItemsChoiceType.Name },
+                Items = items
+            };
+            if (Client.GetType() == typeof(SoapCallClient))
+            {
+                var recordingData = Client.GetRecordingData(getRecordingData);
+                Assert.IsNotNull(recordingData);
+            }
+        }
+        [Test]
+        public void Test_GetRecordingDataRecordingIdInvalid() 
+        {
+            object[] items = { Convert.ToInt64(137448938001) };
+            var getRecordingData = new CfGetRecordingData
+            {
+                ItemsElementNameField = new[] { CfItemsChoiceType.RecordingId },
+                Items = items
+            };
+            if (Client.GetType() == typeof (SoapCallClient))
+            {
+                Assert.Throws<FaultException<ServiceFaultInfo>>(() => Client.GetRecordingData(getRecordingData));
+            }
+        }
+
+        [Test]
+        public void Test_GetRecordingDataRecordingDifferentName()
+        {
+            object[] items = { Convert.ToInt64(137448938001), "Name" };
+            var getRecordingData = new CfGetRecordingData
+            {
+                ItemsElementNameField = new[] { CfItemsChoiceType.CallId, CfItemsChoiceType.Name, CfItemsChoiceType.RecordingId },
+                Items = items
+            };
+            if (Client.GetType() == typeof(SoapCallClient))
+            {
+                Assert.Throws<FaultException>(() => Client.GetRecordingData(getRecordingData));
+            }
+        }
     }
 }
 

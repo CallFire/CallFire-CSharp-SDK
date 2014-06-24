@@ -31,6 +31,229 @@ namespace Callfire_csharp_sdk.IntegrationTests
             Assert.IsTrue(contacts.Contact.Any(c => c.Id == ContactId));
         }
 
+        //QueryContacts
+        [Test]
+        public void Test_QueryContactsNotExistContactListId()
+        {
+            //ContactListId= no exist
+        }
+        [Test]
+        public void Test_QueryContactsAllResults()
+        {
+
+            //go to Try it out!
+
+        }
+
+        [Test]
+        public void Test_QueryContactsComplete()
+        {
+
+            //fields complete
+            //MaxResults 200
+            //FirstResult 90
+        }
+
+        //UpdateContacts
+        [Test]
+        public void Test_UpdateContactsMandatory()
+        {
+
+            //Mandatory fields complete
+            
+        }
+        [Test]
+        public void Test_UpdateContactsComplete()
+        {
+
+            // fields complete
+
+        }
+        [Test]
+        public void Test_UpdateContactsInvalidID()
+        {
+
+            // ID invalid
+            //resto de los campos existentes
+        }
+        //RemoveContacts
+        [Test]
+        public void Test_RemoveContactsInvalidId()
+        {
+
+            // invalid id
+        }
+        [Test]
+        public void Test_RemoveContactsIdNull()
+        {
+            //
+        }
+        [Test]
+        public void Test_RemoveContactsComplete()
+        {
+            //valid id
+        }
+
+        //GetContact
+        [Test]
+        public void Test_GetContactValidId()
+        {
+            //ID Valido
+        }
+
+        [Test]
+        public void Test_GetContactInValidId()
+        {
+            //ID InValido
+        }
+        [Test]
+        public void Test_GetContactIDnull()
+        {
+            //ID null
+        }
+        //GetContactHistory
+        [Test]
+        public void Test_GetContactHistoryMandatory()
+        {
+            //mandatory field
+        }
+        [Test]
+        public void Test_GetContactHistoryComnplete()
+        {
+            //complete all field
+        }
+        [Test]
+        public void Test_GetContactHistoryIdNull()
+        {
+            //ContactId= null
+        }
+
+        //CreateContactList
+        [Test]
+        public void Test_CreateContactListMandatory()
+        {
+            //MandatoryFieds completes
+        }
+        [Test]
+        public void Test_CreateContactListComplete()
+        {
+            //All fields complete
+            //Validate= true
+            //csv file correct
+        }
+        [Test]
+        public void Test_CreateContactListWrongFormatFile()
+        {
+            //
+        }
+        //QueryContactLists
+        [Test]
+        public void Test_QueryContactListsAllResults()
+        {
+
+            //go to Try it out!
+
+        }
+
+        [Test]
+        public void Test_QueryContactListsComplete()
+        {
+
+            //MaxResults 2
+            //FirstResult 600
+        }
+
+        //DeleteContactList
+        [Test]
+        public void Test_DeleteContactListInvalidId()
+        {
+
+            // invalid id
+        }
+        [Test]
+        public void Test_DeleteContactListIdNull()
+        {
+            //
+        }
+        [Test]
+        public void Test_DeleteContactListComplete()
+        {
+            //valid id
+        }
+
+        //AddContactsToList
+        [Test]
+        public void Test_AddContactsToListMandatory()
+        {
+            //
+        }
+        [Test]
+        public void Test_AddContactsToListComplete()
+        {
+            //all fields complete
+            //Validate = true
+        }
+        //GetContactList
+        [Test]
+        public void Test_GetContactListValidId()
+        {
+            //ID Valido
+        }
+
+        [Test]
+        public void Test_GetContactListInValidId()
+        {
+            //ID InValido
+        }
+        [Test]
+        public void Test_GetContactListIDnull()
+        {
+            //ID null
+        }
+        //RemoveContactsFromList
+        [Test]
+        public void Test_RemoveContactsFromListInvalidId()
+        {
+
+            // invalid id
+        }
+        [Test]
+        public void Test_RemoveContactsFromListIdNull()
+        {
+            //
+        }
+        [Test]
+        public void Test_RemoveContactsFromListComplete()
+        {
+            //valid id
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         [Test]
         public void Test_GetContact()
         {

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Web;
-using System.Xml;
 using System.Xml.Serialization;
 using CallFire_csharp_sdk.API.Soap;
 
@@ -43,13 +43,19 @@ namespace CallFire_csharp_sdk.Common
                 {
                     AddEncodedArray(value, propertyInfo, result);
                 }
-                else if (!IsCustomClass(propertyInfo))
-                {
-                    AddEncodedValue(value, propertyInfo, result);
-                }
                 else
                 {
-                    result.AddRange(GetProperties(value));
+                    var customClass = propertyInfo.PropertyType.Name.Equals("Object")
+                        ? value.GetType().IsClass && value.GetType().Namespace != "System" : IsCustomClass(propertyInfo);
+                    if (!customClass)
+                    {
+                        AddEncodedValue(value, propertyInfo, result);
+                    }
+                    else
+                    {
+                        result.AddRange(GetProperties(value));
+                    }
+
                 }
             }
             return result;
@@ -57,8 +63,7 @@ namespace CallFire_csharp_sdk.Common
 
         private static void AddEncodedValue(object value, PropertyInfo propertyInfo, List<KeyValuePair<string, string>> result)
         {
-            var stringValue = value.ToString();
-
+            string stringValue = value.GetType() == typeof(byte[]) ? Encoding.UTF8.GetString((byte[])value) : value.ToString();
             var attribs = (XmlElementAttribute[])Attribute.GetCustomAttributes(propertyInfo, typeof(XmlElementAttribute));
             if (propertyInfo.PropertyType == typeof (DateTime))
             {
@@ -70,7 +75,14 @@ namespace CallFire_csharp_sdk.Common
             {
                 elementName = attribs.First(i => i.Type == value.GetType()).ElementName;
             }
-            result.Add(new KeyValuePair<string, string>(elementName, HttpUtility.UrlEncode(stringValue)));
+            if (value.GetType() == typeof(byte[]))
+            {
+                result.Add(new KeyValuePair<string, string>(elementName, stringValue));
+            }
+            else
+            {
+                result.Add(new KeyValuePair<string, string>(elementName, HttpUtility.UrlEncode(stringValue)));
+            }
         }
 
         private static string FindDateFormat(object value, XmlElementAttribute[] attribs)
