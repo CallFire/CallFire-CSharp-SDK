@@ -42,12 +42,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// <summary>
         /// CreateSubscription
         /// </summary>
-        [Test]
-        public void Test_CreateSuscription()
-        {
-            var id = Client.CreateSubscription(CfSubscriptionRequest);
-            Assert.IsNotNull(id);
-        }
         
         [Test]
         public void Test_CreateSubscriptionEndpointID()
@@ -116,15 +110,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// QuerySubscriptions
         /// </summary>
         [Test]
-        public void Test_QuerySuscription()
-        {
-            var subscriptionQueryResult = Client.QuerySubscriptions(QuerySubscription);
-            Assert.NotNull(subscriptionQueryResult);
-            Assert.IsNotNull(subscriptionQueryResult.Subscription);
-            Assert.IsTrue(subscriptionQueryResult.Subscription.Any(s => s.NotificationFormat.Equals(CfNotificationFormat.Email)));
-        }
-        
-        [Test]
         public void Test_querySubsctiptionsAllResults()
         {
             var subscriptionQueryResult = Client.QuerySubscriptions(new CfQuery());
@@ -146,12 +131,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// <summary>
         /// GetSubscriptions
         /// </summary>
-        [Test]
-        public void Test_GetSuscription()
-        {
-            var subscription = Client.GetSubscription(139597001);
-            Assert.NotNull(subscription);
-        }
         
         [Test]
         public void Test_GetSubscriptionsValid()
@@ -169,13 +148,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// <summary>
         /// UpdateSubscription
         /// </summary>
-        [Test]
-        [Ignore]
-        public void Test_UpdateSuscription()
-        {
-            Client.UpdateSubscription(CfUpdateSubscription);
-        }
-        
+        /// 
         [Test]
         public void Test_UpdateSubscriptionEmpty()
         {
@@ -281,13 +254,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// <summary>
         /// DeleteSubscription
         /// </summary>
-        [Test]
-        [Ignore]
-        public void Test_DeleteSuscription()
-        {
-            var id = Client.CreateSubscription(CfSubscriptionRequest);
-            Client.DeleteSubscription(id);
-        }
         
         [Test]
         public void Test_DeleteSubscriptionIdNull()

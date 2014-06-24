@@ -41,14 +41,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// <summary>
         /// SendCall
         /// </summary>
-        [Test]
-        [Ignore]
-        public void Test_SendCall()
-        {
-            var id = Client.SendCall(SendCall);
-            Assert.IsNotNull(id);
-        }
-
+        
         [Test]
         public void Test_SendCallEmpty()
         {
@@ -177,16 +170,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// QueryCalls
         /// </summary>
         [Test]
-        public void Test_QueryCalls()
-        {
-            var calls = Client.QueryCalls(ActionQuery);
-            Assert.IsNotNull(calls);
-            Assert.IsNotNull(calls.Calls);
-            Assert.IsTrue(calls.Calls.Any(c => c.FromNumber.Equals("12132609784")));
-            Assert.IsTrue(calls.Calls.Any(c => c.CallRecord.Any(r => r.Id.Equals(125746517001))));
-        }
-        
-        [Test]
         public void Test_QueryCallsNotExistNumber()
         {
             var actionQuery = new CfActionQuery
@@ -235,14 +218,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// <summary>
         /// GetCall
         /// </summary>
-        [Test]
-        public void Test_GetCall()
-        {
-            var call = Client.GetCall(209720137001);
-            Assert.IsNotNull(call);
-            Assert.AreEqual(call.ContactId, 165251012001);
-        }
-        
         [Test]
         public void Test_GetCallValidId()
         {
@@ -323,14 +298,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// <summary>
         /// QuerySoundMeta
         /// </summary>
-        [Test]
-        public void Test_QuerySoundMeta()
-        {
-            var soundMeta = Client.QuerySoundMeta(QuerySoundMeta);
-            Assert.IsNotNull(soundMeta);
-            Assert.IsNotNull(soundMeta.SoundMeta);
-            Assert.IsTrue(soundMeta.SoundMeta.Any(s => s.Id.Equals(459849001)));
-        }
         
         [Test]
         public void Test_QuerySoundMetaAllResults()
@@ -354,13 +321,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// <summary>
         /// GetSoundMeta
         /// </summary>
-        [Test]
-        public void Test_GetSoundMeta()
-        {
-            var soundMeta = Client.GetSoundMeta(426834001);
-            Assert.IsNotNull(soundMeta);
-            Assert.AreEqual(soundMeta.Status, CfSoundStatus.Active);
-        }
         
         [Test]
         public void Test_GetSoundMetaInValidId()
