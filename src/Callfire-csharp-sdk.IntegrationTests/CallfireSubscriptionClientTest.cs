@@ -21,7 +21,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         protected CfQuery QuerySubscription;
         protected CfSubscriptionRequest CfUpdateSubscription;
 
-        protected const string VerifyFromNumber = "+19196991764";
+        protected const string VerifyFromNumber = "+15712655344";
         protected const string VerifyShortCode = "67076";
 
         public void AssertClientException<TRest, TSoap>(TestDelegate test)

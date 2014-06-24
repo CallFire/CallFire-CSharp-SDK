@@ -28,8 +28,9 @@ namespace Callfire_csharp_sdk.IntegrationTests
         protected CfControlBroadcast ControlBroadcast;
         protected CfCreateContactBatch CreateContactBatch;
 
-        protected const string VerifyFromNumber = "+19196991764";
+        protected const string VerifyFromNumber = "+15712655344";
         protected const string VerifyShortCode = "67076";
+        protected const long ExistingBroadcastId = 1931347001;
 
         public void AssertClientException<TRest, TSoap>(TestDelegate test)
             where TRest : Exception
@@ -196,9 +197,9 @@ namespace Callfire_csharp_sdk.IntegrationTests
                 Item = new CfVoiceBroadcastConfig
                 {
                     FromNumber = VerifyFromNumber,
-                    Item = 426834001,
+                    Item = 460760001,
                     MachineSoundTextVoice = "SPANISH1",
-                    Item1 = 426834001,
+                    Item1 = 460760001,
                     RetryConfig = new CfBroadcastConfigRetryConfig
                     {
                         RetryResults = new[] { CfResult.La }
@@ -527,15 +528,8 @@ namespace Callfire_csharp_sdk.IntegrationTests
         [Test]
         public void Test_QueryBroadcastsEmpty()
         {
-            if (Client.GetType() == typeof(RestBroadcastClient))
-            {
-                var broadcastQueryResult = Client.QueryBroadcasts(new CfQueryBroadcasts());
-                Assert.IsNotNull(broadcastQueryResult);
-            }
-            else
-            {
-                Assert.Throws<CommunicationException>(() => Client.QueryBroadcasts(new CfQueryBroadcasts()));
-            }
+            var broadcastQueryResult = Client.QueryBroadcasts(new CfQueryBroadcasts());
+            Assert.IsNotNull(broadcastQueryResult);
         }
 
         [Test]
@@ -579,7 +573,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         [Test]
         public void Test_GetBroadcastSuccess()
         {
-            var broadcast = Client.GetBroadcast(1953755001);
+            var broadcast = Client.GetBroadcast(1934539001);
             Assert.IsNotNull(broadcast);
         }
 
@@ -617,7 +611,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
             var id = Client.CreateBroadcast(new CfBroadcastRequest(string.Empty, ExpectedBroadcastVoice));
 
             const string newName = "changeType";
-            const long newSoundId = 454556001;
+            const long newSoundId = 460759001;
             const int newMaxAttempts = 10;
             ExpectedBroadcast = new CfBroadcast
             {
@@ -760,7 +754,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         {
             var getBroadcastStats = new CfGetBroadcastStats
             {
-                Id = 1838228001,
+                Id = 1934513001,
                 IntervalBegin = new DateTime(2014, 01, 01, 00, 00, 01),
                 IntervalEnd = new DateTime(2014, 12, 31, 23, 59, 59)
             };
@@ -854,7 +848,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
             var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastDefault);
             var id = Client.CreateBroadcast(broadcastRequest);
 
-            object[] contactListId = { Convert.ToInt64(188601001) };
+            object[] contactListId = { Convert.ToInt64(192949001) };
             var createContactBatch = new CfCreateContactBatch
             {
                 BroadcastId = id,
@@ -913,7 +907,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         {
             var queryBroadcastData = new CfQueryBroadcastData
             {
-                BroadcastId = 1951201001
+                BroadcastId = ExistingBroadcastId
             };
             var contactBatchQueryResult = Client.QueryContactBatches(queryBroadcastData);
             Assert.IsNotNull(contactBatchQueryResult);
@@ -924,7 +918,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         {
             var queryBroadcastData = new CfQueryBroadcastData
             {
-                BroadcastId = 1951201001,
+                BroadcastId = ExistingBroadcastId,
                 MaxResults = 20,
                 FirstResult = 2
             };
@@ -991,7 +985,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         {
             var createBroadcastSchedule = new CfCreateBroadcastSchedule
             {
-                BroadcastId = 1918588001,
+                BroadcastId = 1931347001,
                 BroadcastSchedule = new CfBroadcastSchedule
                 {
                     StartTimeOfDay = new DateTime(2014,01,01,08,00,00),
@@ -1008,7 +1002,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         {
             var createBroadcastSchedule = new CfCreateBroadcastSchedule
             {
-                BroadcastId = 1918588001,
+                BroadcastId = 1931347001,
                 BroadcastSchedule = new CfBroadcastSchedule
                 {
                     BeginDate = new DateTime(2014, 06, 18, 00, 00, 00),
@@ -1031,7 +1025,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         {
             var queryBroadcastData = new CfQueryBroadcastData
             {
-                BroadcastId = 1918588001
+                BroadcastId = 1934539001
             };
             var broadcastScheduleQueryResult = Client.QueryBroadcastSchedule(queryBroadcastData);
             Assert.IsNotNull(broadcastScheduleQueryResult);
@@ -1042,7 +1036,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         {
             var queryBroadcastData = new CfQueryBroadcastData
             {
-                BroadcastId = 1918588001,
+                BroadcastId = ExistingBroadcastId,
                 FirstResult = 1,
                 MaxResults = 10
             };
@@ -1074,7 +1068,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         {
              var createBroadcastSchedule = new CfCreateBroadcastSchedule
             {
-                BroadcastId = 1918588001,
+                BroadcastId = 1934511001,
                 BroadcastSchedule = new CfBroadcastSchedule
                 {
                     StartTimeOfDay = new DateTime(2014,01,01,08,00,00),

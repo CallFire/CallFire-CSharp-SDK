@@ -56,6 +56,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
+        [Ignore]
         public void Test_SendCallMandatoryVoice() 
         {
             CfToNumber[] toNumberList = { new CfToNumber { Value = VerifyFromNumber, ClientData = "Client1" } };
@@ -75,6 +76,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
+        [Ignore]
         public void Test_SendCallVoiceComplete() 
         {
             CfToNumber[] toNumberList = { new CfToNumber { Value = VerifyFromNumber, ClientData = "Client1" } };
@@ -121,6 +123,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
+        [Ignore]
         public void Test_SendCallMandatoryIVR() 
         {
             CfToNumber[] toNumberList = { new CfToNumber { Value = VerifyFromNumber, ClientData = "Client1" } };
@@ -139,6 +142,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
+        [Ignore]
         public void Test_SendCallIVRComplete()
         {
             CfToNumber[] toNumberList = { new CfToNumber { Value = VerifyFromNumber, ClientData = "Client1" } };
@@ -268,7 +272,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
             {
                 Item = fileBytes,
             };
-            AssertClientException<WebException, FaultException<ServiceFaultInfo>>(() => Client.CreateSound(createSound));
+            AssertClientException<WebException, FaultException<ServiceFaultInfo>>(() => Client.CreateSound(createSound, CfSoundFormat.Mp3));
         }
 
         [Test]
@@ -284,7 +288,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
             {
                 Item = fileBytes,
             };
-            var id = Client.CreateSound(createSound);
+            var id = Client.CreateSound(createSound, CfSoundFormat.Mp3);
             Assert.IsNotNull(id);
         }
 
@@ -299,7 +303,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
                     ToNumber = VerifyFromNumber
                 },
             };
-            var id = Client.CreateSound(createSound);
+            var id = Client.CreateSound(createSound, CfSoundFormat.Mp3);
             Assert.IsNotNull(id);
         }
 
@@ -312,7 +316,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
                 Item = "Text sound test",
                 SoundTextVoice = "FEMALE1" 
             };
-            var id = Client.CreateSound(createSound);
+            var id = Client.CreateSound(createSound, CfSoundFormat.Mp3);
             Assert.IsNotNull(id);
         }
 

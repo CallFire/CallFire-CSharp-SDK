@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -29,9 +30,9 @@ namespace CallFire_csharp_sdk.Common
             return GetResponse(request);
         }
 
-        public string Send(string relativeUrl, object body, Stream file, string contentType,string fileName)
+        public string Send(string relativeUrl, object body, Stream file, string contentType)
         {
-            var request = GetRequest(relativeUrl, body, file, contentType,fileName);
+            var request = GetRequest(relativeUrl, body, file, contentType);
 
             return GetResponse(request);
         }
@@ -88,7 +89,7 @@ namespace CallFire_csharp_sdk.Common
             return request;
         }
 
-        private HttpWebRequest GetRequest(string relativeUrl, object body, Stream file, string contentType,string fileName)
+        private HttpWebRequest GetRequest(string relativeUrl, object body, Stream file, string contentType)
         {
             string boundary = "---------------------------" + DateTime.Now.Ticks.ToString("x");
             byte[] boundarybytes = Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
@@ -107,7 +108,7 @@ namespace CallFire_csharp_sdk.Common
             request.Credentials = _credentials;
 
             Stream rs = request.GetRequestStream();
-            var parameters = _serializer.GetProperties(body);
+            var parameters = body == null ? new List<KeyValuePair<string, string>>() : _serializer.GetProperties(body);
 
             const string formdataTemplate = "Content-Disposition: form-data; name=\"{0}\"\r\n\r\n{1}";
             foreach (var parameter in parameters)
@@ -119,8 +120,8 @@ namespace CallFire_csharp_sdk.Common
             }
             rs.Write(boundarybytes, 0, boundarybytes.Length);
 
-            const string headerTemplate = "Content-Disposition: form-data; name=\"{0}\"; filename=\"{1}\"\r\nContent-Type: {2}\r\n\r\n";
-            string header = string.Format(headerTemplate, "Data", fileName, contentType);
+            const string headerTemplate = "Content-Disposition: form-data; name=\"{0}\"; \r\nContent-Type: {1}\r\n\r\n";
+            string header = string.Format(headerTemplate, "Data", contentType);
             byte[] headerbytes = Encoding.UTF8.GetBytes(header);
             rs.Write(headerbytes, 0, headerbytes.Length);
 

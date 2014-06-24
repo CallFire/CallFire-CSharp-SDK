@@ -32,7 +32,7 @@ namespace CallFire_csharp_sdk.API
         /// </summary>
         /// <param name="cfCreateSound"></param>
         /// <returns>Unique ID of resource</returns>
-        long CreateSound(CfCreateSound cfCreateSound);
+        long CreateSound(CfCreateSound cfCreateSound, CfSoundFormat cfSoundFormat);
 
         /// <summary>
         /// Lists sounds available for use in calls
