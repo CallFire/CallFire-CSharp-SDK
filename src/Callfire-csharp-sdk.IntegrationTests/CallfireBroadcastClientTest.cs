@@ -49,13 +49,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// <summary>
         /// Create Broadcasts
         /// </summary>
-        [Test]
-        public void Test_CreateBroadcast()
-        {
-            var broadcastRequest = new CfBroadcastRequest(string.Empty, ExpectedBroadcastDefault);
-            var id = Client.CreateBroadcast(broadcastRequest);
-            Assert.IsNotNull(id);
-        }
         
         [Test]
         public void Test_CreateBroadcastNull()
