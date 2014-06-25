@@ -172,14 +172,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// GetContact
         /// </summary>
         [Test]
-        public void Test_GetContact()
-        {
-            var contact = Client.GetContact(ContactId);
-            Assert.IsNotNull(contact);
-            Assert.AreEqual(contact.HomePhone, "14252163710");
-        }
-        
-        [Test]
         public void Test_GetContactValidId()
         {
             var client = Client.GetContact(ExistingContactId);
@@ -195,16 +187,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// <summary>
         /// GetContactHistory
         /// </summary>
-        [Test]
-        public void Test_GetContactHistory()
-        {
-            var contactHistory = Client.GetContactHistory(GetContactHistory);
-            Assert.IsNotNull(contactHistory);
-            Assert.IsTrue(contactHistory.Any(ch => ch.Id == 210128059001));
-            Assert.IsTrue(contactHistory.Any(ch => ch.BroadcastId == 1838228001));
-        }
-        
-        [Test]
+                [Test]
         public void Test_GetContactHistoryMandatory()
         {
             var getContactHistory = new CfGetContactHistory
@@ -216,7 +199,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
-        public void Test_GetContactHistoryComnplete()
+        public void Test_GetContactHistoryComplete()
         {
             var getContactHistory = new CfGetContactHistory
             {
@@ -239,19 +222,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// <summary>
         /// CreateContactList
         /// </summary>
-        [Test]
-        public void Test_CreateContactList_Contact()
-        {
-            var id = Client.CreateContactList(CreateContactList);
-            Assert.IsTrue(id > 0);
-        }
-
-        [Test]
-        public void Test_CreateContactList_ContactId()
-        {
-            var id = Client.CreateContactList(CreateContactList2);
-            Assert.IsTrue(id > 0);
-        }
         
         [Test]
         public void Test_CreateContactListMandatory() // TODO
@@ -374,15 +344,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// QueryContactLists
         /// </summary>
         [Test]
-        public void Test_QueryContactList()
-        {
-            var contactListQueryResult = Client.QueryContactLists(QueryContactLists);
-            Assert.IsNotNull(contactListQueryResult);
-            Assert.IsNotNull(contactListQueryResult.ContactList);
-            Assert.IsTrue(contactListQueryResult.ContactList.Any(c => c.Name.Equals("NewContactListTest")));
-        }
-        
-        [Test]
         public void Test_QueryContactListsAllResults()
         {
             var contactListQueryResult = Client.QueryContactLists(new CfQuery());
@@ -404,12 +365,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// <summary>
         /// DeleteContactList
         /// </summary>
-        [Test]
-        public void Test_DeleteContactList()
-        {
-            var id = Client.CreateContactList(CreateContactList2);
-            Client.DeleteContactList(id);
-        }
         
         [Test]
         public void Test_DeleteContactListInvalidId()
