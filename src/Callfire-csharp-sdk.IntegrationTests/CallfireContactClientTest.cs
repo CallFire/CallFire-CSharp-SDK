@@ -391,12 +391,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// <summary>
         /// AddContactsToList
         /// </summary>
-        [Test]
-        public void Test_AddContactToList()
-        {
-            Client.AddContactsToList(AddContactsToList);
-            Client.RemoveContactsFromList(RemoveContactsFromList);
-        }
         
         [Test]
         public void Test_AddContactsToListMandatory()
@@ -438,13 +432,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// <summary>
         /// GetContactList
         /// </summary>
-        [Test]
-        public void Test_GetContactList()
-        {
-            var contactList = Client.GetContactList(188601001);
-            Assert.IsNotNull(contactList);
-            Assert.IsTrue(contactList.Status.Equals(CfContactListStatus.Active) && contactList.Size.Equals("2"));
-        }
         
         [Test]
         public void Test_GetContactListValidId()
