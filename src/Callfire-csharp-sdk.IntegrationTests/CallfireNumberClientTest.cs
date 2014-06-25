@@ -45,14 +45,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// <summary>
         /// QueryRegions
         /// </summary>
-        [Test]
-        public void Test_QueryRegions()
-        {
-            var regionQueryResult = Client.QueryRegions(RegionQuery);
-            Assert.IsNotNull(regionQueryResult);
-            Assert.IsNotNull(regionQueryResult.Region);
-            Assert.IsTrue(regionQueryResult.Region.Any(r => r.City != null && r.City.Equals("HACKENSACK")));
-        }
         
         [Test]
         public void Test__QueryRegionsAllResults()
@@ -94,14 +86,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// <summary>
         /// QueryNumbers
         /// </summary>
-        [Test]
-        public void Test_QueryNumbers()
-        {
-            var numbersQueryResult = Client.QueryNumbers(QueryNumbers);
-            Assert.IsNotNull(numbersQueryResult);
-            Assert.AreEqual(numbersQueryResult.TotalResults, 0);
-        }
-        
         [Test]
         public void Test__QueryNumbersAllResults()
         {
