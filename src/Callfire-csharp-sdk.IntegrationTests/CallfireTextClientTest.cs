@@ -44,14 +44,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// SendText
         /// </summary>
         [Test]
-        [Ignore]
-        public void Test_SendText()
-        {
-            var id = Client.SendText(SendText);
-            Assert.IsNotNull(id);
-        }
-        
-        [Test]
         public void Test_SendTextEmpty()
         {
             AssertClientException<WebException, FaultException>(() => Client.SendText(new CfSendText()));
@@ -168,15 +160,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// QueryTexts
         /// </summary>
         [Test]
-        public void Test_QueryText()
-        {
-            var cfTextQueryResult = Client.QueryTexts(CfActionQuery);
-            Assert.IsNotNull(cfTextQueryResult);
-            Assert.IsNotNull(cfTextQueryResult.Text);
-            Assert.IsTrue(cfTextQueryResult.Text.Any(t => t.FromNumber.Equals("67076")));
-        }
-        
-        [Test]
         public void Test_QueryTextsAllResults()
         {
             var textQueryResult = Client.QueryTexts(new CfActionQuery());
@@ -236,13 +219,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// <summary>
         /// GetText
         /// </summary>
-        [Test]
-        public void Test_GetText()
-        {
-            var text = Client.GetText(210128059001);
-            Assert.IsNotNull(text);
-            Assert.AreEqual(text.ToNumber.Value, "14252163710");
-        }
         
         [Test]
         public void Test_GetTextValidId()
@@ -299,13 +275,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// <summary>
         /// QueryAutoReplies
         /// </summary>
-        [Test]
-        public void Test_QueryAutoReplies()
-        {
-            var autoReplyQueryResult = Client.QueryAutoReplies(QueryAutoReplies);
-            Assert.IsNotNull(autoReplyQueryResult);
-            Assert.AreEqual(autoReplyQueryResult.TotalResults, 0);
-        }
         
         [Test]
         public void Test_QueryAutoRepliesNotExistNumber()
