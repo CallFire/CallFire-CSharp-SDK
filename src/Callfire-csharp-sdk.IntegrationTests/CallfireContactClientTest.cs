@@ -459,7 +459,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
-        public void Test_AddContactsToListComplete() //TODO
+        public void Test_AddContactsToListComplete() // TODO
         {
             var contact1 = new CfContact
             {
@@ -508,7 +508,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// RemoveContactsFromList
         /// </summary>
         [Test]
-        public void Test_RemoveContactsFromListInvalidId() //TODO
+        public void Test_RemoveContactsFromListInvalidId() // TODO
         {
             const int clientListId = 192950001;
             object[] contacts = { 169299452000 };
@@ -527,7 +527,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
-        public void Test_RemoveContactsFromListComplete()//TODO
+        public void Test_RemoveContactsFromListComplete() // TODO
         {
             const int clientListId = 192950001;
             object[] contacts = { 169299452001 };

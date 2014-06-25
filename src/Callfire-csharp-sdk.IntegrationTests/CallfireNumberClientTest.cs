@@ -1,6 +1,13 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Net;
+using System.ServiceModel;
 using CallFire_csharp_sdk.API;
+using CallFire_csharp_sdk.API.Rest.Clients;
+using CallFire_csharp_sdk.API.Soap;
+using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
+using CallFire_csharp_sdk.Common.Resource.Mappers;
 using NUnit.Framework;
 
 namespace Callfire_csharp_sdk.IntegrationTests
@@ -8,7 +15,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
     [TestFixture]
     public abstract class CallfireNumberClientTest
     {
-        protected INumberClient NumberClient;
+        protected INumberClient Client;
 
         protected CfRegionQuery RegionQuery;
         protected CfSearchAvailableKeywords SearchAvailableKeywords;
@@ -16,279 +23,486 @@ namespace Callfire_csharp_sdk.IntegrationTests
         protected CfQuery QueryKeywords;
         protected CfQueryNumbers QueryNumbers;
 
-        //QueryRegions
+        protected const string VerifyFromNumber = "+15712655344";
+        protected const string VerifyShortCode = "67076";
+
+        protected const string ExistingNumber = "13107742289";
+        protected const string ExistingKeyword = "NETTEST";
+        
+        public void AssertClientException<TRest, TSoap>(TestDelegate test)
+            where TRest : Exception
+            where TSoap : Exception
+        {
+            if (Client.GetType() == typeof(RestNumberClient))
+            {
+                Assert.Throws<TRest>(test);
+            }
+            else
+            {
+                Assert.Throws<TSoap>(test);
+            }
+        }
+
+        /// <summary>
+        /// QueryRegions
+        /// </summary>
+        [Test]
+        public void Test_QueryRegions()
+        {
+            var regionQueryResult = Client.QueryRegions(RegionQuery);
+            Assert.IsNotNull(regionQueryResult);
+            Assert.IsNotNull(regionQueryResult.Region);
+            Assert.IsTrue(regionQueryResult.Region.Any(r => r.City != null && r.City.Equals("HACKENSACK")));
+        }
+        
         [Test]
         public void Test__QueryRegionsAllResults()
         {
-
-            //go to Try it out!
-
+            var regionQuery = new CfRegionQuery
+            {
+                MaxResults = 100,
+                Region = new CfRegion()
+            };
+            var regions = Client.QueryRegions(regionQuery);
+            Assert.IsNotNull(regions);
         }
 
         [Test]
-        public void Test_QueryRegionsComplete()
+        public void Test_QueryRegionsComplete()//TODO
         {
-
-            //fields complete
-            //MaxResults 200
-            //FirstResult 90
-
+            var regionQuery = new CfRegionQuery
+            {
+                MaxResults = 200,
+                FirstResult = 90,
+                Region = new CfRegion
+                {
+                    Prefix = "1201202",
+                    City = "HACKENSACK",
+                    State = "NJ",
+                    Zipcode = "07601",
+                    Country = "US",
+                    Lata = "224",
+                    RateCenter = "HACKENSACK",
+                    Latitude = (float) 40.887,
+                    Longitude = (float) -74.0391,
+                    TimeZone = "America/New_York"
+                }
+            };
+            var regions = Client.QueryRegions(regionQuery);
+            Assert.IsNotNull(regions);
         }
 
-        //QueryNumbers
+        /// <summary>
+        /// QueryNumbers
+        /// </summary>
+        [Test]
+        public void Test_QueryNumbers()
+        {
+            var numbersQueryResult = Client.QueryNumbers(QueryNumbers);
+            Assert.IsNotNull(numbersQueryResult);
+            Assert.AreEqual(numbersQueryResult.TotalResults, 0);
+        }
+        
         [Test]
         public void Test__QueryNumbersAllResults()
         {
-
-            //go to Try it out!
-
+            var queryNumbers = new CfQueryNumbers
+            {
+                Region = new CfRegion()
+            };
+            var numberQueryResult = Client.QueryNumbers(queryNumbers);
+            Assert.IsNotNull(numberQueryResult);
         }
 
         [Test]
-        public void Test_QueryNumbersComplete()
+        public void Test_QueryNumbersComplete()//TODO
         {
-
-            //fields complete
-            //MaxResults 10
-            //FirstResult 50
-
+            var queryNumbers = new CfQueryNumbers
+            {
+                MaxResults = 10,
+                FirstResult = 50,
+                Region = new CfRegion
+                {
+                    Prefix = "1310774",
+                    City = "MALIBU",
+                    State = "CA",
+                    Zipcode = "90264",
+                    Country = "US",
+                    Lata = "730",
+                    RateCenter = "MALIBU",
+                    Latitude = (float)34.0331,
+                    Longitude = (float)-118.633,
+                    TimeZone = "America/Los_Angeles"
+                }
+            };
+            var numberQueryResult = Client.QueryNumbers(queryNumbers);
+            Assert.IsNotNull(numberQueryResult);
         }
 
-        //GetNumber
+        /// <summary>
+        /// GetNumber
+        /// </summary>
         [Test]
         public void Test_GetNumberValidNumber()
         {
-            //Number Valid
+            var number = Client.GetNumber(ExistingNumber);
+            Assert.IsNotNull(number);
         }
 
         [Test]
         public void Test_GetNumberInValidNumber()
         {
-            //Number InValido
+            AssertClientException<WebException, FaultException<ServiceFaultInfo>>(() => Client.GetNumber("4988461"));
         }
+
         [Test]
         public void Test_GetNumbernull()
         {
-            //Number null
+            if (Client.GetType() == typeof(RestNumberClient))
+            {
+                var number = Client.GetNumber(null);
+                Assert.IsNull(number);
+            }
+            else
+            {
+                Assert.Throws<FaultException>(() => Client.GetNumber(null));
+            }
         }
 
-        //ConfigureNumber
+        /// <summary>
+        /// ConfigureNumber
+        /// </summary>
         [Test]
         public void Test_ConfigureNumberValidNumber()
         {
-            //Number Valid only
-            //
+            var configureNumber = new CfConfigureNumber
+            {
+                Number = ExistingNumber,
+                NumberConfiguration = new CfNumberConfiguration
+                {
+                    TextFeature = CfNumberFeature.Enabled
+                }
+            };
+            Client.ConfigureNumber(configureNumber);
         }
 
         [Test]
         public void Test_ConfigureNumberInValidNumber()
         {
-            //Number InValido 
+            var configureNumber = new CfConfigureNumber
+            {
+                Number = "48943156648",
+                NumberConfiguration = new CfNumberConfiguration()
+            };
+            AssertClientException<WebException, FaultException<ServiceFaultInfo>>(() => Client.ConfigureNumber(configureNumber));
         }
 
         [Test]
         public void Test_ConfigureNumberNull()
         {
-            // 
+            if (Client.GetType() == typeof(RestNumberClient))
+            {
+                Client.ConfigureNumber(new CfConfigureNumber());
+            }
+            else
+            {
+                Assert.Throws<FaultException>(() => Client.ConfigureNumber(new CfConfigureNumber()));
+            }
         }
+
         [Test]
         public void Test_ConfigureNumberTrakingNull()
         {
-            //InboundCallConfigurationType=  Traking 
-            //the rest of the fields empty
+            var configureNumber = new CfConfigureNumber
+            {
+                Number = ExistingNumber,
+                NumberConfiguration = new CfNumberConfiguration
+                {
+                    InboundCallConfigurationType = CfInboundType.Tracking,
+                    InboundCallConfiguration = new CfNumberConfigurationInboundCallConfiguration()
+                }
+            };
+            if (Client.GetType() == typeof(RestNumberClient))
+            {
+                Client.ConfigureNumber(configureNumber);
+            }
+            else
+            {
+                Assert.Throws<FaultException>(() => Client.ConfigureNumber(configureNumber));
+            }
         }
+
         [Test]
         public void Test_ConfigureNumberTrakingComplete()
         {
-            //InboundCallConfigurationType=  Traking 
-            //all fields complete
+            var configureNumber = new CfConfigureNumber
+            {
+                Number = ExistingNumber,
+                NumberConfiguration = new CfNumberConfiguration
+                {
+                    InboundCallConfigurationType = CfInboundType.Tracking,
+                    InboundCallConfiguration = new CfNumberConfigurationInboundCallConfiguration
+                    {
+                        Item = new CfCallTrackingConfig
+                        {
+                            TransferNumber = ExistingNumber,
+                            Record = true,
+                            Screen = true,
+                            IntroSoundId = 460803001,
+                            WhisperSoundId = 460803001
+                        }
+                    }
+                }
+            };
+            Client.ConfigureNumber(configureNumber);
         }
+
         [Test]
         public void Test_ConfigureNumberIVRNull()
         {
-            //InboundCallConfigurationType=  IVR
-            //the rest of the fields empty
+            var configureNumber = new CfConfigureNumber
+            {
+                Number = ExistingNumber,
+                NumberConfiguration = new CfNumberConfiguration
+                {
+                    InboundCallConfigurationType = CfInboundType.Ivr,
+                    InboundCallConfiguration = new CfNumberConfigurationInboundCallConfiguration()
+                }
+            };
+            if (Client.GetType() == typeof(RestNumberClient))
+            {
+                Client.ConfigureNumber(configureNumber);
+            }
+            else
+            {
+                Assert.Throws<FaultException>(() => Client.ConfigureNumber(configureNumber));
+            }
         }
+
         [Test]
         public void Test_ConfigureNumberIVRComplete()
         {
-            //InboundCallConfigurationType=  IVR 
-            //all fields complete
+            var configureNumber = new CfConfigureNumber
+            {
+                Number = ExistingNumber,
+                NumberConfiguration = new CfNumberConfiguration
+                {
+                    InboundCallConfigurationType = CfInboundType.Ivr,
+                    InboundCallConfiguration = new CfNumberConfigurationInboundCallConfiguration
+                    {
+                        Item = new CfIvrInboundConfig
+                        {
+                            DialplanXml = "<dialplan><play type=\"tts\">Dialplan for Configure Number.</play></dialplan>"
+                        }
+                    }
+                }
+            };
+            Client.ConfigureNumber(configureNumber);
         }
 
-        //SearchAvailableNumbers
+        /// <summary>
+        /// SearchAvailableNumbers
+        /// </summary>
         [Test]
-        public void Test_ConfigureNumberMandatory()
+        public void Test_SearchAvailableNumbers()
         {
-            //mandatory= count?
+            var numbersQueryResult = Client.SearchAvailableNumbers(SearchAvailableNumbers);
+            Assert.IsNotNull(numbersQueryResult);
+            Assert.IsNotNull(numbersQueryResult.Number);
+            Assert.IsTrue(numbersQueryResult.Number.Any(r => r.Number1 != null));
         }
+        
         [Test]
-        public void Test_ConfigureNumbeComplete()
+        public void Test_SearchAvailableNumbersMandatory()
         {
-            //mandatory= count?
-            //all fields complete
-            //TollFree= true
-
+            var numberQueryResult = Client.SearchAvailableNumbers(new CfSearchAvailableNumbers());
+            Assert.IsNotNull(numberQueryResult);
         }
+
         [Test]
-        public void Test_ConfigureNumbeWrong()
+        public void Test_SearchAvailableNumbersComplete()
         {
-            //mandatory= count?
-            //State	!= Country ?
-            
+            var searchAvailableNumbers = new CfSearchAvailableNumbers
+            {
+                Count = 10,
+                TollFree = true,
+                Region = new CfRegion
+                {
+                    City = "MALIBU",
+                    State = "CA",
+                }
+            };
+            var numberQueryResult = Client.SearchAvailableNumbers(searchAvailableNumbers);
+            Assert.IsNotNull(numberQueryResult);
         }
 
-        //QueryKeywords
+        [Test]
+        public void Test_SearchAvailableNumbersWrong()
+        {
+            var searchAvailableNumbers = new CfSearchAvailableNumbers
+            {
+                Region = new CfRegion
+                {
+                    City = "MALIBU",
+                    State = "CA",
+                    Country = "URU"
+                }
+            };
+            var numberQueryResult = Client.SearchAvailableNumbers(searchAvailableNumbers);
+            Assert.IsNotNull(numberQueryResult);
+        }
 
+        /// <summary>
+        /// QueryKeywords
+        /// </summary>
+        [Test]
+        public void Test_Querykeywords()
+        {
+            var keywordQueryResult = Client.QueryKeywords(QueryKeywords);
+            Assert.IsNotNull(keywordQueryResult);
+            Assert.AreEqual(keywordQueryResult.TotalResults, 0);
+        }
+        
         [Test]
         public void Test_QueryKeywordsAllResults()
         {
-            //go to Try it out!
-
+            var keywordQueryResult = Client.QueryKeywords(new CfQuery());
+            Assert.IsNotNull(keywordQueryResult);
         }
+
         [Test]
         public void Test_QueryKeywordsComplete()
         {
-
-            //fields complete
-            //MaxResults 37
-            //FirstResult 1
-
+            var query = new CfQuery
+            {
+                MaxResults = 37,
+                FirstResult = 1
+            };
+            var keywordQueryResult = Client.QueryKeywords(query);
+            Assert.IsNotNull(keywordQueryResult);
         }
 
-        //SearchAvailableKeywords
+        /// <summary>
+        /// SearchAvailableKeywords
+        /// </summary>
+        [Test]
+        public void Test_SearchAvailableKeywords()
+        {
+            var keywordQueryResult = Client.SearchAvailableKeywords(SearchAvailableKeywords);
+            Assert.IsNotNull(keywordQueryResult);
+            Assert.IsNull(keywordQueryResult.Keyword);
+        }
+        
         [Test]
         public void Test_SearchAvailableKeywordsNotExist()
         {
-
-            //Not exist
-
+            var searchAvailableKeywords = new CfSearchAvailableKeywords
+            {
+                Keywords = "KEYWORD"
+            };
+            var keywordQueryResult = Client.SearchAvailableKeywords(searchAvailableKeywords);
+            Assert.IsNotNull(keywordQueryResult);
         }
+
         [Test]
         public void Test_SearchAvailableKeywordsComplete()
         {
-
-            //valid
-
+            var searchAvailableKeywords = new CfSearchAvailableKeywords
+            {
+                Keywords = ExistingKeyword
+            };
+            var keywordQueryResult = Client.SearchAvailableKeywords(searchAvailableKeywords);
+            Assert.IsNotNull(keywordQueryResult);
         }
 
 
-        //CreateNumberOrder
+        /// <summary>
+        /// CreateNumberOrder
+        /// </summary>
         [Test]
         public void Test_CreateNumberOrderMandatory()
         {
-
-            //Count 
-
+            var createNumberOrder = new CfCreateNumberOrder
+            {
+                Numbers = ExistingNumber,
+                Keywords = ExistingKeyword
+            };
+            AssertClientException<WebException, FaultException<ServiceFaultInfo>>(() => Client.CreateNumberOrder(createNumberOrder));
         }
+
         [Test]
         public void Test_CreateNumberOrderComplete()
         {
-
-            //all fields complete
-
+            var createNumberOrder = new CfCreateNumberOrder
+            {
+                Numbers = "13105551212",
+                Keywords = "NEWKEYWORD",
+                BulkLocal = new CfCreateNumberOrderBulkLocal
+                {
+                    Count = 10,
+                    Region = new CfRegion
+                    {
+                        City = "MALIBU",
+                        State = "CA",
+                        Country = "US",
+                        RateCenter = "MALIBU",
+                        TimeZone = "America/Los_Angeles"
+                    }
+                },
+                BulkTollFree = new CfCreateNumberOrderBulkTollFree
+                {
+                    Count = 1
+                }
+            };
+            AssertClientException<WebException, FaultException<ServiceFaultInfo>>(() => Client.CreateNumberOrder(createNumberOrder));
         }
 
-        //GetNumberOrder
+        /// <summary>
+        /// GetNumberOrder
+        /// </summary>
         [Test]
-        public void Test_GetNumberOrderValidId()
+        public void Test_GetNumberOrderValidId()//TODO
         {
-            //ID Valido
+            var numberOrder = Client.GetNumberOrder(987445615);
+            Assert.IsNotNull(numberOrder);
         }
 
         [Test]
         public void Test_GetNumberOrderInValidId()
         {
-            //ID InValido
-        }
-        [Test]
-        public void Test_GetContactIDnull()
-        {
-            //ID null
+            AssertClientException<WebException, FaultException<ServiceFaultInfo>>(() => Client.GetNumberOrder(524546));
         }
 
         //Release
         [Test]
         public void Test_ReleaseMandatory()
         {
-            //Num
+            var release = new CfRelease
+            {
+                Number = ExistingNumber,
+            };
+            Client.Release(release);
         }
+
         [Test]
-        public void Test_ReleaseComplete()
+        public void Test_ReleaseComplete() //TODO
         {
-            //all fields complete
+            var release = new CfRelease
+            {
+                Number = ExistingNumber,
+                Keyword = ExistingKeyword
+            };
+            Client.Release(release);
         }
+
         [Test]
         public void Test_ReleaseInvalidNum()
         {
-            //invalid number
-        }
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-        [Test]
-        public void Test_QueryRegions()
-        {
-            var regionQueryResult = NumberClient.QueryRegions(RegionQuery);
-            Assert.IsNotNull(regionQueryResult);
-            Assert.IsNotNull(regionQueryResult.Region);
-            Assert.IsTrue(regionQueryResult.Region.Any(r => r.City != null && r.City.Equals("HACKENSACK")));
-            //Assert.IsTrue(regionQueryResult.Region.Any(r => r.Prefix == "1201208" && r.City.Equals("HACKENSACK")));
-            //Assert.AreEqual("1201208", regionQueryResult.nUMBERO);
-        }
-
-        [Test]
-        public void Test_SearchAvailableKeywords()
-        {
-            var keywordQueryResult = NumberClient.SearchAvailableKeywords(SearchAvailableKeywords);
-            Assert.IsNotNull(keywordQueryResult);
-            Assert.IsNull(keywordQueryResult.Keyword);
-        }
-
-        [Test]
-        public void Test_SearchAvailableNumbers()
-        {
-            var numbersQueryResult = NumberClient.SearchAvailableNumbers(SearchAvailableNumbers);
-            Assert.IsNotNull(numbersQueryResult);
-            Assert.IsNotNull(numbersQueryResult.Number);
-            Assert.IsTrue(numbersQueryResult.Number.Any(r => r.Number1 != null));
-        }
-
-        [Test]
-        public void Test_Querykeywords()
-        {
-            var keywordQueryResult = NumberClient.QueryKeywords(QueryKeywords);
-            Assert.IsNotNull(keywordQueryResult);
-            Assert.AreEqual(keywordQueryResult.TotalResults, 0);
-        }
-
-        [Test]
-        public void Test_QueryNumbers()
-        {
-            var numbersQueryResult = NumberClient.QueryNumbers(QueryNumbers);
-            Assert.IsNotNull(numbersQueryResult);
-            Assert.AreEqual(numbersQueryResult.TotalResults, 0);
+            var release = new CfRelease
+            {
+                Number = "4684615687"
+            };
+            AssertClientException<WebException, FaultException<ServiceFaultInfo>>(() => Client.Release(release));
         }
     }
 }

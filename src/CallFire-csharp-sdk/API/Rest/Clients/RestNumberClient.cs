@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using CallFire_csharp_sdk.API.Rest.Data;
 using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common;
@@ -43,13 +44,17 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
 
         public CfNumber GetNumber(string number)
         {
+            if (String.IsNullOrEmpty(number))
+            {
+                return null;
+            }
             var resource = BaseRequest<Resource>(HttpMethod.Get, null, new CallfireRestRoute<Number>(long.Parse(number)));
             return NumberMapper.FromNumber((Number)resource.Resources);
         }
 
         public void ConfigureNumber(CfConfigureNumber configureNumber)
         {
-            if (configureNumber != null)
+            if (configureNumber != null && !String.IsNullOrEmpty(configureNumber.Number))
             {
                 BaseRequest<string>(HttpMethod.Put, new ConfigureNumber(configureNumber),
                     new CallfireRestRoute<Number>(long.Parse(configureNumber.Number)));

@@ -579,6 +579,10 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfIvrInboundConfig : CfInboundConfig
     {
+        public CfIvrInboundConfig()
+        {
+        }
+
         public CfIvrInboundConfig(long? id, string dialplanXml)
         {
             Id = id;
@@ -1360,6 +1364,10 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfNumberConfigurationInboundCallConfiguration
     {
+        public CfNumberConfigurationInboundCallConfiguration()
+        {
+        }
+
         public CfNumberConfigurationInboundCallConfiguration(CfInboundConfig item)
         {
             Item = item;

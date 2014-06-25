@@ -2,6 +2,10 @@
 {
     public class CfSearchAvailableKeywords
     {
+        public CfSearchAvailableKeywords()
+        {
+        }
+
         public CfSearchAvailableKeywords(string keywords)
         {
             Keywords = keywords;
