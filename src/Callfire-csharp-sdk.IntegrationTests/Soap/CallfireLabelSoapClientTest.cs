@@ -12,7 +12,7 @@ namespace Callfire_csharp_sdk.IntegrationTests.Soap
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            LabelClient = new SoapLabelClient(MockClient.User(), MockClient.Password());
+            Client = new SoapLabelClient(MockClient.User(), MockClient.Password());
             BroadcastClient = new SoapBroadcastClient(MockClient.User(), MockClient.Password());
 
             var localTimeZoneRestriction = new CfLocalTimeZoneRestriction(DateTime.Now, DateTime.Now);
@@ -26,6 +26,22 @@ namespace Callfire_csharp_sdk.IntegrationTests.Soap
             BroadcastId = BroadcastClient.CreateBroadcast(broadcastRequest);
 
             LabelName = "New SoapLabel";
+
+            Broadcast = new CfBroadcast
+            {
+                Name = "Name",
+                Type = CfBroadcastType.Text,
+                Item = new CfTextBroadcastConfig
+                {
+                    FromNumber = VerifyShortCode,
+                    RetryConfig = new CfBroadcastConfigRetryConfig
+                    {
+                        RetryPhoneTypes = new[] { CfRetryPhoneType.FirstNumber },
+                        RetryResults = new[] { CfResult.NoAns }
+                    },
+                    Message = "Message Test",
+                },
+            };
         }
     }
 }

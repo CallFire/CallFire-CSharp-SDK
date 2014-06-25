@@ -12,7 +12,7 @@ namespace Callfire_csharp_sdk.IntegrationTests.Rest
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            LabelClient = new RestLabelClient(MockClient.User(), MockClient.Password());
+            Client = new RestLabelClient(MockClient.User(), MockClient.Password());
             BroadcastClient = new RestBroadcastClient(MockClient.User(), MockClient.Password());
 
             var localTimeZoneRestriction = new CfLocalTimeZoneRestriction(DateTime.Now, DateTime.Now);
@@ -27,6 +27,22 @@ namespace Callfire_csharp_sdk.IntegrationTests.Rest
             BroadcastId = BroadcastClient.CreateBroadcast(broadcastRequest);
 
             LabelName = "New RestLabel";
+
+            Broadcast = new CfBroadcast
+            {
+                Name = "Name",
+                Type = CfBroadcastType.Text,
+                Item = new CfTextBroadcastConfig
+                {
+                    FromNumber = VerifyShortCode,
+                    RetryConfig = new CfBroadcastConfigRetryConfig
+                    {
+                        RetryPhoneTypes = new[] { CfRetryPhoneType.FirstNumber },
+                        RetryResults = new[] { CfResult.NoAns }
+                    },
+                    Message = "Message Test",
+                },
+            };
         }
     }
 }
