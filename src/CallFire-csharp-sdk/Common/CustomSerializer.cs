@@ -46,7 +46,8 @@ namespace CallFire_csharp_sdk.Common
                 else
                 {
                     var customClass = propertyInfo.PropertyType.Name.Equals("Object")
-                        ? value.GetType().IsClass && value.GetType().Namespace != "System" : IsCustomClass(propertyInfo);
+                        ? value.GetType().IsClass && value.GetType().Namespace != "System"
+                        : IsCustomClass(propertyInfo);
                     if (!customClass)
                     {
                         AddEncodedValue(value, propertyInfo, result);

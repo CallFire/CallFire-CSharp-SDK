@@ -37,6 +37,9 @@ namespace Callfire_csharp_sdk.IntegrationTests.Rest
             AddContactsToList = new CfContactListRequest(contactListId, false, new CfContactSource(contact));
 
             RemoveContactsFromList = new CfRemoveContactsFromList(contactListId, contactId);
+
+            ContactLastName = "ContactLastNameRest";
+            ContactFirstName = "ContactFirstNameRest";
         }
     }
 }

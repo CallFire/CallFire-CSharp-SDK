@@ -38,8 +38,8 @@ namespace CallFire_csharp_sdk.API.Soap
 
         public void RemoveContacts(CfRemoveContacts removeContacts)
         {
-            var contacts = removeContacts.ContactId.ToList().ConvertAll(i => i.ToString(CultureInfo.InvariantCulture)).ToArray();
-            ContactService.RemoveContacts(new RemoveContacts(string.Join(" ", contacts)));
+            var contacts = removeContacts.ContactId == null ? null : removeContacts.ContactId.ToList().ConvertAll(i => i.ToString(CultureInfo.InvariantCulture)).ToArray();
+            ContactService.RemoveContacts(new RemoveContacts(contacts == null ? string.Empty : string.Join(" ", contacts)));
         }
 
         public CfContact GetContact(long id)
