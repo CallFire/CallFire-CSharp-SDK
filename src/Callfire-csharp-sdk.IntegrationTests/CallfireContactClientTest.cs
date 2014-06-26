@@ -224,7 +224,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// </summary>
         
         [Test]
-        public void Test_CreateContactListMandatory() // TODO
+        public void Test_CreateContactListMandatory()
         {
             var contact1 = new CfContact
             {
@@ -250,8 +250,8 @@ namespace Callfire_csharp_sdk.IntegrationTests
         {
             var contactNumbers = new CfContactSourceNumbers
             {
-                FieldName = "14252163710",
-                Text = new[] {"homePhone"}
+                FieldName = "homePhone",
+                Text = new[] { "14252163710" }
             };
             
             object[] contacts = { contactNumbers };
@@ -408,7 +408,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
-        public void Test_AddContactsToListComplete() // TODO
+        public void Test_AddContactsToListComplete()
         {
             var contact1 = new CfContact
             {

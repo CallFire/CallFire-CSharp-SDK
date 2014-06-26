@@ -79,6 +79,10 @@ namespace CallFire_csharp_sdk.Common
             if (value.GetType() == typeof(byte[]))
             {
                 result.Add(new KeyValuePair<string, string>(elementName, stringValue));
+            } 
+            else if (value is float)
+            {
+                result.Add(new KeyValuePair<string, string>(elementName, stringValue.Replace(",",".")));
             }
             else
             {
@@ -124,6 +128,14 @@ namespace CallFire_csharp_sdk.Common
                     var arrayData = string.Join(" ", array.OfType<ToNumber>().Select(e => e.ClientData).ToArray());
                     result.Add(new KeyValuePair<string, string>("ToNumber[ClientData]", HttpUtility.UrlEncode(arrayData)));
                 }
+                //else if (array.GetType().GetElementType() == typeof(ContactSourceNumbers))
+                //{
+                //    var arrayValue = string.Join(" ", array.OfType<ContactSourceNumbers>().Select(e => e.Text).ToArray());
+                //    result.Add(new KeyValuePair<string, string>(string.Format("{0}", elementName), HttpUtility.UrlEncode(arrayValue)));
+
+                //    var arrayData = string.Join(" ", array.OfType<ContactSourceNumbers>().Select(e => e.fieldName).ToArray());
+                //    result.Add(new KeyValuePair<string, string>(string.Format("{0}[fieldName]", elementName), HttpUtility.UrlEncode(arrayData)));
+                //}
                 else
                 {
                     for (var i = 0; i < array.Length; i++)

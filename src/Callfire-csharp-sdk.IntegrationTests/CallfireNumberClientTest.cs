@@ -59,7 +59,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
-        public void Test_QueryRegionsComplete()//TODO
+        public void Test_QueryRegionsComplete()
         {
             var regionQuery = new CfRegionQuery
             {
@@ -98,7 +98,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
-        public void Test_QueryNumbersComplete()//TODO
+        public void Test_QueryNumbersComplete()
         {
             var queryNumbers = new CfQueryNumbers
             {

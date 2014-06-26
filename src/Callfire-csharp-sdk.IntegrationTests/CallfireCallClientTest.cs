@@ -371,9 +371,9 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// GetRecordingData
         /// </summary>
         [Test]
-        public void Test_GetRecordingDataMandatory() //TODO
+        public void Test_GetRecordingDataMandatory() 
         {
-            object[] items = { Convert.ToInt64(138148426001) };
+            object[] items = { Convert.ToInt64(2891401001) };
             var getRecordingData = new CfGetRecordingData
             {
                 ItemsElementNameField = new []{CfItemsChoiceType.RecordingId},
@@ -387,9 +387,9 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
-        public void Test_GetRecordingDataComplete() //TODO
+        public void Test_GetRecordingDataComplete()
         {
-            object[] items = { Convert.ToInt64(229202915001), "SoundRecordingCall_1" };
+            object[] items = { Convert.ToInt64(230484476001), "recording" };
             var getRecordingData = new CfGetRecordingData
             {
                 Format = CfSoundFormat.Mp3,

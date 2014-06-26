@@ -12,17 +12,20 @@ namespace CallFire_csharp_sdk.Common.Resource
 
         public CfContactSource(object[] items)
         {
-            if (items.GetType() == typeof(Contact[]))
+            if (items != null && items.Any())
             {
-                Items = items.Select(i => ContactMapper.FromContact(i as Contact)).ToArray();
-            }
-            else if (items.GetType() == typeof(ContactSourceNumbers[]))
-            {
-                Items = items.Select(i => ContactSourceNumbersMapper.FromContactSourceNumbers(i as ContactSourceNumbers)).ToArray();
-            }
-            else
-            {
-                Items = items;
+                if (items.GetValue(0).GetType() == typeof(Contact))
+                {
+                    Items = items.Select(i => ContactMapper.FromContact(i as Contact)).ToArray();
+                }
+                else if (items.GetValue(0).GetType() == typeof(ContactSourceNumbers))
+                {
+                    Items = items.Select(i => ContactSourceNumbersMapper.FromContactSourceNumbers(i as ContactSourceNumbers)).ToArray();
+                }
+                else
+                {
+                    Items = items;
+                }
             }
         }
 

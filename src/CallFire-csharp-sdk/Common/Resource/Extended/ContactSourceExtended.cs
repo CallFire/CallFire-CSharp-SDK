@@ -15,17 +15,20 @@ namespace CallFire_csharp_sdk.API.Soap
         
         public ContactSource(object[] items)
         {
-            if (items.GetType() == typeof(CfContact[]))
+            if (items != null && items.Any())
             {
-                Items = items.Select(i => ContactMapper.ToContact(i as CfContact)).ToArray();
-            }
-            else if (items.GetType() == typeof (CfContactSourceNumbers[]))
-            {
-                Items = items.Select(i => ContactSourceNumbersMapper.ToContactSourceNumbers(i as CfContactSourceNumbers)).ToArray();
-            }
-            else
-            {
-                Items = items;
+                if (items.GetValue(0).GetType() == typeof(CfContact))
+                {
+                    Items = items.Select(i => ContactMapper.ToContact(i as CfContact)).ToArray();
+                }
+                else if (items.GetValue(0).GetType() == typeof(CfContactSourceNumbers))
+                {
+                    Items = items.Select(i => ContactSourceNumbersMapper.ToContactSourceNumbers(i as CfContactSourceNumbers)).ToArray();
+                }
+                else
+                {
+                    Items = items;
+                }
             }
         }
     }
