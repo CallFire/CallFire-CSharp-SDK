@@ -407,8 +407,8 @@ namespace Callfire_csharp_sdk.IntegrationTests
         {
             var createNumberOrder = new CfCreateNumberOrder
             {
-                Numbers = ExistingNumber,
-                Keywords = ExistingKeyword
+                Numbers = "18665223137",
+                Keywords = "KEY"
             };
             AssertClientException<WebException, FaultException<ServiceFaultInfo>>(() => Client.CreateNumberOrder(createNumberOrder));
         }
@@ -444,9 +444,9 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// GetNumberOrder
         /// </summary>
         [Test]
-        public void Test_GetNumberOrderValidId()//TODO
+        public void Test_GetNumberOrderValidId()
         {
-            var numberOrder = Client.GetNumberOrder(987445615);
+            var numberOrder = Client.GetNumberOrder(837931001);
             Assert.IsNotNull(numberOrder);
         }
 
@@ -468,14 +468,14 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
-        public void Test_ReleaseComplete() //TODO
+        public void Test_ReleaseComplete()
         {
             var release = new CfRelease
             {
-                Number = ExistingNumber,
-                Keyword = ExistingKeyword
+                Number = "18665220659",
+                Keyword = "NEWNETTEST"
             };
-            Client.Release(release);
+            AssertClientException<WebException, FaultException<ServiceFaultInfo>>(() => Client.Release(release));
         }
 
         [Test]

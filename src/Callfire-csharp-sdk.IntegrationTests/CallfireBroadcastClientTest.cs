@@ -513,7 +513,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
        [Test]
         public void Test_QueryBroadcastsEmpty()
         {
-            var broadcastQueryResult = Client.QueryBroadcasts(new CfQueryBroadcasts());
+            var broadcastQueryResult = Client.QueryBroadcasts(new CfQueryBroadcasts{MaxResults = 100});
             Assert.IsNotNull(broadcastQueryResult);
         }
 

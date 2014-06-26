@@ -288,7 +288,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         [Test]
         public void Test_CreateContactListComplete()
         {
-            var stream = File.OpenRead(@"C:\Users\marcelob-ot\Documents\GitHub\CallFire-CSharp-SDK\src\contacts.csv");
+            var stream = File.OpenRead("../../Files/contacts.csv");
             var fileBytes = new byte[stream.Length];
 
             stream.Read(fileBytes, 0, fileBytes.Length);
@@ -311,7 +311,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         [Test]
         public void Test_CreateContactListWrongFormatFile()
         {
-            var stream = File.OpenRead(@"C:\Users\marcelob-ot\Documents\GitHub\CallFire-CSharp-SDK\src\test.png");
+            var stream = File.OpenRead("../../Files/test.png");
             var fileBytes = new byte[stream.Length];
 
             stream.Read(fileBytes, 0, fileBytes.Length);

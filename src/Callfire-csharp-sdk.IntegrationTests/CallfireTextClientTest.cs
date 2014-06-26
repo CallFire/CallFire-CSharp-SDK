@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Net;
 using System.ServiceModel;
 using CallFire_csharp_sdk.API;
@@ -236,15 +235,14 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// <summary>
         /// CreateAutoReply 
         /// </summary>
-        [Test] //TODO
+        [Test] 
         public void Test_CreateAutoReplyMandatoryFields() 
         {
             var createAutoReply = new CfCreateAutoReply
             {
                 CfAutoReply = new CfAutoReply
                 {
-                    Number = PurchaseNumber,
-                    Keyword = PurchaseKeyword,
+                    Number = "13107742289",
                     Match = "Match",
                     Message = "Test AutoReply Message"
                 }
@@ -253,7 +251,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
             Assert.IsNotNull(id);
         }
 
-        [Test] //TODO
+        [Test] 
         public void Test_CreateAutoReplyComplete()
         {
             var createAutoReply = new CfCreateAutoReply
@@ -261,9 +259,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
                 RequestId = "TestURI",
                 CfAutoReply = new CfAutoReply
                 {
-                    Id = 38796,
-                    Number = PurchaseNumber,
-                    Keyword = PurchaseKeyword,
+                    Number = "13107742289",
                     Match = "Match",
                     Message = "Te$t.Aut0Reply Me55age!"
                 }
@@ -310,10 +306,10 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// <summary>
         /// GetAutoReply
         /// </summary>
-        [Test] //TODO
+        [Test] 
         public void Test_GetAutoReplyValidId()
         {
-            var autoReply = Client.GetAutoReply(5448992);
+            var autoReply = Client.GetAutoReply(2570223001);
             Assert.IsNotNull(autoReply);
         }
 
@@ -332,15 +328,14 @@ namespace Callfire_csharp_sdk.IntegrationTests
             AssertClientException<WebException, FaultException<ServiceFaultInfo>>(() => Client.DeleteAutoReply(0));
         }
 
-        [Test] //TODO
+        [Test]
         public void Test_DeleteAutoReplyComplete()
         {
             var createAutoReply = new CfCreateAutoReply
             {
                 CfAutoReply = new CfAutoReply
                 {
-                    Number = PurchaseNumber,
-                    Keyword = PurchaseKeyword,
+                    Number = "13107742289",
                     Match = "Match",
                     Message = "Test AutoReply Message"
                 }

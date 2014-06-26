@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.ServiceModel;
 using CallFire_csharp_sdk.API;
@@ -237,7 +236,8 @@ namespace Callfire_csharp_sdk.IntegrationTests
         [Test]
         public void Test_CreateSoundInvalidData()
         {
-            var stream = File.OpenRead(@"C:\Users\marcelob-ot\Documents\GitHub\CallFire-CSharp-SDK\src\test.png");
+            var stream = File.OpenRead("../../Files/test.png");
+            
             var fileBytes = new byte[stream.Length];
 
             stream.Read(fileBytes, 0, fileBytes.Length);
@@ -253,7 +253,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         [Test]
         public void Test_CreateSoundMandatoryFields()
         {
-            var stream = File.OpenRead(@"C:\Users\marcelob-ot\Documents\GitHub\CallFire-CSharp-SDK\src\test.mp3");
+            var stream = File.OpenRead("../../Files/test.mp3");
             var fileBytes = new byte[stream.Length];
 
             stream.Read(fileBytes, 0, fileBytes.Length);
@@ -402,6 +402,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
                 Assert.IsNotNull(recordingData);
             }
         }
+
         [Test]
         public void Test_GetRecordingDataRecordingIdInvalid() 
         {
