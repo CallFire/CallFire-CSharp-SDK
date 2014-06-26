@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Net;
 using System.ServiceModel;
 using CallFire_csharp_sdk.API;

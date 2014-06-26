@@ -1,5 +1,4 @@
-﻿using System;
-using CallFire_csharp_sdk.Common.DataManagement;
+﻿using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource.Mappers;
 
 // ReSharper disable once CheckNamespace - This is an extension from API.Soap

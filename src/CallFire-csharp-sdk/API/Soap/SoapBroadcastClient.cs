@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using CallFire_csharp_sdk.Common.DataManagement;
+﻿using CallFire_csharp_sdk.Common.DataManagement;
 using CallFire_csharp_sdk.Common.Resource;
 using CallFire_csharp_sdk.Common.Resource.Mappers;
 using CallFire_csharp_sdk.Common.Result;

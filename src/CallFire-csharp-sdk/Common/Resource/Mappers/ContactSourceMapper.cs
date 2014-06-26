@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using CallFire_csharp_sdk.API.Soap;
-using CallFire_csharp_sdk.Common.DataManagement;
+﻿using CallFire_csharp_sdk.API.Soap;
 
 namespace CallFire_csharp_sdk.Common.Resource.Mappers
 {

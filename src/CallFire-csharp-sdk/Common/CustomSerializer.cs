@@ -122,20 +122,12 @@ namespace CallFire_csharp_sdk.Common
             {
                 if (array.GetType().GetElementType() == typeof (ToNumber))
                 {
-                    var arrayValue = string.Join(" ", array.OfType<ToNumber>().Select(e => e.Value).ToArray());
-                    result.Add(new KeyValuePair<string, string>("To", HttpUtility.UrlEncode(arrayValue)));
-
-                    var arrayData = string.Join(" ", array.OfType<ToNumber>().Select(e => e.ClientData).ToArray());
-                    result.Add(new KeyValuePair<string, string>("ToNumber[ClientData]", HttpUtility.UrlEncode(arrayData)));
+                    EncodeToNumber(result, array);
                 }
-                //else if (array.GetType().GetElementType() == typeof(ContactSourceNumbers))
-                //{
-                //    var arrayValue = string.Join(" ", array.OfType<ContactSourceNumbers>().Select(e => e.Text).ToArray());
-                //    result.Add(new KeyValuePair<string, string>(string.Format("{0}", elementName), HttpUtility.UrlEncode(arrayValue)));
-
-                //    var arrayData = string.Join(" ", array.OfType<ContactSourceNumbers>().Select(e => e.fieldName).ToArray());
-                //    result.Add(new KeyValuePair<string, string>(string.Format("{0}[fieldName]", elementName), HttpUtility.UrlEncode(arrayData)));
-                //}
+                else if (array.GetType().GetElementType() == typeof(ContactSourceNumbers))
+                {
+                    EncodeContactSourceNumbers(result, array, elementName);
+                }
                 else
                 {
                     for (var i = 0; i < array.Length; i++)
@@ -151,6 +143,26 @@ namespace CallFire_csharp_sdk.Common
                 var arrayValue = string.Join(" ", array.OfType<object>().Select(e => e.ToString()).ToArray());
                 result.Add(new KeyValuePair<string, string>(elementName, HttpUtility.UrlEncode(arrayValue)));
             }
+        }
+
+        private static void EncodeContactSourceNumbers(List<KeyValuePair<string, string>> result, Array array, string elementName)
+        {
+            var arrayValue = string.Join(" ",
+                array.OfType<ContactSourceNumbers>().Select(e => string.Join(" ", e.Text)).ToArray());
+            result.Add(new KeyValuePair<string, string>(string.Format("{0}", elementName), HttpUtility.UrlEncode(arrayValue)));
+
+            var arrayData = string.Join(" ", array.OfType<ContactSourceNumbers>().Select(e => e.fieldName).ToArray());
+            result.Add(new KeyValuePair<string, string>(string.Format("{0}[fieldName]", elementName),
+                HttpUtility.UrlEncode(arrayData)));
+        }
+
+        private static void EncodeToNumber(List<KeyValuePair<string, string>> result, Array array)
+        {
+            var arrayValue = string.Join(" ", array.OfType<ToNumber>().Select(e => e.Value).ToArray());
+            result.Add(new KeyValuePair<string, string>("To", HttpUtility.UrlEncode(arrayValue)));
+
+            var arrayData = string.Join(" ", array.OfType<ToNumber>().Select(e => e.ClientData).ToArray());
+            result.Add(new KeyValuePair<string, string>("ToNumber[ClientData]", HttpUtility.UrlEncode(arrayData)));
         }
 
         private static bool CheckSpecifiedProperties(object o, object value, PropertyInfo propertyInfo, IEnumerable<PropertyInfo> props)

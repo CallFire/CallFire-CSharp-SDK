@@ -332,7 +332,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
                 var id = Client.CreateContactList(createContactList);
                 Assert.IsNotNull(id);
                 var contactList = Client.GetContactList(id);
-                Assert.AreEqual(CfContactListStatus.Errors, contactList.Status);
+                Assert.IsTrue(CfContactListStatus.Errors == contactList.Status || CfContactListStatus.Validating == contactList.Status);
             }
             else
             {
@@ -450,10 +450,10 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// RemoveContactsFromList
         /// </summary>
         [Test]
-        public void Test_RemoveContactsFromListInvalidId() 
+        public void Test_RemoveContactsFromListInvalidId()
         {
             const int clientListId = 192950001;
-            object[] contacts = { 169299452000 };
+            object contacts = 169299452000;
             var removeContactsFromList = new CfRemoveContactsFromList
             {
                 ContactListId = clientListId,
@@ -469,7 +469,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
-        public void Test_RemoveContactsFromListComplete() 
+        public void Test_RemoveContactsFromListComplete()
         {
             const int clientListId = 192950001;
             object[] contacts = { 169299452001 };
@@ -483,10 +483,11 @@ namespace Callfire_csharp_sdk.IntegrationTests
             };
             Client.AddContactsToList(contactListRequest);
 
+            object contact = 169299452001;
             var removeContactsFromList = new CfRemoveContactsFromList
             {
                 ContactListId = clientListId,
-                Item = contacts
+                Item = contact
             };
             Client.RemoveContactsFromList(removeContactsFromList);
         }
