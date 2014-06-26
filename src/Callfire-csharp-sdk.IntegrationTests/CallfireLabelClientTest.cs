@@ -42,15 +42,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// DeleteLabel
         /// </summary>
         [Test]
-        public void Test_DeleteLabel()
-        {
-            Client.LabelBroadcast(BroadcastId, LabelName);
-            Client.DeleteLabel(LabelName);
-            var result = Client.QueryLabels(new CfQuery(10, 0));
-            Assert.IsTrue(result.Labels.All(l => l.Name != LabelName));
-        }
-        
-        [Test]
         public void Test_DeleteLabelComplete()
         {
             var broadcastRequest = new CfBroadcastRequest(string.Empty, Broadcast);
@@ -91,14 +82,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// <summary>
         /// LabelBroadcast
         /// </summary>
-        [Test]
-        public void Test_CreateBroadcastLabel()
-        {
-            Client.LabelBroadcast(BroadcastId, "New broadcastlabel");
-
-            var result = Client.QueryLabels(new CfQuery(10, 0));
-            Assert.IsTrue(result.Labels.Any(l => l.Name == "New broadcastlabel"));
-        }
         
         [Test]
         public void Test_LabelBroadcastMandatoryComplete()
@@ -124,13 +107,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
         /// <summary>
         /// UnlabelBroadcast
         /// </summary>
-        [Test]
-        public void Test_UnlabelBroadcast()
-        {
-            Client.LabelBroadcast(BroadcastId, LabelName);
-            Client.UnlabelBroadcast(BroadcastId, LabelName);
-        }
-        
         [Test]
         public void Test_UnlabelBroadcastNotExistId()
         {
