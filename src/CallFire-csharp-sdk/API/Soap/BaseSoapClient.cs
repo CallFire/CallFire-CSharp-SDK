@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 
@@ -8,7 +9,12 @@ namespace CallFire_csharp_sdk.API.Soap
     {
         internal static CustomBinding GetCustomBinding()
         {
-            var transportElement = new HttpsTransportBindingElement { AuthenticationScheme = AuthenticationSchemes.Basic };
+            var transportElement = new HttpsTransportBindingElement
+            {
+                AuthenticationScheme = AuthenticationSchemes.Basic,
+                MaxBufferSize = Int32.MaxValue,
+                MaxReceivedMessageSize = Int32.MaxValue
+            };
 
             var messegeElement = new TextMessageEncodingBindingElement
             {

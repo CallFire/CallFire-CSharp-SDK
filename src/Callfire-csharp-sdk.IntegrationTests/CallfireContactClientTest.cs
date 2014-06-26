@@ -250,8 +250,8 @@ namespace Callfire_csharp_sdk.IntegrationTests
         {
             var contactNumbers = new CfContactSourceNumbers
             {
-                FieldName = "14252163710",
-                Text = new[] {"homePhone"}
+                FieldName = "homePhone",
+                Text = new[] { "14252163710" }
             };
             
             object[] contacts = { contactNumbers };
