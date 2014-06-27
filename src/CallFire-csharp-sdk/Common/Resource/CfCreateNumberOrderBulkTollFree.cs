@@ -2,6 +2,10 @@
 {
     public class CfCreateNumberOrderBulkTollFree
     {
+        public CfCreateNumberOrderBulkTollFree()
+        {
+        }
+
         public CfCreateNumberOrderBulkTollFree(int count)
         {
             Count = count;

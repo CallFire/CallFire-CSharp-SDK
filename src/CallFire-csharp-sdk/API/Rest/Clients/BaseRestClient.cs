@@ -2,7 +2,9 @@
 using System.Net;
 using System.Xml.Serialization;
 using CallFire_csharp_sdk.API.Rest.Data;
+using CallFire_csharp_sdk.API.Soap;
 using CallFire_csharp_sdk.Common;
+using CallFire_csharp_sdk.Common.DataManagement;
 
 namespace CallFire_csharp_sdk.API.Rest.Clients
 {
@@ -25,12 +27,27 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
             XmlClient = xmlClient;
         }
 
+        private CfSoundFormat _soundFormat;
+        internal TU BaseRequest<TU>(HttpMethod method, object request, CallfireRestRoute<T> route, CfSoundFormat cfSoundFormat)
+        {
+            _soundFormat = cfSoundFormat;
+            return BaseRequest<TU>(method, request, route);
+        }
+
         internal TU BaseRequest<TU>(HttpMethod method, object request, CallfireRestRoute<T> route)
         {
             var response = string.Empty;
             try
             {
-                response = XmlClient.Send(route.ToString(), method, request);
+                if (request != null && request.GetType() == typeof(CreateSound) && ((CreateSound)request).Item.GetType() == typeof(byte[]))
+                {
+                    var bytes = (byte[]) ((CreateSound)request).Item;
+                    response = XmlClient.Send(route.ToString(), null, new MemoryStream(bytes), string.Format("audio/{0}", _soundFormat.ToString().ToLower()));
+                }
+                else
+                {
+                    response = XmlClient.Send(route.ToString(), method, request);
+                }
             }
             catch (WebException ex)
             {

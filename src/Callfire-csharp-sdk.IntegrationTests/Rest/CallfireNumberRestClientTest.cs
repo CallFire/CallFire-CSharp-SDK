@@ -12,7 +12,7 @@ namespace Callfire_csharp_sdk.IntegrationTests.Rest
         public void FixtureSetup()
         {
             var region = new CfRegion(null, null, null, null, null, null, null, null, null, null);
-            NumberClient = new RestNumberClient(MockClient.User(), MockClient.Password());
+            Client = new RestNumberClient(MockClient.User(), MockClient.Password());
             RegionQuery = new CfRegionQuery(100, 0, region);
             SearchAvailableKeywords = new CfSearchAvailableKeywords(string.Empty);
             SearchAvailableNumbers = new CfSearchAvailableNumbers(null, true, 100);

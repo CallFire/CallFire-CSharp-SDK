@@ -31,8 +31,9 @@ namespace CallFire_csharp_sdk.API
         /// Creates a new CallFire-hosted sound for use in calls
         /// </summary>
         /// <param name="cfCreateSound"></param>
+        /// <param name="cfSoundFormat"></param>
         /// <returns>Unique ID of resource</returns>
-        long CreateSound(CfCreateSound cfCreateSound);
+        long CreateSound(CfCreateSound cfCreateSound, CfSoundFormat cfSoundFormat);
 
         /// <summary>
         /// Lists sounds available for use in calls

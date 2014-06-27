@@ -2,6 +2,10 @@
 {
     public class CfContactSourceNumbers
     {
+        public CfContactSourceNumbers()
+        {
+        }
+
         public CfContactSourceNumbers(string fieldName, string[] text)
         {
             FieldName = fieldName;

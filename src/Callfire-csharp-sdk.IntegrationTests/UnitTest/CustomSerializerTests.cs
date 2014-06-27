@@ -20,8 +20,8 @@ namespace Callfire_csharp_sdk.IntegrationTests.UnitTest
             _serializer = new CustomSerializer();
             _broadcast = new Broadcast(1, "Broadcast Name", BroadcastStatus.ARCHIVED,
                 new DateTime(2014, 1, 1, 3, 0, 0), BroadcastType.TEXT,
-                new TextBroadcastConfig(2, new DateTime(2014, 1, 1, 3, 0, 0),
-                    "111", null, new BroadcastConfigRetryConfig(1, 1, "1", "1"), "message", new BigMessageStrategy()))
+                new TextBroadcastConfig(new CfTextBroadcastConfig(2, new DateTime(2014, 1, 1, 3, 0, 0),
+                    "111", null, new CfBroadcastConfigRetryConfig(1, 1, new [] {CfResult.Busy}, new []{CfRetryPhoneType.HomePhone}), "message", new CfBigMessageStrategy())))
             {
                 idSpecified = true,
                 LastModifiedSpecified = true

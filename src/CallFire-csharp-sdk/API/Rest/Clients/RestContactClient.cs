@@ -36,7 +36,7 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
         public void UpdateContacts(CfContact[] updateContacts)
         {
             var arrayUpdateContacts = updateContacts == null ? null : updateContacts.Select(ContactMapper.ToContact).ToArray();
-            BaseRequest<string>(HttpMethod.Put, arrayUpdateContacts, new CallfireRestRoute<Contact>());
+            BaseRequest<string>(HttpMethod.Put, new { Contact = arrayUpdateContacts }, new CallfireRestRoute<Contact>());
         }
 
         public void RemoveContacts(CfRemoveContacts removeContacts)
@@ -62,7 +62,7 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
             var resource = BaseRequest<Resource>(HttpMethod.Get, new GetContactHistory(getContactHistory),
                 new CallfireRestRoute<Contact>(getContactHistory.ContactId, null, ContactRestRouteObjects.History));
             var contactHistory = resource.Resources as ContactHistory;
-            return contactHistory == null || contactHistory.ContactHistory1  == null ? null 
+            return contactHistory == null || contactHistory.ContactHistory1  == null ? new CfAction[]{}
                 : contactHistory.ContactHistory1.Select(ActionMapper.FromAction).ToArray();
         }
 

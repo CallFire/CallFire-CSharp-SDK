@@ -38,7 +38,7 @@ namespace CallFire_csharp_sdk.API.Soap
             return CallMapper.FromCall(CallService.GetCall(new IdRequest(id)));
         }
 
-        public long CreateSound(CfCreateSound cfCreateSound)
+        public long CreateSound(CfCreateSound cfCreateSound, CfSoundFormat cfSoundFormat)
         {
             return CallService.CreateSound(new CreateSound(cfCreateSound));
         }

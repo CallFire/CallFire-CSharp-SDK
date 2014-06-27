@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Web;
 using System.Xml.Serialization;
+using CallFire_csharp_sdk.API.Soap;
 
 namespace CallFire_csharp_sdk.Common
 {
     public class CustomSerializer : ICustomSerializer
     {
-        private const string DateFormat = "yyyy-MM-ddThh:mm:ss";
+        private const string DateTimeFormat = "yyyy-MM-ddTHH:mm:ss";
+        private const string TimeFormat = "HH:mm:ss";
+        private const string DateFormat = "yyyy-MM-dd";
 
         public string SerializeToFormData(object o)
         {
@@ -39,13 +43,20 @@ namespace CallFire_csharp_sdk.Common
                 {
                     AddEncodedArray(value, propertyInfo, result);
                 }
-                else if (!IsCustomClass(propertyInfo))
-                {
-                    AddEncodedValue(value, propertyInfo, result);
-                }
                 else
                 {
-                    result.AddRange(GetProperties(value));
+                    var customClass = propertyInfo.PropertyType.Name.Equals("Object")
+                        ? value.GetType().IsClass && value.GetType().Namespace != "System"
+                        : IsCustomClass(propertyInfo);
+                    if (!customClass)
+                    {
+                        AddEncodedValue(value, propertyInfo, result);
+                    }
+                    else
+                    {
+                        result.AddRange(GetProperties(value));
+                    }
+
                 }
             }
             return result;
@@ -53,38 +64,78 @@ namespace CallFire_csharp_sdk.Common
 
         private static void AddEncodedValue(object value, PropertyInfo propertyInfo, List<KeyValuePair<string, string>> result)
         {
-            var stringValue = value.ToString();
-
+            string stringValue = value.GetType() == typeof(byte[]) ? Encoding.UTF8.GetString((byte[])value) : value.ToString();
+            var attribs = (XmlElementAttribute[])Attribute.GetCustomAttributes(propertyInfo, typeof(XmlElementAttribute));
             if (propertyInfo.PropertyType == typeof (DateTime))
             {
-                stringValue = ((DateTime) value).ToString(DateFormat);
+                stringValue = FindDateFormat(value, attribs);
             }
 
             var elementName = propertyInfo.Name;
-            var attribs = (XmlElementAttribute[]) Attribute.GetCustomAttributes(propertyInfo, typeof (XmlElementAttribute));
             if (attribs.Any(i => i.Type == value.GetType()))
             {
                 elementName = attribs.First(i => i.Type == value.GetType()).ElementName;
             }
-            result.Add(new KeyValuePair<string, string>(elementName, HttpUtility.UrlEncode(stringValue)));
+            if (value.GetType() == typeof(byte[]))
+            {
+                result.Add(new KeyValuePair<string, string>(elementName, stringValue));
+            } 
+            else if (value is float)
+            {
+                result.Add(new KeyValuePair<string, string>(elementName, stringValue.Replace(",",".")));
+            }
+            else
+            {
+                result.Add(new KeyValuePair<string, string>(elementName, HttpUtility.UrlEncode(stringValue)));
+            }
+        }
+
+        private static string FindDateFormat(object value, XmlElementAttribute[] attribs)
+        {
+            if (attribs.Any())
+            {
+                var dataType = attribs[0].DataType;
+                switch (dataType)
+                {
+                    case "time":
+                        return ((DateTime)value).ToString(TimeFormat);
+                    case "date":
+                        return ((DateTime)value).ToString(DateFormat);
+                    default:
+                        return ((DateTime)value).ToString(DateTimeFormat);
+                }
+            }
+            return ((DateTime) value).ToString(DateTimeFormat);
         }
 
         private void AddEncodedArray(object value, PropertyInfo propertyInfo, List<KeyValuePair<string, string>> result)
         {
             var array = ((Array) value);
             var attribs = (XmlElementAttribute[]) Attribute.GetCustomAttributes(propertyInfo, typeof (XmlElementAttribute));
-            if (array.Length <= 0 || attribs.All(i => i.Type != array.GetValue(0).GetType()))
+
+            var elementName = propertyInfo.Name;
+            if (array.Length > 0 && attribs.Any(i => i.Type == array.GetValue(0).GetType()))
             {
-                return;
+                elementName = attribs.First(i => i.Type == array.GetValue(0).GetType()).ElementName;
             }
-            var elementName = attribs.First(i => i.Type == array.GetValue(0).GetType()).ElementName;
             if (IsCustomClass(array.GetType().GetElementType()))
             {
-                for (var i = 0; i < array.Length; i++)
+                if (array.GetType().GetElementType() == typeof (ToNumber))
                 {
-                    var elementProperties = GetProperties(array.GetValue(i));
-                    result.AddRange(elementProperties.Select(a => new KeyValuePair<string, string>
-                        (string.Format("{0}[{1}][{2}]", elementName, i, a.Key), a.Value)));
+                    EncodeToNumber(result, array);
+                }
+                else if (array.GetType().GetElementType() == typeof(ContactSourceNumbers))
+                {
+                    EncodeContactSourceNumbers(result, array, elementName);
+                }
+                else
+                {
+                    for (var i = 0; i < array.Length; i++)
+                    {
+                        var elementProperties = GetProperties(array.GetValue(i));
+                        result.AddRange(elementProperties.Select(a => new KeyValuePair<string, string>
+                            (string.Format("{0}[{1}][{2}]", elementName, i, a.Key), a.Value)));
+                    }
                 }
             }
             else
@@ -92,6 +143,26 @@ namespace CallFire_csharp_sdk.Common
                 var arrayValue = string.Join(" ", array.OfType<object>().Select(e => e.ToString()).ToArray());
                 result.Add(new KeyValuePair<string, string>(elementName, HttpUtility.UrlEncode(arrayValue)));
             }
+        }
+
+        private static void EncodeContactSourceNumbers(List<KeyValuePair<string, string>> result, Array array, string elementName)
+        {
+            var arrayValue = string.Join(" ",
+                array.OfType<ContactSourceNumbers>().Select(e => string.Join(" ", e.Text)).ToArray());
+            result.Add(new KeyValuePair<string, string>(string.Format("{0}", elementName), HttpUtility.UrlEncode(arrayValue)));
+
+            var arrayData = string.Join(" ", array.OfType<ContactSourceNumbers>().Select(e => e.fieldName).ToArray());
+            result.Add(new KeyValuePair<string, string>(string.Format("{0}[fieldName]", elementName),
+                HttpUtility.UrlEncode(arrayData)));
+        }
+
+        private static void EncodeToNumber(List<KeyValuePair<string, string>> result, Array array)
+        {
+            var arrayValue = string.Join(" ", array.OfType<ToNumber>().Select(e => e.Value).ToArray());
+            result.Add(new KeyValuePair<string, string>("To", HttpUtility.UrlEncode(arrayValue)));
+
+            var arrayData = string.Join(" ", array.OfType<ToNumber>().Select(e => e.ClientData).ToArray());
+            result.Add(new KeyValuePair<string, string>("ToNumber[ClientData]", HttpUtility.UrlEncode(arrayData)));
         }
 
         private static bool CheckSpecifiedProperties(object o, object value, PropertyInfo propertyInfo, IEnumerable<PropertyInfo> props)

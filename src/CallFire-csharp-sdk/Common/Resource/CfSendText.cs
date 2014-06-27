@@ -8,10 +8,12 @@ namespace CallFire_csharp_sdk.Common.Resource
         public CfSendText()
         {
             UseDefaultBroadcast = false;
+            ScrubBroadcastDuplicates = false;
+            BroadcastName = "API Send";
         }
 
         public CfSendText(string requestId, CfBroadcastType type, string broadcastName, CfToNumber[] toNumber, bool scrubBroadcastDuplicates,
-            CfTextBroadcastConfig textBroadcastConfig, long broadcastId, Boolean useDefaultBroadcast)
+            CfTextBroadcastConfig textBroadcastConfig, long? broadcastId, Boolean useDefaultBroadcast)
         {
             RequestId = requestId;
             Type = type;
@@ -31,7 +33,7 @@ namespace CallFire_csharp_sdk.Common.Resource
         /// <summary>
         /// BroadcastId to send message from
         /// </summary>
-        public long BroadcastId { get; set; }
+        public long? BroadcastId { get; set; }
 
         /// <summary>
         /// If true send text through existing default broadcast (default: false)

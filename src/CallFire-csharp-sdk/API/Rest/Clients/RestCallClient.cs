@@ -44,9 +44,9 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
             return CallMapper.FromCall(resource.Resources as Call);
         }
 
-        public long CreateSound(CfCreateSound cfCreateSound)
+        public long CreateSound(CfCreateSound cfCreateSound, CfSoundFormat cfSoundFormat)
         {
-            var resource = BaseRequest<ResourceReference>(HttpMethod.Post, new CreateSound(cfCreateSound), new CallfireRestRoute<Call>(null, CallRestRouteObjects.Sound, null));
+            var resource = BaseRequest<ResourceReference>(HttpMethod.Post, new CreateSound(cfCreateSound), new CallfireRestRoute<Call>(null, CallRestRouteObjects.Sound, null), cfSoundFormat);
             return resource.Id;
         }
 

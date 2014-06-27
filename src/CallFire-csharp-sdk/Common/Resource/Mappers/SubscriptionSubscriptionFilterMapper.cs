@@ -12,7 +12,7 @@ namespace CallFire_csharp_sdk.Common.Resource.Mappers
 
         internal static SubscriptionSubscriptionFilter ToSoapSubscriptionSubscriptionFilter(CfSubscriptionSubscriptionFilter source)
         {
-            return source == null ? null : new SubscriptionSubscriptionFilter(source.BroadcastId, source.BatchId, source.FromNumber, source.ToNumber, source.Inbound);
+            return source == null ? null : new SubscriptionSubscriptionFilter(source);
         }
     }
 }

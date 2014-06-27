@@ -38,6 +38,9 @@ namespace Callfire_csharp_sdk.IntegrationTests.Soap
             AddContactsToList = new CfContactListRequest(contactListId, false, new CfContactSource(contact));
 
             RemoveContactsFromList = new CfRemoveContactsFromList(contactListId, contactId);
+
+            ContactLastName = "ContactLastNameSoap";
+            ContactFirstName = "ContactFirstNameSoap";
         }
     }
 }

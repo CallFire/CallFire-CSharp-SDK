@@ -2,6 +2,10 @@
 {
     public class CfRemoveContacts
     {
+        public CfRemoveContacts()
+        {
+        }
+
         public CfRemoveContacts(long[] contactId)
         {
             ContactId = contactId;

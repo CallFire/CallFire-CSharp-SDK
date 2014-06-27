@@ -57,8 +57,7 @@ namespace CallFire_csharp_sdk.API.Soap
 
         public long CreateContactBatch(CfCreateContactBatch createContactBatch)
         {
-            return
-                BroadcastService.CreateContactBatch(new CreateContactBatch(createContactBatch.RequestId,
+            return BroadcastService.CreateContactBatch(new CreateContactBatch(createContactBatch.RequestId,
                     createContactBatch.BroadcastId, createContactBatch.Name, createContactBatch.Items,
                     createContactBatch.ScrubBroadcastDuplicates));
         }

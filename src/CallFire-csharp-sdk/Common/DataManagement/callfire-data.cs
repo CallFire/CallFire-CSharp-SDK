@@ -130,6 +130,10 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfLocalTimeZoneRestriction
     {
+        public CfLocalTimeZoneRestriction()
+        {
+        }
+
         public CfLocalTimeZoneRestriction(DateTime? beginTime, DateTime? endTime)
         {
             BeginTime = beginTime;
@@ -575,6 +579,10 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfIvrInboundConfig : CfInboundConfig
     {
+        public CfIvrInboundConfig()
+        {
+        }
+
         public CfIvrInboundConfig(long? id, string dialplanXml)
         {
             Id = id;
@@ -1012,7 +1020,11 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfSubscriptionSubscriptionFilter
     {
-        public CfSubscriptionSubscriptionFilter(long broadcastId, long batchId, string fromNumber, string toNumber, bool inbound)
+        public CfSubscriptionSubscriptionFilter()
+        {
+        }
+
+        public CfSubscriptionSubscriptionFilter(long? broadcastId, long? batchId, string fromNumber, string toNumber, bool? inbound)
         {
             BroadcastId = broadcastId;
             BatchId = batchId;
@@ -1024,12 +1036,12 @@ namespace CallFire_csharp_sdk.Common.DataManagement
         /// <summary>
         /// Broadcast ID to filter on
         /// </summary>
-        public long BroadcastId { get; set; }
+        public long? BroadcastId { get; set; }
 
         /// <summary>
         /// Batch ID to filter on
         /// </summary>
-        public long BatchId { get; set; }
+        public long? BatchId { get; set; }
 
         /// <summary>
         /// From number (11 digit) or shortcode to filter on
@@ -1044,7 +1056,7 @@ namespace CallFire_csharp_sdk.Common.DataManagement
         /// <summary>
         /// Deprecated, use TriggerEvent
         /// </summary>
-        public bool Inbound { get; set; }
+        public bool? Inbound { get; set; }
 
     }
 
@@ -1352,6 +1364,10 @@ namespace CallFire_csharp_sdk.Common.DataManagement
 
     public class CfNumberConfigurationInboundCallConfiguration
     {
+        public CfNumberConfigurationInboundCallConfiguration()
+        {
+        }
+
         public CfNumberConfigurationInboundCallConfiguration(CfInboundConfig item)
         {
             Item = item;
