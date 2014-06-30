@@ -48,7 +48,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
-        [Ignore]
         public void Test_SendCallMandatoryVoice() 
         {
             CfToNumber[] toNumberList = { new CfToNumber { Value = VerifyFromNumber, ClientData = "Client1" } };
@@ -68,7 +67,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
-        [Ignore]
         public void Test_SendCallVoiceComplete() 
         {
             CfToNumber[] toNumberList = { new CfToNumber { Value = VerifyFromNumber, ClientData = "Client1" } };
@@ -115,7 +113,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
-        [Ignore]
         public void Test_SendCallMandatoryIVR() 
         {
             CfToNumber[] toNumberList = { new CfToNumber { Value = VerifyFromNumber, ClientData = "Client1" } };
@@ -134,7 +131,6 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
-        [Ignore]
         public void Test_SendCallIVRComplete()
         {
             CfToNumber[] toNumberList = { new CfToNumber { Value = VerifyFromNumber, ClientData = "Client1" } };
@@ -268,6 +264,7 @@ namespace Callfire_csharp_sdk.IntegrationTests
         }
 
         [Test]
+        [Ignore]
         public void Test_CreateSoundMandatoryFieldsRecordingCall()
         {
             var createSound = new CfCreateSound
