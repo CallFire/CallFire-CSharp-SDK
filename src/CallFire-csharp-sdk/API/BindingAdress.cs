@@ -26,7 +26,7 @@ namespace CallFire_csharp_sdk.API
 
         private static string GetKeyFromAppConfig(string key)
         {
-            return ConfigurationManager.AppSettings.AllKeys.FirstOrDefault(s => s == key);
+            return ConfigurationManager.AppSettings.AllKeys.Any(s => s == key) ? ConfigurationManager.AppSettings[key] : null;
         }
     }
 }
