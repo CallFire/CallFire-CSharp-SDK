@@ -10,6 +10,7 @@ namespace CallFire_csharp_sdk.Common.Resource
             UseDefaultBroadcast = false;
             ScrubBroadcastDuplicates = false;
             BroadcastName = "API Send";
+            Type = CfBroadcastType.Text;
         }
 
         public CfSendText(string requestId, CfBroadcastType type, string broadcastName, CfToNumber[] toNumber, bool scrubBroadcastDuplicates,
