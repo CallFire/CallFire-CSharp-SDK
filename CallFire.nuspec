@@ -13,4 +13,7 @@
     <copyright>Copyright (c) 2015 CallFire Inc.</copyright>
     <tags>Callfire rest api client</tags>
   </metadata>
+  <files>
+    <file src="src/CallFire-csharp-sdk/bin/Release/CallFire-csharp-sdk.dll" target="lib" />
+  </files>
 </package>
