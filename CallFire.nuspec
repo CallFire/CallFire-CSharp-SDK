@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>CallFire</id>
+    <version>1.0.1</version>
+    <title>CallFire API v1.1 client</title>
+    <authors>CallFire</authors>
+    <owners>CallFire</owners>
+    <projectUrl>https://github.com/CallFire/CallFire-CSharp-SDK</projectUrl>
+    <iconUrl>https://www.callfire.com/favicon.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>C# client library for integration with Callfire REST API v1.1 services</description>
+    <copyright>Copyright (c) 2015 CallFire Inc.</copyright>
+    <tags>Callfire rest api client</tags>
+  </metadata>
+</package>
