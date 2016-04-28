@@ -23,5 +23,10 @@ namespace CallFire_csharp_sdk.Common.Resource
         /// Scrub duplicates
         /// </summary>
         public bool ScrubBroadcastDuplicates { get; set; }
+
+        /// <summary>
+        /// Labels
+        /// </summary>
+        public string[] Labels { get; set; }
     }
 }

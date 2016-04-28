@@ -9,13 +9,14 @@ namespace CallFire_csharp_sdk.Common.Resource
         }
 
         public CfSendCall(string requestId, CfBroadcastType type, string broadcastName, CfToNumber[] toNumber, 
-            bool scrubBroadcastDuplicates, CfBroadcastConfig item)
+            bool scrubBroadcastDuplicates, string[] labels, CfBroadcastConfig item)
         {
             RequestId = requestId;
             Type = type;
             BroadcastName = broadcastName;
             ToNumber = toNumber;
             ScrubBroadcastDuplicates = scrubBroadcastDuplicates;
+            Labels = labels;
             Item = item;
         }
 

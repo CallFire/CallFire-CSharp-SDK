@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+
 namespace CallFire_csharp_sdk.API.Soap {
     
     
@@ -4187,7 +4188,9 @@ namespace CallFire_csharp_sdk.API.Soap {
         private ToNumber[] toNumberField;
         
         private bool scrubBroadcastDuplicatesField;
-        
+
+        private string[] label;
+
         public SendRequest() {
             this.broadcastNameField = "API Send";
             this.scrubBroadcastDuplicatesField = false;
@@ -4254,7 +4257,22 @@ namespace CallFire_csharp_sdk.API.Soap {
                 this.RaisePropertyChanged("ScrubBroadcastDuplicates");
             }
         }
-        
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order = 5)]
+        public string[] Label
+        {
+            get
+            {
+                return this.label;
+            }
+            set
+            {
+                this.label = value;
+                this.RaisePropertyChanged("Label");
+            }
+        }
+
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {

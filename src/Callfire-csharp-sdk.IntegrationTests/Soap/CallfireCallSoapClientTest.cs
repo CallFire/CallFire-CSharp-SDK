@@ -24,12 +24,33 @@ namespace Callfire_csharp_sdk.IntegrationTests.Soap
             var toNumber = new CfToNumber[1];
             toNumber[0] = new CfToNumber("Data", null, "14252163710");
 
-            SendCall = new CfSendCall(String.Empty, CfBroadcastType.Ivr, "broadcastSoap", toNumber, false, ivrBroadcastConfig);
+            SendCall = new CfSendCall(String.Empty, CfBroadcastType.Ivr, "broadcastSoap", toNumber, false, null, ivrBroadcastConfig);
 
             ActionQuery = new CfActionQuery(100, 0, 1836940001, 1092170001, new[] { CfActionState.Finished }, new[] { CfResult.La },
                 false, new DateTime(2014, 1, 1), new DateTime(2014, 12, 1), "12132609784", "14252163710", string.Empty);
 
             QuerySoundMeta = new CfQuery();
         }
+
+        [Test]
+        public void Test_SendCallLabels()
+        {
+            CfToNumber[] toNumberList = { new CfToNumber { Value = VerifyFromNumber, ClientData = "Client1" } };
+            var sendCall = new CfSendCall
+            {
+                Type = CfBroadcastType.Voice,
+                ToNumber = toNumberList,
+                Item = new CfVoiceBroadcastConfig
+                {
+                    FromNumber = VerifyFromNumber,
+                    Item = "TTS: eeee",
+                    Item1 = "TTS: eeee"
+                },
+                Labels = new string[] { "Test Label 1", "Test Label 2" }
+            };
+            var id = Client.SendCall(sendCall);
+            Assert.IsNotNull(id);
+        }
+
     }
 }

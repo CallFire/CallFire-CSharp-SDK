@@ -18,6 +18,7 @@ namespace CallFire_csharp_sdk.API.Soap
             BroadcastName = cfSendCall.BroadcastName;
             ToNumber = ToNumberMapper.ToToNumber(cfSendCall.ToNumber);
             ScrubBroadcastDuplicates = cfSendCall.ScrubBroadcastDuplicates;
+            Label = cfSendCall.Labels;
             Item = BroadcastConfigMapper.ToBroadcastConfig(cfSendCall.Item, cfSendCall.Type);
         }
     }
