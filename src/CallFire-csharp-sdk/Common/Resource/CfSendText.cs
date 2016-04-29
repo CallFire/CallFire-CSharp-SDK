@@ -26,6 +26,20 @@ namespace CallFire_csharp_sdk.Common.Resource
             UseDefaultBroadcast = useDefaultBroadcast;
         }
 
+        public CfSendText(string requestId, CfBroadcastType type, string broadcastName, CfToNumber[] toNumber, bool scrubBroadcastDuplicates, string[] labels,
+            CfTextBroadcastConfig textBroadcastConfig, long? broadcastId, Boolean useDefaultBroadcast)
+        {
+            RequestId = requestId;
+            Type = type;
+            BroadcastName = broadcastName;
+            ToNumber = toNumber;
+            ScrubBroadcastDuplicates = scrubBroadcastDuplicates;
+            TextBroadcastConfig = textBroadcastConfig;
+            BroadcastId = broadcastId;
+            UseDefaultBroadcast = useDefaultBroadcast;
+            Labels = labels;
+        }
+
         /// <summary>
         /// Configuration needed for a Text Broadcast
         /// </summary>
