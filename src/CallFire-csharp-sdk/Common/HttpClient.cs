@@ -110,9 +110,11 @@ namespace CallFire_csharp_sdk.Common
             Stream rs = request.GetRequestStream();
             var parameters = body == null ? new List<KeyValuePair<string, string>>() : _serializer.GetProperties(body);
 
+            string filename = "";
             const string formdataTemplate = "Content-Disposition: form-data; name=\"{0}\"\r\n\r\n{1}";
             foreach (var parameter in parameters)
             {
+                filename = parameter.Key.ToLower().Contains("name") ? parameter.Value : filename;
                 rs.Write(boundarybytes, 0, boundarybytes.Length);
                 string formitem = string.Format(formdataTemplate, parameter.Key, parameter.Value);
                 byte[] formitembytes = Encoding.UTF8.GetBytes(formitem);
@@ -120,8 +122,8 @@ namespace CallFire_csharp_sdk.Common
             }
             rs.Write(boundarybytes, 0, boundarybytes.Length);
 
-            const string headerTemplate = "Content-Disposition: form-data; name=\"{0}\"; \r\nContent-Type: {1}\r\n\r\n";
-            string header = string.Format(headerTemplate, "Data", contentType);
+            const string headerTemplate = "Content-Disposition: form-data; name=\"{0}\"; filename=\"{1}\"\r\nContent-Type: {2}\r\n\r\n";
+            string header = string.Format(headerTemplate, "Data", filename, contentType);
             byte[] headerbytes = Encoding.UTF8.GetBytes(header);
             rs.Write(headerbytes, 0, headerbytes.Length);
 

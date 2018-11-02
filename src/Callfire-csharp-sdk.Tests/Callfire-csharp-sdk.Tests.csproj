@@ -110,12 +110,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CallFire-csharp-sdk\CallFire-csharp-sdk.csproj">
-      <Project>{50266DB9-D429-4F75-91F6-287E95A0FED8}</Project>
+      <Project>{50266db9-d429-4f75-91f6-287e95a0fed8}</Project>
       <Name>CallFire-csharp-sdk</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

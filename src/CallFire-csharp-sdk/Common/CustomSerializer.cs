@@ -34,6 +34,10 @@ namespace CallFire_csharp_sdk.Common
             foreach (var propertyInfo in props)
             {
                 var value = propertyInfo.GetValue(o, null);
+                if (type == typeof(CreateSound) && value != null && value.GetType() == typeof(byte[]))
+                {
+                    continue;
+                }
                 if (CheckSpecifiedProperties(o, value, propertyInfo, props))
                 {
                     continue;

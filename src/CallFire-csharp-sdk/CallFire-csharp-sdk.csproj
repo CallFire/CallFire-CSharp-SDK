@@ -323,7 +323,9 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Service References\API.Soap\callfire-ann.xsd">
       <SubType>Designer</SubType>
     </None>

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net;
 using System.Xml.Serialization;
 using CallFire_csharp_sdk.API.Rest.Data;
@@ -41,8 +42,13 @@ namespace CallFire_csharp_sdk.API.Rest.Clients
             {
                 if (request != null && request.GetType() == typeof(CreateSound) && ((CreateSound)request).Item.GetType() == typeof(byte[]))
                 {
-                    var bytes = (byte[]) ((CreateSound)request).Item;
-                    response = XmlClient.Send(route.ToString(), null, new MemoryStream(bytes), string.Format("audio/{0}", _soundFormat.ToString().ToLower()));
+                    CreateSound soundRequest = (CreateSound) request;
+                    soundRequest.Name = string.IsNullOrEmpty(soundRequest.Name)
+                        ? "unknown_name_" + DateTime.UtcNow.ToString("yyyy_MM_dd_HH_mm_ss")
+                        : soundRequest.Name;
+                    response = XmlClient.Send(route.ToString(), request, 
+                        new MemoryStream((byte[])soundRequest.Item), 
+                        string.Format("audio/{0}", _soundFormat.ToString().ToLower()));
                 }
                 else
                 {
